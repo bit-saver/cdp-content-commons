@@ -1,0 +1,33 @@
+{
+  "name": "cdp-search",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.1",
+    "bodybuilder": "^2.1.0",
+    "lodash.range": "^3.2.0",
+    "material-ui": "^0.18.1",
+    "moment": "^2.18.1",
+    "normalize.css": "^7.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "react-redux-loading-bar": "^2.9.1",
+    "react-router-dom": "^4.1.1",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "node-sass-chokidar": "0.0.1",
+    "react-scripts": "1.0.6"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

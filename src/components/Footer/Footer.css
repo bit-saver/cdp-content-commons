@@ -1,0 +1,9 @@
+.Footer__component {
+  font-family: 'Merriweather';
+  text-align: center;
+  padding: 16px;
+  font-size: .9rem;
+  max-height: 100px;
+  margin-top: 32px;
+  background-color: #08182D;
+  color: #FFFFFF; }

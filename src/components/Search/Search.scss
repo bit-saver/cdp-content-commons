@@ -1,0 +1,41 @@
+@import '../../variables.scss';
+
+.Search__component {
+  background-color: $allports4;
+  padding: 32px 0;
+  border-bottom: 1px solid $allports3;
+  @media (max-width: 786px) {
+    padding: 32px 24px;
+  }
+}
+.Search__basic {
+  flex-direction: row;
+}
+.Search__query__container {
+  flex: .8;
+  background-color: $white;
+  padding: 0 10px 5px;
+}
+.Search__query__submit {
+  flex: .2;
+  background-color: $white;
+  padding: 28px 10px 0 0;
+}
+.Search__toggle {
+  font-size: .8rem;
+  padding-top: 8px;
+}
+.SearchAdvanced__component {
+  display: flex;
+  flex-direction: column;
+  background: $white;
+  padding: 10px;
+  margin-top: 16px;
+}
+.SearchAdvanced__row {
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
