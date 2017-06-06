@@ -12,6 +12,13 @@ REACT_APP_WEBSITE_NAME=IIP Search
 REACT_APP_PUBLIC_API=http://localhost:3000
 ```
 
+### Get Started
+
+```
+npm install
+npm start
+```
+
 ### Pending To Do's
 
 * Add favicon.ico
