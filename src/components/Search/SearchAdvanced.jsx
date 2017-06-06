@@ -102,6 +102,8 @@ class SearchAdvanced extends Component {
             container="inline"
             mode="portrait"
             onChange={this.handleFromDateChange}
+            minDate={new Date(process.env.REACT_APP_MIN_DATE)}
+            maxDate={new Date()}
             disabled={this.props.date.dateSelect !== 'custom' ? true : false}
             formatDate={new DateTimeFormat('en-US', {
               day: 'numeric',
@@ -117,6 +119,8 @@ class SearchAdvanced extends Component {
             disableYearSelection={false}
             container="inline"
             mode="portrait"
+            minDate={new Date(process.env.REACT_APP_MIN_DATE)}
+            maxDate={new Date()}
             onChange={this.handleToDateChange}
             disabled={this.props.date.dateSelect !== 'custom' ? true : false}
             formatDate={new DateTimeFormat('en-US', {
