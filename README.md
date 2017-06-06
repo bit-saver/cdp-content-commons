@@ -1,4 +1,18 @@
-# Todo
+# CDP Search Frontend
+
+### Configuration
+
+Two options for loading in environment variables:
+
+* Set environment variables on the server
+* Set environment variables on `.env` file at the root of project
+
+```
+REACT_APP_WEBSITE_NAME=IIP Search
+REACT_APP_PUBLIC_API=http://localhost:3000
+```
+
+### Pending To Do's
 
 * Add favicon.ico
-* Set default image for search results
+* Set a default image while search results are loading
