@@ -44,6 +44,14 @@
     .ResultItem__component {
       width: 100%; } }
 
+.ResultItem__featured {
+  overflow: hidden;
+  width: 100%;
+  display: block;
+  height: 260px;
+  background-repeat: none;
+  background-size: cover; }
+
 @media (max-width: 769px) {
   .ResultItem__excerpt {
     display: none; } }

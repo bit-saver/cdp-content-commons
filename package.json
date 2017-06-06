@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.16.2",
     "bodybuilder": "^2.1.0",
     "lodash.range": "^3.2.0",
     "material-ui": "^0.18.1",
@@ -19,7 +19,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "node-sass-chokidar": "0.0.1",
+    "node-sass-chokidar": "0.0.2",
     "react-scripts": "1.0.6"
   },
   "scripts": {

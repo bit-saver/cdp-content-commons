@@ -52,6 +52,14 @@
     width: 100%;
   }
 }
+.ResultItem__featured {
+  overflow: hidden;
+  width: 100%;
+  display: block;
+  height: 260px;
+  background-repeat: none;
+  background-size: cover;
+}
 .ResultItem__excerpt {
   @media (max-width: 769px) {
     display: none;

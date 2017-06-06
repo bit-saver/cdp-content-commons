@@ -7,6 +7,7 @@ import SvgIconInbox from 'material-ui/svg-icons/content/inbox';
 import moment from 'moment'
 import colors from '../../utils/colors';
 import defaultImage from '../../assets/default_image.png';
+import './Results.css';
 
 class ResultItem extends Component {
   render() {
@@ -27,9 +28,8 @@ class ResultItem extends Component {
               </div>
             )} />}
           >
-            <img
-              alt={source.title}
-              src={(() => {
+            <div className="ResultItem__featured" style={{
+              backgroundImage: `url(${(() => {
                 const image = source.featured_image;
 
                 if (image && image.sizes && image.sizes.medium) {
@@ -37,7 +37,9 @@ class ResultItem extends Component {
                 } else {
                   return defaultImage;
                 }
-              })()} />
+              })()})`
+            }}>
+            </div>
           </CardMedia>
         </a>
         <CardTitle
