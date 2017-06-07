@@ -6,7 +6,7 @@
     "axios": "^0.16.2",
     "bodybuilder": "^2.1.0",
     "lodash.range": "^3.2.0",
-    "material-ui": "^0.18.1",
+    "material-ui": "^0.18.2",
     "moment": "^2.18.1",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
@@ -20,7 +20,8 @@
   },
   "devDependencies": {
     "node-sass-chokidar": "0.0.2",
-    "react-scripts": "1.0.6"
+    "react-scripts": "1.0.6",
+    "rx": "^4.1.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

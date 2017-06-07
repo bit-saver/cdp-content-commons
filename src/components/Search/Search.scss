@@ -1,9 +1,9 @@
 @import '../../variables.scss';
 
 .Search__component {
-  background-color: $allports4;
+  background-color: $allPorts4;
   padding: 32px 0;
-  border-bottom: 1px solid $allports3;
+  border-bottom: 1px solid $allPorts3;
   @media (max-width: 786px) {
     padding: 32px 24px;
   }
