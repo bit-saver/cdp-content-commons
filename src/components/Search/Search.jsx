@@ -20,6 +20,7 @@ class Search extends Component {
   componentWillMount() {
     this.props.loadLanguages();
     this.props.loadPostTypes();
+    this.props.loadSites();
   }
   handleQueryOnChange(e) {
     this.props.updateSearchQuery(e.target.value);

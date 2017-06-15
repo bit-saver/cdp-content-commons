@@ -36,3 +36,11 @@
   @media (max-width: 768px) {
     .SearchAdvanced__row {
       flex-direction: column; } }
+
+@media (max-width: 768px) {
+  .SearchAdvanced__filter {
+    width: 100% !important; } }
+
+@media (max-width: 768px) {
+  .SearchAdvanced__filter input, .SearchAdvanced__filter div {
+    width: 100% !important; } }

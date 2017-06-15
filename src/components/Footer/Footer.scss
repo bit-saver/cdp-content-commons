@@ -1,12 +1,19 @@
 @import '../../variables.scss';
 
 .Footer__component {
-  font-family: 'Merriweather';
-  text-align: center;
   padding: 16px;
   font-size: .9rem;
   max-height: 100px;
   margin-top: 32px;
-  background-color: $blackPearl;
-  color: $white;
+}
+.Footer__flex {
+  display: flex;
+  border: 1px solid $allPorts3;
+  width: 100%;
+}
+.Footer__copyright {
+  padding: 8px;
+  & a {
+    color: $allPorts;
+  }
 }

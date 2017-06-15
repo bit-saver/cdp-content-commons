@@ -39,3 +39,13 @@
     flex-direction: column;
   }
 }
+.SearchAdvanced__filter {
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
+  input, div {
+    @media (max-width: 768px) {
+      width: 100% !important;
+    }
+  }
+}

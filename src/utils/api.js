@@ -21,3 +21,10 @@ export const postTypeAggRequest = () => axios.post(SEARCH, {
     .agg('terms', 'type.keyword', {}, 'postType')
     .build(),
 }).then(response => response.data);
+
+export const siteAggRequest = () => axios.post(SEARCH, {
+  body: bodybuilder()
+    .size(0)
+    .agg('terms', 'site.keyword', {}, 'site')
+    .build(),
+}).then(response => response.data);

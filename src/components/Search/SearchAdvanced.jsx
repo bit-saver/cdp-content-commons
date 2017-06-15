@@ -19,6 +19,7 @@ class SearchAdvanced extends Component {
     this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleFromDateChange = this.handleFromDateChange.bind(this);
     this.handleToDateChange = this.handleToDateChange.bind(this);
+    this.handleSiteUpdate = this.handleSiteUpdate.bind(this);
   }
   handlePostTypeUpdate(event, index, value) {
     this.props.postTypeUpdate(value);
@@ -41,12 +42,17 @@ class SearchAdvanced extends Component {
   handleToDateChange(event, date) {
     this.props.toDateUpdate(moment(date).format('DD/MM/YYYY'));
   }
+  handleSiteUpdate(event, index, value) {
+    this.props.siteUpdate(value);
+  }
   render() {
+    console.log(this.props.site);
     return (
       <form className="SearchAdvanced__component" onSubmit={this.handleOnSubmit}>
         <div className="SearchAdvanced__row">
           {/* Language selector*/}
           <SelectField
+            className="SearchAdvanced__filter"
             value={this.props.language.currentLanguage}
             floatingLabelText="Language"
             onChange={this.handleLanguageChange}
@@ -56,9 +62,24 @@ class SearchAdvanced extends Component {
             ))}
           </SelectField>
 
-          {/* Format selector*/}
+          <div className="SearchAdvanced__site">
+            <SelectField
+              className="SearchAdvanced__filter"
+              value={this.props.site.currentSite}
+              floatingLabelText="Site"
+              onChange={this.handleSiteUpdate}
+              floatingLabelFixed={true}
+            >
+              <MenuItem value="" primaryText="All Sites" />
+              {this.props.site.list.map(item => (
+                <MenuItem key={item.key} value={item.key} primaryText={item.display} />
+              ))}
+            </SelectField>
+          </div>
+
           <div className="SearchAdvanced__format">
             <SelectField
+              className="SearchAdvanced__filter"
               value={this.props.type.currentPostType}
               floatingLabelText="Format"
               onChange={this.handlePostTypeUpdate}
@@ -73,6 +94,7 @@ class SearchAdvanced extends Component {
 
           {/* Author input*/}
           <TextField
+            className="SearchAdvanced__filter"
             floatingLabelText="Author"
             onChange={this.handleAuthorChange}
             value={this.props.search.author}
@@ -81,6 +103,7 @@ class SearchAdvanced extends Component {
 
         <div className="SearchAdvanced__row">
           <SelectField
+            className="SearchAdvanced__filter"
             value={this.props.date.dateSelect}
             floatingLabelText="Date"
             onChange={this.handleDateSelect}
@@ -95,6 +118,7 @@ class SearchAdvanced extends Component {
           </SelectField>
 
           <DatePicker
+            className="SearchAdvanced__filter"
             value={new Date(this.props.date.from)}
             autoOk={false}
             floatingLabelText="From Date"
@@ -113,6 +137,7 @@ class SearchAdvanced extends Component {
           />
 
           <DatePicker
+            className="SearchAdvanced__filter"
             value={new Date(this.props.date.to)}
             autoOk={false}
             floatingLabelText="To Date"
@@ -139,7 +164,8 @@ const mapStateToProps = state => ({
   search: state.search,
   language: state.language,
   type: state.type,
-  date: state.date
+  date: state.date,
+  site: state.site,
 });
 
 export default connect(mapStateToProps, actions)(SearchAdvanced);

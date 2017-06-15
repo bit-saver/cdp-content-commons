@@ -1,9 +1,15 @@
 .Footer__component {
-  font-family: 'Merriweather';
-  text-align: center;
   padding: 16px;
   font-size: .9rem;
   max-height: 100px;
-  margin-top: 32px;
-  background-color: #08182D;
-  color: #FFFFFF; }
+  margin-top: 32px; }
+
+.Footer__flex {
+  display: flex;
+  border: 1px solid #BED3DA;
+  width: 100%; }
+
+.Footer__copyright {
+  padding: 8px; }
+  .Footer__copyright a {
+    color: #038098; }

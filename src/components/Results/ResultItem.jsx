@@ -20,7 +20,7 @@ class ResultItem extends Component {
           <CardMedia
             overlay={<CardTitle subtitle={(
               <div className="ResultItem__overlay">
-                <p>{source.domain}</p>
+                <p>{source.site}</p>
                 <Chip backgroundColor={colors.scarlet2} labelColor={colors.white}>
                   <Avatar color={colors.white} style={{ backgroundColor: colors.scarlet1 }} icon={<SvgIconFile />} />
                   {source.type}

@@ -1,5 +1,3 @@
-@import '../../variables.scss';
-
 @media (max-width: 768px) {
   .Results__component {
     margin: 0 24px; } }
@@ -47,7 +45,7 @@
       width: 100%; } }
 
 .ResultItem__featured {
-  background-color: $allPorts2;
+  background-color: #83B2BF;
   overflow: hidden;
   width: 100%;
   display: block;

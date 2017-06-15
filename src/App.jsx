@@ -10,7 +10,7 @@ import theme from './utils/theme';
 import HeaderBar from './components/HeaderBar';
 import Results from './components/Results';
 import Search from './components/Search';
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 
 ReactTapEventPlugin();
 
@@ -24,14 +24,14 @@ class App extends Component {
               <section>
                 <HeaderBar />
               </section>
-              <section>
+              <section className="content__screen">
                 <Search />
               </section>
               <section>
                 <Route exact path="/" component={Results} />
               </section>
               <section>
-                {/*<Footer />*/}
+                <Footer />
               </section>
             </div>
           </Router>

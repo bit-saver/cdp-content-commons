@@ -34,6 +34,10 @@ export const queryBuilder = (store) => {
     options.push(`type: ${store.type.currentPostType}`);
   }
 
+  if (store.site.currentSite) {
+    options.push(`site: ${store.site.currentSite}`);
+  }
+
   if (store.date.dateSelect) {
     if (store.date.dateSelect !== 'custom') {
       body.filter('range', 'published', { gte: store.date.dateSelect });
