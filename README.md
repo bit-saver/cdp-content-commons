@@ -22,5 +22,4 @@ npm start
 ### Pending To Do's
 
 * Add favicon.ico
-* Set a default image while search results are loading
-* Add site filter
+* Add validation to all freeform inputs
