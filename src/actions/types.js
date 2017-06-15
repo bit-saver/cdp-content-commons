@@ -1,5 +1,6 @@
 export const SEARCH_QUERY_UPDATE = 'search_query_update';
 export const SEARCH_AUTHOR_UPDATE = 'search_author_update';
+export const SEARCH_TAG_UPDATE = 'search_tag_update';
 export const SEARCH_REQUEST_PENDING = 'search_request_pending';
 export const SEARCH_REQUEST_FAILED = 'search_request_failed';
 export const SEARCH_REQUEST_SUCCESS = 'search_request_success';

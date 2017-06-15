@@ -3,6 +3,7 @@ import range from 'lodash.range';
 import {
   SEARCH_QUERY_UPDATE,
   SEARCH_AUTHOR_UPDATE,
+  SEARCH_TAG_UPDATE,
   SEARCH_REQUEST_PENDING,
   SEARCH_REQUEST_FAILED,
   SEARCH_REQUEST_SUCCESS,
@@ -69,6 +70,11 @@ export const updateSearchQuery = payload => ({
 
 export const updateSearchAuthor = payload => ({
   type: SEARCH_AUTHOR_UPDATE,
+  payload,
+});
+
+export const updateSearchTag = payload => ({
+  type: SEARCH_TAG_UPDATE,
   payload,
 });
 

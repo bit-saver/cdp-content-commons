@@ -20,6 +20,7 @@ class SearchAdvanced extends Component {
     this.handleFromDateChange = this.handleFromDateChange.bind(this);
     this.handleToDateChange = this.handleToDateChange.bind(this);
     this.handleSiteUpdate = this.handleSiteUpdate.bind(this);
+    this.handleTagChange = this.handleTagChange.bind(this);
   }
   handlePostTypeUpdate(event, index, value) {
     this.props.postTypeUpdate(value);
@@ -29,6 +30,9 @@ class SearchAdvanced extends Component {
   }
   handleAuthorChange(e) {
     this.props.updateSearchAuthor(e.target.value);
+  }
+  handleTagChange(e) {
+    this.props.updateSearchTag(e.target.value);
   }
   handleOnSubmit(e) {
     e.preventDefault();
@@ -62,6 +66,7 @@ class SearchAdvanced extends Component {
             ))}
           </SelectField>
 
+          {/* Site input */}
           <div className="SearchAdvanced__site">
             <SelectField
               className="SearchAdvanced__filter"
@@ -77,6 +82,7 @@ class SearchAdvanced extends Component {
             </SelectField>
           </div>
 
+          {/* Format or Post Type input*/}
           <div className="SearchAdvanced__format">
             <SelectField
               className="SearchAdvanced__filter"
@@ -102,6 +108,14 @@ class SearchAdvanced extends Component {
         </div>
 
         <div className="SearchAdvanced__row">
+          {/* Tags input*/}
+          <TextField
+            className="SearchAdvanced__filter"
+            floatingLabelText="Tag"
+            onChange={this.handleTagChange}
+            value={this.props.search.tag}
+          />
+
           <SelectField
             className="SearchAdvanced__filter"
             value={this.props.date.dateSelect}

@@ -30,6 +30,10 @@ export const queryBuilder = (store) => {
     options.push(`author.name: ${store.search.author}`);
   }
 
+  if (store.search.tag) {
+    options.push(`tags.name.keyword: ${store.search.tag}~2`);
+  }
+
   if (store.type.currentPostType) {
     options.push(`type: ${store.type.currentPostType}`);
   }

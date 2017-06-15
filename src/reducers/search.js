@@ -9,7 +9,8 @@ import {
   SEARCH_SORT_PENDING,
   SEARCH_SORT_FAILED,
   SEARCH_SORT_SUCCESS,
-  SEARCH_AUTHOR_UPDATE
+  SEARCH_AUTHOR_UPDATE,
+  SEARCH_TAG_UPDATE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -26,6 +27,7 @@ const INITIAL_STATE = {
   sort: 'relevance',
   startIndex: 0,
   startPage: 1,
+  tag: '',
   total: 0,
   totalPages: 0,
 };
@@ -41,6 +43,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         author: action.payload
+      };
+    case SEARCH_TAG_UPDATE:
+      return {
+        ...state,
+        tag: action.payload
       };
     case SEARCH_REQUEST_PENDING:
       return {
