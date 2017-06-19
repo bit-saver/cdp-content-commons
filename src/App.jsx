@@ -28,7 +28,7 @@ class App extends Component {
                 <Search />
               </section>
               <section>
-                <Route exact path="/" component={Results} />
+                <Results />
               </section>
               <section>
                 <Footer />

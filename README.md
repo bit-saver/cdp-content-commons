@@ -18,8 +18,3 @@ REACT_APP_PUBLIC_API=http://localhost:3000
 npm install
 npm start
 ```
-
-### Pending To Do's
-
-* Add favicon.ico
-* Add validation to all freeform inputs

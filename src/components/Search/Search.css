@@ -1,7 +1,7 @@
 .Search__component {
-  background-color: #DCE6E9;
+  background-color: #BED3DA;
   padding: 32px 0;
-  border-bottom: 1px solid #BED3DA; }
+  border-bottom: 1px solid #83B2BF; }
   @media (max-width: 786px) {
     .Search__component {
       padding: 32px 24px; } }

@@ -6,6 +6,14 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 
 class HeaderBarMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.handleTwitterClick = this.handleTwitterClick.bind(this);
+  }
+  handleTwitterClick(e) {
+    e.preventDefault();
+    window.location.href = 'https://twitter.com/iipstate';
+  }
   render() {
     return (
       <IconMenu
@@ -15,7 +23,10 @@ class HeaderBarMenu extends Component {
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
-        <MenuItem primaryText="Follow us @IIPState" />
+        <MenuItem
+          primaryText="Follow us @IIPState"
+          onTouchTap={this.handleTwitterClick}
+        />
       </IconMenu>
     );
   }

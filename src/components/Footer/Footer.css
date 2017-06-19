@@ -5,11 +5,18 @@
   margin-top: 32px; }
 
 .Footer__flex {
-  display: flex;
   border: 1px solid #BED3DA;
   width: 100%; }
 
 .Footer__copyright {
-  padding: 8px; }
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .Footer__copyright .Footer_logo {
+    height: 48px;
+    opacity: .4; }
+  .Footer__copyright span {
+    padding: 0 0 0 16px; }
   .Footer__copyright a {
     color: #038098; }

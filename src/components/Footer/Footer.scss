@@ -7,12 +7,21 @@
   margin-top: 32px;
 }
 .Footer__flex {
-  display: flex;
   border: 1px solid $allPorts3;
   width: 100%;
 }
 .Footer__copyright {
   padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .Footer_logo {
+    height: 48px;
+    opacity: .4;
+  }
+  & span {
+    padding: 0 0 0 16px;
+  }
   & a {
     color: $allPorts;
   }
