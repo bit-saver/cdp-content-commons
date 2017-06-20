@@ -11,7 +11,6 @@ class Results extends Component {
     if (this.props.search.response.hits) {
       items = this.props.search.response.hits.hits;
     } else { items = []; }
-    console.log('testing this fired');
 
     return (
       <div className="Results__component">

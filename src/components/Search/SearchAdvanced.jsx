@@ -50,7 +50,6 @@ class SearchAdvanced extends Component {
     this.props.siteUpdate(value);
   }
   render() {
-    console.log(this.props.site);
     return (
       <form className="SearchAdvanced__component" onSubmit={this.handleOnSubmit}>
         <div className="SearchAdvanced__row">
