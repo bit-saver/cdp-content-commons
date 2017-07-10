@@ -7,12 +7,16 @@ import ResultsPagination from './ResultsPagination';
 
 class Results extends Component {
   render() {
-    console.log(this.props.search);
     let items;
     if (this.props.search.response.hits) {
       items = this.props.search.response.hits.hits;
     } else {
       items = [];
+    }
+
+    let isNoResults;
+    if (!items.length && Object.keys(this.props.search.response).length) {
+      isNoResults = true;
     }
 
     return (
@@ -29,11 +33,10 @@ class Results extends Component {
               <ResultsPagination />
             </section>
           </div>}
-          {!items.length && Object.keys(this.props.search.response).length ? (
-            <div className="Results__no__results">
-              Sorry, your search did not return any results =(
-            </div>
-          )}
+        {isNoResults &&
+          <div className="Results__no__results">
+            Sorry, your search did not return any results =(
+          </div>}
       </div>
     );
   }
