@@ -41,10 +41,10 @@ class SearchAdvanced extends Component {
     this.props.dateUpdate(value);
   }
   handleFromDateChange(event, date) {
-    this.props.fromDateUpdate(moment(date).format('DD/MM/YYYY'));
+    this.props.fromDateUpdate(moment(date).format('MM/DD/YYYY'));
   }
   handleToDateChange(event, date) {
-    this.props.toDateUpdate(moment(date).format('DD/MM/YYYY'));
+    this.props.toDateUpdate(moment(date).format('MM/DD/YYYY'));
   }
   handleSiteUpdate(event, index, value) {
     this.props.siteUpdate(value);
