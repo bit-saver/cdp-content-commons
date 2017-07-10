@@ -24,10 +24,10 @@ class App extends Component {
               <section>
                 <HeaderBar />
               </section>
-              <section className="content__screen">
+              <section>
                 <Search />
               </section>
-              <section>
+              <section className="content__screen">
                 <Results />
               </section>
               <section>
