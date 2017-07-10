@@ -2,3 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh; }
+
+.content__screen {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 1; }
