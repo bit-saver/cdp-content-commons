@@ -99,4 +99,5 @@
 .Results__no__results {
   text-align: center;
   display: block;
-  width: 100%; }
+  width: 100%;
+  padding: 64px 0; }
