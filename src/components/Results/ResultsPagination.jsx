@@ -35,7 +35,6 @@ class ResultsPagination extends Component {
   }
   render() {
     const o = this.props.search;
-
     if (o.response.took && o.response.hits.hits.length) {
       return (
         <ul className="ResultsPagination__component">
@@ -90,6 +89,7 @@ class ResultsPagination extends Component {
         </ul>
       );
     }
+    return <div />;
   }
 }
 
