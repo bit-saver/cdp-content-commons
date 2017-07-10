@@ -27,7 +27,7 @@ class Results extends Component {
             </section>
           </div>
         ) : (
-          <div style={{textAlign: 'center', display: block; width: '100%'}}>
+          <div style={{textAlign: 'center', display: 'block'; width: '100%'}}>
             Your search did not match any documents =(
           </div>
         )}
