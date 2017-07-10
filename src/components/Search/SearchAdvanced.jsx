@@ -50,6 +50,7 @@ class SearchAdvanced extends Component {
     this.props.siteUpdate(value);
   }
   render() {
+    console.log(this.props.date);
     return (
       <form className="SearchAdvanced__component" onSubmit={this.handleOnSubmit}>
         <div className="SearchAdvanced__row">
@@ -60,9 +61,9 @@ class SearchAdvanced extends Component {
             floatingLabelText="Language"
             onChange={this.handleLanguageChange}
           >
-            {this.props.language.list.map(item => (
+            {this.props.language.list.map(item =>
               <MenuItem key={item.key} value={item.key} primaryText={item.display} />
-            ))}
+            )}
           </SelectField>
 
           {/* Site input */}
@@ -75,9 +76,9 @@ class SearchAdvanced extends Component {
               floatingLabelFixed={true}
             >
               <MenuItem value="" primaryText="All Sites" />
-              {this.props.site.list.map(item => (
+              {this.props.site.list.map(item =>
                 <MenuItem key={item.key} value={item.key} primaryText={item.display} />
-              ))}
+              )}
             </SelectField>
           </div>
 
@@ -91,9 +92,9 @@ class SearchAdvanced extends Component {
               floatingLabelFixed={true}
             >
               <MenuItem value="" primaryText="All Formats" />
-              {this.props.type.list.map(item => (
+              {this.props.type.list.map(item =>
                 <MenuItem key={item.key} value={item.key} primaryText={item.display} />
-              ))}
+              )}
             </SelectField>
           </div>
 
@@ -142,11 +143,13 @@ class SearchAdvanced extends Component {
             minDate={new Date(process.env.REACT_APP_MIN_DATE)}
             maxDate={new Date()}
             disabled={this.props.date.dateSelect !== 'custom' ? true : false}
-            formatDate={new DateTimeFormat('en-US', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            }).format}
+            formatDate={
+              new DateTimeFormat('en-US', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              }).format
+            }
           />
 
           <DatePicker
@@ -157,15 +160,17 @@ class SearchAdvanced extends Component {
             disableYearSelection={false}
             container="inline"
             mode="portrait"
+            onChange={this.handleToDateChange}
             minDate={new Date(process.env.REACT_APP_MIN_DATE)}
             maxDate={new Date()}
-            onChange={this.handleToDateChange}
             disabled={this.props.date.dateSelect !== 'custom' ? true : false}
-            formatDate={new DateTimeFormat('en-US', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            }).format}
+            formatDate={
+              new DateTimeFormat('en-US', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              }).format
+            }
           />
         </div>
       </form>
@@ -178,7 +183,7 @@ const mapStateToProps = state => ({
   language: state.language,
   type: state.type,
   date: state.date,
-  site: state.site,
+  site: state.site
 });
 
 export default connect(mapStateToProps, actions)(SearchAdvanced);
