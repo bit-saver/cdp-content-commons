@@ -27,11 +27,11 @@ class Results extends Component {
               <ResultsHeader />
             </section>
             <section className="Results__container">
+              {items.map(item => <ResultItem key={item._id} item={item} />)}
               {isNoResults &&
                 <div className="Results__no__results">
                   Sorry, your search did not return any results =(
                 </div>}
-              {items.map(item => <ResultItem key={item._id} item={item} />)}
             </section>
             <section>
               <ResultsPagination />
