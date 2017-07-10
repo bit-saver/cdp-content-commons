@@ -6,8 +6,8 @@ import ResultsPagination from './ResultsPagination';
 // import * as actions from '../../actions/search';
 
 class Results extends Component {
-  console.log(this.props.search);
   render() {
+    console.log(this.props.search);
     let items;
     if (this.props.search.response.hits) {
       items = this.props.search.response.hits.hits;
