@@ -1,24 +1,24 @@
 import bodybuilder from 'bodybuilder';
 
-export const millisToSeconds = (millis) => {
+export const millisToSeconds = millis => {
   if (typeof millis !== 'number') {
     throw new Error('_millisToSeconds(): Provided parameter is not a number');
   }
-  return ((millis % 60000) / 1000).toFixed(2);
+  return (millis % 60000 / 1000).toFixed(2);
 };
 
-export const numberWithCommas = (number) => {
+export const numberWithCommas = number => {
   if (typeof number !== 'number') {
     throw new Error('Error: Parameter provided is not a number');
   }
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-export const capitalizeFirst = (str) => {
-  return (str).substr(0, 1).toUpperCase() + (str).substr(1);
-}
+export const capitalizeFirst = str => {
+  return str.substr(0, 1).toUpperCase() + str.substr(1);
+};
 
-export const queryBuilder = (store) => {
+export const queryBuilder = store => {
   let body = new bodybuilder();
   let options = [];
 
@@ -45,22 +45,21 @@ export const queryBuilder = (store) => {
   if (store.date.dateSelect) {
     if (store.date.dateSelect !== 'custom') {
       body.filter('range', 'published', { gte: store.date.dateSelect });
-    }
-    else if (store.date.dateSelect === 'custom') {
+    } else if (store.date.dateSelect === 'custom') {
       body.filter('range', 'published', {
         gte: store.date.from,
         lte: store.date.to,
-        format: 'dd/MM/yyyy'
+        format: 'MM/dd/yyyy'
       });
     }
   }
 
   if (store.search.sort === 'published') {
-    body.sort('published', 'desc')
+    body.sort('published', 'desc');
   }
 
   let optionStr = options.reduce((acc, value, index, arr) => {
-    if (index === (arr.length - 1)) {
+    if (index === arr.length - 1) {
       acc += value;
     } else {
       acc += `${value} AND `;
@@ -73,5 +72,3 @@ export const queryBuilder = (store) => {
 
   return body.build();
 };
-
-
