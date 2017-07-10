@@ -95,3 +95,8 @@
     cursor: default;
     opacity: 0.2;
     text-decoration: none; }
+
+.Results__no__results {
+  text-align: center;
+  display: block;
+  width: 100%; }

@@ -22,7 +22,7 @@
 }
 .ResultsHeader__total {
   @media (max-width: 768px) {
-    order: 2
+    order: 2;
   }
 }
 .ResultsHeader__sort {
@@ -75,7 +75,7 @@
     display: none;
   }
 }
-.ResultItem__chip{
+.ResultItem__chip {
   margin: 5px !important;
 }
 .ResultItem__overlay {
@@ -110,4 +110,9 @@
     opacity: 0.2;
     text-decoration: none;
   }
+}
+.Results__no__results {
+  text-align: center;
+  display: block;
+  width: 100%;
 }
