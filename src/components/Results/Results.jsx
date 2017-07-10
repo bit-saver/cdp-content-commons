@@ -14,7 +14,7 @@ class Results extends Component {
 
     return (
       <div className="Results__component">
-        {this.props.search.currentPage !== -1 && (
+        {this.props.search.currentPage !== -1 ? (
           <div className="Results__component constrained__container">
             <section>
               <ResultsHeader />
@@ -25,6 +25,10 @@ class Results extends Component {
             <section>
               <ResultsPagination />
             </section>
+          </div>
+        ) : (
+          <div style={{textAlign: 'center', display: block; width: '100%'}>
+            Your search did not match any documents =(
           </div>
         )}
       </div>
