@@ -29,6 +29,11 @@ class Results extends Component {
               <ResultsPagination />
             </section>
           </div>}
+          {!items.length && Object.keys(this.props.search.response).length ? (
+            <div className="Results__no__results">
+              Sorry, your search did not return any results =(
+            </div>
+          )}
       </div>
     );
   }
