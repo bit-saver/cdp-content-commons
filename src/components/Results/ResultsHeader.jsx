@@ -17,14 +17,16 @@ class ResultsHeader extends Component {
   render() {
     const { currentPage, total, sort } = this.props.search;
 
-    if (this.props.search.response.took) {
+    if (this.props.search.response.took && this.props.search.response.hits.hits.length) {
       return (
         <div className="ResultsHeader__component">
-          {currentPage === 1 ? (
-            <p className="ResultsHeader__total">About {numberWithCommas(total)} results</p>
-          ) : (
-              <p className="ResultsHeader__total">Page {currentPage} of about {total} results</p>
-            )}
+          {currentPage === 1
+            ? <p className="ResultsHeader__total">
+                About {numberWithCommas(total)} results
+              </p>
+            : <p className="ResultsHeader__total">
+                Page {currentPage} of about {total} results
+              </p>}
           <form>
             <SelectField
               className="ResultsHeader__sort"
