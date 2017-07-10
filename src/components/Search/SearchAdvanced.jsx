@@ -7,8 +7,6 @@ import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import moment from 'moment';
 
-const DateTimeFormat = global.Intl.DateTimeFormat;
-
 class SearchAdvanced extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +48,6 @@ class SearchAdvanced extends Component {
     this.props.siteUpdate(value);
   }
   render() {
-    console.log(this.props.date);
     return (
       <form className="SearchAdvanced__component" onSubmit={this.handleOnSubmit}>
         <div className="SearchAdvanced__row">
