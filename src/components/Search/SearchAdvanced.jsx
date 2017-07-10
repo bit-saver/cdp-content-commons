@@ -143,13 +143,7 @@ class SearchAdvanced extends Component {
             minDate={new Date(process.env.REACT_APP_MIN_DATE)}
             maxDate={new Date()}
             disabled={this.props.date.dateSelect !== 'custom' ? true : false}
-            formatDate={
-              new DateTimeFormat('en-US', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-              }).format
-            }
+            locale="en-US"
           />
 
           <DatePicker
@@ -164,13 +158,7 @@ class SearchAdvanced extends Component {
             minDate={new Date(process.env.REACT_APP_MIN_DATE)}
             maxDate={new Date()}
             disabled={this.props.date.dateSelect !== 'custom' ? true : false}
-            formatDate={
-              new DateTimeFormat('en-US', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-              }).format
-            }
+            locale="en-US"
           />
         </div>
       </form>
