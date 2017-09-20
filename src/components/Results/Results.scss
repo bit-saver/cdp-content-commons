@@ -95,7 +95,9 @@
   display: flex;
   justify-content: center;
   margin: 36px 0;
-
+  @media (max-width: 756px) {
+    justify-content: space-evenly;
+  }
   & > li {
     display: list-item;
     margin-right: 32px;
