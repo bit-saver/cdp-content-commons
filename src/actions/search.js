@@ -19,28 +19,28 @@ import { queryBuilder } from '../utils/helpers';
 
 export const calculatePages = (_total, _currentPage) => {
   const total = _total;
-  const pageSize = 9;
+  const pageSize = 15;
   const currentPage = _currentPage;
   const totalPages = Math.ceil(total / pageSize);
 
   let startPage;
   let endPage;
-  if (totalPages > 10) {
-    // more than 10 total pages so calculate start and end pages
-    if (currentPage <= 6) {
+  if (totalPages > 5) {
+    // more than 5 total pages so calculate start and end pages
+    if (currentPage <= 3) {
       startPage = 1;
-      endPage = 10;
-    } else if (currentPage + 4 >= totalPages) {
-      startPage = totalPages - 8;
+      endPage = 5;
+    } else if (currentPage + 2 >= totalPages) {
+      startPage = totalPages - 4;
       endPage = totalPages;
     } else {
-      startPage = currentPage - 5;
-      endPage = currentPage + 4;
+      startPage = currentPage - 2;
+      endPage = currentPage + 2;
     }
   } else {
-    // less than 10 total pages, so show all
+    // less than 5 total pages, so show only the amount of pages
     startPage = 1;
-    endPage = 10;
+    endPage = totalPages;
   }
 
   // calculate start and end item indices

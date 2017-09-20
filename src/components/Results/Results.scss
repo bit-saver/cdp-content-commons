@@ -105,10 +105,16 @@
       padding: 0 5px;
     }
   }
+  & > li > a {
+    text-decoration: none;
+  }
   .ResultsPagination__disabled {
     cursor: default;
     opacity: 0.2;
     text-decoration: none;
+  }
+  .ResultsPagination__active {
+    font-weight: bold;
   }
 }
 .Results__no__results {
