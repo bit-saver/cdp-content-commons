@@ -78,7 +78,7 @@
   margin: 5px !important; }
 
 .ResultItem__overlay {
-  padding: 12px;
+  padding: 6px 12px;
   text-align: right; }
   .ResultItem__overlay > p {
     margin: 0;
