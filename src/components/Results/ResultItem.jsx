@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
-//import Chip from 'material-ui/Chip';
-import SvgIconFile from 'material-ui/svg-icons/editor/insert-drive-file';
-//import SvgIconInbox from 'material-ui/svg-icons/content/inbox';
 import moment from 'moment'
-import colors from '../../utils/colors';
 import defaultImage from '../../assets/default_image.png';
+import postImage from '../../assets/content_icons_32px_article.png';
+import courseImage from '../../assets/content_icons_32px_course.png';
+import podcastImage from '../../assets/content_icons_32px_podcast.png';
+import videoImage from '../../assets/content_icons_32px_video.png';
 import './Results.css';
 
 class ResultItem extends Component {
@@ -14,6 +14,24 @@ class ResultItem extends Component {
     const item = this.props.item;
     const source = item._source;
     const sourcelink = 'https://' + source.site;
+    let iconImage;
+
+    switch(source.type) {
+      case 'post':
+        iconImage = postImage;
+        break;
+      case 'course':
+        iconImage = courseImage;
+        break;
+      case 'podcast':
+        iconImage = podcastImage;
+        break;
+      case 'video': 
+        iconImage = videoImage;
+        break;
+      default:
+        iconImage = postImage;
+    }
 
     return (
       <Card className="ResultItem__component">
@@ -21,7 +39,7 @@ class ResultItem extends Component {
           <CardMedia
             overlay={
               <div className="ResultItem__overlay">
-                  <Avatar backgroundColor={colors.white} color={colors.doveGray} icon={<SvgIconFile />} />
+                <Avatar size={32} backgroundColor='transparent' src={iconImage} style={{opacity: '0.8'}} />
               </div>
             }
             className="ResultItem__cardMedia"
@@ -90,7 +108,7 @@ class ResultItem extends Component {
             }
           </CardText>
         )}
-      </Card >
+      </Card>
     );
   }
 }
