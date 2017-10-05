@@ -64,9 +64,14 @@
   background-size: cover;
 }
 .ResultItem__excerpt {
+  padding: 0 16px;
   @media (max-width: 769px) {
     display: none;
   }
+}
+.ResultItem__date, .ResultItem__source {
+  padding: 16px 16px 2px;
+  font-size: 12px; 
 }
 .ResultItem__categories {
   display: flex;
@@ -75,12 +80,16 @@
     display: none;
   }
 }
+.ResultItem__category {
+  padding: 0 4px 0 0;
+  color: $allPorts;
+}
 .ResultItem__chip {
   margin: 5px !important;
 }
 .ResultItem__overlay {
-  display: flex;
-  justify-content: space-between;
+  padding: 12px;
+  text-align: right;
   & > p {
     margin: 0;
     line-height: 32px;

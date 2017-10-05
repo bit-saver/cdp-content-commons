@@ -53,9 +53,15 @@
   background-repeat: none;
   background-size: cover; }
 
-@media (max-width: 769px) {
-  .ResultItem__excerpt {
-    display: none; } }
+.ResultItem__excerpt {
+  padding: 0 16px; }
+  @media (max-width: 769px) {
+    .ResultItem__excerpt {
+      display: none; } }
+
+.ResultItem__date, .ResultItem__source {
+  padding: 16px 16px 2px;
+  font-size: 12px; }
 
 .ResultItem__categories {
   display: flex;
@@ -64,12 +70,16 @@
     .ResultItem__categories {
       display: none; } }
 
+.ResultItem__category {
+  padding: 0 4px 0 0;
+  color: #038098; }
+
 .ResultItem__chip {
   margin: 5px !important; }
 
 .ResultItem__overlay {
-  display: flex;
-  justify-content: space-between; }
+  padding: 12px;
+  text-align: right; }
   .ResultItem__overlay > p {
     margin: 0;
     line-height: 32px; }
