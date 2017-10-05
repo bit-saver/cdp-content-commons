@@ -76,19 +76,16 @@ class ResultItem extends Component {
           >{source.excerpt}
         </CardText>
         <CardText 
-          className="ResultItem__date" 
-          style={{ padding: '16px 16px 4px', fontSize: '12px' }}
-          >{moment(source.published).format('MMMM DD, YYYY')}
+          className="ResultItem__date">
+          {moment(source.published).format('MMMM DD, YYYY')}
         </CardText>
         <CardText 
-          className="ResultItem__source"
-          style={{ padding: '0px 16px 4px', fontSize: '12px' }}>
+          className="ResultItem__source">
           <a target="_blank" rel="noopener noreferrer" href={sourcelink}>{source.site}</a>
         </CardText>
         {source.categories && (
           <CardText 
-            className="ResultItem__categories"
-            style={{ padding: '0px 16px 4px', fontSize: '12px' }}>
+            className="ResultItem__categories">
             {
               source.categories.map((cat, index) => {
                 if (index > 2) {
