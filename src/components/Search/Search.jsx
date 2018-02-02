@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import './Search.css';
+//import './Search.css';
 import * as actions from '../../actions';
 import SearchAdvanced from './SearchAdvanced';
 

@@ -1,27 +1,35 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
 body {
+  padding-top: 60px;
   box-sizing: border-box;
   font-family: 'Roboto';
-  font-weight: 300; }
+  font-weight: 300;
+}
 
 a {
-  color: inherit; }
+  color: inherit;
+}
 
 /* flexbox css styles */
 .container {
   display: flex;
   min-height: 100vh;
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 .constrained__container {
   display: flex;
   max-width: 1170px;
   margin: 0 auto;
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 .flex__container {
-  display: flex; }
+  display: flex;
+}
 
 .box {
   flex: 1;
-  flex-grow: 1; }
+  flex-grow: 1;
+}
