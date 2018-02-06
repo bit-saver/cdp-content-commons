@@ -29469,6 +29469,11 @@ a {
     border-radius: 0; }
     .ResultsHeader__component .ui.form .fields.results_sort .ui.selection.dropdown .dropdown.icon {
       padding-right: 0; }
+    .ResultsHeader__component .ui.form .fields.results_sort .ui.selection.dropdown.active {
+      box-shadow: none; }
+      .ResultsHeader__component .ui.form .fields.results_sort .ui.selection.dropdown.active .menu {
+        border-radius: 0;
+        border-color: transparent; }
 
 /******************
     END TEMP

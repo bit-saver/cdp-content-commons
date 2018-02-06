@@ -177,6 +177,15 @@
       .dropdown.icon {
         padding-right: 0;
       }
+
+      &.active {
+        box-shadow: none;
+
+        .menu {
+          border-radius: 0;
+          border-color: transparent;
+        }
+      }
     }
   }
     
