@@ -7,7 +7,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 //import './App.css';
 import store from './utils/store';
 import theme from './utils/theme';
-import HeaderBar from './components/HeaderBar';
+
+import Nav from './components/Nav';
+import Header from './components/Header';
 import Results from './components/Results';
 import Search from './components/Search';
 import Footer from './components/Footer';
@@ -20,9 +22,10 @@ class App extends Component {
       <Provider store={store}>
         <MuiThemeProvider muiTheme={theme}>
           <Router>
-            <div className="App__component">
+            <div className="App__component">              
+              <Nav />              
               <section>
-                <HeaderBar />
+                <Header />
               </section>
               <section>
                 <Search />

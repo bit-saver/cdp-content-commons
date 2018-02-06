@@ -4,7 +4,8 @@
 @import './assets/styles/index';
 
 /* COMPONENTS */
-@import './components/HeaderBar/HeaderBar';
+@import './components/Nav/Nav';
+@import './components/Header/Header';
 @import './components/Notification/_Notification.scss';
 @import './components/Results/Results';
 @import './components/Search/Search';
