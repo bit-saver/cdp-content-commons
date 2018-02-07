@@ -4,7 +4,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import { numberWithCommas } from '../../utils/helpers';
 import { sortRequest } from '../../actions/search';
-import './Results.css';
+//import './Results.css';
 
 class ResultsHeader extends Component {
   constructor(props) {

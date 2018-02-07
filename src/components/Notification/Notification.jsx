@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import './Notification.css';
+//import './Notification.css';
 
 class Notification extends Component {
   constructor(props) {

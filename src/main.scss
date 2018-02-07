@@ -1,0 +1,11 @@
+@import './assets/styles/overrides';
+@import 'semantic-ui-sass/semantic-ui.scss';
+@import './assets/styles/App';
+@import './assets/styles/index';
+
+/* COMPONENTS */
+@import './components/HeaderBar/HeaderBar';
+@import './components/Notification/_Notification.scss';
+@import './components/Results/Results';
+@import './components/Search/Search';
+@import './components/Footer/Footer';

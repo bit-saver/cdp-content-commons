@@ -9,6 +9,7 @@
     "material-ui": "^0.18.4",
     "moment": "^2.18.1",
     "normalize.css": "^7.0.0",
+    "npm-run-all": "^4.1.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
@@ -16,7 +17,9 @@
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-react": "^0.77.2",
+    "semantic-ui-sass": "^2.2.11"
   },
   "devDependencies": {
     "node-sass-chokidar": "0.0.2",
@@ -24,10 +27,12 @@
     "rx": "^4.1.0"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o public/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o public/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

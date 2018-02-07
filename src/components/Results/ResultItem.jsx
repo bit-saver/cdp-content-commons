@@ -7,7 +7,7 @@ import postImage from '../../assets/content_icons_32px_article.png';
 import courseImage from '../../assets/content_icons_32px_course.png';
 import podcastImage from '../../assets/content_icons_32px_podcast.png';
 import videoImage from '../../assets/content_icons_32px_video.png';
-import './Results.css';
+//import './Results.css';
 
 class ResultItem extends Component {
   render() {
