@@ -6,14 +6,29 @@ import { numberWithCommas } from '../../utils/helpers';
 import { sortRequest } from '../../actions/search';
 //import './Results.css';
 
+
+import { Form, Select } from 'semantic-ui-react';
+const options = [
+  { key: 1, text: 'Relevance', value: 'relevance' },
+  { key: 2, text: 'Recent', value: 'published' }
+];
+
+
 class ResultsHeader extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+
+    }
+
     this.handleOnChange = this.handleOnChange.bind(this);
   }
-  handleOnChange(event, index, value) {
+    
+  handleOnChange(event, { index, value }) {
     this.props.sortRequest(value);
   }
+
   render() {
     const { currentPage, total, sort } = this.props.search;
 
@@ -27,6 +42,7 @@ class ResultsHeader extends Component {
             : <p className="ResultsHeader__total">
                 Page {currentPage} of about {total} results
               </p>}
+          {/*
           <form>
             <SelectField
               className="ResultsHeader__sort"
@@ -38,6 +54,19 @@ class ResultsHeader extends Component {
               <MenuItem value="published" primaryText="Recent" />
             </SelectField>
           </form>
+          */}
+
+          <Form>
+            <Form.Group className='results_sort'>
+              <Form.Field 
+                control={Select} 
+                label='Sort By' 
+                value={sort} 
+                options={options}
+                onChange={this.handleOnChange} 
+              />
+            </Form.Group>
+          </Form>
         </div>
       );
     }

@@ -3,9 +3,11 @@
 
 .Results__component {
   // min-height: 100vh;
+  /*
   @media (max-width: 768px) {
     margin: 0 24px;
   }
+  */
 }
 .ResultsHeader__component {
   display: flex;
@@ -17,17 +19,17 @@
   & > form {
     flex: .2;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     flex-direction: column;
   }
 }
 .ResultsHeader__total {
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     order: 2;
   }
 }
 .ResultsHeader__sort {
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     width: 100% !important;
     order: 1;
   }
@@ -42,6 +44,7 @@
     flex-direction: column;
   }
 }
+
 .ResultItem__component {
   width: 32%;
   margin: 16px 0;
@@ -55,6 +58,7 @@
     width: 100%;
   }
 }
+
 .ResultItem__featured {
   background-color: $allPorts2;
   overflow: hidden;
@@ -142,3 +146,50 @@
   width: 100%;
   padding: 64px 0;
 }
+
+
+/******************
+    TEMP
+*******************/
+.ResultsHeader__component {
+  
+  .ui.form .fields.results_sort {
+    margin: 0; 
+
+    .field {
+      flex: 1;
+    }
+
+    label {
+      margin: 0;
+      color: #b2b4b8;
+      font-weight: normal;
+    }
+
+    .ui.selection.dropdown {
+      padding-left: 0;
+      padding-right: 0;
+      margin: 0;
+      border: none;
+      border-bottom: 1px solid #000;
+      border-radius: 0;
+
+      .dropdown.icon {
+        padding-right: 0;
+      }
+
+      &.active {
+        box-shadow: none;
+
+        .menu {
+          border-radius: 0;
+          border-color: transparent;
+        }
+      }
+    }
+  }
+    
+}
+/******************
+    END TEMP
+*******************/
