@@ -6,3 +6,14 @@
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
+
+.ui.header {
+	
+  &.title {    
+    color: #112e51;
+    @media screen and (min-width: 641px) {
+      font-size: 60px;
+    }
+  }
+}

@@ -134,14 +134,17 @@
         @media screen and (max-width: 540px) {
           flex: 1;
         }
-      }
 
-      input[type='text'] {      
-        border-right: none;
-      }
+        input[type='text'] {      
+          border-right: none;
+          @media screen and (max-width: 640px) {
+            padding-top: 13px;
+          }
+        }
+      }      
 
       .ui.button {
-        padding: 13.5px 11px;
+        padding: 14px 11px;
         border-left: none;
         font-size: 18px;
         background-color: #fff;

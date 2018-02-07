@@ -29254,10 +29254,8 @@ body.pushable > .pusher {
   flex-basis: 1; }
 
 body {
-  padding-top: 60px;
-  box-sizing: border-box;
-  /*font-family: 'Roboto';
-  font-weight: 300;*/ }
+  padding-top: 2em;
+  box-sizing: border-box; }
 
 a {
   color: inherit; }
@@ -29282,6 +29280,10 @@ a {
   flex-grow: 1; }
 
 /* COMPONENTS */
+.nav {
+  margin-bottom: 1em;
+  color: #0071bc; }
+
 .HeaderBar__component {
   background-image: url("../../assets/iip_logo_white.png");
   background-position-y: 7px;
@@ -29289,6 +29291,12 @@ a {
   background-size: 128px;
   background-repeat: no-repeat;
   cursor: pointer; }
+
+.ui.header.title {
+  color: #112e51; }
+  @media screen and (min-width: 641px) {
+    .ui.header.title {
+      font-size: 60px; } }
 
 /*@import '../../variables.scss';*/
 .Flash__component {
@@ -29547,10 +29555,13 @@ a {
     @media screen and (max-width: 540px) {
       .ui.form .fields .field.search_input {
         flex: 1; } }
-  .ui.form .fields .field input[type='text'] {
-    border-right: none; }
+    .ui.form .fields .field.search_input input[type='text'] {
+      border-right: none; }
+      @media screen and (max-width: 640px) {
+        .ui.form .fields .field.search_input input[type='text'] {
+          padding-top: 13px; } }
   .ui.form .fields .field .ui.button {
-    padding: 13.5px 11px;
+    padding: 14px 11px;
     border-left: none;
     font-size: 18px;
     background-color: #fff;
