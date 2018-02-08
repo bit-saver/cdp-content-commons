@@ -67,7 +67,7 @@ class Search extends Component {
     const contentType = this.state.contentType;
     
     return (    
-      <div>
+      <section>
         <div className='search_bar'>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group>
@@ -121,7 +121,7 @@ class Search extends Component {
           </div>
         </div>
         */}
-      </div>
+      </section>
     );
   }
 }

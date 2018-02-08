@@ -8,7 +8,7 @@ import { Header } from 'semantic-ui-react';
 class HeaderItem extends Component {
   render() {
     return (
-      <div>
+      <section>
         {/*
         <AppBar
           className="HeaderBar__component"
@@ -24,7 +24,7 @@ class HeaderItem extends Component {
           <Header.Subheader className='subtitle'>Welcome to the Content Commons. Here you can discover, find, and reuse public diplomacy content from U.S. Department of State resources.</Header.Subheader>
         </Header>        
 
-      </div>
+      </section>
     );
   }
 }
