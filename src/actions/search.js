@@ -19,7 +19,7 @@ import { queryBuilder } from '../utils/helpers';
 
 export const calculatePages = (_total, _currentPage) => {
   const total = _total;
-  const pageSize = 15;
+  const pageSize = 16;
   const currentPage = _currentPage;
   const totalPages = Math.ceil(total / pageSize);
 
@@ -85,7 +85,7 @@ export const createRequest = () => async (dispatch, getState) => {
   let response;
   try {
     response = await queryRequest({
-      size: 15,
+      size: 16,
       body: queryBuilder(getState()),
     });
   } catch (err) {
@@ -108,7 +108,7 @@ export const createRequest = () => async (dispatch, getState) => {
 };
 
 export const previousRequest = () => async (dispatch, getState) => {
-  const OFFSET = 15;
+  const OFFSET = 16;
   dispatch(showLoading());
   dispatch({ type: SEARCH_PAGE_PENDING });
 
@@ -117,7 +117,7 @@ export const previousRequest = () => async (dispatch, getState) => {
     response = await queryRequest({
       body: queryBuilder(getState()),
       from: (getState().search.currentPage * OFFSET) - OFFSET,
-      size: 15,
+      size: 16,
     });
   } catch (err) {
     return dispatch({ type: SEARCH_PAGE_FAILED });
@@ -138,7 +138,7 @@ export const previousRequest = () => async (dispatch, getState) => {
 };
 
 export const nextRequest = () => async (dispatch, getState) => {
-  const OFFSET = 15;
+  const OFFSET = 16;
   dispatch(showLoading());
   dispatch({ type: SEARCH_PAGE_PENDING });
 
@@ -147,7 +147,7 @@ export const nextRequest = () => async (dispatch, getState) => {
     response = await queryRequest({
       body: queryBuilder(getState()),
       from: getState().search.currentPage * OFFSET,
-      size: 15,
+      size: 16,
     });
   } catch (err) {
     dispatch(hideLoading());
@@ -169,7 +169,7 @@ export const nextRequest = () => async (dispatch, getState) => {
 };
 
 export const targetRequest = page => async (dispatch, getState) => {
-  let offset = 15;
+  let offset = 16;
   offset = (page * offset) - offset;
   dispatch(showLoading());
   dispatch({ type: SEARCH_PAGE_PENDING });
@@ -179,7 +179,7 @@ export const targetRequest = page => async (dispatch, getState) => {
     response = await queryRequest({
       body: queryBuilder(getState()),
       from: offset,
-      size: 15,
+      size: 16,
     });
   } catch (err) {
     dispatch(hideLoading());
@@ -216,7 +216,7 @@ export const sortRequest = sortType => async (dispatch, getState) => {
   try {
     response = await queryRequest({
       body: queryBuilder(getState()),
-      size: 15,
+      size: 16,
     });
   } catch (err) {
     dispatch(hideLoading());

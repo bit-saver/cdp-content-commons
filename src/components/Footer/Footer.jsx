@@ -5,7 +5,7 @@ import logo from '../..//assets/iip_logo.png';
 class Footer extends Component {
   render() {
     return (
-      <div className="Footer__component">
+      <section className="Footer__component">
         <div className="Footer__flex constrained__container">
           <div className="Footer__copyright">
             <img src={logo} alt="IIP State" className="Footer_logo" />
@@ -14,7 +14,7 @@ class Footer extends Component {
             </span>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

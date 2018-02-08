@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as ReactTapEventPlugin from 'react-tap-event-plugin';
 import { BrowserRouter as Router } from 'react-router-dom';
 //import 'normalize.css';
@@ -19,26 +19,16 @@ ReactTapEventPlugin();
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <MuiThemeProvider muiTheme={theme}>
-          <Router>
-            <div className="App__component">              
-              <Nav />              
-              <section>
-                <Header />
-              </section>
-              <section>
-                <Search />
-              </section>
-              <section className="content__screen">
-                <Results />
-              </section>
-              <section>
-                <Footer />
-              </section>
-            </div>
-          </Router>
-        </MuiThemeProvider>
+      <Provider store={store}>        
+        <Router>
+          <div>              
+            <Nav />              
+            <Header />
+            <Search />                        
+            <Results />
+            <Footer />            
+          </div>
+        </Router>        
       </Provider>
     );
   }

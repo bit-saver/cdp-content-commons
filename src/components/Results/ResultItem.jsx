@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+//import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import moment from 'moment'
 import defaultImage from '../../assets/default_image.png';
@@ -7,7 +7,13 @@ import postImage from '../../assets/content_icons_32px_article.png';
 import courseImage from '../../assets/content_icons_32px_course.png';
 import podcastImage from '../../assets/content_icons_32px_podcast.png';
 import videoImage from '../../assets/content_icons_32px_video.png';
+import cardDownloadIcon from '../../assets/Card_Download_Icon.svg';
+import cardShareIcon from '../../assets/Card_Share_Icon.svg';
 //import './Results.css';
+
+
+import { Card, Image } from 'semantic-ui-react';
+
 
 class ResultItem extends Component {
   render() {
@@ -15,6 +21,14 @@ class ResultItem extends Component {
     const source = item._source;
     const sourcelink = 'https://' + source.site;
     let iconImage;
+    let cardImageSrc;
+
+    const image = source.featured_image;            
+    if (image && image.sizes && image.sizes.full) {
+      cardImageSrc = image.sizes.full.url;
+    } else {
+      cardImageSrc = defaultImage;
+    }
 
     switch(source.type) {
       case 'post':
@@ -33,78 +47,55 @@ class ResultItem extends Component {
         iconImage = postImage;
     }
 
-    return (
-      <Card className="ResultItem__component">
-        <a rel="noopener noreferrer" href={source.link} title={source.title} target="_blank">
-          <CardMedia
-            overlay={
-              <div className="ResultItem__overlay">
-                <Avatar size={32} backgroundColor='transparent' src={iconImage} style={{opacity: '0.8'}} />
-              </div>
-            }
-            className="ResultItem__cardMedia"
-            overlayContentStyle={{background: 'transparent'}}>
-            <div className="ResultItem__featured" style={{
-              backgroundImage: `url(${(() => {
-                const image = source.featured_image;
-
-                if (image && image.sizes && image.sizes.medium) {
-                  return image.sizes.medium.url;
-                } else {
-                  return defaultImage;
-                }
-              })()})`
-            }}>
-            </div>
-          </CardMedia>
+    return (      
+      <Card>
+        <a rel='noopener noreferrer' href={source.link} title={source.title} target='_blank'>
+          <Image src={cardImageSrc}
+          />
         </a>
-        <CardTitle
-          titleStyle={{ fontFamily: 'Merriweather' }}
-          title={(
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={source.link}
-              title={source.title}>
-              {source.title}
-            </a>
-          )} />
+        <Card.Content>          
+            <Card.Header className='card_header'>
+              <a rel='noopener noreferrer' href={source.link} title={source.title} target='_blank'>{source.title}</a>
+            </Card.Header>          
+          <Card.Description className='card_excerpt'>
+            {source.excerpt}
+          </Card.Description>
+          
+          <div className='card_metadata'>
+            <Card.Meta>
+              {moment(source.published).format('MMMM DD, YYYY')}
+            </Card.Meta>
+            <Card.Meta>
+              <a target="_blank" rel="noopener noreferrer" href={sourcelink}>{source.site}</a>
+            </Card.Meta>           
 
-        <CardText
-          className="ResultItem__excerpt"
-          style={{ padding: '0 16px' }}
-          >{source.excerpt}
-        </CardText>
-        <CardText 
-          className="ResultItem__date">
-          {moment(source.published).format('MMMM DD, YYYY')}
-        </CardText>
-        <CardText 
-          className="ResultItem__source">
-          <a target="_blank" rel="noopener noreferrer" href={sourcelink}>{source.site}</a>
-        </CardText>
-        {source.categories && (
-          <CardText 
-            className="ResultItem__categories">
-            {
-              source.categories.map((cat, index) => {
-                if (index > 2) {
-                  return undefined;
-                }
-                if (source.categories.length - 1 !== index && index < 2) {
-                  cat.name = cat.name + '  ·';
-                }
-                return (
-                  <span
-                    key={index}
-                    className="ResultItem__category">
-                    {cat.name.toLowerCase()}
-                  </span>
-                );
-              })
-            }
-          </CardText>
-        )}
+            {source.categories && (
+            <Card.Meta>            
+              {
+                source.categories.map((cat, index) => {
+                  if (index > 2) {
+                    return undefined;
+                  }
+                  if (source.categories.length - 1 !== index && index < 2) {
+                    cat.name = cat.name + '  ·';
+                  }
+                  return (
+                    <span key={index}>{cat.name.toLowerCase()}</span>
+                  );
+                })
+              }
+            </Card.Meta>          
+            )}
+          </div>
+        </Card.Content> 
+        <Card.Content extra>
+          <span className='card_icon card_icon--share'>          
+            <Image src={cardShareIcon} />
+          </span>
+          <span className='card_icon card_icon--download'>
+            <Image src={cardDownloadIcon} />  
+          </span>
+        </Card.Content> 
       </Card>
     );
   }

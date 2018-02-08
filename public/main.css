@@ -29475,6 +29475,46 @@ a {
         border-radius: 0;
         border-color: transparent; }
 
+.ui.grid > .column:not(.row).card_wrapper,
+.card_inner {
+  display: flex; }
+
+@media screen and (max-width: 425px) {
+  .ui.grid > .column:not(.row).card_wrapper {
+    padding: 0 !important;
+    margin-top: 1em !important; } }
+
+.ui.card {
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  border-radius: 0;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); }
+  .ui.card .content .card_header {
+    font-size: 18px;
+    font-weight: 700;
+    color: #112e51; }
+  .ui.card .content .card_excerpt {
+    color: #000; }
+  .ui.card .content .card_metadata {
+    margin-top: 1em;
+    font-size: 11px;
+    line-height: 1.428;
+    color: #5b616b; }
+  .ui.card .content .card_icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer; }
+    .ui.card .content .card_icon img {
+      width: 100%; }
+    .ui.card .content .card_icon--download {
+      float: right; }
+  .ui.card .meta {
+    color: #5b616b;
+    opacity: 1; }
+    .ui.card .meta > a:not(.ui) {
+      color: #112e51; }
+
 /******************
     END TEMP
 *******************/

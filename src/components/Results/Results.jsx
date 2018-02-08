@@ -5,6 +5,10 @@ import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
 // import * as actions from '../../actions/search';
 
+
+import { Grid } from 'semantic-ui-react';
+
+
 class Results extends Component {
   render() {
     let items;
@@ -20,24 +24,31 @@ class Results extends Component {
     }
 
     return (
-      <div className="Results__component">
+      <section>
         {this.props.search.currentPage !== -1 &&
-          <div className="Results__component constrained__container">
+          <div>          
             <section>
               <ResultsHeader />
             </section>
-            <section className="Results__container">
-              {items.map(item => <ResultItem key={item._id} item={item} />)}
-              {isNoResults &&
+            <Grid stackable columns={4}>   
+              { 
+                items.map(item => {
+                  return <Grid.Column className='card_wrapper' key={item._id}><ResultItem key={item._id} item={item} /></Grid.Column>
+                })
+              }
+              
+              { isNoResults &&
                 <div className="Results__no__results">
                   Sorry, your search did not return any results =(
-                </div>}
-            </section>
+                </div>
+              }
+            </Grid>
             <section>
               <ResultsPagination />
             </section>
-          </div>}
-      </div>
+          </div>    
+        }
+      </section>
     );
   }
 }
