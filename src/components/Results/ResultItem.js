@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-//import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
 import moment from 'moment'
 import defaultImage from '../../assets/default_image.png';
 import postImage from '../../assets/content_icons_32px_article.png';
@@ -9,9 +7,6 @@ import podcastImage from '../../assets/content_icons_32px_podcast.png';
 import videoImage from '../../assets/content_icons_32px_video.png';
 import cardDownloadIcon from '../../assets/Card_Download_Icon.svg';
 import cardShareIcon from '../../assets/Card_Share_Icon.svg';
-//import './Results.css';
-
-
 import { Card, Image } from 'semantic-ui-react';
 
 

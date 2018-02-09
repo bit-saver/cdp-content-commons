@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
-// import * as actions from '../../actions/search';
-
-
 import { Grid } from 'semantic-ui-react';
 
 
@@ -30,10 +27,10 @@ class Results extends Component {
             <section>
               <ResultsHeader />
             </section>
-            <Grid stackable columns={4}>   
+            <Grid>   
               { 
                 items.map(item => {
-                  return <Grid.Column className='card_wrapper' key={item._id}><ResultItem key={item._id} item={item} /></Grid.Column>
+                  return <Grid.Column mobile={16} tablet={8} computer={4} className='card_wrapper' key={item._id}><ResultItem key={item._id} item={item} /></Grid.Column>
                 })
               }
               
