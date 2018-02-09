@@ -29317,7 +29317,6 @@ a {
   background-color: #00E676;
   color: #212121; }
 
-/*@import '../../variables.scss';*/
 .Results__component {
   /*
   @media (max-width: 768px) {
@@ -29489,6 +29488,12 @@ a {
   border: 1px solid #f1f1f1;
   border-radius: 0;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); }
+  .ui.card > a {
+    position: relative; }
+  .ui.card .card_postIcon {
+    position: absolute;
+    bottom: 10px;
+    right: 5px; }
   .ui.card .content .card_header {
     font-size: 18px;
     font-weight: 700;

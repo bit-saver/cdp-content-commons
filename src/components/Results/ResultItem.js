@@ -45,8 +45,8 @@ class ResultItem extends Component {
     return (      
       <Card>
         <a rel='noopener noreferrer' href={source.link} title={source.title} target='_blank'>
-          <Image src={cardImageSrc}
-          />
+          <Image src={cardImageSrc} />
+          <Image src={iconImage} className='card_postIcon' />
         </a>
         <Card.Content>          
             <Card.Header className='card_header'>
