@@ -7,8 +7,9 @@ import podcastImage from '../../assets/content_icons_32px_podcast.png';
 import videoImage from '../../assets/content_icons_32px_video.png';
 import cardDownloadIcon from '../../assets/Card_Download_Icon.svg';
 import cardShareIcon from '../../assets/Card_Share_Icon.svg';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Popup } from 'semantic-ui-react';
 
+import HoverContent from './ResultsDownloadHover';
 
 class ResultItem extends Component {
   render() {
@@ -46,7 +47,7 @@ class ResultItem extends Component {
       <Card>
         <a rel='noopener noreferrer' href={source.link} title={source.title} target='_blank'>
           <Image src={cardImageSrc} />
-          <Image src={iconImage} className='card_postIcon' />
+          <Image src={iconImage} className='card_postIcon' />                              
         </a>
         <Card.Content>          
             <Card.Header className='card_header'>
@@ -88,7 +89,12 @@ class ResultItem extends Component {
             <Image src={cardShareIcon} />
           </span>
           <span className='card_icon card_icon--download'>
-            <Image src={cardDownloadIcon} />  
+            <Popup 
+              trigger={<Image src={cardDownloadIcon} />}
+              content='Download Video Popup Modal'
+              on='click'
+            />
+            <HoverContent />
           </span>
         </Card.Content> 
       </Card>

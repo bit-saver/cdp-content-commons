@@ -29317,13 +29317,6 @@ a {
   background-color: #00E676;
   color: #212121; }
 
-.Results__component {
-  /*
-  @media (max-width: 768px) {
-    margin: 0 24px;
-  }
-  */ }
-
 .ResultsHeader__component {
   display: flex;
   margin-top: 80px; }
@@ -29344,77 +29337,6 @@ a {
   .ResultsHeader__sort {
     width: 100% !important;
     order: 1; } }
-
-.Results__container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
-  @media (max-width: 768px) {
-    .Results__container {
-      flex-wrap: none;
-      justify-content: flex-start;
-      flex-direction: column; } }
-
-.ResultItem__component {
-  width: 32%;
-  margin: 16px 0; }
-  .ResultItem__component a {
-    text-decoration: none; }
-  .ResultItem__component a:hover {
-    text-decoration: underline; }
-  @media (max-width: 768px) {
-    .ResultItem__component {
-      width: 100%; } }
-
-.ResultItem__featured {
-  background-color: #83B2BF;
-  overflow: hidden;
-  width: 100%;
-  display: block;
-  height: 260px;
-  background-repeat: none;
-  background-size: cover; }
-
-.ResultItem__excerpt {
-  padding: 0 16px; }
-  @media (max-width: 769px) {
-    .ResultItem__excerpt {
-      display: none; } }
-
-.ResultItem__date {
-  padding: 16px 16px 4px !important;
-  font-size: 12px !important; }
-  @media (max-width: 768px) {
-    .ResultItem__date {
-      padding: 0 16px 4px !important; } }
-
-.ResultItem__source {
-  padding: 0 16px 4px !important;
-  font-size: 12px !important; }
-
-.ResultItem__categories {
-  padding: 0 16px 4px !important;
-  font-size: 12px !important; }
-  @media (max-width: 768px) {
-    .ResultItem__categories {
-      display: none; } }
-
-.ResultItem__category {
-  padding: 0 4px 0 0;
-  color: #038098; }
-
-.ResultItem__chip {
-  margin: 5px !important; }
-
-.ResultItem__overlay {
-  padding: 6px 12px;
-  text-align: right; }
-  .ResultItem__overlay > p {
-    margin: 0;
-    line-height: 32px; }
-
-.ResultItem__type__chip {
-  max-height: 32px; }
 
 .ResultsPagination__component {
   list-style: none;
@@ -29506,6 +29428,7 @@ a {
     line-height: 1.428;
     color: #5b616b; }
   .ui.card .content .card_icon {
+    position: relative;
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -29514,6 +29437,18 @@ a {
       width: 100%; }
     .ui.card .content .card_icon--download {
       float: right; }
+    .ui.card .content .card_icon:hover > .card_downloadHover {
+      display: block; }
+  .ui.card .content .card_downloadHover {
+    position: absolute;
+    top: -40px;
+    left: -50px;
+    display: none;
+    width: 100px;
+    border: 2px solid #000;
+    background-color: #000;
+    color: #fff;
+    text-align: center; }
   .ui.card .meta {
     color: #5b616b;
     opacity: 1; }
