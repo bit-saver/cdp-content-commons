@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-//import './Search.css';
 import * as actions from '../../actions';
-import SearchAdvanced from './SearchAdvanced';
-
-
 import { Form, Dropdown } from 'semantic-ui-react';
+
+/****
+TEMP
+*****/
 const contentTypes = [
   { key: 0, text: 'All Content Types', value: 'All Content Types' },
   { key: 1, text: 'Article', value: 'Article' },
@@ -18,7 +16,7 @@ const contentTypes = [
   { key: 6, text: 'Quiz', value: 'Quiz' },
   { key: 7, text: 'Video', value: 'Video' }
 ];
-
+/*****/
 
 class Search extends Component {
   constructor(props) {
@@ -88,39 +86,6 @@ class Search extends Component {
             </Form.Group>
           </Form>
         </div>
-
-        {/*
-        <div className="Search__component">        
-          <div className="constrained__container">          
-            <form onSubmit={this.handleSubmit}>
-              <div className="Search__basic flex__container">
-                <div className="Search__query__container">
-                  <TextField
-                    fullWidth={true}
-                    floatingLabelText="Search"
-                    onChange={this.handleQueryOnChange}
-                  />
-                </div>
-                <div className="Search__query__submit">
-                  <RaisedButton
-                    type="submit"
-                    className="Search__query_input"
-                    label="Search"
-                    primary={true}
-                    fullWidth={true}
-                  />
-                </div>
-              </div>
-            </form>
-            <div className="Search__toggle">
-              <a href="#advanced-search" onClick={this.handleAdvancedSearchClick}>
-                {this.state.open ? '← Basic Search' : 'Advanced Search'}
-              </a>
-            </div>
-            {this.state.open && <SearchAdvanced />}
-          </div>
-        </div>
-        */}
       </section>
     );
   }

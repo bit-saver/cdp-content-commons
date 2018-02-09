@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import { numberWithCommas } from '../../utils/helpers';
 import { sortRequest } from '../../actions/search';
-//import './Results.css';
-
-
 import { Form, Select } from 'semantic-ui-react';
+
+/****
+TEMP
+*****/
 const options = [
   { key: 1, text: 'Relevance', value: 'relevance' },
   { key: 2, text: 'Recent', value: 'published' }
 ];
-
+/****/
 
 class ResultsHeader extends Component {
   constructor(props) {
@@ -42,19 +41,6 @@ class ResultsHeader extends Component {
             : <p className="ResultsHeader__total">
                 Page {currentPage} of about {total} results
               </p>}
-          {/*
-          <form>
-            <SelectField
-              className="ResultsHeader__sort"
-              value={sort}
-              floatingLabelText="Sort By:"
-              onChange={this.handleOnChange}
-            >
-              <MenuItem value="relevance" primaryText="Relevance" />
-              <MenuItem value="published" primaryText="Recent" />
-            </SelectField>
-          </form>
-          */}
 
           <Form>
             <Form.Group className='results_sort'>
