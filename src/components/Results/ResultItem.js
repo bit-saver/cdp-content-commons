@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import moment from 'moment'
-import defaultImage from '../../assets/default_image.png';
-import postImage from '../../assets/content_icons_32px_article.png';
-import courseImage from '../../assets/content_icons_32px_course.png';
-import podcastImage from '../../assets/content_icons_32px_podcast.png';
-import videoImage from '../../assets/content_icons_32px_video.png';
-import cardDownloadIcon from '../../assets/Card_Download_Icon.svg';
-import cardShareIcon from '../../assets/Card_Share_Icon.svg';
-import { Card, Image, Popup } from 'semantic-ui-react';
+import defaultImage from '../../assets/images/default_image.png';
+import postImage from '../../assets/images/content_icons_32px_article.png';
+import courseImage from '../../assets/images/content_icons_32px_course.png';
+import podcastImage from '../../assets/images/content_icons_32px_podcast.png';
+import videoImage from '../../assets/images/content_icons_32px_video.png';
+import cardShareIcon from '../../assets/images/Card_Share_Icon.svg';
+import { Card, Image } from 'semantic-ui-react';
+import VideoDownloadPopup from '../Popup/Video/VideoDownloadPopup';
 
-import HoverContent from './ResultsDownloadHover';
 
-class ResultItem extends Component {
+class ResultItem extends Component {  
   render() {
     const item = this.props.item;
     const source = item._source;
@@ -88,14 +87,7 @@ class ResultItem extends Component {
           <span className='card_icon card_icon--share'>          
             <Image src={cardShareIcon} />
           </span>
-          <span className='card_icon card_icon--download'>
-            <Popup 
-              trigger={<Image src={cardDownloadIcon} />}
-              content='Download Video Popup Modal'
-              on='click'
-            />
-            <HoverContent />
-          </span>
+          <VideoDownloadPopup />
         </Card.Content> 
       </Card>
     );

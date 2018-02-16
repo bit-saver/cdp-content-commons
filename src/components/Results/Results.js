@@ -27,7 +27,7 @@ class Results extends Component {
             <section>
               <ResultsHeader />
             </section>
-            <Grid>   
+            <Grid className='results_wrapper'>   
               { 
                 items.map(item => {
                   return <Grid.Column mobile={16} tablet={8} computer={4} className='card_wrapper' key={item._id}><ResultItem key={item._id} item={item} /></Grid.Column>

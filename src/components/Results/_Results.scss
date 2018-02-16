@@ -104,6 +104,15 @@
   }    
 }
 
+.results_wrapper {
+  
+  &.ui.grid {
+    @media screen and (max-width: 425px) {
+      margin: 0;
+    }
+  }
+
+}
 
 .ui.grid > .column:not(.row).card_wrapper,
 .card_inner {
@@ -170,18 +179,6 @@
       &:hover > .card_downloadHover {
         display: block;
       }
-    }
-
-    &_downloadHover {
-      position: absolute;
-      top: -40px;
-      left: -50px; 
-      display: none;     
-      width: 100px;
-      border: 2px solid #000; 
-      background-color: #000;
-      color: #fff;
-      text-align: center;
     }    
   }
 

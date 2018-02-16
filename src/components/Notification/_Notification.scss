@@ -1,12 +1,11 @@
-/*@import '../../variables.scss';*/
-@import '../../assets/styles/variables';
+/*@import '../../assets/styles/variables';*/
 
 .Flash__component {
   position: relative;
   padding: 8px;
   background-color: $red500;
   text-align: center;
-  color: $white;
+  color: #fff;
   animation: expand .5s;
 }
 @keyframes expand {

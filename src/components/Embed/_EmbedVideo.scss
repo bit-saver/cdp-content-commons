@@ -1,0 +1,57 @@
+.videoEmbed {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40px;  
+
+  &_wrapper {
+    margin-bottom: 25px;
+  }
+
+  &_label {    
+    position: absolute;
+    top: 0;
+    right: 0;
+  	margin-bottom: 0;
+  	margin-right: 10px;
+  	padding-top: 7.5px;
+  	font-weight: bold;
+
+    &_wrapper {
+      position: relative;
+      min-width: 50px;
+    }
+  }
+
+
+  &_code {
+  	display: flex;
+  	justify-content: space-between;
+  	flex: 1;
+
+  	.ui.input {
+  	  flex: 1;
+      color: #000;
+
+      &.disabled {
+        opacity: 1;
+      }
+  	  
+  	  input {  	    	    
+  	  	border-radius: 0;
+  	    border: none;
+  	    background-color: $light-grey;
+  	  }
+  	}
+
+  	.ui.button {
+  	  border-radius: 0;
+  	}
+  }
+
+
+  &_specs {
+    display: block;
+    margin-left: 90px;
+    font-size: 12px;
+  }
+}

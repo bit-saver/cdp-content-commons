@@ -16,11 +16,6 @@ const options = [
 class ResultsHeader extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-
-    }
-
     this.handleOnChange = this.handleOnChange.bind(this);
   }
     
