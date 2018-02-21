@@ -3,7 +3,7 @@ import PopupMenu from './DownloadPopupMenu';
 import PopupContent from './DownloadPopupContent';
 
 class DownloadPopup extends Component {  
-  render() {
+  render() {  	
   	return(
   	  <div className='downloadPopup'>
         <p className='downloadPopup_title'>{this.props.title}</p>

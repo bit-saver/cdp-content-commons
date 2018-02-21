@@ -21,7 +21,7 @@ class PopupMenu extends Component {
   render() {
   	return(
   	  <div>
-  	  	<div className='downloadPopup_menu_wrapper test'>
+  	  	<div className='downloadPopup_menu_wrapper'>
   	      <ul className='downloadPopup_menu'>
             <PopupMenuItem 
               domProps={{className: 'downloadPopup_menu_item', 'data-menu-item': '1', onClick: this.menuItemOnClick}} 

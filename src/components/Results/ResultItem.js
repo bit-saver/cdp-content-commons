@@ -10,7 +10,7 @@ import { Card, Image } from 'semantic-ui-react';
 import VideoDownloadPopup from '../Popup/Video/VideoDownloadPopup';
 
 
-class ResultItem extends Component {  
+class ResultItem extends Component {    
   render() {
     const item = this.props.item;
     const source = item._source;
@@ -49,9 +49,9 @@ class ResultItem extends Component {
           <Image src={iconImage} className='card_postIcon' />                              
         </a>
         <Card.Content>          
-            <Card.Header className='card_header'>
-              <a rel='noopener noreferrer' href={source.link} title={source.title} target='_blank'>{source.title}</a>
-            </Card.Header>          
+          <Card.Header className='card_header'>
+            <a rel='noopener noreferrer' href={source.link} title={source.title} target='_blank'>{source.title}</a>
+          </Card.Header>          
           <Card.Description className='card_excerpt'>
             {source.excerpt}
           </Card.Description>

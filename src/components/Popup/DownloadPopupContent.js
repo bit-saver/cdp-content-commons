@@ -33,8 +33,10 @@ class PopupContent extends Component {
       	</PopupContentItem>
       	
       	<PopupContentItem domProps={{ className: 'downloadPopup_content_item', 'data-content': '4' }} >
-      	  <p>I don't see what I'm lookg for...(link to Dev Tools)</p>
-      	  <p>Whay can't I use an open captions file for social media?</p>      	  
+      	  <div className='downloadPopup_content_item_textOnly'>   
+            <p>I don't see what I'm looking for...(link to Dev Tools)</p>
+        	  <p>Whay can't I use an open captions file for social media?</p>      	  
+          </div>
       	</PopupContentItem>
       </div>
     );

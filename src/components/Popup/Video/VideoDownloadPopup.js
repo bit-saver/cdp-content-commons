@@ -9,8 +9,21 @@ class VideoDownloadPopup extends Component {
     super(props);
 
     this.state = {
-      popupOpen: false
+      popupOpen: false,
+      isMobile: false
+    }   
+
+    this.isMobile = this.isMobile.bind(this);
+  }
+
+  isMobile() {
+    if( window.outerWidth < 768 ) {
+      this.setState({ isMobile: true });
     }
+  }
+
+  componentDidMount() {
+    this.isMobile();
   }
 
   render() {
@@ -19,10 +32,12 @@ class VideoDownloadPopup extends Component {
         <Popup 
           trigger={<Image src={cardDownloadIcon} />}              
           on='click'
-          onOpen={ () => this.setState({ popupOpen: true }) }
-          onClose={ () => this.setState({ popupOpen: false }) }
-          className='downloadPopup_wrapper'
-          content={<DownloadPopup title='Download this video.' />}              
+          onOpen={ (e) => {            
+            this.setState({ popupOpen: true });            
+          }}          
+          onClose={ () => this.setState({ popupOpen: false }) }          
+          className={!this.state.isMobile ? 'downloadPopup_wrapper' : 'downloadPopup_wrapper downloadPopup_wrapper--mobile'}
+          content={<DownloadPopup title='Download this video.' />}          
         >                            
         </Popup>            
         <Hover className={this.state.popupOpen ? 'card_downloadHover hideOnPopup': 'card_downloadHover'} content='Download this video with an embed code' />

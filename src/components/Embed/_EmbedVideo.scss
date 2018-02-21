@@ -2,6 +2,10 @@
   display: flex;
   justify-content: space-between;
   margin-left: 40px;  
+  @media screen and (max-width: 640px) {
+    display: block;
+    margin-left: 0;
+  }
 
   &_wrapper {
     margin-bottom: 25px;
@@ -15,6 +19,10 @@
   	margin-right: 10px;
   	padding-top: 7.5px;
   	font-weight: bold;
+    @media screen and (max-width: 640px) {
+      position: relative;
+      font-size: 12px;
+    }
 
     &_wrapper {
       position: relative;
@@ -27,6 +35,9 @@
   	display: flex;
   	justify-content: space-between;
   	flex: 1;
+    @media screen and (max-width: 640px) {
+      font-size: 12px;
+    }
 
   	.ui.input {
   	  flex: 1;
@@ -53,5 +64,8 @@
     display: block;
     margin-left: 90px;
     font-size: 12px;
+    @media screen and (max-width: 640px) {
+      margin-left: 0;
+    }   
   }
 }
