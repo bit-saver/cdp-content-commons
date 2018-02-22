@@ -4,8 +4,8 @@ class PopupMenu extends Component {
   render() {
   	return(
   	  <div>
-  	  	<div className='downloadPopup_menu_wrapper'>
-  	      <ul className='downloadPopup_menu'>
+  	  	<div className='popupElem_menu_wrapper'>
+  	      <ul className='popupElem_menu'>
             {this.props.children}	        
   	      </ul>
   	    </div>

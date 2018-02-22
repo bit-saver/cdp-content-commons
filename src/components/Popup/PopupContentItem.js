@@ -6,7 +6,7 @@ class PopupContentItem extends Component {
 
   	return(
   	  <div {...domProps}>
-  	  	<p className='downloadPopup_content_info'>{headline}</p>
+  	  	<p className='popupElem_content_info'>{headline}</p>
   	  	{this.props.children}
   	  </div>	
   	);

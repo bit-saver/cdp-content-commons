@@ -31,11 +31,11 @@ class PopupMenuItem extends Component {
     // remove show class on currently displaying content item
     // add to target content item
     const 
-      activeContent = document.querySelector('.downloadPopup_content_item--show'),
+      activeContent = document.querySelector('.popupElem_content_item--show'),
       targetContent = document.querySelector(`[data-content="${menuItem}"`);      
       
-      activeContent.classList.remove('downloadPopup_content_item--show');
-      targetContent.classList.add('downloadPopup_content_item--show');
+      activeContent.classList.remove('popupElem_content_item--show');
+      targetContent.classList.add('popupElem_content_item--show');
   }
 
   // Gather clicked Menu Item width & position ||
