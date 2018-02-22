@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Popup, Image } from 'semantic-ui-react';
 import Hover from '../../Hover/Hover';
 import DownloadPopup from '../DownloadPopup';
+import VidPopup from './TestPopup.js';
 import cardDownloadIcon from '../../../assets/images/Card_Download_Icon.svg';
 
 class VideoDownloadPopup extends Component {
@@ -37,7 +38,7 @@ class VideoDownloadPopup extends Component {
           }}          
           onClose={ () => this.setState({ popupOpen: false }) }          
           className={!this.state.isMobile ? 'downloadPopup_wrapper' : 'downloadPopup_wrapper downloadPopup_wrapper--mobile'}
-          content={<DownloadPopup title='Download this video.' />}          
+          content={<VidPopup />}          
         >                            
         </Popup>            
         <Hover className={this.state.popupOpen ? 'card_downloadHover hideOnPopup': 'card_downloadHover'} content='Download this video with an embed code' />

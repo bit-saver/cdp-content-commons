@@ -5,10 +5,9 @@ import postImage from '../../assets/images/content_icons_32px_article.png';
 import courseImage from '../../assets/images/content_icons_32px_course.png';
 import podcastImage from '../../assets/images/content_icons_32px_podcast.png';
 import videoImage from '../../assets/images/content_icons_32px_video.png';
-import cardShareIcon from '../../assets/images/Card_Share_Icon.svg';
 import { Card, Image } from 'semantic-ui-react';
 import VideoDownloadPopup from '../Popup/Video/VideoDownloadPopup';
-
+import ShareDownloadPopup from '../Popup/Share/ShareDownloadPopup';
 
 class ResultItem extends Component {    
   render() {
@@ -84,9 +83,7 @@ class ResultItem extends Component {
           </div>
         </Card.Content> 
         <Card.Content extra>
-          <span className='card_icon card_icon--share'>          
-            <Image src={cardShareIcon} />
-          </span>
+          <ShareDownloadPopup />          
           <VideoDownloadPopup />
         </Card.Content> 
       </Card>
