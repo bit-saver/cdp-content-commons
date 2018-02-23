@@ -20,7 +20,8 @@
         background-image: linear-gradient(90deg, #0071bc 3%, #02bfe7 100% );
       }
 
-      &.bottom.right {
+      &.bottom.right,
+      &.bottom.left {
         
         &:after {
           top: 100%;

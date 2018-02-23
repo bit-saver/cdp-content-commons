@@ -29571,23 +29571,24 @@ a {
 *******************/
 .card_downloadHover {
   position: absolute;
-  top: -53px;
-  left: -77px;
+  bottom: -55px;
+  left: -80px;
   z-index: 1;
   display: none;
-  width: 150px;
+  width: 175px;
   padding: 8px;
   border-radius: 3px;
   text-align: center;
   background-color: #eee;
   color: #5b616b; }
-  .card_downloadHover:after {
+  .card_downloadHover:before {
     content: '';
     position: absolute;
+    top: -12px;
     left: 50%;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
-    border-top: 16px solid #eee; }
+    border-bottom: 16px solid #eee; }
   .card_downloadHover.hideOnPopup {
     display: none !important; }
   .card_downloadHover > p {
@@ -29609,7 +29610,7 @@ a {
       width: 100%;
       padding-top: 5px;
       background-image: linear-gradient(90deg, #0071bc 3%, #02bfe7 100%); }
-    .popupElem_wrapper.ui.popup.bottom.right:after {
+    .popupElem_wrapper.ui.popup.bottom.right:after, .popupElem_wrapper.ui.popup.bottom.left:after {
       top: 100%; }
   .popupElem_wrapper--mobile.ui.popup {
     left: 50% !important;
@@ -29673,6 +29674,26 @@ a {
     border: none;
     border-top: 1px solid #d6d7d9; }
 
+.shareSocial .logos {
+  display: flex;
+  justify-content: space-around;
+  margin: 50px 0 25px; }
+  .shareSocial .logos .ui.image.tiny {
+    height: 80px; }
+
+.shareSocial .ui.input.disabled {
+  display: flex;
+  justify-content: space-around;
+  color: #000;
+  opacity: 1; }
+
+.shareSocial .ui.input input {
+  flex: 0.5;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+  background-color: #f1f1f1; }
+
 .videoEmbed {
   display: flex;
   justify-content: space-between;
@@ -29723,3 +29744,81 @@ a {
     @media screen and (max-width: 767px) {
       .videoEmbed_specs {
         margin-left: 0; } }
+
+.clipboardcopy {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40px; }
+  @media screen and (max-width: 767px) {
+    .clipboardcopy {
+      display: block;
+      margin-left: 0; } }
+  .clipboardcopy_wrapper {
+    margin-bottom: 25px; }
+  .clipboardcopy_label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    margin-bottom: 0;
+    margin-right: 10px;
+    font-weight: bold; }
+    @media screen and (min-width: 768px) {
+      .clipboardcopy_label {
+        text-align: right; } }
+    @media screen and (max-width: 767px) {
+      .clipboardcopy_label {
+        position: relative;
+        font-size: 12px; } }
+    .clipboardcopy_label_wrapper {
+      position: relative;
+      min-width: 100px; }
+  .clipboardcopy_item {
+    display: flex;
+    justify-content: space-between;
+    flex: 1; }
+    @media screen and (max-width: 767px) {
+      .clipboardcopy_item {
+        font-size: 12px; } }
+    .clipboardcopy_item .ui.input {
+      flex: 1;
+      color: #000; }
+      .clipboardcopy_item .ui.input.disabled {
+        opacity: 1; }
+      .clipboardcopy_item .ui.input input {
+        border-radius: 0;
+        border: none;
+        background-color: #f1f1f1; }
+    .clipboardcopy_item .ui.button {
+      position: relative;
+      border-radius: 0; }
+      .clipboardcopy_item .ui.button.copied:after {
+        content: 'COPIED!';
+        position: absolute;
+        top: 0;
+        right: 50%;
+        display: block;
+        margin-right: -33px;
+        padding: 8px;
+        background-color: #f1f1f1;
+        color: #0071bc;
+        opacity: 0;
+        animation: showCopied 1.5s ease; }
+  .clipboardcopy_info {
+    display: block;
+    margin-left: 140px;
+    font-size: 12px; }
+    @media screen and (max-width: 767px) {
+      .clipboardcopy_info {
+        margin-left: 0; } }
+
+@keyframes showCopied {
+  0% {
+    opacity: 0;
+    transform: translateY(100%); }
+  70% {
+    opacity: 1;
+    transform: translateY(-10%); }
+  100% {
+    opacity: 0;
+    transform: translateY(-15%); } }
