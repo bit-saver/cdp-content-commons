@@ -1,6 +1,3 @@
-/*@import '../../variables.scss';*/
-@import '../../assets/styles/variables';
-
 .Search__component {
   background-color: $allPorts3;
   padding: 32px 0;
@@ -14,12 +11,12 @@
 }
 .Search__query__container {
   flex: .8;
-  background-color: $white;
+  background-color: #fff;
   padding: 0 10px 5px;
 }
 .Search__query__submit {
   flex: .2;
-  background-color: $white;
+  background-color: #fff;
   padding: 28px 10px 0 0;
 }
 .Search__toggle {
@@ -29,7 +26,7 @@
 .SearchAdvanced__component {
   display: flex;
   flex-direction: column;
-  background: $white;
+  background: #fff;
   padding: 10px;
   margin-top: 16px;
 }

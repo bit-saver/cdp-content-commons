@@ -1,0 +1,31 @@
+.card_downloadHover {    
+  position: absolute;
+  top: -53px;
+  left: -77px; 
+  z-index: 1;
+  display: none;     
+  width: 150px;      
+  padding: 8px;
+  border-radius: 3px;      
+  text-align: center;
+  background-color: #eee;
+  color: #5b616b;      
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 50%;        
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;        
+    border-top: 16px solid #eee;
+  }
+
+  &.hideOnPopup {
+    display: none !important;
+  }
+
+  > p {
+    font-size: 11px;
+    font-weight: 300;
+  }
+}    
