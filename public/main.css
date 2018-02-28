@@ -13,7 +13,6 @@
 *******************************/
 /* Border-Box */
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
-@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
 *,
 *:before,
 *:after {
@@ -29244,31 +29243,11 @@ body.pushable > .pusher {
          Site Overrides
 *******************************/
 /* OLD COLORS */
-body {
-  padding-top: 2em;
-  box-sizing: border-box; }
-
-a {
-  color: inherit; }
-
-/* flexbox css styles */
-.container {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column; }
-
-.constrained__container {
-  display: flex;
-  max-width: 1170px;
-  margin: 0 auto;
-  flex-direction: column; }
-
-.flex__container {
-  display: flex; }
-
-.box {
-  flex: 1;
-  flex-grow: 1; }
+@media screen and (min-width: 768px) {
+  .ui.container {
+    width: 1600px;
+    padding-left: 2em;
+    padding-right: 2em; } }
 
 /* COMPONENTS */
 .nav {
@@ -29413,8 +29392,9 @@ a {
     right: 5px; }
   .ui.card .content .card_header {
     font-size: 18px;
-    font-weight: 700;
-    color: #112e51; }
+    font-weight: 700; }
+    .ui.card .content .card_header > a {
+      color: #112e51; }
   .ui.card .content .card_excerpt {
     color: #000; }
   .ui.card .content .card_metadata {

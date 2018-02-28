@@ -147,7 +147,10 @@
     &_header {
       font-size: 18px;
       font-weight: 700;
-      color: #112e51;
+      
+      > a {
+        color: #112e51;
+      }
     }        
 
     &_excerpt {
