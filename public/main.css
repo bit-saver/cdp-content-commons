@@ -29496,35 +29496,6 @@ a {
 .ui.header .sub.header {
   margin-bottom: 30px; }
 
-/* Dropdown */
-.ui.selection.dropdown.search_dropdown {
-  padding-right: 1em;
-  border: none;
-  border-radius: 0;
-  background-color: none;
-  background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100%); }
-  @media screen and (max-width: 767px) {
-    .ui.selection.dropdown.search_dropdown {
-      min-width: 10em; } }
-  @media screen and (max-width: 540px) {
-    .ui.selection.dropdown.search_dropdown {
-      flex: 1;
-      min-width: 100%; } }
-  .ui.selection.dropdown.search_dropdown > .text,
-  .ui.selection.dropdown.search_dropdown .chevron.down {
-    color: #fff; }
-    @media screen and (min-width: 541px) {
-      .ui.selection.dropdown.search_dropdown > .text,
-      .ui.selection.dropdown.search_dropdown .chevron.down {
-        transform: translateY(50%); } }
-  .ui.selection.dropdown.search_dropdown .chevron.down {
-    float: right; }
-  .ui.selection.dropdown.search_dropdown.visible > .text {
-    color: #fff; }
-  .ui.selection.dropdown.search_dropdown.visible:hover {
-    background-color: inherit;
-    background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100%); }
-
 .search_bar {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); }
 
