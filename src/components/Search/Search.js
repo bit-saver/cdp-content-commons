@@ -1,35 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { Form, Dropdown } from 'semantic-ui-react';
-
-/****
-TEMP
-*****/
-const contentTypes = [
-  { key: 0, text: 'All Content Types', value: 'All Content Types' },
-  { key: 1, text: 'Article', value: 'Article' },
-  { key: 2, text: 'Audio', value: 'Audio' },
-  { key: 3, text: 'Course', value: 'Course' },
-  { key: 4, text: 'Image', value: 'Image' },
-  { key: 5, text: 'Publication', value: 'Publication' },
-  { key: 6, text: 'Quiz', value: 'Quiz' },
-  { key: 7, text: 'Video', value: 'Video' }
-];
-/*****/
+import { Form } from 'semantic-ui-react';
 
 class Search extends Component {
   constructor(props) {
     super(props);
     // toggles advanced search
     this.state = {
-      open: false,
-      contentType: 'Content Types',      
+      open: false
     };
     this.handleQueryOnChange = this.handleQueryOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAdvancedSearchClick = this.handleAdvancedSearchClick.bind(this);
-    this.handleSearchDropdownSelection = this.handleSearchDropdownSelection.bind(this);
   }
   componentWillMount() {
     this.props.loadLanguages();
@@ -57,26 +40,12 @@ class Search extends Component {
     });
   }
 
-  handleSearchDropdownSelection(e, { value }) {
-    this.setState({ contentType: value });
-  }
-
   render() {
-    const contentType = this.state.contentType;
-    
     return (    
       <section>
         <div className='search_bar'>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group>
-              <Dropdown         
-                icon='chevron down'                 
-                selection
-                options={contentTypes} 
-                className='search_dropdown'               
-                text={contentType}
-                onChange={this.handleSearchDropdownSelection}
-              />
               <Form.Input 
                 placeholder='Search...' 
                 className='search_input'
