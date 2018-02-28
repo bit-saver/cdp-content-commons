@@ -1,5 +1,7 @@
 import React from 'react';
 import { Header } from 'semantic-ui-react';
+import Nav from '../Nav';
+import Search from '../Search';
 
 const HeaderItem = () => (
   <section>
