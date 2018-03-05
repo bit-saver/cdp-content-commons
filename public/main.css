@@ -29696,6 +29696,7 @@ body.pushable > .pusher {
       .videoEmbed_specs {
         margin-left: 0; } }
 
+<<<<<<< HEAD
 .clipboardcopy {
   display: flex;
   justify-content: space-between;
@@ -29773,3 +29774,58 @@ body.pushable > .pusher {
   100% {
     opacity: 0;
     transform: translateY(-15%); } }
+=======
+.filterMenu {
+  position: relative;
+  min-width: 150px; }
+  .filterMenu_wrapper {
+    display: flex;
+    justify-content: space-around;
+    max-width: 768px;
+    padding-left: 0;
+    margin: 0 auto;
+    list-style: none; }
+  .filterMenu_label {
+    position: relative;
+    display: block;
+    padding: 1em 1em 8px 1em;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #112e51;
+    cursor: pointer; }
+    .filterMenu_label .icon {
+      font-size: 0.5em; }
+      .filterMenu_label .icon::before {
+        display: inline-block; }
+    .filterMenu_label:hover:after, .filterMenu_label.active:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: inline-block;
+      width: 100%;
+      border-bottom: 3px solid #112e51; }
+    .filterMenu_label:hover .icon::before, .filterMenu_label.active .icon::before {
+      transition: .5s;
+      transform: rotate(360deg); }
+  .filterMenu_options {
+    background-color: #fff; }
+    .filterMenu_options.ui.form {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 2;
+      width: 100%;
+      display: none;
+      padding: 6px 0 12px 0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
+      .filterMenu_options.ui.form.show {
+        display: block; }
+      .filterMenu_options.ui.form .fields {
+        flex-direction: column;
+        margin: 0;
+        padding: 0 12px; }
+        .filterMenu_options.ui.form .fields .field {
+          margin: 5px 0 0 3px; }
+>>>>>>> testing dropdown structure

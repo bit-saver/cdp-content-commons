@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape, array, number } from 'prop-types';
 import { connect } from 'react-redux';
-import FilterMenu from '../FilterMenu/FilterMenu';
+import ResultsFilterMenu from '../FilterMenu/ResultsFilterMenu/ResultsFilterMenu';
 import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
@@ -23,7 +23,7 @@ const Results = ( props ) => {
       <section>
         { props.search.currentPage !== -1 &&
           <div>          
-            <FilterMenu />
+            <ResultsFilterMenu />
             <section>
               <ResultsHeader />
             </section>
