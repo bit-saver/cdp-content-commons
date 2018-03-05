@@ -22,19 +22,17 @@ const Results = ( props ) => {
   return (
     <section>
       { props.search.currentPage !== -1 &&
-        <div>          
+        <div>
           <ResultsFilterMenu />
           <section>
             <ResultsHeader />
           </section>
-          <Grid className='results_wrapper'>   
-            { items.map(item => {
-                return <Grid.Column mobile={ 16 } tablet={ 8 } computer={ 4 } className='card_wrapper' key={ item._id }>
-                  <ResultItem key={ item._id } item={ item } />
-                </Grid.Column>
-              })
-            }
-            
+          <Grid className="results_wrapper">
+            { items.map( item => (
+              <Grid.Column mobile={ 16 } tablet={ 8 } computer={ 4 } className="card_wrapper" key={ item._id }>
+                <ResultItem key={ item._id } item={ item } />
+              </Grid.Column>
+            ) ) }
             { isNoResults &&
               <div className="Results__no__results">
                 Sorry, your search did not return any results =(
@@ -44,11 +42,11 @@ const Results = ( props ) => {
           <section>
             <ResultsPagination />
           </section>
-        </div>    
+        </div>
       }
     </section>
   );
-}
+};
 
 
 const mapStateToProps = state => ( {
