@@ -4,6 +4,11 @@ module.exports = {
     'max-len': [1, 120, 2, { ignoreComments: true }],
     'react/forbid-prop-types': 0,
     'react/jsx-filename-extension': [(1, { extensions: ['.js', '.jsx'] })],
+    'jsx-a11y/anchor-is-valid': [ "error", {
+        "components": [ "Link" ],
+        "specialLink": [ "to", "hrefLeft", "hrefRight" ],
+        "aspects": [ "noHref", "invalidHref", "preferButton" ]
+      }],
     'react/require-default-props': 0,
     'react/jsx-curly-spacing': [2, { when: 'always', children: true }],
     'space-in-parens': ['warn', 'always'],

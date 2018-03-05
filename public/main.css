@@ -29262,12 +29262,6 @@ body.pushable > .pusher {
   background-repeat: no-repeat;
   cursor: pointer; }
 
-.ui.header.title {
-  color: #112e51; }
-  @media screen and (min-width: 641px) {
-    .ui.header.title {
-      font-size: 60px; } }
-
 /*@import '../../assets/styles/variables';*/
 .Flash__component {
   position: relative;
@@ -29521,6 +29515,12 @@ body.pushable > .pusher {
 /****************** 
   END TEMP 
 *******************/
+.title, .title:hover {
+  color: #112e51; }
+  @media screen and (min-width: 641px) {
+    .title, .title:hover {
+      font-size: 60px; } }
+
 .card_downloadHover {
   position: absolute;
   bottom: -55px;
