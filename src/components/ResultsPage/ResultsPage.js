@@ -3,8 +3,9 @@ import React from 'react';
 import Nav from '../Nav';
 import Header from '../Header';
 import Search from '../Search';
+import Results from '../Results';
 
-const LandingPage = () => (
+const ResultsPage = () => (
   <div>
     <header>
       <Nav />
@@ -12,9 +13,9 @@ const LandingPage = () => (
       <Search />
     </header>
     <main>
-      <section>LANDING PAGE</section>
+      <Results />
     </main>
   </div>
 );
 
-export default LandingPage;
+export default ResultsPage;
