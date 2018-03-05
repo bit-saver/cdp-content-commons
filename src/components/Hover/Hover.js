@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { string } from 'prop-types';
 
-class Hover extends Component {  
-  render() {
-  	return(
-  	  <div className={this.props.className}>
-        <p>{this.props.content}</p>
-      </div>
-  	);
-  }	
-}
+const Hover = props => (
+  <div className={ props.className }>
+    <p>{ props.content }</p>
+  </div>
+);
+
+Hover.propTypes = {
+  className: string,
+  content: string
+};
 
 export default Hover;

@@ -3,32 +3,32 @@ import {
   LOAD_LANGUAGES_PENDING,
   LOAD_LANGUAGES_FAILED,
   LOAD_LANGUAGES_SUCCESS,
-  LANGUAGE_CHANGE,
+  LANGUAGE_CHANGE
 } from './types';
 
-export const languageUpdate = language => ({
+export const languageUpdate = language => ( {
   type: LANGUAGE_CHANGE,
-  payload: language,
-});
+  payload: language
+} );
 
-export const loadLanguages = () => async (dispatch) => {
-  dispatch({ type: LOAD_LANGUAGES_PENDING });
+export const loadLanguages = () => async ( dispatch ) => {
+  dispatch( { type: LOAD_LANGUAGES_PENDING } );
 
   let response;
   try {
     response = await languageAggRequest();
-  } catch (err) {
-    return dispatch({ type: LOAD_LANGUAGES_FAILED });
+  } catch ( err ) {
+    return dispatch( { type: LOAD_LANGUAGES_FAILED } );
   }
 
-  const buckets = response.aggregations.locale.buckets;
-  const payload = buckets.map(lang => ({
+  const { buckets } = response.aggregations.locale;
+  const payload = buckets.map( lang => ( {
     key: lang.key,
-    display: lang.display.buckets[0].key,
-  }));
+    display: lang.display.buckets[0].key
+  } ) );
 
-  return dispatch({
+  return dispatch( {
     type: LOAD_LANGUAGES_SUCCESS,
-    payload,
-  });
+    payload
+  } );
 };

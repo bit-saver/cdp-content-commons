@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { node, string, object } from 'prop-types';
 
-class PopupContentItem extends Component {
-  render() {
-  	const { domProps, headline } = this.props;
+const PopupContentItem = ( props ) => {
+  const { domProps, headline } = props;
 
-  	return(
-  	  <div {...domProps}>
-  	  	<p className='popupElem_content_info'>{headline}</p>
-  	  	{this.props.children}
-  	  </div>	
-  	);
-  }
-}
+  return (
+    <div { ...domProps }>
+      <p className="popupElem_content_info">{ headline }</p>
+      { props.children }
+    </div>
+  );
+};
+
+PopupContentItem.propTypes = {
+  children: node,
+  domProps: object,
+  headline: string
+};
 
 export default PopupContentItem;

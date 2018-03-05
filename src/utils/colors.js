@@ -19,5 +19,5 @@ export default {
   gray: '#919191',
   silver: '#C2C2C2',
   white: '#FFFFFF',
-  black: '#000000',
+  black: '#000000'
 };

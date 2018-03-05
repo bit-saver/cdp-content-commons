@@ -1,10 +1,13 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
+import { func, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-/*import TextField from 'material-ui/TextField';
+/* import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import DatePicker from 'material-ui/DatePicker';
-import MenuItem from 'material-ui/MenuItem';*/
+import MenuItem from 'material-ui/MenuItem'; */
 import moment from 'moment';
 
 class SearchAdvanced extends Component {
@@ -51,16 +54,16 @@ class SearchAdvanced extends Component {
     return (
       <form className="SearchAdvanced__component" onSubmit={this.handleOnSubmit}>
         <div className="SearchAdvanced__row">
-          {/* Language selector*/}
+          {/* Language selector */}
           <SelectField
             className="SearchAdvanced__filter"
             value={this.props.language.currentLanguage}
             floatingLabelText="Language"
             onChange={this.handleLanguageChange}
           >
-            {this.props.language.list.map(item =>
+            {this.props.language.list.map(item => (
               <MenuItem key={item.key} value={item.key} primaryText={item.display} />
-            )}
+            ))}
           </SelectField>
 
           {/* Site input */}
@@ -70,32 +73,32 @@ class SearchAdvanced extends Component {
               value={this.props.site.currentSite}
               floatingLabelText="Site"
               onChange={this.handleSiteUpdate}
-              floatingLabelFixed={true}
+              floatingLabelFixed
             >
               <MenuItem value="" primaryText="All Sites" />
-              {this.props.site.list.map(item =>
+              {this.props.site.list.map(item => (
                 <MenuItem key={item.key} value={item.key} primaryText={item.display} />
-              )}
+              ))}
             </SelectField>
           </div>
 
-          {/* Format or Post Type input*/}
+          {/* Format or Post Type input */}
           <div className="SearchAdvanced__format">
             <SelectField
               className="SearchAdvanced__filter"
               value={this.props.type.currentPostType}
               floatingLabelText="Format"
               onChange={this.handlePostTypeUpdate}
-              floatingLabelFixed={true}
+              floatingLabelFixed
             >
               <MenuItem value="" primaryText="All Formats" />
-              {this.props.type.list.map(item =>
+              {this.props.type.list.map(item => (
                 <MenuItem key={item.key} value={item.key} primaryText={item.display} />
-              )}
+              ))}
             </SelectField>
           </div>
 
-          {/* Author input*/}
+          {/* Author input */}
           <TextField
             className="SearchAdvanced__filter"
             floatingLabelText="Author"
@@ -105,7 +108,7 @@ class SearchAdvanced extends Component {
         </div>
 
         <div className="SearchAdvanced__row">
-          {/* Tags input*/}
+          {/* Tags input */}
           <TextField
             className="SearchAdvanced__filter"
             floatingLabelText="Tag"
@@ -118,7 +121,7 @@ class SearchAdvanced extends Component {
             value={this.props.date.dateSelect}
             floatingLabelText="Date"
             onChange={this.handleDateSelect}
-            floatingLabelFixed={true}
+            floatingLabelFixed
           >
             <MenuItem value={this.props.date.options[0]} primaryText="Any time" />
             <MenuItem value={this.props.date.options[1]} primaryText="Past 24 hours" />
@@ -139,7 +142,7 @@ class SearchAdvanced extends Component {
             onChange={this.handleFromDateChange}
             minDate={new Date(process.env.REACT_APP_MIN_DATE)}
             maxDate={new Date()}
-            disabled={this.props.date.dateSelect !== 'custom' ? true : false}
+            disabled={this.props.date.dateSelect !== 'custom'}
             locale="en-US"
           />
 
@@ -154,7 +157,7 @@ class SearchAdvanced extends Component {
             onChange={this.handleToDateChange}
             minDate={new Date(process.env.REACT_APP_MIN_DATE)}
             maxDate={new Date()}
-            disabled={this.props.date.dateSelect !== 'custom' ? true : false}
+            disabled={this.props.date.dateSelect !== 'custom'}
             locale="en-US"
           />
         </div>
@@ -170,5 +173,20 @@ const mapStateToProps = state => ({
   date: state.date,
   site: state.site
 });
+
+SearchAdvanced.propTypes = {
+  postTypeUpdate: func,
+  languageUpdate: func,
+  updateSearchAuthor: func,
+  updateSearchTag: func,
+  dateUpdate: func,
+  fromDateUpdate: func,
+  toDateUpdate: func,
+  siteUpdate: func,
+  language: shape,
+  type: shape,
+  search: shape,
+  date: shape
+};
 
 export default connect(mapStateToProps, actions)(SearchAdvanced);

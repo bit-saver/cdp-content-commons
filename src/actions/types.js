@@ -20,12 +20,10 @@ export const LOAD_POST_TYPES_SUCCESS = 'load_post_types_success';
 export const SITE_CHANGE = 'site_change';
 export const LOAD_SITES_PENDING = 'load_sites_pending';
 export const LOAD_SITES_SUCCESS = 'load_sites_success';
-export const LOAD_SITES_FAILED = 'load_sites_failed'
+export const LOAD_SITES_FAILED = 'load_sites_failed';
 export const POST_TYPE_CHANGE = 'post_type_change';
 export const DATE_CHANGE = 'date_change';
 export const FROM_DATE_CHANGE = 'from_date_change';
 export const TO_DATE_CHANGE = 'to_date_change';
 export const SHOW_NOTIFICATION = 'show_notification';
 export const CLOSE_NOTIFICATION = 'close_notification';
-
-

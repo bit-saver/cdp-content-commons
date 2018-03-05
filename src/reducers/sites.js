@@ -9,34 +9,34 @@ const INITIAL_STATE = {
   error: false,
   list: [],
   loading: false,
-  currentSite: '',
+  currentSite: ''
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+export default ( state = INITIAL_STATE, action ) => {
+  switch ( action.type ) {
     case LOAD_SITES_PENDING:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case LOAD_SITES_FAILED:
       return {
         ...state,
         ...INITIAL_STATE,
         error: true,
-        loading: false,
+        loading: false
       };
     case LOAD_SITES_SUCCESS:
       return {
         ...state,
         error: true,
         loading: false,
-        list: action.payload,
+        list: action.payload
       };
     case SITE_CHANGE:
       return {
         ...state,
-        currentSite: action.payload,
+        currentSite: action.payload
       };
     default:
       return state;

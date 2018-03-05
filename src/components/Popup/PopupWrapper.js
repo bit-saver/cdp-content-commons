@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { node, string } from 'prop-types';
 
-class PopupWrapper extends Component {  
-  render() {  	
-  	return(
-  	  <div className='popupElem'>
-        <p className='popupElem_title'>{this.props.title}</p>
-        {this.props.children}               
-      </div>
-  	);
-  }	
+const PopupWrapper = props => (
+  <div className="popupElem">
+    <p className="popupElem_title">{ props.title }</p>
+    { props.children }
+  </div>
+);
+
+PopupWrapper.propTypes = {
+  title: string,
+  children: node
 };
 
 export default PopupWrapper;

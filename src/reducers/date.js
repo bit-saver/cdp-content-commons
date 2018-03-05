@@ -18,17 +18,17 @@ const INITIAL_STATE = {
   ]
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+export default ( state = INITIAL_STATE, action ) => {
+  switch ( action.type ) {
     case DATE_CHANGE:
       return {
         ...state,
-        dateSelect: action.payload,
+        dateSelect: action.payload
       };
     case FROM_DATE_CHANGE:
       return {
         ...state,
-        from: action.payload,
+        from: action.payload
       };
     case TO_DATE_CHANGE:
       return {

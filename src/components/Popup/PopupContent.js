@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { node } from 'prop-types';
 
-class PopupContent extends Component {
-  render() {
-    return(
-      <div className='popupElem_content'>
-      	{this.props.children}
-      </div>
-    );
-  }
-}
+const PopupContent = props => <div className="popupElem_content">{ props.children }</div>;
 
+PopupContent.propTypes = {
+  children: node
+};
 export default PopupContent;

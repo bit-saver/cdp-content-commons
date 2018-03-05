@@ -10,7 +10,7 @@ import {
   SEARCH_SORT_FAILED,
   SEARCH_SORT_SUCCESS,
   SEARCH_AUTHOR_UPDATE,
-  SEARCH_TAG_UPDATE,
+  SEARCH_TAG_UPDATE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -29,15 +29,15 @@ const INITIAL_STATE = {
   startPage: 1,
   tag: '',
   total: 0,
-  totalPages: 0,
+  totalPages: 0
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+export default ( state = INITIAL_STATE, action ) => {
+  switch ( action.type ) {
     case SEARCH_QUERY_UPDATE:
       return {
         ...state,
-        query: action.payload,
+        query: action.payload
       };
     case SEARCH_AUTHOR_UPDATE:
       return {
@@ -53,58 +53,58 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: true,
-        error: false,
+        error: false
       };
     case SEARCH_REQUEST_FAILED:
       return {
         INITIAL_STATE,
         ...state,
         isFetching: false,
-        error: true,
+        error: true
       };
     case SEARCH_REQUEST_SUCCESS:
       return {
         ...state,
         isFetching: false,
         error: false,
-        ...action.payload,
+        ...action.payload
       };
     case SEARCH_PAGE_PENDING:
       return {
         ...state,
         isFetching: true,
-        error: false,
+        error: false
       };
     case SEARCH_PAGE_FAILED:
       return {
         INITIAL_STATE,
         ...state,
         isFetching: false,
-        error: true,
+        error: true
       };
     case SEARCH_PAGE_SUCCESS:
       return {
         ...state,
         ...action.payload,
-        isFetching: false,
+        isFetching: false
       };
     case SEARCH_SORT_PENDING:
       return {
         ...state,
-        ...action.payload,
-      }
+        ...action.payload
+      };
     case SEARCH_SORT_FAILED:
       return {
         ...INITIAL_STATE,
         ...state,
         isFetching: false,
-        error: true,
+        error: true
       };
     case SEARCH_SORT_SUCCESS:
       return {
         ...state,
         ...action.payload,
-        isFetching: false,
+        isFetching: false
       };
     default:
       return state;

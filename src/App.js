@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import * as ReactTapEventPlugin from 'react-tap-event-plugin';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -11,21 +11,17 @@ import Search from './components/Search';
 
 ReactTapEventPlugin();
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>        
-        <Router>
-          <div>              
-            <Nav />              
-            <Header />
-            <Search />                        
-            <Results />        
-          </div>
-        </Router>        
-      </Provider>
-    );
-  }
-}
+const App = () => (
+  <Provider store={ store }>
+    <Router>
+      <div>
+        <Nav />
+        <Header />
+        <Search />
+        <Results />
+      </div>
+    </Router>
+  </Provider>
+);
 
 export default App;
