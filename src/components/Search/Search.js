@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { func, shape, string } from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { func, shape, string, object } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Form } from 'semantic-ui-react';
@@ -7,13 +8,8 @@ import { Form } from 'semantic-ui-react';
 class Search extends Component {
   constructor( props ) {
     super( props );
-    // toggles advanced search
-    this.state = {
-      open: false
-    };
     this.handleQueryOnChange = this.handleQueryOnChange.bind( this );
     this.handleSubmit = this.handleSubmit.bind( this );
-    this.handleAdvancedSearchClick = this.handleAdvancedSearchClick.bind( this );
   }
 
   componentWillMount() {
@@ -31,18 +27,8 @@ class Search extends Component {
     if ( !this.props.search.query ) {
       return;
     }
-    if ( this.state.open ) {
-      // close advanced search when search runs
-      this.setState( { open: false } );
-    }
     this.props.createRequest();
-  }
-
-  handleAdvancedSearchClick( e ) {
-    e.preventDefault();
-    this.setState( {
-      open: !this.state.open
-    } );
+    this.props.history.push( '/results' );
   }
 
   render() {
@@ -71,9 +57,11 @@ Search.propTypes = {
   loadSites: func,
   updateSearchQuery: func,
   createRequest: func,
+  history: object,
   search: shape( {
     query: string
   } )
 };
 
-export default connect( mapStateToProps, actions )( Search );
+// wrap component in withRouter to get access to history
+export default withRouter( connect( mapStateToProps, actions )( Search ) );
