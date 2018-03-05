@@ -29696,7 +29696,6 @@ body.pushable > .pusher {
       .videoEmbed_specs {
         margin-left: 0; } }
 
-<<<<<<< HEAD
 .clipboardcopy {
   display: flex;
   justify-content: space-between;
@@ -29774,7 +29773,58 @@ body.pushable > .pusher {
   100% {
     opacity: 0;
     transform: translateY(-15%); } }
-=======
+
+.videoEmbed {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40px; }
+  @media screen and (max-width: 767px) {
+    .videoEmbed {
+      display: block;
+      margin-left: 0; } }
+  .videoEmbed_wrapper {
+    margin-bottom: 25px; }
+  .videoEmbed_label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+    padding-top: 7.5px;
+    font-weight: bold; }
+    @media screen and (max-width: 767px) {
+      .videoEmbed_label {
+        position: relative;
+        font-size: 12px; } }
+    .videoEmbed_label_wrapper {
+      position: relative;
+      min-width: 50px; }
+  .videoEmbed_code {
+    display: flex;
+    justify-content: space-between;
+    flex: 1; }
+    @media screen and (max-width: 767px) {
+      .videoEmbed_code {
+        font-size: 12px; } }
+    .videoEmbed_code .ui.input {
+      flex: 1;
+      color: #000; }
+      .videoEmbed_code .ui.input.disabled {
+        opacity: 1; }
+      .videoEmbed_code .ui.input input {
+        border-radius: 0;
+        border: none;
+        background-color: #f1f1f1; }
+    .videoEmbed_code .ui.button {
+      border-radius: 0; }
+  .videoEmbed_specs {
+    display: block;
+    margin-left: 90px;
+    font-size: 12px; }
+    @media screen and (max-width: 767px) {
+      .videoEmbed_specs {
+        margin-left: 0; } }
+
 .filterMenu {
   position: relative;
   min-width: 150px; }
@@ -29828,4 +29878,3 @@ body.pushable > .pusher {
         padding: 0 12px; }
         .filterMenu_options.ui.form .fields .field {
           margin: 5px 0 0 3px; }
->>>>>>> testing dropdown structure
