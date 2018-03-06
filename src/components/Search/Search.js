@@ -38,7 +38,12 @@ class Search extends Component {
         <div className="search_bar">
           <Form onSubmit={ this.handleSubmit }>
             <Form.Group>
-              <Form.Input placeholder="Search..." className="search_input" onChange={ this.handleQueryOnChange } />
+              <Form.Input
+                placeholder="Search..."
+                className="search_input"
+                onChange={ this.handleQueryOnChange }
+                value={ this.props.search.query ? this.props.search.query : '' }
+              />
               <Form.Button icon="search" type="submit" />
             </Form.Group>
           </Form>

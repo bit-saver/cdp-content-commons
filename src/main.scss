@@ -4,12 +4,14 @@
 @import './assets/styles/layout';
 
 /* COMPONENTS */
+@import './components/ResultsPage/ResultsPage';
+@import './components/LandingPage/LandingPage';
 @import './components/Nav/Nav';
 @import './components/Header/Header';
+@import './components/Title/Title';
 @import './components/Notification/_Notification.scss';
 @import './components/Results/Results';
 @import './components/Search/Search';
-@import './components/Title/Title';
 @import './components/Hover/Hover';
 @import './components/Popup/PopupElem';
 @import './components/Popup/Video/SharePopupItem';
