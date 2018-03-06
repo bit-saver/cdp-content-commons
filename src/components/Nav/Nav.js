@@ -1,14 +1,26 @@
 import React from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
+import Search from '../Search';
+import Title from '../Title';
 
 const Nav = () => (
   <section>
-    <Dropdown text="MENU" className="nav">
-      <Dropdown.Menu>
-        <Dropdown.Item text="Menu Item" />
-        <Dropdown.Item text="Sign In" />
-      </Dropdown.Menu>
-    </Dropdown>
+    <Menu className="nav" borderless>
+      <Menu.Item>
+        <Title />
+      </Menu.Item>
+      <Menu.Item>
+        <Search />
+      </Menu.Item>
+      <Menu.Menu position="right">
+        <Menu.Item name="about">
+          About
+        </Menu.Item>
+        <Menu.Item name="signin">
+          Sign In
+        </Menu.Item>
+      </Menu.Menu>
+    </Menu>
   </section>
 );
 
