@@ -29254,6 +29254,27 @@ body.pushable > .pusher {
   width: 100%; }
 
 /* COMPONENTS */
+.resultspage header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999; }
+
+.resultspage main {
+  margin-top: 80px; }
+
+.landingpage .ui.nav.menu {
+  background-image: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none; }
+
+.landingpage .ui.nav.menu .search_bar {
+  display: none; }
+
+.landingpage .ui.nav.menu .title {
+  display: none; }
+
 .ui.nav.menu {
   background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100%);
   border: none;
@@ -29269,18 +29290,6 @@ body.pushable > .pusher {
 .ui.nav.menu .search_bar .fields {
   margin: 0; }
 
-.landingpage .ui.nav.menu {
-  background-image: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none; }
-
-.landingpage .ui.nav.menu .search_bar {
-  display: none; }
-
-.landingpage .ui.nav.menu .title {
-  display: none; }
-
 .HeaderBar__component {
   background-image: url("../../assets/iip_logo_white.png");
   background-position-y: 7px;
@@ -29288,6 +29297,12 @@ body.pushable > .pusher {
   background-size: 128px;
   background-repeat: no-repeat;
   cursor: pointer; }
+
+.title, .title:hover {
+  color: #112e51; }
+  @media screen and (min-width: 641px) {
+    .title, .title:hover {
+      font-size: 60px; } }
 
 /*@import '../../assets/styles/variables';*/
 .Flash__component {
@@ -29541,12 +29556,6 @@ body.pushable > .pusher {
 /****************** 
   END TEMP 
 *******************/
-.title, .title:hover {
-  color: #112e51; }
-  @media screen and (min-width: 641px) {
-    .title, .title:hover {
-      font-size: 60px; } }
-
 .card_downloadHover {
   position: absolute;
   bottom: -55px;
