@@ -19,8 +19,8 @@ class ResultItem extends Component {
     let cardImageSrc;
 
     const image = source.featured_image;
-    if ( image && image.sizes && image.sizes.full ) {
-      cardImageSrc = image.sizes.full.url;
+    if ( image && image.sizes && image.sizes.medium ) {
+      cardImageSrc = image.sizes.medium.url;
     } else {
       cardImageSrc = defaultImage;
     }
@@ -45,7 +45,7 @@ class ResultItem extends Component {
     return (
       <Card>
         <a rel="noopener noreferrer" href={ source.link } title={ source.title } target="_blank">
-          <Image src={ cardImageSrc } />
+          <Image src={ cardImageSrc } width="100%" height="100%" />
           <Image src={ iconImage } className="card_postIcon" />
         </a>
         <Card.Content>
