@@ -5,14 +5,13 @@ import Header from '../Header';
 import Search from '../Search';
 
 const LandingPage = () => (
-  <div>
+  <div className="landingpage">
     <header>
       <Nav />
-      <Header />
-      <Search />
     </header>
     <main>
-      <section>LANDING PAGE</section>
+      <Header />
+      <Search />
     </main>
   </div>
 );

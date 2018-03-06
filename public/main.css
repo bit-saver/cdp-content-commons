@@ -29244,15 +29244,42 @@ body.pushable > .pusher {
 *******************************/
 /* OLD COLORS */
 @media screen and (min-width: 768px) {
-  .ui.container {
-    width: 1600px;
-    padding-left: 2em;
-    padding-right: 2em; } }
+  .ui.container main {
+    width: 100%;
+    padding: 2em; } }
+
+.ui.container {
+  margin: 0;
+  padding: 0;
+  width: 100%; }
 
 /* COMPONENTS */
-.nav {
-  margin-bottom: 1em;
-  color: #0071bc; }
+.ui.nav.menu {
+  background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100%);
+  border: none;
+  border-radius: 0; }
+
+.ui.nav.menu a {
+  color: #fff;
+  font-size: 1.5em; }
+
+.ui.nav.menu .search_bar {
+  width: 500px; }
+
+.ui.nav.menu .search_bar .fields {
+  margin: 0; }
+
+.landingpage .ui.nav.menu {
+  background-image: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none; }
+
+.landingpage .ui.nav.menu .search_bar {
+  display: none; }
+
+.landingpage .ui.nav.menu .title {
+  display: none; }
 
 .HeaderBar__component {
   background-image: url("../../assets/iip_logo_white.png");
@@ -29282,8 +29309,7 @@ body.pushable > .pusher {
   color: #212121; }
 
 .ResultsHeader__component {
-  display: flex;
-  margin-top: 80px; }
+  display: flex; }
   .ResultsHeader__component > p {
     flex: .8;
     margin-top: 38px; }
