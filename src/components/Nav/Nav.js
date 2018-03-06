@@ -1,25 +1,25 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import Search from '../Search';
 import Title from '../Title';
 
 const Nav = () => (
   <section>
-    <Menu className="nav" borderless>
-      <Menu.Item>
+    <Menu className="nav" borderless stackable>
+      <Menu.Item className="nav__title">
         <Title />
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item className="nav__search">
         <Search />
       </Menu.Item>
-      <Menu.Menu position="right">
-        <Menu.Item name="about">
-          About
-        </Menu.Item>
-        <Menu.Item name="signin">
-          Sign In
-        </Menu.Item>
-      </Menu.Menu>
+      <Menu.Item position="right" className="nav__menu">
+        <Dropdown item simple text="MENU" direction="right">
+          <Dropdown.Menu>
+            <Dropdown.Item text="About" />
+            <Dropdown.Item text="Sign In" />
+          </Dropdown.Menu>
+        </Dropdown>
+      </Menu.Item>
     </Menu>
   </section>
 );

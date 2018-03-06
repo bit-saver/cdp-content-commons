@@ -8,7 +8,7 @@ const ResultsPage = () => (
     <header>
       <Nav />
     </header>
-    <main>
+    <main className="ui container">
       <Results />
     </main>
   </div>
