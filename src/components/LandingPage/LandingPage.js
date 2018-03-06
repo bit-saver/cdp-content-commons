@@ -9,7 +9,7 @@ const LandingPage = () => (
     <header>
       <Nav />
     </header>
-    <main>
+    <main className="ui container">
       <Header />
       <Search />
     </main>
