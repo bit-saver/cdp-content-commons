@@ -29243,30 +29243,13 @@ body.pushable > .pusher {
          Site Overrides
 *******************************/
 /* OLD COLORS */
-.ui.container {
-  margin: 0;
-  padding: 0;
-  width: 100%; }
-
 @media screen and (min-width: 768px) {
-  main.ui.container {
-    width: 100%;
-    padding: 2em;
-    max-width: 1600px; } }
+  .ui.container {
+    width: 1600px;
+    padding-left: 2em;
+    padding-right: 2em; } }
 
 /* COMPONENTS */
-.resultspage header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 999; }
-
-.resultspage main.ui.container {
-  margin-top: 210px; }
-  @media screen and (min-width: 768px) {
-    .resultspage main.ui.container {
-      margin-top: 70px; } }
-
 .landingpage .ui.nav.menu {
   background-image: none;
   border: none;
@@ -29280,25 +29263,40 @@ body.pushable > .pusher {
   display: none; }
 
 nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   padding: 1.5em;
   z-index: 999; }
 
-header.bar {
-  padding: 4em 0; }
-
-header.resultsbar {
+.resultsbar {
   background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100%);
   border: none;
   border-radius: 0;
   padding: 0;
-  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 998; }
+
+header {
+  text-align: center; }
+
+.bar header {
+  padding: 10em 0; }
+
+.bar .search_bar {
+  margin: 4em auto; }
+
+@media screen and (max-width: 767px) {
+  .resultsbar header {
+    text-align: left; } }
+
+.resultsbar .ui.container, .bar .ui.container {
+  position: relative; }
+  @media screen and (min-width: 768px) {
+    .resultsbar .ui.container, .bar .ui.container {
+      width: 1600px; } }
 
 .resultsbar a, .resultsbar a:hover {
   color: #fff;
@@ -29314,7 +29312,8 @@ header.resultsbar {
 
 .resultsbar .header .title {
   font-size: 1em;
-  padding: 1em; }
+  padding: 0.5em;
+  padding-left: 0; }
 
 .resultsbar .sub.header.subtitle {
   display: none; }
