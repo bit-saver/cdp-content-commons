@@ -29251,7 +29251,8 @@ body.pushable > .pusher {
 @media screen and (min-width: 768px) {
   main.ui.container {
     width: 100%;
-    padding: 2em; } }
+    padding: 2em;
+    max-width: 1600px; } }
 
 /* COMPONENTS */
 .resultspage header {
@@ -29278,34 +29279,60 @@ body.pushable > .pusher {
 .landingpage .ui.nav.menu .nav__search {
   display: none; }
 
-.ui.nav.menu {
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 1.5em;
+  z-index: 999; }
+
+header.bar {
+  padding: 4em 0; }
+
+header.resultsbar {
   background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100%);
   border: none;
-  border-radius: 0; }
+  border-radius: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998; }
 
-.ui.nav.menu a {
+.resultsbar a, .resultsbar a:hover {
   color: #fff;
   font-size: 1.5em; }
 
-.ui.nav.menu .search_bar {
-  width: 100%; }
+.resultsbar h1.ui.header {
+  margin: 0;
+  padding: 0.5em;
+  text-align: left; }
   @media screen and (min-width: 768px) {
-    .ui.nav.menu .search_bar {
-      width: 400px; } }
+    .resultsbar h1.ui.header {
+      float: left; } }
+
+.resultsbar .header .title {
+  font-size: 1em;
+  padding: 1em; }
+
+.resultsbar .sub.header.subtitle {
+  display: none; }
+
+.resultsbar .search_bar {
+  width: 100%;
+  padding: 0.6em;
+  box-shadow: none; }
+  @media screen and (min-width: 768px) {
+    .resultsbar .search_bar {
+      width: 400px;
+      float: center; } }
   @media screen and (min-width: 900px) {
-    .ui.nav.menu .search_bar {
+    .resultsbar .search_bar {
       width: 500px; } }
 
-.ui.nav.menu .search_bar .fields {
+.resultsbar .search_bar .fields {
   margin: 0; }
-
-.HeaderBar__component {
-  background-image: url("../../assets/iip_logo_white.png");
-  background-position-y: 7px;
-  background-position-x: 24px;
-  background-size: 128px;
-  background-repeat: no-repeat;
-  cursor: pointer; }
 
 .title, .title:hover {
   color: #112e51; }
@@ -29409,6 +29436,12 @@ body.pushable > .pusher {
       .ResultsHeader__component .ui.form .fields.results_sort .ui.selection.dropdown.active .menu {
         border-radius: 0;
         border-color: transparent; }
+
+.results {
+  margin-top: 140px; }
+  @media screen and (min-width: 768px) {
+    .results {
+      margin-top: 70px; } }
 
 @media screen and (max-width: 425px) {
   .results_wrapper.ui.grid {

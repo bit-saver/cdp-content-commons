@@ -20,7 +20,7 @@ const Results = ( props ) => {
   }
 
   return (
-    <section>
+    <section className="results">
       { props.search.currentPage !== -1 && (
         <div>
           <section>

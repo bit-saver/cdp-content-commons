@@ -1,24 +1,7 @@
-.ui.nav.menu {
-  background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100% );
-  border: none;
-  border-radius: 0;
-}
-
-.ui.nav.menu a {
-  color: #fff;
-  font-size: 1.5em;
-}
-
-.ui.nav.menu .search_bar {
-  @media screen and (min-width: 768px) {
-    width: 400px;
-  }
-  @media screen and (min-width: 900px) {
-    width: 500px;
-  }
-  width: 100%;
-}
-
-.ui.nav.menu .search_bar .fields {
-  margin: 0;
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 1.5em;
+  z-index: 999;
 }
