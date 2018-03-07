@@ -1,8 +1,55 @@
-.HeaderBar__component {
-  background-image: url('../../assets/iip_logo_white.png');
-  background-position-y: 7px;
-  background-position-x: 24px;
-  background-size: 128px;
-  background-repeat: no-repeat;
-  cursor: pointer;
+header.bar {
+  padding: 4em 0;
+}
+
+header.resultsbar {
+  background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100% );
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+}
+
+.resultsbar a, .resultsbar a:hover {
+  color: #fff;
+  font-size: 1.5em;
+}
+
+.resultsbar h1.ui.header {
+  @media screen and (min-width: 768px) {
+    float: left;
+  }
+  margin: 0;
+  padding: 0.5em;
+  text-align: left;
+}
+
+.resultsbar .header .title {
+  font-size: 1em;
+  padding: 1em;
+}
+
+.resultsbar .sub.header.subtitle {
+  display: none;
+}
+
+.resultsbar .search_bar {
+  @media screen and (min-width: 768px) {
+    width: 400px;
+    float: center;
+  }
+  @media screen and (min-width: 900px) {
+    width: 500px;
+  }
+  width: 100%;
+  padding: 0.6em;
+  box-shadow: none;
+}
+
+.resultsbar .search_bar .fields {
+  margin: 0;
 }
