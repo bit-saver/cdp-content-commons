@@ -4,7 +4,6 @@ import * as ReactTapEventPlugin from 'react-tap-event-plugin';
 
 import LandingPage from './components/LandingPage';
 import Header from './components/Header';
-import Nav from './components/Nav';
 import Results from './components/Results';
 
 ReactTapEventPlugin();
@@ -12,7 +11,6 @@ ReactTapEventPlugin();
 const App = () => (
   <div>
     <Header />
-    <Nav />
     <main className="ui container">
       <Switch>
         <Route path="/" exact component={ LandingPage } />

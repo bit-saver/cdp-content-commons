@@ -1,19 +1,38 @@
-header.bar {
-  padding: 4em 0;
-}
-
-header.resultsbar {
+.resultsbar {
   background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100% );
   border: none;
   border-radius: 0;
   padding: 0;
-  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 998;
 }
 
+header {
+  text-align: center;
+}
+
+.bar header {
+  padding: 10em 0;
+}
+
+.bar .search_bar {
+  margin: 4em auto;
+}
+
+.resultsbar header {
+  @media screen and (max-width: 767px) {
+    text-align: left;
+  }
+}
+
+.resultsbar .ui.container, .bar .ui.container {
+  @media screen and (min-width: 768px) {
+    width: 1600px;
+  }
+  position: relative;
+}
 .resultsbar a, .resultsbar a:hover {
   color: #fff;
   font-size: 1.5em;
@@ -30,7 +49,8 @@ header.resultsbar {
 
 .resultsbar .header .title {
   font-size: 1em;
-  padding: 1em;
+  padding: 0.5em;
+  padding-left: 0;
 }
 
 .resultsbar .sub.header.subtitle {
