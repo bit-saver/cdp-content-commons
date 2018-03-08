@@ -29269,6 +29269,15 @@ nav {
   padding: 1.5em;
   z-index: 999; }
 
+header {
+  text-align: center; }
+
+.bar header {
+  padding: 10em 0; }
+
+.bar .search_bar {
+  margin: 4em auto; }
+
 .resultsbar {
   background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100%);
   border: none;
@@ -29278,15 +29287,6 @@ nav {
   top: 0;
   width: 100%;
   z-index: 998; }
-
-header {
-  text-align: center; }
-
-.bar header {
-  padding: 10em 0; }
-
-.bar .search_bar {
-  margin: 4em auto; }
 
 @media screen and (max-width: 767px) {
   .resultsbar header {
@@ -29308,7 +29308,8 @@ header {
   text-align: left; }
   @media screen and (min-width: 768px) {
     .resultsbar h1.ui.header {
-      float: left; } }
+      float: left;
+      padding-left: 0; } }
 
 .resultsbar .header .title {
   font-size: 1em;
