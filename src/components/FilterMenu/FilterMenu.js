@@ -1,132 +1,122 @@
 import React, { Component } from 'react';
-import { Form, Icon, Dropdown, Input, Radio } from 'semantic-ui-react';
-
+import FilterMenuItem from './FilterMenuItem';
 
 class FilterMenu extends Component {
-  
-  state = {};
+  constructor( props ) {
+    super( props );
 
-  handleOnChange = (e, { value }) => this.setState({ value });
+    this.state = {
+      filterSelection: ''
+    };
 
-  displayMenuOnClick = (e) => {
-  	const 
-  	  menuLabel = e.target,
-  	  menu = menuLabel.nextSibling;
-  	  
-  	this.menuReset();
-  	
-  	menuLabel.classList.add('active');
-  	menu.classList.add('show');
+    this.handleFilterSelect = this.handleFilterSelect.bind( this );
   }
 
-  menuOffClick = () => {
-  	document.addEventListener('click', (e) => {
-		console.log(e);
-  		console.log(e.srcElement);
-  		console.log(e.srcElement.tagName === 'LABEL');
+  handleFilterSelect( e ) {
+    const filterSelection = e.target.previousSibling.value;
+    this.setState( { filterSelection } );
 
-  		// Use UI State to store label & filterMenu_label states?  		
-  		if( !e.srcElement.tagName === 'LABEL' || !e.target.classList.contains('filterMenu_label') ) {
-  		  this.menuReset();
-  		}
-
-
-  	});
+    const subMenu = document.querySelector( `[data-menu-for=${filterSelection}]` );
+    if ( subMenu ) {
+      subMenu.classList.add( 'show' );
+    }
   }
-
-  menuReset = () => {
-  	const activeMenu = document.querySelector('.filterMenu_options.show'),  	
-		  activeMenuLabel = document.querySelector('.filterMenu_label.active');
-  		  
-    if( !!activeMenu ) activeMenu.classList.remove('show');
-    if( !!activeMenuLabel ) activeMenuLabel.classList.remove('active');
-  }
-
-  testOnSelect = e => console.log(e);
-
-  componentDidMount() {
-  	this.menuOffClick();
-  }
-
 
   render() {
-  	const { value } = this.state;
+    return (
+      <div className='filterMenu_wrapper'>
+  	    <div className='filterMenu_main'>
+          <FilterMenuItem
+            menuName='Most Recent'
+            handleFilterSelect={ this.handleFilterSelect }
+            menuOptions = { [
+              { optionLabel: 'Most Recent', optionValue: 'mostRecent' },
+              { optionLabel: 'Past Hour', optionValue: 'pastHour' },
+              { optionLabel: 'Past 24 Hours', optionValue: 'past24Hours' },
+              { optionLabel: 'Past Week', optionValue: 'pastWeek' },
+              { optionLabel: 'Past Month', optionValue: 'pastMonth' },
+              { optionLabel: 'Past Year', optionValue: 'pastYear' },
+              { optionLabel: 'Oldest', optionValue: 'oldest' },
+              { optionLabel: 'Custom', optionValue: 'custom' }
+            ] }
+          />
+          <FilterMenuItem
+            menuName='Format'
+            handleFilterSelect={ this.handleFilterSelect }
+            menuOptions = { [
+              { optionLabel: 'Article', optionValue: 'article' },
+              { optionLabel: 'Audio', optionValue: 'audio' },
+              { optionLabel: 'Course', optionValue: 'course' },
+              { optionLabel: 'Image', optionValue: 'image' },
+              { optionLabel: 'Publication', optionValue: 'publication' },
+              { optionLabel: 'Quiz', optionValue: 'quiz' },
+              { optionLabel: 'Video', optionValue: 'video' }            
+            ] }
+          />
+          <FilterMenuItem 
+            menuName='Source'
+            handleFilterSelect={ this.handleFilterSelect }
+            useCheckbox
+            menuOptions = { [
+              { optionLabel: 'American Spaces', optionValue: 'american_spaces' },
+              { optionLabel: 'IIP Interactive', optionValue: 'iip_interactive' },
+              { optionLabel: 'IIP Video Production', optionValue: 'iip_video_prod' },
+              { optionLabel: 'ShareAmerica', optionValue: 'share_america' },
+              { optionLabel: 'YALI', optionValue: 'yali' },
+              { optionLabel: 'YLAI', optionValue: 'ylai' }
+            ] }
+          />
+          <FilterMenuItem 
+            menuName='Language'
+            handleFilterSelect={ this.handleFilterSelect }
+            useCheckbox
+            menuOptions = { [
+              { optionLabel: 'English', optionValue: 'english' },
+              { optionLabel: 'Espanol', optionValue: 'spanish' },
+              { optionLabel: 'Francais', optionValue: 'french' },
+              { optionLabel: 'Portugues', optionValue: 'portuguese' },
+              { optionLabel: 'Pyccknn', optionValue: 'something' }
+            ] }
+          />
+          <FilterMenuItem 
+            menuName='Category'
+            handleFilterSelect={ this.handleFilterSelect }
+            useCheckbox
+            menuOptions = { [
+              { optionLabel: 'Art', optionValue: 'art' },
+              { optionLabel: 'Business', optionValue: 'business' },
+              { optionLabel: 'Education', optionValue: 'education' },
+              { optionLabel: 'Policy', optionValue: 'policy' },
+              { optionLabel: 'Region', optionValue: 'region' }
+            ] }
+          />
+        </div>
 
-  	return(  	    	    
-  	  <div className='filterMenu_wrapper'>
-  	    <div className='filterMenu'>
-  	  	  <span className='filterMenu_label' onClick={this.displayMenuOnClick}>Most Recent <Icon name='chevron up' /></span>  	  	  	
-  	  	  <Form className='filterMenu_options'>
-  	  	    <Form.Group>
-  	  	      <Form.Radio label='Most Recent' value='mostRecent' checked={value === 'mostRecent'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Past Hour' value='pastHour' checked={value === 'pastHour'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Past 24 Hours' value='past24Hours' checked={value === 'past24Hours'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Past Week' value='pastWeek' checked={value === 'pastWeek'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Past Month' value='pastMonth' checked={value === 'pastMonth'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Past Year' value='pastYear' checked={value === 'pastYear'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Oldest' value='oldest' checked={value === 'oldest'} onChange={this.handleOnChange} />  	  	    
-  	  	      <Form.Radio label='Custom' value='custom' checked={value === 'custom'} onChange={this.handleOnChange} />
-  	  	    </Form.Group>	
-  	  	  </Form>
-  	    </div>
-
-  	    <div className='filterMenu'>
-  	  	  <span className='filterMenu_label' onClick={this.displayMenuOnClick}>Format <Icon name='chevron up' /></span>  	  	  	
-  	  	  <Form className='filterMenu_options'>
-  	  	    <Form.Group>
-  	  	      <Form.Radio label='Article' value='article' checked={value === 'article'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Audio' value='audio' checked={value === 'audio'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Course' value='course' checked={value === 'course'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Image' value='image' checked={value === 'image'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Publication' value='publication' checked={value === 'publication'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Quiz' value='quiz' checked={value === 'quiz'} onChange={this.handleOnChange} />
-  	  	      <Form.Radio label='Video' value='video' checked={value === 'video'} onChange={this.handleOnChange} />
-  	  	    </Form.Group>	
-  	  	  </Form>
-  	    </div>
-
-  	    <div className='filterMenu'>
-  	  	  <span className='filterMenu_label' onClick={this.displayMenuOnClick}>Source <Icon name='chevron up' /></span>  	  	  	
-  	  	  <Form className='filterMenu_options'>
-  	  	    <Form.Group>
-  	  	      <Form.Checkbox label='American Spaces' value='american_spaces' />
-  	  	      <Form.Checkbox label='IIP Interactive' value='iip_interactive' />
-  	  	      <Form.Checkbox label='IIP Video Production' value='iip_video_prod' />
-  	  	      <Form.Checkbox label='ShareAmerica' value='share_america' />
-  	  	      <Form.Checkbox label='YALI' value='yali' />
-  	  	      <Form.Checkbox label='YLAI' value='ylai' />	  	  	    
-  	  	    </Form.Group>	
-  	  	  </Form>
-  	    </div>
-
-  	    <div className='filterMenu'>
-  	  	  <span className='filterMenu_label' onClick={this.displayMenuOnClick}>Language <Icon name='chevron up' /></span>  	  	  	
-  	  	  <Form className='filterMenu_options'>
-  	  	    <Form.Group>
-  	  	      <Form.Checkbox label='English' value='english' />
-  	  	      <Form.Checkbox label='Espanol' value='spanish' />
-  	  	      <Form.Checkbox label='Francais' value='french' />
-  	  	      <Form.Checkbox label='Portugues' value='portuguese' />
-  	  	      <Form.Checkbox label='Pyccknn' value='something' />	  	  	    
-  	  	    </Form.Group>	
-  	  	  </Form>
-  	    </div> 
-
-  	    <div className='filterMenu'>
-  	   	  <span className='filterMenu_label' onClick={this.displayMenuOnClick}>Category <Icon name='chevron up' /></span>  	  	  	
-  	  	  <Form className='filterMenu_options'>
-  	  	    <Form.Group>
-  	  	      <Form.Checkbox label='Art' value='art' />
-  	  	      <Form.Checkbox label='Business' value='business' />
-  	  	      <Form.Checkbox label='Education' value='education' />
-  	  	      <Form.Checkbox label='Policy' value='policy' />
-  	  	      <Form.Checkbox label='Region' value='region' />	  	  	    
-  	  	    </Form.Group>	
-  	  	  </Form>
-  	    </div>  
-
-	  </div>
-  	);
+        {/*****************
+          SUB
+        ******************/}        
+        <div className='filterMenu_sub' data-menu-for='video'>
+          <FilterMenuItem
+            menuName='File Type'            
+            menuOptions={[
+              { optionLabel: '.mp4', optionValue: 'mp4' },
+              { optionLabel: '.mov', optionValue: 'mov' }
+            ]}
+          />
+          <FilterMenuItem
+            menuName='Length'
+            menuOptions={[
+              { optionLabel: '< 1 minute', optionValue: 'under1minute' },
+              { optionLabel: '1-5 minutes', optionValue: '1_5minutes' },
+              { optionLabel: '5-10 minute', optionValue: '5_10minutes' },
+              { optionLabel: '10-15 minute', optionValue: '10_15minutes' },
+              { optionLabel: '15-30 minute', optionValue: '15_30minutes' },
+              { optionLabel: '> 30 minute', optionValue: 'greater30minutes' }
+            ]}
+          />
+        </div>
+	    </div>
+    );
   }
 }
 
