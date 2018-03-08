@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { object, string } from 'prop-types';
+import './PopupElem.css';
 
 class PopupMenuItem extends Component {
   constructor( props ) {

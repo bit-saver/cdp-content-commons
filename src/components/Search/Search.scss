@@ -1,0 +1,59 @@
+@import "../../assets/styles/_colors.scss";
+
+.ui.header .sub.header {
+  margin-bottom: 30px;
+}
+
+.search_bar {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Form */
+.ui.form {
+  .fields {
+    @media screen and (max-width: 767px) {
+      flex-wrap: nowrap;
+      margin: 0;
+    }
+    @media screen and (max-width: 540px) {
+      flex-wrap: wrap;
+    }
+
+    .field {
+      padding-left: 0;
+      padding-right: 0;
+
+      input[type="text"],
+      .ui.button {
+        border: 2px solid #02bfe7;
+        border-radius: 0;
+      }
+
+      &.search_input {
+        width: 100%;
+        font-size: 18px;
+        @media screen and (max-width: 540px) {
+          flex: 1;
+        }
+
+        input[type="text"] {
+          border-right: none;
+          @media screen and (max-width: 640px) {
+            padding-top: 13px;
+          }
+        }
+      }
+
+      .ui.button {
+        padding: 14px 11px;
+        border-left: none;
+        font-size: 18px;
+        background-color: #fff;
+        color: #0071bc;
+        @media screen and (max-width: 767px) {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

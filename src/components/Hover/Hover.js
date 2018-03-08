@@ -1,5 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
+import './Hover.css';
 
 const Hover = props => (
   <div className={ props.className }>

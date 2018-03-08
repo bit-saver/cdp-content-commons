@@ -1,7 +1,9 @@
+@import "../../assets/styles/_colors.scss";
+
 .clipboardcopy {
   display: flex;
   justify-content: space-between;
-  margin-left: 40px;  
+  margin-left: 40px;
   @media screen and (max-width: 767px) {
     display: block;
     margin-left: 0;
@@ -11,14 +13,14 @@
     margin-bottom: 25px;
   }
 
-  &_label {    
+  &_label {
     position: absolute;
     top: 0;
     right: 0;
     width: 100%;
-  	margin-bottom: 0;
-  	margin-right: 10px;  	
-  	font-weight: bold;    
+    margin-bottom: 0;
+    margin-right: 10px;
+    font-weight: bold;
     @media screen and (min-width: 768px) {
       text-align: right;
     }
@@ -33,39 +35,38 @@
     }
   }
 
-
   &_item {
-  	display: flex;
-  	justify-content: space-between;
-  	flex: 1;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
     @media screen and (max-width: 767px) {
       font-size: 12px;
     }
 
-  	.ui.input {
-  	  flex: 1;
+    .ui.input {
+      flex: 1;
       color: #000;
 
       &.disabled {
         opacity: 1;
       }
-  	  
-  	  input {  	    	    
-  	  	border-radius: 0;
-  	    border: none;
-  	    background-color: $light-grey;
-  	  }
-  	}
 
-  	.ui.button {
+      input {
+        border-radius: 0;
+        border: none;
+        background-color: $light-grey;
+      }
+    }
+
+    .ui.button {
       position: relative;
-  	  border-radius: 0;
+      border-radius: 0;
 
       &.copied:after {
-        content: 'COPIED!';
+        content: "COPIED!";
         position: absolute;
-        top: 0;        
-        right: 50%;        
+        top: 0;
+        right: 50%;
         display: block;
         margin-right: -33px;
         padding: 8px;
@@ -74,9 +75,8 @@
         opacity: 0;
         animation: showCopied 1.5s ease;
       }
-  	}
+    }
   }
-
 
   &_info {
     display: block;
@@ -84,7 +84,7 @@
     font-size: 12px;
     @media screen and (max-width: 767px) {
       margin-left: 0;
-    }   
+    }
   }
 }
 
@@ -104,4 +104,3 @@
     transform: translateY(-15%);
   }
 }
-

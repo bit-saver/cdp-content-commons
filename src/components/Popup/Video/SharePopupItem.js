@@ -9,6 +9,7 @@ import { Image, Input } from 'semantic-ui-react';
 import facebookLogo from '../../../assets/images/VideoShareDownload/facebook.png';
 import twitterLogo from '../../../assets/images/VideoShareDownload/twitter.png';
 import darkowlLogo from '../../../assets/images/VideoShareDownload/darkowl.png';
+import './SharePopupItem.css';
 
 class SharePopupItem extends Component {
   render() {

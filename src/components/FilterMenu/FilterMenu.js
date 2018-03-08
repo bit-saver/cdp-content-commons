@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FilterMenuItem from './FilterMenuItem';
+import './FilterMenu.css';
 
 class FilterMenu extends Component {
   constructor( props ) {
@@ -24,12 +25,12 @@ class FilterMenu extends Component {
 
   render() {
     return (
-      <div className='filterMenu_wrapper'>
-  	    <div className='filterMenu_main'>
+      <div className="filterMenu_wrapper">
+        <div className="filterMenu_main">
           <FilterMenuItem
-            menuName='Most Recent'
+            menuName="Most Recent"
             handleFilterSelect={ this.handleFilterSelect }
-            menuOptions = { [
+            menuOptions={ [
               { optionLabel: 'Most Recent', optionValue: 'mostRecent' },
               { optionLabel: 'Past Hour', optionValue: 'pastHour' },
               { optionLabel: 'Past 24 Hours', optionValue: 'past24Hours' },
@@ -41,23 +42,23 @@ class FilterMenu extends Component {
             ] }
           />
           <FilterMenuItem
-            menuName='Format'
+            menuName="Format"
             handleFilterSelect={ this.handleFilterSelect }
-            menuOptions = { [
+            menuOptions={ [
               { optionLabel: 'Article', optionValue: 'article' },
               { optionLabel: 'Audio', optionValue: 'audio' },
               { optionLabel: 'Course', optionValue: 'course' },
               { optionLabel: 'Image', optionValue: 'image' },
               { optionLabel: 'Publication', optionValue: 'publication' },
               { optionLabel: 'Quiz', optionValue: 'quiz' },
-              { optionLabel: 'Video', optionValue: 'video' }            
+              { optionLabel: 'Video', optionValue: 'video' }
             ] }
           />
-          <FilterMenuItem 
-            menuName='Source'
+          <FilterMenuItem
+            menuName="Source"
             handleFilterSelect={ this.handleFilterSelect }
             useCheckbox
-            menuOptions = { [
+            menuOptions={ [
               { optionLabel: 'American Spaces', optionValue: 'american_spaces' },
               { optionLabel: 'IIP Interactive', optionValue: 'iip_interactive' },
               { optionLabel: 'IIP Video Production', optionValue: 'iip_video_prod' },
@@ -66,11 +67,11 @@ class FilterMenu extends Component {
               { optionLabel: 'YLAI', optionValue: 'ylai' }
             ] }
           />
-          <FilterMenuItem 
-            menuName='Language'
+          <FilterMenuItem
+            menuName="Language"
             handleFilterSelect={ this.handleFilterSelect }
             useCheckbox
-            menuOptions = { [
+            menuOptions={ [
               { optionLabel: 'English', optionValue: 'english' },
               { optionLabel: 'Espanol', optionValue: 'spanish' },
               { optionLabel: 'Francais', optionValue: 'french' },
@@ -78,11 +79,11 @@ class FilterMenu extends Component {
               { optionLabel: 'Pyccknn', optionValue: 'something' }
             ] }
           />
-          <FilterMenuItem 
-            menuName='Category'
+          <FilterMenuItem
+            menuName="Category"
             handleFilterSelect={ this.handleFilterSelect }
             useCheckbox
-            menuOptions = { [
+            menuOptions={ [
               { optionLabel: 'Art', optionValue: 'art' },
               { optionLabel: 'Business', optionValue: 'business' },
               { optionLabel: 'Education', optionValue: 'education' },
@@ -92,30 +93,30 @@ class FilterMenu extends Component {
           />
         </div>
 
-        {/*****************
-          SUB
-        ******************/}        
-        <div className='filterMenu_sub' data-menu-for='video'>
+        { /*
+        SUB
+         */ }
+        <div className="filterMenu_sub" data-menu-for="video">
           <FilterMenuItem
-            menuName='File Type'            
-            menuOptions={[
+            menuName="File Type"
+            menuOptions={ [
               { optionLabel: '.mp4', optionValue: 'mp4' },
               { optionLabel: '.mov', optionValue: 'mov' }
-            ]}
+            ] }
           />
           <FilterMenuItem
-            menuName='Length'
-            menuOptions={[
+            menuName="Length"
+            menuOptions={ [
               { optionLabel: '< 1 minute', optionValue: 'under1minute' },
               { optionLabel: '1-5 minutes', optionValue: '1_5minutes' },
               { optionLabel: '5-10 minute', optionValue: '5_10minutes' },
               { optionLabel: '10-15 minute', optionValue: '10_15minutes' },
               { optionLabel: '15-30 minute', optionValue: '15_30minutes' },
               { optionLabel: '> 30 minute', optionValue: 'greater30minutes' }
-            ]}
+            ] }
           />
         </div>
-	    </div>
+      </div>
     );
   }
 }
