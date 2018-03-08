@@ -1,6 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 import { Input } from 'semantic-ui-react';
+import './EmbedVideo.css';
 
 const EmbedVideo = ( props ) => {
   const { embedcode } = props;

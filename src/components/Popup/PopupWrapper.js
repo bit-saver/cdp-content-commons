@@ -1,5 +1,6 @@
 import React from 'react';
 import { node, string } from 'prop-types';
+import './PopupElem.css';
 
 const PopupWrapper = props => (
   <div className="popupElem">

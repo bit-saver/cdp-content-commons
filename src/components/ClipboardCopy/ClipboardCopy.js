@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { string } from 'prop-types';
 import { Button } from 'semantic-ui-react';
+import './ClipboardCopy.css';
 
 class ClipboardCopy extends Component {
   constructor( props ) {

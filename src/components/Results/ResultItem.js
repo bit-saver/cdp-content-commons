@@ -9,6 +9,7 @@ import videoImage from '../../assets/images/content_icons_32px_video.png';
 import { Card, Image } from 'semantic-ui-react';
 import VideoSharePopup from '../Popup/Video/VideoSharePopup';
 import VideoDownloadPopup from '../Popup/Video/VideoDownloadPopup';
+import './ResultItem.css';
 
 class ResultItem extends Component {
   render() {

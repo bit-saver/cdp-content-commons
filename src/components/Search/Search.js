@@ -4,6 +4,7 @@ import { func, shape, string, object } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Form } from 'semantic-ui-react';
+import './Search.css';
 
 class Search extends Component {
   constructor( props ) {

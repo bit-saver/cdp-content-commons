@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { numberWithCommas } from '../../utils/helpers';
 import { sortRequest } from '../../actions/search';
 import { Form, Select } from 'semantic-ui-react';
+import './ResultsHeader.css';
 
 /** **
 TEMP

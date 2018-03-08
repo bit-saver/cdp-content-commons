@@ -11,6 +11,7 @@ module.exports = {
     'comma-dangle': ['warn', 'never'],
     'no-underscore-dangle': 0,
     'import/first': 0,
+    'import/no-unresolved': [2, { ignore: ['.css$'] }],
     'no-console': 0,
     'no-param-reassign': 0,
     'no-unused-vars': ['warn', { vars: 'local', args: 'none' }],

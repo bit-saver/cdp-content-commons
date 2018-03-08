@@ -5,6 +5,7 @@ import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
 import { Grid } from 'semantic-ui-react';
+import './Results.css';
 
 const Results = ( props ) => {
   let items;

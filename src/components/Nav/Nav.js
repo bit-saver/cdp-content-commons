@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
+import './Nav.css';
 
 const Nav = () => (
   <section>

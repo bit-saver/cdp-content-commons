@@ -25,5 +25,3 @@ export const POST_TYPE_CHANGE = 'post_type_change';
 export const DATE_CHANGE = 'date_change';
 export const FROM_DATE_CHANGE = 'from_date_change';
 export const TO_DATE_CHANGE = 'to_date_change';
-export const SHOW_NOTIFICATION = 'show_notification';
-export const CLOSE_NOTIFICATION = 'close_notification';
