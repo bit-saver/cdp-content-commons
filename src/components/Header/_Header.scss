@@ -1,14 +1,3 @@
-.resultsbar {
-  background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100% );
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 998;
-}
-
 header {
   text-align: center;
 }
@@ -19,6 +8,17 @@ header {
 
 .bar .search_bar {
   margin: 4em auto;
+}
+
+.resultsbar {
+  background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100% );
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998;
 }
 
 .resultsbar header {
@@ -33,6 +33,7 @@ header {
   }
   position: relative;
 }
+
 .resultsbar a, .resultsbar a:hover {
   color: #fff;
   font-size: 1.5em;
@@ -41,6 +42,7 @@ header {
 .resultsbar h1.ui.header {
   @media screen and (min-width: 768px) {
     float: left;
+    padding-left: 0;
   }
   margin: 0;
   padding: 0.5em;
