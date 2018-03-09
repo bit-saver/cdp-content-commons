@@ -1,5 +1,6 @@
 import React from 'react';
+import Recent from '../Recent';
 
-const LandingPage = () => <section>Landing Page</section>;
+const LandingPage = () => <section><Recent /></section>;
 
 export default LandingPage;
