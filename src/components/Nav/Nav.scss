@@ -1,4 +1,7 @@
-.nav {
-  margin-bottom: 1em;
-  color: #0071bc;
+nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1.5em;
+  z-index: 999;
 }
