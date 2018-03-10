@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/search';
+import * as actions from '../../../actions/search';
 import './ResultsPagination.css';
 
 class ResultsPagination extends Component {

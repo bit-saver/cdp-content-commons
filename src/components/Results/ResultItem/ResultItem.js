@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import moment from 'moment';
-import defaultImage from '../../assets/images/default_image.png';
-import postImage from '../../assets/images/content_icons_32px_article.png';
-import courseImage from '../../assets/images/content_icons_32px_course.png';
-import podcastImage from '../../assets/images/content_icons_32px_podcast.png';
-import videoImage from '../../assets/images/content_icons_32px_video.png';
-import { Card, Image } from 'semantic-ui-react';
-import VideoSharePopup from '../Popup/Video/VideoSharePopup';
-import VideoDownloadPopup from '../Popup/Video/VideoDownloadPopup';
+import defaultImage from '../../../assets/images/default_image.png';
+import postImage from '../../../assets/images/content_icons_32px_article.png';
+import courseImage from '../../../assets/images/content_icons_32px_course.png';
+import podcastImage from '../../../assets/images/content_icons_32px_podcast.png';
+import videoImage from '../../../assets/images/content_icons_32px_video.png';
+import { Card, Image, Icon } from 'semantic-ui-react';
+import PopUp from '../../Popup';
+// import VideoSharePopup from '../../Popup/Video/VideoSharePopup';
+// import VideoDownloadPopup from '../../Popup/Video/VideoDownloadPopup';
 import './ResultItem.css';
 
 class ResultItem extends Component {
@@ -83,8 +84,9 @@ class ResultItem extends Component {
           </div>
         </Card.Content>
         <Card.Content extra>
-          <VideoSharePopup />
-          <VideoDownloadPopup />
+          <PopUp />
+          { /* <VideoSharePopup />
+          <VideoDownloadPopup /> */ }
         </Card.Content>
       </Card>
     );
