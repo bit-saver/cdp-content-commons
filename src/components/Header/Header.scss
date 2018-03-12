@@ -1,3 +1,5 @@
+@import "../../assets/styles/colors.scss";
+
 header {
   text-align: center;
 }
@@ -11,7 +13,7 @@ header {
 }
 
 .resultsbar {
-  background-image: linear-gradient(60deg, #0071bc 2%, #02bfe7 100% );
+  background-image: linear-gradient(60deg, $light-blue 2%, $bright-blue 100%);
   border: none;
   border-radius: 0;
   padding: 0;
@@ -27,14 +29,16 @@ header {
   }
 }
 
-.resultsbar .ui.container, .bar .ui.container {
+.resultsbar .ui.container,
+.bar .ui.container {
   @media screen and (min-width: 768px) {
     width: 1600px;
   }
   position: relative;
 }
 
-.resultsbar a, .resultsbar a:hover {
+.resultsbar a,
+.resultsbar a:hover {
   color: #fff;
   font-size: 1.5em;
 }

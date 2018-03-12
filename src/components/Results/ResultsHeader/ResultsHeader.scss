@@ -1,3 +1,5 @@
+@import "../../../assets/styles/colors.scss";
+
 .ResultsHeader__component {
   display: flex;
   & > p {
@@ -36,7 +38,7 @@
 
     label {
       margin: 0;
-      color: #b2b4b8;
+      color: $medium-grey;
       font-weight: normal;
     }
 
