@@ -25,3 +25,6 @@ export const POST_TYPE_CHANGE = 'post_type_change';
 export const DATE_CHANGE = 'date_change';
 export const FROM_DATE_CHANGE = 'from_date_change';
 export const TO_DATE_CHANGE = 'to_date_change';
+export const LOAD_RECENTS_PENDING = 'load_recents_pending';
+export const LOAD_RECENTS_FAILED = 'load_recents_failed';
+export const LOAD_RECENTS_SUCCESS = 'load_recents_success';

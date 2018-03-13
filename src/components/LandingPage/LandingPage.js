@@ -1,6 +1,11 @@
 import React from 'react';
-import Recent from '../Recent';
+import Recents from '../Recents';
+import './LandingPage.css';
 
-const LandingPage = () => <section><Recent /></section>;
+const LandingPage = () => (
+  <section className="landing">
+    <Recents label="Posts" type="post" />
+  </section>
+);
 
 export default LandingPage;
