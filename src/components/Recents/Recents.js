@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func, object, string } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { Grid, Card, Image, Header } from 'semantic-ui-react';
+import { Grid, Header, Item } from 'semantic-ui-react';
 import './Recents.css';
 import defaultImage from '../../assets/images/default_image.png';
 
@@ -10,6 +10,7 @@ class Recents extends Component {
   componentWillMount() {
     this.props.recentsRequest( this.props.type );
   }
+
   render() {
     let items;
     if ( this.props.recents.items.response ) {
@@ -17,27 +18,44 @@ class Recents extends Component {
     } else {
       items = [];
     }
-    return (
-      <section>
-        <Header as="h1" size="large">Recent { this.props.label }</Header>
-        <Grid columns="equal" stackable stretched>
-          { items.map( ( item, index ) => (
-            <Grid.Column key={ item._id } width={ ( index === 0 ) ? 8 : 4 } >
-              <Card>
-                <Image
-                  src={ ( item._source.featured_image ) ? item._source.featured_image.sizes.medium.url : defaultImage }
-                  fluid
-                />
-                <Card.Content>
-                  <Card.Header>{ ( item._source ) ? item._source.title : '' }</Card.Header>
-                  <Card.Description>{ ( item._source && index !== 0 ) ? item._source.excerpt : '' }</Card.Description>
-                </Card.Content>
-              </Card>
+
+    const itemsright = [];
+
+    items.slice( 1 ).map( item => (
+      itemsright.push( {
+        childKey: item._id,
+        image: ( item._source.featured_image ) ? item._source.featured_image.sizes.medium.url : defaultImage,
+        header: item._source.title,
+        description: item._source.excerpt,
+        as: 'a'
+      } )
+    ) );
+
+    if ( items[0] ) {
+      return (
+        <section className="recents">
+          <Header as="h1" size="large">Most Recent { this.props.label }</Header>
+          <Grid columns="equal" stackable stretched>
+            <Grid.Column width={ 8 }>
+              <div
+                className="recentsleft"
+                style={ {
+                  backgroundImage: `url( ${( items[0]._source.featured_image ) ?
+                    items[0]._source.featured_image.sizes.medium.url :
+                    defaultImage} )`
+                } }
+              >
+                <div className="recentsoverlay">{ items[0]._source.title }</div>
+              </div>
             </Grid.Column>
-          ) ) }
-        </Grid>
-      </section>
-    );
+            <Grid.Column width={ 8 }>
+              <Item.Group items={ itemsright } />
+            </Grid.Column>
+          </Grid>
+        </section>
+      );
+    }
+    return [];
   }
 }
 
