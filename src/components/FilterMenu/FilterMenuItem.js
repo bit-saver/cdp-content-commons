@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { func, shape, string, object, array, bool } from 'prop-types';
 import { Form, Icon } from 'semantic-ui-react';
 import './FilterMenuItem.css';
 
@@ -91,5 +92,15 @@ class FilterMenuItem extends Component {
     );
   }
 }
+
+FilterMenuItem.propTypes = {
+  updateIsChecked: func,
+  closeSubMenu: func,
+  menuName: string,
+  useCheckbox: bool,
+  menuOptions: array,
+  handleFilterSelect: func,
+  isChecked: bool
+};
 
 export default FilterMenuItem;

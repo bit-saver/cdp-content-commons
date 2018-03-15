@@ -39,7 +39,6 @@ class FilterMenu extends Component {
   updateFilterSelections( e ) {
     const filterToRemove = e.target.parentNode.textContent;
     const { filterSelections } = this.state;
-    
     const updatedFilterSelections = filterSelections.filter( sel => sel.selectionLabel !== filterToRemove );
     this.setState( { filterSelections: updatedFilterSelections } );
 
@@ -140,7 +139,7 @@ class FilterMenu extends Component {
             closeSubMenu={ this.closeSubMenu }
             isChecked={ this.state.isChecked }
             updateIsChecked={ this.updateIsChecked }
-            useCheckbox        
+            useCheckbox
             menuOptions={ [
               { optionLabel: 'English', optionValue: 'english', hasSubMenu: false },
               { optionLabel: 'Espanol', optionValue: 'spanish', hasSubMenu: false },

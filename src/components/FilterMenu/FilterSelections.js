@@ -1,4 +1,5 @@
 import React from 'react';
+import { func, array } from 'prop-types';
 import { Label, Icon } from 'semantic-ui-react';
 import './FilterSelections.css';
 
@@ -16,6 +17,11 @@ const FilterSelections = ( props ) => {
       }
     </div>
   );
-}
+};
+
+FilterSelections.propTypes = {
+  selections: array,
+  onremove: func
+};
 
 export default FilterSelections;
