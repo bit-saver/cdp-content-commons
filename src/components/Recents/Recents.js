@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { func, object, string } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -21,15 +22,23 @@ class Recents extends Component {
 
     const itemsright = [];
 
-    items.slice( 1 ).map( item => (
+    items.slice( 1 ).forEach( ( item ) => {
+      let categories = '';
+      item._source.categories.forEach( ( cat, index ) => {
+        categories += ( item._source.categories.length === index + 1 )
+          ? cat.name.toLowerCase()
+          : `${cat.name.toLowerCase()}  ·`;
+      } );
+
       itemsright.push( {
         childKey: item._id,
         image: ( item._source.featured_image ) ? item._source.featured_image.sizes.medium.url : defaultImage,
         header: item._source.title,
-        description: item._source.excerpt,
+        meta: moment( item._source.published ).format( 'MMMM DD, YYYY' ),
+        extra: categories,
         as: 'a'
-      } )
-    ) );
+      } );
+    } );
 
     if ( items[0] ) {
       return (
@@ -41,7 +50,7 @@ class Recents extends Component {
                 className="recentsleft"
                 style={ {
                   backgroundImage: `url( ${( items[0]._source.featured_image ) ?
-                    items[0]._source.featured_image.sizes.medium.url :
+                    items[0]._source.featured_image.sizes.large.url :
                     defaultImage} )`
                 } }
               >
