@@ -17,7 +17,7 @@ class Recents extends Component {
     if ( this.props.recents.items.response ) {
       items = this.props.recents.items.response.hits.hits;
     } else {
-      items = [];
+      return [];
     }
 
     const itemsright = [];
@@ -40,31 +40,28 @@ class Recents extends Component {
       } );
     } );
 
-    if ( items[0] ) {
-      return (
-        <section className="recents">
-          <Header as="h1" size="large">Most Recent { this.props.label }</Header>
-          <Grid columns="equal" stackable stretched>
-            <Grid.Column width={ 8 }>
-              <div
-                className="recentsleft"
-                style={ {
-                  backgroundImage: `url( ${( items[0]._source.featured_image ) ?
-                    items[0]._source.featured_image.sizes.large.url :
-                    defaultImage} )`
-                } }
-              >
-                <div className="recentsoverlay">{ items[0]._source.title }</div>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={ 8 }>
-              <Item.Group items={ itemsright } />
-            </Grid.Column>
-          </Grid>
-        </section>
-      );
-    }
-    return [];
+    return (
+      <section className="recents">
+        <Header as="h1" size="large">Most Recent { this.props.label }</Header>
+        <Grid columns="equal" stackable stretched>
+          <Grid.Column width={ 8 }>
+            <div
+              className="recentsleft"
+              style={ {
+                backgroundImage: `url( ${( items[0]._source.featured_image ) ?
+                  items[0]._source.featured_image.sizes.large.url :
+                  defaultImage} )`
+              } }
+            >
+              <div className="recentsoverlay">{ items[0]._source.title }</div>
+            </div>
+          </Grid.Column>
+          <Grid.Column width={ 8 }>
+            <Item.Group items={ itemsright } />
+          </Grid.Column>
+        </Grid>
+      </section>
+    );
   }
 }
 
