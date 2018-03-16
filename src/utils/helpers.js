@@ -70,3 +70,9 @@ export const queryBuilder = ( store ) => {
 
   return body.build();
 };
+
+// export const queryBuilder = ( store ) => {
+//   const body = new Bodybuilder();
+//   body.query( 'query_string', 'query', 'type: video' );
+//   return body.build();
+// };

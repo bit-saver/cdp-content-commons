@@ -1,0 +1,110 @@
+@import "../../assets/styles/colors.scss";
+
+.popupElem {
+  &_wrapper {
+    min-height: 425px;
+    &.ui.popup {
+      min-width: 540px;
+      border-radius: 0;
+      border: none;
+      padding: 20px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-top: 5px;
+        background-image: linear-gradient(
+          90deg,
+          $light-blue 3%,
+          $bright-blue 100%
+        );
+      }
+
+      &.bottom.right,
+      &.bottom.left {
+        &:after {
+          top: 100%;
+        }
+      }
+    }
+
+    &--mobile {
+      &.ui.popup {
+        //left: 50% !important;
+        //transform: translateX(-50%);
+        // min-width: 300px;
+        // max-width: 300px;
+        // position: absolute;
+        // left: 0;
+        // width: 100%;
+      }
+    }
+
+    .ui.header {
+      margin-bottom: 1em;
+      color: $blue;
+      font-weight: normal;
+      @media screen and (max-width: 767px) {
+        font-size: 18px;
+      }
+    }
+
+    .ui.segment {
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .ui.secondary.menu {
+      border-bottom: 1px solid $alt-grey;
+      display: flex;
+      justify-content: center;
+      position: relative;
+
+      .item {
+        font-size: 1.143em;
+        font-weight: 700;
+        color: $blue;
+        padding: 8px 15px;
+        position: relative;
+        border-radius: 0;
+        margin: 0;
+
+        &:last-child {
+          font-weight: normal;
+          position: absolute;
+          right: 15px;
+        }
+
+        &:hover {
+          background: none;
+        }
+      }
+
+      .active.item {
+        border-color: $light-blue;
+        border-bottom-width: 3px;
+        background: none;
+
+        &::after {
+          left: 0;
+          right: 0;
+        }
+      }
+    }
+
+    .slider {
+      position: relative;
+      left: 0;
+      top: 41px;
+      border: none;
+      height: 3px;
+      z-index: 1;
+      background: $light-blue;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
