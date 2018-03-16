@@ -36,7 +36,7 @@ class Recents extends Component {
         <div className="meta">
           <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
           <span className="categories">{ categories }</span>
-          <img src={ item.icon } className="metaicon" alt={ item.title } />
+          <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
         </div>
       );
 
@@ -62,7 +62,7 @@ class Recents extends Component {
             >
               <div className="recentsoverlay">
                 <div className="recentsoverlay_title">{ items[0].title }</div>
-                <img src={ items[0].icon } className="recentsoverlay_icon" alt={ items[0].title } />
+                <img src={ items[0].icon } className="recentsoverlay_icon" alt={ `${this.props.type} icon` } />
               </div>
             </div>
           </Grid.Column>
