@@ -16,7 +16,8 @@
   }
 }
 .recentsoverlay {
-  position: absolute; 
+  position: absolute;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
   bottom: 0;
   width: 100%;
   height: auto; 
@@ -30,6 +31,17 @@
     -1px 1px 0 rgba(0,0,0,0.3), 
     1px 1px 0 rgba(0,0,0,0.3);
 }
+
+.recentsoverlay_title {
+  width: 80%;
+}
+
+.recentsoverlay_icon {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+}
+
 .ui.items.rightitems {
   display: flex;
   flex: 1;
@@ -79,4 +91,9 @@
 .recents .ui.items .item .content .meta .categories {
   display: block;
   color: $grey;
+}
+.recents .ui.items .item .content .meta .metaicon {
+  position: absolute;
+  left: -4.3em;
+  bottom: -0.4em;
 }

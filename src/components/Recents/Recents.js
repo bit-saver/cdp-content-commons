@@ -36,6 +36,7 @@ class Recents extends Component {
         <div className="meta">
           <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
           <span className="categories">{ categories }</span>
+          <img src={ item.icon } className="metaicon" alt={ item.title } />
         </div>
       );
 
@@ -56,12 +57,13 @@ class Recents extends Component {
             <div
               className="recentsleft"
               style={ {
-                backgroundImage: `linear-gradient(to bottom,
-                  rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4)),
-                  url( ${items[0].thumbnail} )`
+                backgroundImage: `url( ${items[0].thumbnail} )`
               } }
             >
-              <div className="recentsoverlay">{ items[0].title }</div>
+              <div className="recentsoverlay">
+                <div className="recentsoverlay_title">{ items[0].title }</div>
+                <img src={ items[0].icon } className="recentsoverlay_icon" alt={ items[0].title } />
+              </div>
             </div>
           </Grid.Column>
           <Grid.Column width={ 8 }>
