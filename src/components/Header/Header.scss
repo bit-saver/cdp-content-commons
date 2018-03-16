@@ -1,3 +1,5 @@
+@import "../../assets/styles/_colors.scss";
+
 header {
   text-align: center;
 }
@@ -8,6 +10,17 @@ header {
 
 .bar .search_bar {
   margin: 4em auto;
+}
+
+.bar h1.ui.header .sub.header.subtitle {
+  font-size: 1em;
+  color: $blue;
+  margin: 1em 0;
+}
+
+.bar h1.ui.header .sub.header.subtext {
+  color: $grey;
+  margin: 0;
 }
 
 .resultsbar {
@@ -55,7 +68,7 @@ header {
   padding-left: 0;
 }
 
-.resultsbar .sub.header.subtitle {
+.resultsbar .sub.header.subtitle, resultsbar .sub.header.subtext {
   display: none;
 }
 
