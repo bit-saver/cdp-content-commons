@@ -44,9 +44,17 @@
   }
 }
 .recents .ui.items .item .image {
+  background: $light-grey;
+  position: relative;
+  overflow: hidden;
   @media screen and (max-width: 767px) {
     max-height: inherit!important;
   }
+}
+.recents .ui.items .item .image img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .ui.items .item .content {
   padding: 1em;

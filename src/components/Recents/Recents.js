@@ -57,7 +57,7 @@ class Recents extends Component {
               className="recentsleft"
               style={ {
                 backgroundImage: `linear-gradient(to bottom,
-                  rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)),
+                  rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4)),
                   url( ${items[0].thumbnail} )`
               } }
             >
