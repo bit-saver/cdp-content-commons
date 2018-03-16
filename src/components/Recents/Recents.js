@@ -44,11 +44,13 @@ class Recents extends Component {
       <section className="recents">
         <Header as="h1" size="large">Most Recent { this.props.label }</Header>
         <Grid columns="equal" stackable stretched>
-          <Grid.Column width={ 8 }>
+          <Grid.Column width={ 8 } style={ { paddingRight: '0' } }>
             <div
               className="recentsleft"
               style={ {
-                backgroundImage: `url( ${( items[0]._source.featured_image ) ?
+                backgroundImage: `linear-gradient(to bottom,
+                  rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)),
+                  url( ${( items[0]._source.featured_image ) ?
                   items[0]._source.featured_image.sizes.large.url :
                   defaultImage} )`
               } }
