@@ -6,8 +6,13 @@ const Heading = () => (
   <Header as="h1">
     <Title />
     <Header.Subheader className="subtitle">
-      Welcome to the Content Commons. Here you can discover, find, and reuse public diplomacy
-      content from U.S. Department of State resources.
+      Discover, share, connect.
+    </Header.Subheader>
+    <Header.Subheader className="subtext">
+      The Commons is the portal to find, use, and share content from the U.S. Department of State.
+    </Header.Subheader>
+    <Header.Subheader className="subtext">
+      Connecting people with content. To get started, search or browse below.
     </Header.Subheader>
   </Header>
 );
