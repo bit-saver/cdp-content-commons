@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Grid, Header, Item } from 'semantic-ui-react';
 import './Recents.css';
-import defaultImage from '../../assets/images/default_image.png';
+import { normalizeItem } from '../../utils/parser';
 
 class Recents extends Component {
   componentDidMount() {
@@ -22,25 +22,27 @@ class Recents extends Component {
 
     const itemsright = [];
 
+    items = items.map( item => normalizeItem( item ) );
+
     items.slice( 1 ).forEach( ( item ) => {
       let categories = '';
-      item._source.categories.forEach( ( cat, index ) => {
-        categories += ( item._source.categories.length === index + 1 )
+      item.categories.forEach( ( cat, index ) => {
+        categories += ( item.categories.length === index + 1 )
           ? cat.name.toLowerCase()
           : `${cat.name.toLowerCase()}  ·`;
       } );
 
       const metadiv = (
         <div className="meta">
-          <span className="date">{ moment( item._source.published ).format( 'MMMM DD, YYYY' ) }</span>
+          <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
           <span className="categories">{ categories }</span>
         </div>
       );
 
       itemsright.push( {
         childKey: item._id,
-        image: ( item._source.featured_image ) ? item._source.featured_image.sizes.medium.url : defaultImage,
-        header: item._source.title,
+        image: item.thumbnail,
+        header: item.title,
         meta: metadiv,
         as: 'a'
       } );
@@ -56,12 +58,10 @@ class Recents extends Component {
               style={ {
                 backgroundImage: `linear-gradient(to bottom,
                   rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)),
-                  url( ${( items[0]._source.featured_image ) ?
-                  items[0]._source.featured_image.sizes.large.url :
-                  defaultImage} )`
+                  url( ${items[0].thumbnail} )`
               } }
             >
-              <div className="recentsoverlay">{ items[0]._source.title }</div>
+              <div className="recentsoverlay">{ items[0].title }</div>
             </div>
           </Grid.Column>
           <Grid.Column width={ 8 }>

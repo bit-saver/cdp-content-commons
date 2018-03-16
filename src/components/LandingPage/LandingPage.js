@@ -4,7 +4,7 @@ import './LandingPage.css';
 
 const LandingPage = () => (
   <section className="landing">
-    <Recents label="Posts" type="post" />
+    <Recents label="Videos" type="video" />
   </section>
 );
 
