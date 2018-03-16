@@ -17,7 +17,7 @@ class Recents extends Component {
     if ( this.props.recents.items.response ) {
       items = this.props.recents.items.response.hits.hits;
     } else {
-      return [];
+      return null;
     }
 
     const itemsright = [];
@@ -30,12 +30,18 @@ class Recents extends Component {
           : `${cat.name.toLowerCase()}  ·`;
       } );
 
+      const metadiv = (
+        <div className="meta">
+          <span className="date">{ moment( item._source.published ).format( 'MMMM DD, YYYY' ) }</span>
+          <span className="categories">{ categories }</span>
+        </div>
+      );
+
       itemsright.push( {
         childKey: item._id,
         image: ( item._source.featured_image ) ? item._source.featured_image.sizes.medium.url : defaultImage,
         header: item._source.title,
-        meta: moment( item._source.published ).format( 'MMMM DD, YYYY' ),
-        extra: categories,
+        meta: metadiv,
         as: 'a'
       } );
     } );
