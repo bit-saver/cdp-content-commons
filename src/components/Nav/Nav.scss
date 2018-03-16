@@ -1,7 +1,13 @@
+@import "../../assets/styles/_colors.scss";
+
 nav {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 1.5em;
+  padding: .8em 0;
   z-index: 999;
+}
+nav .ui.menu .item {
+  color: $blue;
+  font-weight: bold;
 }
