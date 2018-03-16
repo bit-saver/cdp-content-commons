@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Popup, Image } from 'semantic-ui-react';
-import Hover from '../../Hover/Hover';
 import SharePopupItem from './SharePopupItem';
 import cardShareIcon from '../../../assets/images/Card_Share_Icon.svg';
 
@@ -36,11 +35,7 @@ class VideoDownloadPopup extends Component {
             this.setState( { popupOpen: true } );
           } }
           onClose={ () => this.setState( { popupOpen: false } ) }
-          className={
-            !this.state.isMobile
-              ? 'popupElem_wrapper'
-              : 'popupElem_wrapper popupElem_wrapper--mobile'
-          }
+          className={ !this.state.isMobile ? 'popupElem_wrapper' : 'popupElem_wrapper popupElem_wrapper--mobile' }
           content={ <SharePopupItem /> }
         />
         <Hover
