@@ -8,7 +8,7 @@ import './Recents.css';
 import defaultImage from '../../assets/images/default_image.png';
 
 class Recents extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.recentsRequest( this.props.type );
   }
 
@@ -17,7 +17,7 @@ class Recents extends Component {
     if ( this.props.recents.items.response ) {
       items = this.props.recents.items.response.hits.hits;
     } else {
-      return null;
+      return <div />;
     }
 
     const itemsright = [];
