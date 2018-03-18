@@ -1,5 +1,5 @@
 import React from 'react';
 
-const DownloadHelp = () => <div>VideoDownloadHelp</div>;
+const DownloadHelp = () => <div>Coming soon...</div>;
 
 export default DownloadHelp;

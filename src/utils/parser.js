@@ -14,7 +14,7 @@ const getIcon = ( type ) => {
     case 'course':
       icon = iconCourse;
       break;
-    case 'podcast':
+    case 'audio':
       icon = iconAudio;
       break;
     case 'video':
@@ -58,6 +58,7 @@ const getThumbnail = ( source ) => {
   return thumbnail;
 };
 
+// send in locale to fetch applicable lang data props?
 const populateVideoItem = ( source ) => {
   const units = source.unit;
   const defaultUnit = units.find( unit => unit.language.locale === 'en-US' );
@@ -73,7 +74,10 @@ const populateVideoItem = ( source ) => {
           : getDefaultThumbnail( source.type ),
       categories: defaultUnit.categories || [],
       tags: defaultUnit.tags || [],
-      duration: source.duration
+      duration: source.duration,
+      files: defaultUnit.source,
+      transcript: defaultUnit.transcript,
+      srt: defaultUnit.srt
     };
   }
 
@@ -119,7 +123,7 @@ export const normalizeItem = ( item ) => {
     site: source.site,
     sourcelink: `https://${source.site}`,
     type: source.type,
-    icon: getIcon( item.type ),
+    icon: getIcon( source.type ),
     author: source.author.name || source.author, // make video obj  w/id & name to be consistent??
     link: source.link || '',
     published: source.published,

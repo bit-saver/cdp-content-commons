@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Popup, Icon } from 'semantic-ui-react';
 import ReactTooltip from 'react-tooltip';
-import { string, node } from 'prop-types';
+import { string, node, bool } from 'prop-types';
 
 class PopupTrigger extends Component {
   constructor( props ) {
@@ -37,7 +37,7 @@ class PopupTrigger extends Component {
       <span
         data-tip={ this.props.toolTip }
         data-tip-disable={ this.state.popupOpen }
-        style={ { float: this.props.position } }
+        style={ { float: this.props.position, display: this.props.show ? 'inline-block' : 'none' } }
       >
         <Popup
           trigger={ <Icon name={ this.props.icon } size="large" color="blue" /> }
@@ -57,7 +57,8 @@ PopupTrigger.propTypes = {
   toolTip: string,
   icon: string,
   content: node,
-  position: string
+  position: string,
+  show: bool
 };
 
 export default PopupTrigger;

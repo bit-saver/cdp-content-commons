@@ -13,6 +13,7 @@ import DownloadHelp from '../../Video/DownloadHelp';
 
 import Shortcode from '../../Video/Shortcode';
 import Social from '../../Video/Social';
+import ShareMore from '../../Video/ShareMore';
 
 import './ResultItem.css';
 
@@ -33,6 +34,7 @@ class ResultItem extends Component {
 
   render() {
     const { item } = this.props;
+
     return (
       <Card>
         <a rel="noopener noreferrer" href={ item.link } title={ item.title } target="_blank">
@@ -61,13 +63,15 @@ class ResultItem extends Component {
           <PopupTrigger
             toolTip="Copy the shortcode for this video or<br> share it social platforms."
             icon="share"
+            show={ item.type === 'video' }
             content={
               <PopupTabbed
                 title="How would you like to share this video?"
+                item={ item }
                 panes={ [
                   { title: 'Copy Shortcode', component: <Shortcode /> },
                   { title: 'Social', component: <Social /> },
-                  { title: 'More', component: <DownloadMore /> },
+                  { title: 'More', component: <ShareMore /> },
                   { title: 'Help', component: <DownloadHelp /> }
                 ] }
                 config={ { width: '141px', offset: '115px' } } // TODO: remove hardcoding, make it dynamic
@@ -78,13 +82,14 @@ class ResultItem extends Component {
             toolTip="Download this video with an embed code"
             icon="download"
             position="right"
+            show={ item.type === 'video' }
             content={
               <PopupTabbed
                 title="Download this video."
                 panes={ [
-                  { title: 'Closed Captions', component: <ClosedCaptions /> },
+                  { title: 'Closed Captions', component: <ClosedCaptions files={ item.files } /> },
                   { title: 'Open Captions', component: <OpenCaptions /> },
-                  { title: 'More', component: <DownloadMore /> },
+                  { title: 'More', component: <DownloadMore transcript={ item.transcript } srt={ item.srt } /> },
                   { title: 'Help', component: <DownloadHelp /> }
                 ] }
                 config={ { width: '142px', offset: '84px' } } // TODO: remove hardcoding, make it dynamic

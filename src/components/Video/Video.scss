@@ -1,0 +1,58 @@
+
+@import "../../assets/styles/colors.scss";
+
+.form-group_instructions {
+  color: $grey;
+  font-style: italic;
+  font-size: .857em;
+}
+
+.ui.form.form-group_tabbed {
+
+  .inline.fields {
+    padding-top: 1em;
+  
+    .field {
+      display: flex;
+
+      label {
+        margin-top: .8em;
+        color: $grey;
+        width: 6.5em;
+      }
+      
+      &:first-child {
+        flex: 2 0 auto;
+        padding-right: 0;
+        //margin-left: 3.5em;
+      }
+
+      &:last-child {
+        flex: 0 1 auto;
+        padding-left: 0;
+      }
+
+      .ui.input {
+        width:  100%;
+
+        input {
+          border: 0;
+          background: $light-grey;
+          border-radius: 0;
+        }
+      }
+  
+      .ui.button {
+        border-radius: 0;
+        background: $light-blue;
+        color: #fff;
+        padding-left: 1em;
+        padding-right: 1em;
+
+        &:hover {
+          background: darken($light-blue, 5%);
+        }
+      }
+    }
+  }
+}

@@ -56,6 +56,8 @@
       border: none;
       border-radius: 0;
       box-shadow: none;
+      padding: 1em 0; 
+      margin: 0;
     }
 
     .ui.secondary.menu {
@@ -63,6 +65,7 @@
       display: flex;
       justify-content: center;
       position: relative;
+      margin: 0;
 
       .item {
         font-size: 1.143em;
@@ -85,14 +88,7 @@
       }
 
       .active.item {
-        border-color: $light-blue;
-        border-bottom-width: 3px;
         background: none;
-
-        &::after {
-          left: 0;
-          right: 0;
-        }
       }
     }
 
