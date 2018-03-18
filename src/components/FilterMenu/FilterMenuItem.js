@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, shape, string, object, array, bool } from 'prop-types';
+import { func, string, array, bool } from 'prop-types';
 import { Form, Icon } from 'semantic-ui-react';
 import './FilterMenuItem.css';
 
@@ -17,10 +17,7 @@ class FilterMenuItem extends Component {
   }
 
   handleOnChange( e, { value } ) {
-    console.log( e.target );
-
     this.setState( { value } );
-    this.props.updateIsChecked();
 
     const optionHasSubMenu = e.target.parentNode.dataset.submenu;
     if ( optionHasSubMenu === 'true' ) {
@@ -50,6 +47,7 @@ class FilterMenuItem extends Component {
 
   render() {
     const { value } = this.state;
+    const { filterSelections } = this.props;
 
     return (
       <div className="filterMenu" ref={ ( filterMenu ) => { this.filterMenu = filterMenu; } }>
@@ -69,7 +67,10 @@ class FilterMenuItem extends Component {
                 key={ opt.optionValue }
                 label={ opt.optionLabel }
                 value={ opt.optionValue }
-                checked={ value === opt.optionValue }
+                checked={
+                  value === opt.optionValue
+                  && filterSelections.some( sel => opt.optionValue === sel.selectionValue )
+                }
                 onChange={ this.handleOnChange }
                 onClick={ this.props.handleFilterSelect }
                 data-submenu={ opt.hasSubMenu }
@@ -80,7 +81,7 @@ class FilterMenuItem extends Component {
                 key={ opt.optionValue }
                 label={ opt.optionLabel }
                 value={ opt.optionValue }
-                checked={ this.props.isChecked }
+                checked={ filterSelections.some( sel => opt.optionValue === sel.selectionValue ) }
                 onChange={ this.handleOnChange }
                 onClick={ this.props.handleFilterSelect }
                 data-submenu={ opt.hasSubMenu }
@@ -94,13 +95,12 @@ class FilterMenuItem extends Component {
 }
 
 FilterMenuItem.propTypes = {
-  updateIsChecked: func,
   closeSubMenu: func,
   menuName: string,
   useCheckbox: bool,
   menuOptions: array,
-  handleFilterSelect: func,
-  isChecked: bool
+  filterSelections: array,
+  handleFilterSelect: func
 };
 
 export default FilterMenuItem;

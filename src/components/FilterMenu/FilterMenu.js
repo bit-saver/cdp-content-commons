@@ -9,48 +9,43 @@ class FilterMenu extends Component {
 
     this.state = {
       filterSelections: [],
-      displaySubMenu: false,
-      isChecked: false
+      displaySubMenu: false
     };
 
     this.handleFilterSelect = this.handleFilterSelect.bind( this );
     this.updateFilterSelections = this.updateFilterSelections.bind( this );
     this.showSubMenu = this.showSubMenu.bind( this );
     this.closeSubMenu = this.closeSubMenu.bind( this );
-    this.updateIsChecked = this.updateIsChecked.bind( this );
   }
 
   handleFilterSelect( e ) {
     const filterSelectionLabel = e.target.textContent;
     const filterSelection = e.target.previousSibling.value;
+    const inputType = e.target.previousSibling.type;
+    const { filterSelections } = this.state;
 
     this.showSubMenu( filterSelection );
 
-    if ( !this.state.filterSelections.some( sel => sel.selectionLabel === filterSelectionLabel ) ) {
+    const isTargetInFilterSelections = filterSelections.some( sel => sel.selectionLabel === filterSelectionLabel );
+
+    if ( !isTargetInFilterSelections ) {
       this.setState( {
         filterSelections: [
-          ...this.state.filterSelections,
+          ...filterSelections,
           { selectionValue: filterSelection, selectionLabel: filterSelectionLabel }
         ]
       } );
+    } else if ( isTargetInFilterSelections && inputType === 'checkbox' ){      
+      const updatedFilterSelections = filterSelections.filter( sel => sel.selectionValue !== filterSelection );
+      this.setState( { filterSelections: updatedFilterSelections } );
     }
   }
 
   updateFilterSelections( e ) {
-    const filterToRemove = e.target.parentNode.textContent;
+    const filterToRemove = e.target.parentNode.dataset.label;
     const { filterSelections } = this.state;
-    const updatedFilterSelections = filterSelections.filter( sel => sel.selectionLabel !== filterToRemove );
+    const updatedFilterSelections = filterSelections.filter( sel => sel.selectionValue !== filterToRemove );
     this.setState( { filterSelections: updatedFilterSelections } );
-
-    // const filterValue = e.target.parentNode.dataset.label;
-    // const checkbox = document.querySelector(`[value=${filterValue}]`);
-    // checkbox.parentNode.classList.remove('checked');
-
-    this.updateIsChecked();
-  }
-
-  updateIsChecked() {
-    this.setState( { isChecked: !this.state.isChecked } );
   }
 
   showSubMenu( filterSelection ) {
@@ -82,11 +77,10 @@ class FilterMenu extends Component {
         <div className="filterMenu_main">
           <FilterMenuItem
             menuName="Most Recent"
+            filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
             isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
-            isChecked={ this.state.isChecked }
-            updateIsChecked={ this.updateIsChecked }
             menuOptions={ [
               { optionLabel: 'Most Recent', optionValue: 'mostRecent', hasSubMenu: false },
               { optionLabel: 'Past Hour', optionValue: 'pastHour', hasSubMenu: false },
@@ -100,11 +94,10 @@ class FilterMenu extends Component {
           />
           <FilterMenuItem
             menuName="Format"
+            filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
             isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
-            isChecked={ this.state.isChecked }
-            updateIsChecked={ this.updateIsChecked }
             menuOptions={ [
               { optionLabel: 'Article', optionValue: 'article', hasSubMenu: false },
               { optionLabel: 'Audio', optionValue: 'audio', hasSubMenu: false },
@@ -117,11 +110,10 @@ class FilterMenu extends Component {
           />
           <FilterMenuItem
             menuName="Source"
+            filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
             isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
-            isChecked={ this.state.isChecked }
-            updateIsChecked={ this.updateIsChecked }
             useCheckbox
             menuOptions={ [
               { optionLabel: 'American Spaces', optionValue: 'american_spaces', hasSubMenu: false },
@@ -134,11 +126,10 @@ class FilterMenu extends Component {
           />
           <FilterMenuItem
             menuName="Language"
+            filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
             isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
-            isChecked={ this.state.isChecked }
-            updateIsChecked={ this.updateIsChecked }
             useCheckbox
             menuOptions={ [
               { optionLabel: 'English', optionValue: 'english', hasSubMenu: false },
@@ -150,11 +141,10 @@ class FilterMenu extends Component {
           />
           <FilterMenuItem
             menuName="Category"
+            filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
             isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
-            isChecked={ this.state.isChecked }
-            updateIsChecked={ this.updateIsChecked }
             useCheckbox
             menuOptions={ [
               { optionLabel: 'Art', optionValue: 'art', hasSubMenu: false },
@@ -175,11 +165,10 @@ class FilterMenu extends Component {
         >
           <FilterMenuItem
             menuName="File Type"
+            filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
             isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
-            isChecked={ this.state.isChecked }
-            updateIsChecked={ this.updateIsChecked }
             menuOptions={ [
               { optionLabel: '.mp4', optionValue: 'mp4' },
               { optionLabel: '.mov', optionValue: 'mov' }
@@ -187,11 +176,10 @@ class FilterMenu extends Component {
           />
           <FilterMenuItem
             menuName="Length"
+            filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
             isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
-            isChecked={ this.state.isChecked }
-            updateIsChecked={ this.updateIsChecked }
             menuOptions={ [
               { optionLabel: '< 1 minute', optionValue: 'opt_under1minute' },
               { optionLabel: '1-5 minutes', optionValue: 'opt_1_5minutes' },
