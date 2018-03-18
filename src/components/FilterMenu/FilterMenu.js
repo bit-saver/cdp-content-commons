@@ -35,7 +35,7 @@ class FilterMenu extends Component {
           { selectionValue: filterSelection, selectionLabel: filterSelectionLabel }
         ]
       } );
-    } else if ( isTargetInFilterSelections && inputType === 'checkbox' ){      
+    } else if ( isTargetInFilterSelections && inputType === 'checkbox' ) {
       const updatedFilterSelections = filterSelections.filter( sel => sel.selectionValue !== filterSelection );
       this.setState( { filterSelections: updatedFilterSelections } );
     }
