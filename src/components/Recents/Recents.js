@@ -32,21 +32,19 @@ class Recents extends Component {
           : `${cat.name.toLowerCase()}  ·`;
       } );
 
-      const metadiv = (
-        <div className="meta">
-          <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
-          <span className="categories">{ categories }</span>
-          <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
-        </div>
-      );
-
-      itemsright.push( {
-        childKey: item._id,
-        image: item.thumbnail,
-        header: item.title,
-        meta: metadiv,
-        as: 'a'
-      } );
+      itemsright.push( (
+        <Item as="a">
+          <Item.Image src={ item.thumbnail } alt={ item.title } />
+          <Item.Content>
+            <Item.Header>{ item.title }</Item.Header>
+            <div className="meta">
+              <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
+              <span className="categories">{ categories }</span>
+              <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
+            </div>
+          </Item.Content>
+        </Item>
+      ) );
     } );
 
     return (
@@ -67,7 +65,7 @@ class Recents extends Component {
             </div>
           </Grid.Column>
           <Grid.Column width={ 8 }>
-            <Item.Group items={ itemsright } />
+            <Item.Group>{ itemsright }</Item.Group>
           </Grid.Column>
         </Grid>
       </section>
