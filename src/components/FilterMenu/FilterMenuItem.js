@@ -22,6 +22,10 @@ class FilterMenuItem extends Component {
     const optionHasSubMenu = e.target.parentNode.dataset.submenu;
     if ( optionHasSubMenu === 'true' ) {
       this.setState( { filterItemOpen: false } );
+      // Toggle filterMenu subMenuActive class (blue background)
+      this.filterMenu.classList.add( 'subMenuActive' );
+    } else {
+      this.filterMenu.classList.remove( 'subMenuActive' );
     }
   }
 
@@ -33,6 +37,7 @@ class FilterMenuItem extends Component {
 
   closeFilter( e ) {
     const activeSubMenu = document.querySelector( '.filterMenu_sub.show' );
+
     if ( !this.filterMenu.contains( e.target ) ) {
       this.setState( { filterItemOpen: false }, () => {
         document.removeEventListener( 'click', this.closeFilter );
@@ -40,6 +45,12 @@ class FilterMenuItem extends Component {
         // Close any filter sub menus if click target is NOT a submenu
         if ( activeSubMenu && !activeSubMenu.contains( e.target ) ) {
           this.props.closeSubMenu();
+
+          // Remove any filterMenus w/ subMenuActive class
+          const filterSubMenuActive = document.querySelector( '.filterMenu.subMenuActive' );
+          if ( filterSubMenuActive ) {
+            filterSubMenuActive.classList.remove( 'subMenuActive' );
+          }
         }
       } );
     }

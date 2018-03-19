@@ -9,11 +9,13 @@ class FilterMenu extends Component {
 
     this.state = {
       filterSelections: [],
+      subMenuVal: '',
       displaySubMenu: false
     };
 
     this.handleFilterSelect = this.handleFilterSelect.bind( this );
     this.updateFilterSelections = this.updateFilterSelections.bind( this );
+    this.clearAllFilterSelections = this.clearAllFilterSelections.bind( this );
     this.showSubMenu = this.showSubMenu.bind( this );
     this.closeSubMenu = this.closeSubMenu.bind( this );
   }
@@ -26,7 +28,7 @@ class FilterMenu extends Component {
 
     this.showSubMenu( filterSelection );
 
-    const isTargetInFilterSelections = filterSelections.some( sel => sel.selectionLabel === filterSelectionLabel );
+    const isTargetInFilterSelections = filterSelections.some( sel => sel.selectionValue === filterSelection );
 
     if ( !isTargetInFilterSelections ) {
       this.setState( {
@@ -48,11 +50,17 @@ class FilterMenu extends Component {
     this.setState( { filterSelections: updatedFilterSelections } );
   }
 
+  clearAllFilterSelections() {
+    this.setState( { filterSelections: [] } );
+  }
+
   showSubMenu( filterSelection ) {
     const activeSubMenu = document.querySelector( '.filterMenu_sub.show' );
     if ( !activeSubMenu ) {
       const subMenu = document.querySelector( `[data-submenu-for=${filterSelection}]` );
-      if ( subMenu ) { this.setState( { displaySubMenu: true } ); }
+      if ( subMenu ) {
+        this.setState( { displaySubMenu: true, subMenuVal: filterSelection } );
+      }
     }
   }
 
@@ -62,24 +70,24 @@ class FilterMenu extends Component {
 
   render() {
     return (
-      <div className="filterMenu_wrapper">
+      <section className="filterMenu_wrapper">
         { /*
         SELECTION DISPLAY
          */ }
         <FilterSelections
           selections={ this.state.filterSelections }
-          onremove={ this.updateFilterSelections }
+          onRemove={ this.updateFilterSelections }
+          removeAll={ this.clearAllFilterSelections }
         />
 
-        { /*
-        MAIN-MENU
-         */ }
-        <div className="filterMenu_main">
+        <div className={ this.state.displaySubMenu ? 'filterMenu_main subMenuDisplay' : 'filterMenu_main' }>
+          { /*
+          MAIN-MENU
+           */ }
           <FilterMenuItem
             menuName="Most Recent"
             filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
-            isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
             menuOptions={ [
               { optionLabel: 'Most Recent', optionValue: 'mostRecent', hasSubMenu: false },
@@ -89,14 +97,13 @@ class FilterMenu extends Component {
               { optionLabel: 'Past Month', optionValue: 'pastMonth', hasSubMenu: false },
               { optionLabel: 'Past Year', optionValue: 'pastYear', hasSubMenu: false },
               { optionLabel: 'Oldest', optionValue: 'oldest', hasSubMenu: false },
-              { optionLabel: 'Custom', optionValue: 'custom', hasSubMenu: false }
+              { optionLabel: 'Custom', optionValue: 'custom', hasSubMenu: true }
             ] }
           />
           <FilterMenuItem
             menuName="Format"
             filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
-            isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
             menuOptions={ [
               { optionLabel: 'Article', optionValue: 'article', hasSubMenu: false },
@@ -112,7 +119,6 @@ class FilterMenu extends Component {
             menuName="Source"
             filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
-            isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
             useCheckbox
             menuOptions={ [
@@ -128,7 +134,6 @@ class FilterMenu extends Component {
             menuName="Language"
             filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
-            isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
             useCheckbox
             menuOptions={ [
@@ -143,7 +148,6 @@ class FilterMenu extends Component {
             menuName="Category"
             filterSelections={ this.state.filterSelections }
             handleFilterSelect={ this.handleFilterSelect }
-            isSubMenuOpen={ this.state.displaySubMenu }
             closeSubMenu={ this.closeSubMenu }
             useCheckbox
             menuOptions={ [
@@ -154,43 +158,74 @@ class FilterMenu extends Component {
               { optionLabel: 'Region', optionValue: 'region', hasSubMenu: false }
             ] }
           />
-        </div>
 
-        { /*
-        SUB-MENUS
-         */ }
-        <div
-          className={ this.state.displaySubMenu ? 'filterMenu_sub show' : 'filterMenu_sub' }
-          data-submenu-for="video"
-        >
-          <FilterMenuItem
-            menuName="File Type"
-            filterSelections={ this.state.filterSelections }
-            handleFilterSelect={ this.handleFilterSelect }
-            isSubMenuOpen={ this.state.displaySubMenu }
-            closeSubMenu={ this.closeSubMenu }
-            menuOptions={ [
-              { optionLabel: '.mp4', optionValue: 'mp4' },
-              { optionLabel: '.mov', optionValue: 'mov' }
-            ] }
-          />
-          <FilterMenuItem
-            menuName="Length"
-            filterSelections={ this.state.filterSelections }
-            handleFilterSelect={ this.handleFilterSelect }
-            isSubMenuOpen={ this.state.displaySubMenu }
-            closeSubMenu={ this.closeSubMenu }
-            menuOptions={ [
-              { optionLabel: '< 1 minute', optionValue: 'opt_under1minute' },
-              { optionLabel: '1-5 minutes', optionValue: 'opt_1_5minutes' },
-              { optionLabel: '5-10 minute', optionValue: 'opt_5_10minutes' },
-              { optionLabel: '10-15 minute', optionValue: 'opt_10_15minutes' },
-              { optionLabel: '15-30 minute', optionValue: 'opt_15_30minutes' },
-              { optionLabel: '> 30 minute', optionValue: 'opt_greater30minutes' }
-            ] }
-          />
+          { /*
+          SUB-MENUS
+           */ }
+          <div
+            className={
+              this.state.displaySubMenu && this.state.subMenuVal === 'video'
+              ? 'filterMenu_sub show'
+              : 'filterMenu_sub'
+            }
+            data-submenu-for="video"
+          >
+            <FilterMenuItem
+              menuName="File Type"
+              filterSelections={ this.state.filterSelections }
+              handleFilterSelect={ this.handleFilterSelect }
+              closeSubMenu={ this.closeSubMenu }
+              menuOptions={ [
+                { optionLabel: '.mp4', optionValue: 'mp4' },
+                { optionLabel: '.mov', optionValue: 'mov' }
+              ] }
+            />
+            <FilterMenuItem
+              menuName="Length"
+              filterSelections={ this.state.filterSelections }
+              handleFilterSelect={ this.handleFilterSelect }
+              closeSubMenu={ this.closeSubMenu }
+              menuOptions={ [
+                { optionLabel: '< 1 minute', optionValue: 'opt_under1minute' },
+                { optionLabel: '1-5 minutes', optionValue: 'opt_1_5minutes' },
+                { optionLabel: '5-10 minute', optionValue: 'opt_5_10minutes' },
+                { optionLabel: '10-15 minute', optionValue: 'opt_10_15minutes' },
+                { optionLabel: '15-30 minute', optionValue: 'opt_15_30minutes' },
+                { optionLabel: '> 30 minute', optionValue: 'opt_greater30minutes' }
+              ] }
+            />
+          </div>
+          <div
+            className={
+              this.state.displaySubMenu && this.state.subMenuVal === 'custom'
+              ? 'filterMenu_sub show'
+              : 'filterMenu_sub'
+            }
+            data-submenu-for="custom"
+          >
+            <FilterMenuItem
+              menuName="Custom 1"
+              filterSelections={ this.state.filterSelections }
+              handleFilterSelect={ this.handleFilterSelect }
+              closeSubMenu={ this.closeSubMenu }
+              menuOptions={ [
+                { optionLabel: 'Custom 1', optionValue: 'custom_1' },
+                { optionLabel: 'Custom 2', optionValue: 'custom_2' }
+              ] }
+            />
+            <FilterMenuItem
+              menuName="Custom 2"
+              filterSelections={ this.state.filterSelections }
+              handleFilterSelect={ this.handleFilterSelect }
+              closeSubMenu={ this.closeSubMenu }
+              menuOptions={ [
+                { optionLabel: 'Test 1', optionValue: 'opt_test1' },
+                { optionLabel: 'Test 2', optionValue: 'opt_test2' }
+              ] }
+            />
+          </div>
         </div>
-      </div>
+      </section>
     );
   }
 }
