@@ -48,11 +48,11 @@ class FilterMenu extends Component {
 
   updateFilterSelections( e ) {
     const filterToRemove = e.target.parentNode.dataset.label;
-    const { filterSelections } = this.state;    
+    const { filterSelections } = this.state;
     const updatedFilterSelections = filterSelections
       .filter( sel => sel.hasParentMenu !== filterToRemove )
       .filter( sel => sel.selectionValue !== filterToRemove );
-      
+
     this.setState( { filterSelections: updatedFilterSelections } );
   }
 
