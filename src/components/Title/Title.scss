@@ -1,6 +1,16 @@
+@import "../../assets/styles/colors.scss";
+
 .title, .title:hover {
-    color: #112e51;
+    color: $blue;
     @media screen and (min-width: 641px) {
       font-size: 60px;
     }
+}
+.beta {
+  font-size: 40%;
+  vertical-align: super;
+  color: $blue;
+  padding: 1px 6px;
+  background: $color-gold;
+  margin-left: 6px;
 }
