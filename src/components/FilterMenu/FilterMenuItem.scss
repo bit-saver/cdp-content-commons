@@ -53,8 +53,9 @@
   }
 
 
-  &_options {    
-    background-color: #fff;
+  &_options {  
+    z-index: 3;
+    background-color: #fff;    
 
     &.ui.form {
       position: absolute;

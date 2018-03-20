@@ -24,6 +24,9 @@ class FilterMenu extends Component {
     const filterSelectionLabel = e.target.textContent;
     const filterSelection = e.target.previousSibling.value;
     const inputType = e.target.previousSibling.type;
+    const hasParentMenu = ( e.target.parentNode.dataset.parentmenu )
+      ? e.target.parentNode.dataset.parentmenu
+      : '';
     const { filterSelections } = this.state;
 
     this.showSubMenu( filterSelection );
@@ -34,7 +37,7 @@ class FilterMenu extends Component {
       this.setState( {
         filterSelections: [
           ...filterSelections,
-          { selectionValue: filterSelection, selectionLabel: filterSelectionLabel }
+          { selectionValue: filterSelection, selectionLabel: filterSelectionLabel, hasParentMenu }
         ]
       } );
     } else if ( isTargetInFilterSelections && inputType === 'checkbox' ) {
@@ -45,8 +48,11 @@ class FilterMenu extends Component {
 
   updateFilterSelections( e ) {
     const filterToRemove = e.target.parentNode.dataset.label;
-    const { filterSelections } = this.state;
-    const updatedFilterSelections = filterSelections.filter( sel => sel.selectionValue !== filterToRemove );
+    const { filterSelections } = this.state;    
+    const updatedFilterSelections = filterSelections
+      .filter( sel => sel.hasParentMenu !== filterToRemove )
+      .filter( sel => sel.selectionValue !== filterToRemove );
+      
     this.setState( { filterSelections: updatedFilterSelections } );
   }
 
@@ -176,8 +182,8 @@ class FilterMenu extends Component {
               handleFilterSelect={ this.handleFilterSelect }
               closeSubMenu={ this.closeSubMenu }
               menuOptions={ [
-                { optionLabel: '.mp4', optionValue: 'mp4' },
-                { optionLabel: '.mov', optionValue: 'mov' }
+                { optionLabel: '.mp4', optionValue: 'mp4', parentMenu: 'video' },
+                { optionLabel: '.mov', optionValue: 'mov', parentMenu: 'video' }
               ] }
             />
             <FilterMenuItem
@@ -186,12 +192,12 @@ class FilterMenu extends Component {
               handleFilterSelect={ this.handleFilterSelect }
               closeSubMenu={ this.closeSubMenu }
               menuOptions={ [
-                { optionLabel: '< 1 minute', optionValue: 'opt_under1minute' },
-                { optionLabel: '1-5 minutes', optionValue: 'opt_1_5minutes' },
-                { optionLabel: '5-10 minute', optionValue: 'opt_5_10minutes' },
-                { optionLabel: '10-15 minute', optionValue: 'opt_10_15minutes' },
-                { optionLabel: '15-30 minute', optionValue: 'opt_15_30minutes' },
-                { optionLabel: '> 30 minute', optionValue: 'opt_greater30minutes' }
+                { optionLabel: '< 1 minute', optionValue: 'opt_under1minute', parentMenu: 'video' },
+                { optionLabel: '1-5 minutes', optionValue: 'opt_1_5minutes', parentMenu: 'video' },
+                { optionLabel: '5-10 minute', optionValue: 'opt_5_10minutes', parentMenu: 'video' },
+                { optionLabel: '10-15 minute', optionValue: 'opt_10_15minutes', parentMenu: 'video' },
+                { optionLabel: '15-30 minute', optionValue: 'opt_15_30minutes', parentMenu: 'video' },
+                { optionLabel: '> 30 minute', optionValue: 'opt_greater30minutes', parentMenu: 'video' }
               ] }
             />
           </div>
@@ -209,8 +215,8 @@ class FilterMenu extends Component {
               handleFilterSelect={ this.handleFilterSelect }
               closeSubMenu={ this.closeSubMenu }
               menuOptions={ [
-                { optionLabel: 'Custom 1', optionValue: 'custom_1' },
-                { optionLabel: 'Custom 2', optionValue: 'custom_2' }
+                { optionLabel: 'Custom 1', optionValue: 'custom_1', parentMenu: 'custom' },
+                { optionLabel: 'Custom 2', optionValue: 'custom_2', parentMenu: 'custom' }
               ] }
             />
             <FilterMenuItem
@@ -219,8 +225,8 @@ class FilterMenu extends Component {
               handleFilterSelect={ this.handleFilterSelect }
               closeSubMenu={ this.closeSubMenu }
               menuOptions={ [
-                { optionLabel: 'Test 1', optionValue: 'opt_test1' },
-                { optionLabel: 'Test 2', optionValue: 'opt_test2' }
+                { optionLabel: 'Test 1', optionValue: 'opt_test1', parentMenu: 'custom' },
+                { optionLabel: 'Test 2', optionValue: 'opt_test2', parentMenu: 'custom' }
               ] }
             />
           </div>

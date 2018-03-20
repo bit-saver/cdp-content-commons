@@ -18,7 +18,11 @@ class FilterSelections extends Component {
       <div className="filterMenu_selections" ref={ ( node ) => { this.selectionsDisplay = node; } }>
         { selections.length > 0 &&
           selections.map( selection => (
-            <Label key={ selection.selectionValue } data-label={ selection.selectionValue }>
+            <Label
+              key={ selection.selectionValue }
+              data-label={ selection.selectionValue }
+              data-parent={ selection.hasParentMenu }
+            >
               { selection.selectionLabel }
               <Icon name="delete" onClick={ onRemove } />
             </Label>

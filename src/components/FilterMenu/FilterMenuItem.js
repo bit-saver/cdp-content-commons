@@ -85,6 +85,7 @@ class FilterMenuItem extends Component {
                 onChange={ this.handleOnChange }
                 onClick={ this.props.handleFilterSelect }
                 data-submenu={ opt.hasSubMenu }
+                data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
               />
             ) ) }
             { this.props.useCheckbox && this.props.menuOptions.map( opt => (
@@ -96,6 +97,7 @@ class FilterMenuItem extends Component {
                 onChange={ this.handleOnChange }
                 onClick={ this.props.handleFilterSelect }
                 data-submenu={ opt.hasSubMenu }
+                data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
               />
             ) ) }
           </Form.Group>
