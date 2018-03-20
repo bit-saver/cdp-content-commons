@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import { func, object, string } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -33,7 +34,7 @@ class Recents extends Component {
       } );
 
       itemsright.push( (
-        <Item as="a">
+        <Item as={ Link } to={ item.sourcelink } key={ item.id }>
           <Item.Image src={ item.thumbnail } alt={ item.title } />
           <Item.Content>
             <Item.Header>{ item.title }</Item.Header>
@@ -52,7 +53,8 @@ class Recents extends Component {
         <Header as="h1" size="large">Most Recent { this.props.label }</Header>
         <Grid columns="equal" stackable stretched>
           <Grid.Column width={ 8 } style={ { paddingRight: '0' } }>
-            <div
+            <a
+              href={ items[0].sourcelink }
               className="recentsleft"
               style={ {
                 backgroundImage: `url( ${items[0].thumbnail} )`
@@ -62,7 +64,7 @@ class Recents extends Component {
                 <div className="recentsoverlay_title">{ items[0].title }</div>
                 <img src={ items[0].icon } className="recentsoverlay_icon" alt={ `${this.props.type} icon` } />
               </div>
-            </div>
+            </a>
           </Grid.Column>
           <Grid.Column width={ 8 }>
             <Item.Group>{ itemsright }</Item.Group>
