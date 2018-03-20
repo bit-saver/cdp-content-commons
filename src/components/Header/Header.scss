@@ -5,11 +5,25 @@ header {
 }
 
 .bar header {
-  padding: 10em 0;
+  padding: 10em 0 3em;
+  @media screen and (max-width: 767px) {
+    padding: 6em 0 2em;
+  }
 }
 
 .bar .search_bar {
-  margin: 4em auto;
+  margin: 3em auto;
+}
+
+.bar h1.ui.header .sub.header.subtitle {
+  font-size: 1em;
+  color: $blue;
+  margin: 1em 0;
+}
+
+.bar h1.ui.header .sub.header.subtext {
+  color: $grey;
+  margin: 0;
 }
 
 .resultsbar {
@@ -59,7 +73,7 @@ header {
   padding-left: 0;
 }
 
-.resultsbar .sub.header.subtitle {
+.resultsbar .sub.header.subtitle, .resultsbar .sub.header.subtext {
   display: none;
 }
 
