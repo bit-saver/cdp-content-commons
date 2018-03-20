@@ -1,16 +1,15 @@
 import React from 'react';
-import { Dropdown } from 'semantic-ui-react';
 import './Nav.css';
+import { Menu } from 'semantic-ui-react';
 
 const Nav = () => (
-  <section>
-    <Dropdown text="MENU" className="nav">
-      <Dropdown.Menu>
-        <Dropdown.Item text="Menu Item" />
-        <Dropdown.Item text="Sign In" />
-      </Dropdown.Menu>
-    </Dropdown>
-  </section>
+  <nav>
+    <Menu compact secondary>
+      <Menu.Item>About</Menu.Item>
+      <Menu.Item>Help</Menu.Item>
+      <Menu.Item>Sign In</Menu.Item>
+    </Menu>
+  </nav>
 );
 
 export default Nav;

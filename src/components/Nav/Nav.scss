@@ -1,4 +1,14 @@
-.nav {
-  margin-bottom: 1em;
-  color: #0071bc;
+@import "../../assets/styles/colors.scss";
+
+nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .8em;
+  z-index: 999;
+}
+
+nav .ui.menu .item {
+  color: $blue;
+  font-weight: bold;
 }

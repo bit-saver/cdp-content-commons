@@ -1,8 +1,95 @@
-.ui.header {
-  &.title {
-    color: #112e51;
-    @media screen and (min-width: 641px) {
-      font-size: 60px;
-    }
+@import "../../assets/styles/colors.scss";
+
+header {
+  text-align: center;
+}
+
+.bar header {
+  padding: 10em 0 3em;
+  @media screen and (max-width: 767px) {
+    padding: 6em 0 2em;
   }
+}
+
+.bar .search_bar {
+  margin: 3em auto;
+}
+
+.bar h1.ui.header .sub.header.subtitle {
+  font-size: 1em;
+  color: $blue;
+  margin: 1em 0;
+}
+
+.bar h1.ui.header .sub.header.subtext {
+  color: $grey;
+  margin: 0;
+}
+
+.resultsbar {
+  background-image: linear-gradient(60deg, $light-blue 2%, $bright-blue 100%);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+}
+
+.resultsbar header {
+  @media screen and (max-width: 767px) {
+    text-align: left;
+  }
+}
+
+.resultsbar .ui.container,
+.bar .ui.container {
+  @media screen and (min-width: 768px) {
+    width: 1600px;
+  }
+  position: relative;
+}
+
+.resultsbar a,
+.resultsbar a:hover {
+  color: #fff;
+  font-size: 1.5em;
+}
+
+.resultsbar h1.ui.header {
+  @media screen and (min-width: 768px) {
+    float: left;
+    padding-left: 0;
+  }
+  margin: 0;
+  padding: 0.5em;
+  text-align: left;
+}
+
+.resultsbar .header .title {
+  font-size: 1em;
+  padding: 0.5em;
+  padding-left: 0;
+}
+
+.resultsbar .sub.header.subtitle, .resultsbar .sub.header.subtext {
+  display: none;
+}
+
+.resultsbar .search_bar {
+  @media screen and (min-width: 768px) {
+    width: 400px;
+    float: center;
+  }
+  @media screen and (min-width: 900px) {
+    width: 500px;
+  }
+  width: 100%;
+  padding: 0.6em;
+  box-shadow: none;
+}
+
+.resultsbar .search_bar .fields {
+  margin: 0;
 }

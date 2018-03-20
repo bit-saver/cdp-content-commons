@@ -34,15 +34,18 @@ class Search extends Component {
 
   render() {
     return (
-      <section>
-        <div className="search_bar">
-          <Form onSubmit={ this.handleSubmit }>
-            <Form.Group>
-              <Form.Input placeholder="Search..." className="search_input" onChange={ this.handleQueryOnChange } />
-              <Form.Button icon="search" type="submit" />
-            </Form.Group>
-          </Form>
-        </div>
+      <section className="search_bar">
+        <Form onSubmit={ this.handleSubmit }>
+          <Form.Group>
+            <Form.Input
+              placeholder="Type in keywords to search our content"
+              className="search_input"
+              onChange={ this.handleQueryOnChange }
+              value={ this.props.search.query ? this.props.search.query : '' }
+            />
+            <Form.Button icon="search" type="submit" />
+          </Form.Group>
+        </Form>
       </section>
     );
   }

@@ -38,7 +38,7 @@ class FilterMenuItem extends Component {
   closeFilter( e ) {
     const activeSubMenu = document.querySelector( '.filterMenu_sub.show' );
 
-    if ( !this.filterMenu.contains( e.target ) ) {
+    if ( !this.filterMenu.contains( e.target ) || e.target.classList.contains( 'filterMenu_label' ) ) {
       this.setState( { filterItemOpen: false }, () => {
         document.removeEventListener( 'click', this.closeFilter );
 
@@ -69,7 +69,7 @@ class FilterMenuItem extends Component {
           role="menuitem"
           tabIndex={ 0 }
         >
-          { this.props.menuName } <Icon name="chevron up" />
+          { this.props.menuName } <Icon name="chevron down" />
         </span>
         <Form className={ this.state.filterItemOpen ? 'filterMenu_options show' : 'filterMenu_options' }>
           <Form.Group>

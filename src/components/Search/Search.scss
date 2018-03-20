@@ -1,4 +1,4 @@
-@import "../../assets/styles/_colors.scss";
+@import "../../assets/styles/colors.scss";
 
 .ui.header .sub.header {
   margin-bottom: 30px;
@@ -6,6 +6,12 @@
 
 .search_bar {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  width: 70%;
+  margin: 0 auto;
+
+  @media screen and (max-width: 640px) {
+    width: 100%;
+  }
 }
 
 /* Form */
@@ -23,12 +29,6 @@
       padding-left: 0;
       padding-right: 0;
 
-      input[type="text"],
-      .ui.button {
-        border: 2px solid #02bfe7;
-        border-radius: 0;
-      }
-
       &.search_input {
         width: 100%;
         font-size: 18px;
@@ -37,7 +37,6 @@
         }
 
         input[type="text"] {
-          border-right: none;
           @media screen and (max-width: 640px) {
             padding-top: 13px;
           }
@@ -48,8 +47,10 @@
         padding: 14px 11px;
         border-left: none;
         font-size: 18px;
-        background-color: #fff;
-        color: #0071bc;
+        background-color: transparent;
+        color: $light-blue;
+        position: absolute;
+        right: 0;
         @media screen and (max-width: 767px) {
           margin: 0;
         }

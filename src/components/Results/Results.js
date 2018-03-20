@@ -6,6 +6,7 @@ import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
 import { Grid } from 'semantic-ui-react';
+import { normalizeItem } from '../../utils/parser';
 import './Results.css';
 
 const Results = ( props ) => {
@@ -21,7 +22,7 @@ const Results = ( props ) => {
     isNoResults = true;
   }
   return (
-    <section>
+    <section className="results">
       { props.search.currentPage !== -1 &&
         <div>
           <FilterMenu />
@@ -31,7 +32,7 @@ const Results = ( props ) => {
           <Grid className="results_wrapper">
             { items.map( item => (
               <Grid.Column mobile={ 16 } tablet={ 8 } computer={ 4 } className="card_wrapper" key={ item._id }>
-                <ResultItem key={ item._id } item={ item } />
+                <ResultItem key={ item._id } item={ normalizeItem( item ) } />
               </Grid.Column>
             ) ) }
             { isNoResults &&

@@ -1,6 +1,7 @@
+@import "../../../assets/styles/colors.scss";
+
 .ResultsHeader__component {
   display: flex;
-  margin-top: 80px;
   & > p {
     flex: 0.8;
     margin-top: 38px;
@@ -37,7 +38,7 @@
 
     label {
       margin: 0;
-      color: #b2b4b8;
+      color: $medium-grey;
       font-weight: normal;
     }
 
