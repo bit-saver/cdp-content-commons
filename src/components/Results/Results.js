@@ -10,6 +10,7 @@ import './Results.css';
 
 const Results = ( props ) => {
   let items;
+
   if ( props.search.response.hits ) {
     items = props.search.response.hits.hits;
   } else {

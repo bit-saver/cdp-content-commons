@@ -46,38 +46,53 @@ const getDefaultThumbnail = ( type ) => {
   return thumbnail;
 };
 
-const getThumbnail = ( source ) => {
+const getThumbnail = ( source, type ) => {
   let thumbnail = '';
-  const image = source.featured_image;
-  if ( image && image.sizes && image.sizes.medium ) {
-    thumbnail = image.sizes.medium.url;
+
+  if ( type === 'video' ) {
+    const vidSrc = source[0];
+    if ( vidSrc && vidSrc.stream && vidSrc.stream.thumbnail ) {
+      // eslint-disable-next-line prefer-destructuring
+      thumbnail = vidSrc.stream.thumbnail;
+    }
   } else {
-    thumbnail = getDefaultThumbnail( source.type );
+    const image = source.featured_image;
+    if ( image && image.sizes && image.sizes.medium ) {
+      thumbnail = image.sizes.medium.url;
+    }
   }
 
-  return thumbnail;
+  return thumbnail || getDefaultThumbnail( type );
 };
 
 // send in locale to fetch applicable lang data props?
 const populateVideoItem = ( source ) => {
+  const locale = 'en-US'; // this needs to come from search qry
   const units = source.unit;
-  const defaultUnit = units.find( unit => unit.language.locale === 'en-US' );
+  const languageUnit = units.find( unit => unit.language.locale === locale );
   let obj = {};
 
-  if ( defaultUnit ) {
+  if ( languageUnit ) {
     obj = {
-      title: defaultUnit.title,
-      description: defaultUnit.desc,
-      thumbnail:
-        defaultUnit.source && defaultUnit.source.stream && defaultUnit.source.stream.thumbnail
-          ? defaultUnit.source.stream.thumbnail
-          : getDefaultThumbnail( source.type ),
-      categories: defaultUnit.categories || [],
-      tags: defaultUnit.tags || [],
+      title: languageUnit.title || '[TITLE]',
+      description: languageUnit.desc || '[DESCRIPTION]',
+      thumbnail: getThumbnail( languageUnit.source, 'video' ),
+      categories: languageUnit.categories || [],
+      tags: languageUnit.tags || [],
       duration: source.duration,
-      files: defaultUnit.source,
-      transcript: defaultUnit.transcript,
-      srt: defaultUnit.srt
+      units,
+      selectedLanguageUnit: languageUnit
+    };
+  } else {
+    // this may not be needed
+    obj = {
+      title: '[TITLE]',
+      description: '[DESCRIPTION]',
+      thumbnail: getDefaultThumbnail( 'video' ),
+      categories: [],
+      tags: [],
+      duration: '',
+      units: []
     };
   }
 

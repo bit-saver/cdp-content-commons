@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Input } from 'semantic-ui-react';
-import { object } from 'prop-types';
+// import { Form, Input } from 'semantic-ui-react';
+// import { object } from 'prop-types';
 import './Video.css';
 
 const ShareMore = props => (
@@ -33,9 +33,9 @@ const ShareMore = props => (
   </div>
 );
 
-ShareMore.propTypes = {
-  transcript: object,
-  srt: object
-};
+// ShareMore.propTypes = {
+//   transcript: object,
+//   srt: object
+// };
 
 export default ShareMore;

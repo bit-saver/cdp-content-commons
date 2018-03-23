@@ -7,16 +7,16 @@
 }
 
 .ui.form.form-group_tabbed {
-  .hide {
+  .on {
+    display: block !important;
+  }
+
+  .off {
     display: none !important;
   }
 
-  .show {
-    display: block;
-  }
-
-  .processing {
-    background: $ice-blue !important;
+  .idle {
+    background: $light-grey;
   }
 
   .inline.fields {
@@ -49,29 +49,32 @@
         padding-left: 0;
       }
 
-      .ui.progress {
-        width: 100%;
-        background: $light-grey;
-        border-radius: 0;
-        margin: 0;
+      // .ui.progress {
+      //   width: 100%;
+      //   border-radius: 0;
+      //   margin: 0;
 
-        .bar {
-          border-radius: 0;
-          height: 100%;
-          background: $ice-blue;
-          display: none;
-        }
+      //   .bar {
+      //     border-radius: 0;
+      //     height: 100%;
+      //     background: $ice-blue;
+      //     display: none;
+      //   }
 
-        .label {
-          top: 0.5em;
-          left: 0.5em;
-          text-align: left;
-          font-weight: normal;
-        }
-      }
+      //   .label {
+      //     top: 0.5em;
+      //     left: 0.5em;
+      //     text-align: left;
+      //     font-weight: normal;
+      //   }
+      // }
 
       .ui.input {
         width: 100%;
+
+        &.processing input {
+          background: $ice-blue !important;
+        }
 
         input {
           border: 0;

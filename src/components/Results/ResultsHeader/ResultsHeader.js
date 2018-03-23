@@ -3,13 +3,13 @@ import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { numberWithCommas } from '../../../utils/helpers';
 import { sortRequest } from '../../../actions/search';
-import { Form, Select } from 'semantic-ui-react';
+// import { Form, Select } from 'semantic-ui-react';
 import './ResultsHeader.css';
 
 /** **
 TEMP
 **** */
-const options = [{ key: 1, text: 'Relevance', value: 'relevance' }, { key: 2, text: 'Recent', value: 'published' }];
+// const options = [{ key: 1, text: 'Relevance', value: 'relevance' }, { key: 2, text: 'Recent', value: 'published' }];
 /** * */
 
 class ResultsHeader extends Component {
@@ -23,7 +23,7 @@ class ResultsHeader extends Component {
   }
 
   render() {
-    const { currentPage, total, sort } = this.props.search;
+    const { currentPage, total } = this.props.search;
 
     if ( this.props.search.response.took && this.props.search.response.hits.hits.length ) {
       return (
@@ -36,7 +36,7 @@ class ResultsHeader extends Component {
             </p>
           ) }
 
-          <Form>
+          { /* <Form>
             <Form.Group className="results_sort">
               <Form.Field
                 control={ Select }
@@ -46,7 +46,7 @@ class ResultsHeader extends Component {
                 onChange={ this.handleOnChange }
               />
             </Form.Group>
-          </Form>
+          </Form> */ }
         </div>
       );
     }
