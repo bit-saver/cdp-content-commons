@@ -53,6 +53,7 @@ class Recents extends Component {
         <Header as="h1" size="large">Most Recent { this.props.label }</Header>
         <Grid columns="equal" stackable stretched>
           <Grid.Column width={ 8 } style={ { paddingRight: '0' } }>
+            { items[0] &&
             <a
               href={ items[0].sourcelink }
               className="recentsleft"
@@ -65,6 +66,7 @@ class Recents extends Component {
                 <img src={ items[0].icon } className="recentsoverlay_icon" alt={ `${this.props.type} icon` } />
               </div>
             </a>
+            }
           </Grid.Column>
           <Grid.Column width={ 8 }>
             <Item.Group>{ itemsright }</Item.Group>
