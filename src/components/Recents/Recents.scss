@@ -3,6 +3,10 @@
 .recents {
   margin-bottom: 6em;
 }
+.ui.grid .column.recentsgridleft {
+   padding-right: 0; 
+   min-height: 320px; 
+}
 .recents h1.header {
   color: $blue;
 }
