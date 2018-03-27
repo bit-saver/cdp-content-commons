@@ -30,7 +30,7 @@ class Recents extends Component {
       item.categories.forEach( ( cat, index ) => {
         categories += ( item.categories.length === index + 1 )
           ? cat.name.toLowerCase()
-          : `${cat.name.toLowerCase()}  ·`;
+          : `${cat.name.toLowerCase()}  · `;
       } );
 
       itemsright.push( (
@@ -52,7 +52,7 @@ class Recents extends Component {
       <section className="recents">
         <Header as="h1" size="large">Most Recent { this.props.label }</Header>
         <Grid columns="equal" stackable stretched>
-          <Grid.Column width={ 8 } style={ { paddingRight: '0' } }>
+          <Grid.Column width={ 8 } className="recentsgridleft" >
             { items[0] &&
             <a
               href={ items[0].sourcelink }
