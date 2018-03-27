@@ -11,10 +11,9 @@ const Breadcrumbs = ( props ) => {
     <Breadcrumb>
       <Breadcrumb.Section href="/">Content Commons</Breadcrumb.Section>
       { paths.map( ( pathname, i, arr ) => {
-        const path = `${( props.location.pathname ).split( pathname )[0]}${pathname}`;
         const breadcrumbSection = ( arr.length - 1 === i )
           ? <Breadcrumb.Section active className="pathname">{ pathname }</Breadcrumb.Section>
-          : <Breadcrumb.Section href={ path } className="pathname">{ pathname }</Breadcrumb.Section>;
+          : <Breadcrumb.Section className="pathname">{ pathname }</Breadcrumb.Section>;
 
         return (
           <span key={ pathname }>
