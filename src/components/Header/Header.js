@@ -7,7 +7,7 @@ import Nav from '../Nav';
 import Search from '../Search';
 
 const HeaderItem = ( props ) => {
-  const barClass = ( `${props.location.pathname}bar` ).substr( 1 );
+  const barClass = ( `${( props.location.pathname ).split( '/' ).slice( 1 )[0]}bar` );
 
   return (
     <section className={ barClass }>
