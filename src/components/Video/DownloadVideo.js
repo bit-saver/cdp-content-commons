@@ -28,6 +28,13 @@ class DownloadVideo extends Component {
     zip.create( [url, ...srt], 'video_archive', cb );
   };
 
+  sortByFilesize = ( a, b ) => {
+    if ( a.size && a.size.filesize && b.size && b.size.filesize ) {
+      return +a.size.filesize > +b.size.filesize;
+    }
+    return true;
+  };
+
   renderFormItem( video, index ) {
     const size = this.getSizeInfo( video.size );
     const label = size && (
@@ -54,7 +61,7 @@ class DownloadVideo extends Component {
     // only sort the videos if each video has a filesize prop for comparison
     if ( videosWithSizeProp.length === videos.length ) {
       // filesize coming in as string, convert to number for comparision
-      videos.sort( ( a, b ) => +a.size.filesize > +b.size.filesize );
+      videos.sort( this.sortByFilesize );
     }
 
     return <div>{ videos.map( ( v, i ) => v.downloadUrl && this.renderFormItem( v, i ) ) }</div>;
