@@ -25,9 +25,9 @@ const Results = ( props ) => {
   }
   return (
     <section className="results">
+      <Breadcrumbs />
       { props.search.currentPage !== -1 &&
         <div>
-          <Breadcrumbs />
           <FilterMenu />
           <section>
             <ResultsHeader />

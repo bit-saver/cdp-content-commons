@@ -5,13 +5,24 @@ import { object } from 'prop-types';
 import './Breadcrumbs.css';
 
 const Breadcrumbs = ( props ) => {
-  const path = ( props.location.pathname ).substr( 1 );
+  const paths = ( props.location.pathname ).split( '/' ).slice( 1 ).filter( Boolean );
 
   return (
     <Breadcrumb>
       <Breadcrumb.Section href="/">Content Commons</Breadcrumb.Section>
-      <Breadcrumb.Divider icon="right angle" />
-      <Breadcrumb.Section active className="path">{ path }</Breadcrumb.Section>
+      { paths.map( ( pathname, i, arr ) => {
+        const path = `${( props.location.pathname ).split( pathname )[0]}${pathname}`;
+        const breadcrumbSection = ( arr.length - 1 === i )
+          ? <Breadcrumb.Section active className="pathname">{ pathname }</Breadcrumb.Section>
+          : <Breadcrumb.Section href={ path } className="pathname">{ pathname }</Breadcrumb.Section>;
+
+        return (
+          <span key={ pathname }>
+            <Breadcrumb.Divider icon="right angle" />
+            { breadcrumbSection }
+          </span>
+        );
+      } ) }
     </Breadcrumb>
   );
 };
