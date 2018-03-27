@@ -6,17 +6,23 @@ import { Card, Image } from 'semantic-ui-react';
 import PopupTrigger from '../../Popup/PopupTrigger';
 import PopupTabbed from '../../Popup/PopupTabbed';
 
-import ClosedCaptions from '../../Video/ClosedCaptions';
-import OpenCaptions from '../../Video/OpenCaptions';
+import DownloadVideo from '../../Video/DownloadVideo';
 import DownloadMore from '../../Video/DownloadMore';
 import DownloadHelp from '../../Video/DownloadHelp';
 
 import Shortcode from '../../Video/Shortcode';
 import Social from '../../Video/Social';
+import ShareMore from '../../Video/ShareMore';
 
 import './ResultItem.css';
 
 class ResultItem extends Component {
+  getLanguage() {
+    const { selectedLanguageUnit } = this.props.item;
+    if ( !selectedLanguageUnit ) return 'English';
+    return selectedLanguageUnit.language.display_name;
+  }
+
   // eslint-disable-next-line class-methods-use-this
   renderCategory( category, index, arr ) {
     let { name } = category;
@@ -31,8 +37,18 @@ class ResultItem extends Component {
     return <span key={ key }>{ name.toLowerCase() }</span>;
   }
 
+  renderCaptionTabTitle() {
+    const { selectedLanguageUnit } = this.props.item;
+    if ( !selectedLanguageUnit ) {
+      return 'With Subtitles';
+    }
+    const source = selectedLanguageUnit.source.find( src => src.burnedInCaptions === 'no' );
+    return source ? 'With Captions' : 'With Subtitles';
+  }
+
   render() {
     const { item } = this.props;
+
     return (
       <Card>
         <a rel="noopener noreferrer" href={ item.link } title={ item.title } target="_blank">
@@ -61,13 +77,15 @@ class ResultItem extends Component {
           <PopupTrigger
             toolTip="Copy the shortcode for this video or<br> share it social platforms."
             icon="share"
+            show={ item.type === 'video' }
             content={
               <PopupTabbed
                 title="How would you like to share this video?"
+                item={ item }
                 panes={ [
                   { title: 'Copy Shortcode', component: <Shortcode /> },
                   { title: 'Social', component: <Social /> },
-                  { title: 'More', component: <DownloadMore /> },
+                  { title: 'More', component: <ShareMore /> },
                   { title: 'Help', component: <DownloadHelp /> }
                 ] }
                 config={ { width: '141px', offset: '115px' } } // TODO: remove hardcoding, make it dynamic
@@ -78,16 +96,37 @@ class ResultItem extends Component {
             toolTip="Download this video with an embed code"
             icon="download"
             position="right"
+            show={ item.type === 'video' }
             content={
               <PopupTabbed
                 title="Download this video."
                 panes={ [
-                  { title: 'Closed Captions', component: <ClosedCaptions /> },
-                  { title: 'Open Captions', component: <OpenCaptions /> },
-                  { title: 'More', component: <DownloadMore /> },
+                  {
+                    title: 'Original',
+                    component: (
+                      <DownloadVideo
+                        selectedLanguageUnit={ this.props.item.selectedLanguageUnit }
+                        instructions={ `Download the original video file without captions in ${this.getLanguage()}. This
+                    download option is best for uploading this video to web pages.` }
+                        burnedInCaptions="no"
+                      />
+                    )
+                  },
+                  {
+                    title: this.renderCaptionTabTitle(),
+                    component: (
+                      <DownloadVideo
+                        selectedLanguageUnit={ this.props.item.selectedLanguageUnit }
+                        instructions={ `Download this video with open captions in ${this.getLanguage()}. This download
+                      option is best for uploading this video to social media` }
+                        burnedInCaptions="yes"
+                      />
+                    )
+                  },
+                  { title: 'More', component: <DownloadMore units={ item.units } /> },
                   { title: 'Help', component: <DownloadHelp /> }
                 ] }
-                config={ { width: '142px', offset: '84px' } } // TODO: remove hardcoding, make it dynamic
+                config={ { width: '87px', offset: '110px' } } // TODO: remove hardcoding, make it dynamic
               />
             }
           />
@@ -102,3 +141,16 @@ ResultItem.propTypes = {
 };
 
 export default ResultItem;
+
+/*
+example: search lang = french
+Is there a video marked as fr w/o burned in eng captions?
+YES
+  original =  french video + french SRT file"
+  with Captions = french video w/burned in french captions + french SRT file"
+NO
+  original =  eng video + french SRT file"
+  with Subtitles = eng video w/burned in french captions + french SRT file"
+
+More = all avaialable SRT files
+*/

@@ -15,44 +15,46 @@
 }
 
 /* Form */
-.ui.form {
-  .fields {
-    @media screen and (max-width: 767px) {
-      flex-wrap: nowrap;
-      margin: 0;
-    }
-    @media screen and (max-width: 540px) {
-      flex-wrap: wrap;
-    }
-
-    .field {
-      padding-left: 0;
-      padding-right: 0;
-
-      &.search_input {
-        width: 100%;
-        font-size: 18px;
-        @media screen and (max-width: 540px) {
-          flex: 1;
-        }
-
-        input[type="text"] {
-          @media screen and (max-width: 640px) {
-            padding-top: 13px;
-          }
-        }
+.search_bar {
+  .ui.form {
+    .fields {
+      @media screen and (max-width: 767px) {
+        flex-wrap: nowrap;
+        margin: 0;
+      }
+      @media screen and (max-width: 540px) {
+        flex-wrap: wrap;
       }
 
-      .ui.button {
-        padding: 14px 11px;
-        border-left: none;
-        font-size: 18px;
-        background-color: transparent;
-        color: $light-blue;
-        position: absolute;
-        right: 0;
-        @media screen and (max-width: 767px) {
-          margin: 0;
+      .field {
+        padding-left: 0;
+        padding-right: 0;
+
+        &.search_input {
+          width: 100%;
+          font-size: 18px;
+          @media screen and (max-width: 540px) {
+            flex: 1;
+          }
+
+          input[type="text"] {
+            @media screen and (max-width: 640px) {
+              padding-top: 13px;
+            }
+          }
+        }
+
+        .ui.button {
+          padding: 14px 11px;
+          border-left: none;
+          font-size: 18px;
+          background-color: transparent;
+          color: $light-blue;
+          position: absolute;
+          right: 0;
+          @media screen and (max-width: 767px) {
+            margin: 0;
+          }
         }
       }
     }

@@ -7,7 +7,7 @@ const Nav = () => (
     <Menu compact secondary>
       <Menu.Item>About</Menu.Item>
       <Menu.Item>Help</Menu.Item>
-      <Menu.Item>Sign In</Menu.Item>
+      { /* <Menu.Item>Sign In</Menu.Item> */ }
     </Menu>
   </nav>
 );

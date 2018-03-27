@@ -18,7 +18,7 @@ header {
 .bar h1.ui.header .sub.header.subtitle {
   font-size: 1em;
   color: $blue;
-  margin: 1em 0;
+  margin: 0.5em 0;
 }
 
 .bar h1.ui.header .sub.header.subtext {
@@ -73,7 +73,8 @@ header {
   padding-left: 0;
 }
 
-.resultsbar .sub.header.subtitle, .resultsbar .sub.header.subtext {
+.resultsbar .sub.header.subtitle,
+.resultsbar .sub.header.subtext {
   display: none;
 }
 
