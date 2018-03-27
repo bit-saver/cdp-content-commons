@@ -1,6 +1,7 @@
 import React from 'react';
 import { shape, array, number } from 'prop-types';
 import { connect } from 'react-redux';
+import FilterMenu from '../FilterMenu/FilterMenu';
 import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
@@ -21,11 +22,11 @@ const Results = ( props ) => {
   if ( !items.length && Object.keys( props.search.response ).length ) {
     isNoResults = true;
   }
-
   return (
     <section className="results">
-      { props.search.currentPage !== -1 && (
+      { props.search.currentPage !== -1 &&
         <div>
+          <FilterMenu />
           <section>
             <ResultsHeader />
           </section>
@@ -35,19 +36,21 @@ const Results = ( props ) => {
                 <ResultItem key={ item._id } item={ normalizeItem( item ) } />
               </Grid.Column>
             ) ) }
-
-            { isNoResults && (
-              <div className="Results__no__results">Sorry, your search did not return any results =(</div>
-            ) }
+            { isNoResults &&
+              <div className="Results__no__results">
+                Sorry, your search did not return any results =(
+              </div>
+            }
           </Grid>
           <section>
             <ResultsPagination />
           </section>
         </div>
-      ) }
+      }
     </section>
   );
 };
+
 
 const mapStateToProps = state => ( {
   search: state.search
