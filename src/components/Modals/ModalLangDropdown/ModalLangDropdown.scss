@@ -1,0 +1,25 @@
+@import "../../../assets/styles/colors.scss";
+
+.modal_languages {
+  
+  
+  &:hover:after {
+    content: '';
+    display: block;
+    height: 3px;
+    background-color: $light-blue;
+  }
+
+
+  &.ui.dropdown .menu {
+    border: none;
+    border-radius: 0;
+  }
+
+  
+  .chevron {
+    margin: 0 3px !important;
+  }
+
+
+}

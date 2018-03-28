@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import moment from 'moment';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Modal } from 'semantic-ui-react';
 
 import PopupTrigger from '../../Popup/PopupTrigger';
 import PopupTabbed from '../../Popup/PopupTabbed';
@@ -13,6 +13,8 @@ import DownloadHelp from '../../Video/DownloadHelp';
 
 import Shortcode from '../../Video/Shortcode';
 import Social from '../../Video/Social';
+
+import VideoModal from '../../Modals/Video/VideoModal';
 
 import './ResultItem.css';
 
@@ -35,18 +37,29 @@ class ResultItem extends Component {
     const { item } = this.props;
     return (
       <Card>
-        <a rel="noopener noreferrer" href={ item.link } title={ item.title } target="_blank">
-          <Image src={ item.thumbnail } width="100%" height="100%" />
-          <Image src={ item.icon } className="card_postIcon" />
-        </a>
+        <Modal
+          closeIcon
+          trigger={
+            <div className="card_imgWrapper">
+              <Image src={ item.thumbnail } width="100%" height="100%" />
+              <Image src={ item.icon } className="card_postIcon" />
+            </div>
+          }
+        >
+          <Modal.Content><VideoModal item={ item } /></Modal.Content>
+        </Modal>
         <Card.Content>
           <Card.Header className="card_header">
-            <a rel="noopener noreferrer" href={ item.link } title={ item.title } target="_blank">
-              { item.title }
-            </a>
+            <Modal
+              closeIcon
+              trigger={
+                <p>{ item.title }</p>
+              }
+            >
+              <Modal.Content><VideoModal item={ item } /></Modal.Content>
+            </Modal>
           </Card.Header>
           <Card.Description className="card_excerpt">{ item.excerpt }</Card.Description>
-
           <div className="card_metadata">
             <Card.Meta>{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</Card.Meta>
             <Card.Meta>
