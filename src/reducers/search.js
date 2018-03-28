@@ -23,6 +23,7 @@ const INITIAL_STATE = {
   pageSize: 9,
   pages: [],
   query: '',
+  currentQuery: '',
   response: {},
   sort: 'relevance',
   startIndex: 0,

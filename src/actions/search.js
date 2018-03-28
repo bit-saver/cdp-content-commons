@@ -84,10 +84,11 @@ export const createRequest = () => async ( dispatch, getState ) => {
   dispatch( { type: SEARCH_REQUEST_PENDING } );
 
   let response;
+  const currentState = getState();
   try {
     response = await queryRequest( {
       size: 16,
-      body: queryBuilder( getState() )
+      body: queryBuilder( currentState )
     } );
   } catch ( err ) {
     dispatch( hideLoading() );
@@ -100,7 +101,8 @@ export const createRequest = () => async ( dispatch, getState ) => {
     payload: {
       response,
       ...calculatePages( response.hits.total, 1 ),
-      sort: 'relevance'
+      sort: 'relevance',
+      currentQuery: currentState.search.query
     }
   } );
 };
