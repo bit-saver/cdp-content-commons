@@ -22,13 +22,13 @@ class ModalContentMeta extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { dateUpdated } = this.props;
+    const { type, dateUpdated, transcript } = this.props;
 
     return (
       <section className="modal_section modal_section--metaContent">
         <div className="modal_meta_wrapper">
           <div className="modal_meta">
-            <span className="modal_meta_content modal_meta_content--filetype">File Type: mp4</span>
+            <span className="modal_meta_content modal_meta_content--filetype">File Type: { type }</span>
             <span className="modal_meta_content modal_meta_content--date">
               Updated: { moment( dateUpdated ).format( 'MMMM DD, YYYY' ) }
             </span>
@@ -43,14 +43,16 @@ class ModalContentMeta extends Component {
             </button>
           </div>
         </div>
-        <ModalTranscript classes={ isOpen ? 'transcript active' : 'transcript' } />
+        <ModalTranscript transcript={ transcript } classes={ isOpen ? 'transcript active' : 'transcript' } />
       </section>
     );
   }
 }
 
 ModalContentMeta.propTypes = {
-  dateUpdated: string
+  type: string,
+  dateUpdated: string,
+  transcript: string
 };
 
 export default ModalContentMeta;

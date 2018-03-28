@@ -3,12 +3,15 @@ import { string } from 'prop-types';
 import './ModalTranscript.css';
 
 const ModalTranscript = ( props ) => {
-  const { classes } = props;
+  const { transcript, classes } = props;
 
   return (
     <div className={ classes }>
       <p className="transcript_label">Transcript:</p>
       <div className="transcript_text">
+        { transcript }
+
+        { /* TEMP */ }
         <p>Transcript text</p>
         <p>Transcript text</p>
         <p>Transcript text</p>
@@ -18,6 +21,7 @@ const ModalTranscript = ( props ) => {
 };
 
 ModalTranscript.propTypes = {
+  transcript: string,
   classes: string
 };
 

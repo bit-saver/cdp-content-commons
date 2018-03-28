@@ -50,7 +50,7 @@ class ResultItem extends Component {
 
   render() {
     const { item } = this.props;
-
+    console.log( item );
     return (
       <Card>
         <Modal
