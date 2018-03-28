@@ -77,7 +77,8 @@ class ResultItem extends Component {
           <PopupTrigger
             toolTip="Copy the shortcode for this video or<br> share it social platforms."
             icon="share"
-            show={ item.type === 'video' }
+            // show={ item.type === 'video' }
+            show={ false }
             content={
               <PopupTabbed
                 title="How would you like to share this video?"
