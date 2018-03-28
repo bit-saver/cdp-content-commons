@@ -21,7 +21,6 @@ import DownloadHelp from '../../Video/DownloadHelp';
 import Shortcode from '../../Video/Shortcode';
 import Social from '../../Video/Social';
 
-
 const VideoModal = ( props ) => {
   const tempLanguages = [
     { key: 'English', value: 'English', text: 'English' },
