@@ -1,0 +1,15 @@
+@import "../../assets/styles/colors.scss";
+
+.searchTerm {
+  text-align: center;
+  padding: 2em 0;
+  border-bottom: 1px solid $light-grey;
+}
+.ui.header.searchTermQuery {
+  color: $blue;
+  margin-bottom: 0;
+}
+.ui.header .sub.header.searchTermTotal {
+  color: $grey;
+  margin-bottom: 0;
+}

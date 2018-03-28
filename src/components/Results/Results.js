@@ -1,6 +1,7 @@
 import React from 'react';
 import { shape, array, number } from 'prop-types';
 import { connect } from 'react-redux';
+import SearchTerm from '../SearchTerm';
 import Breadcrumbs from '../Breadcrumbs';
 import FilterMenu from '../FilterMenu/FilterMenu';
 import ResultsHeader from './ResultsHeader';
@@ -28,6 +29,7 @@ const Results = ( props ) => {
       <Breadcrumbs />
       { props.search.currentPage !== -1 &&
         <div>
+          <SearchTerm />
           <FilterMenu />
           <section>
             <ResultsHeader />
