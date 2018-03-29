@@ -6,6 +6,10 @@
 }
 
 .ui.grid > .column:not(.row).card_wrapper {
+  @media screen and (min-width: 992px) and (max-width: 1199px) {
+    width: 33.33% !important;
+  }
+
   @media screen and (max-width: 425px) {
     padding: 0 !important;
     margin-top: 1em !important;
