@@ -4,6 +4,7 @@ import * as ReactTapEventPlugin from 'react-tap-event-plugin';
 
 import './App.css';
 import LandingPage from './components/LandingPage';
+import AboutPage from './components/AboutPage';
 import Header from './components/Header';
 import Results from './components/Results';
 
@@ -16,6 +17,7 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={ LandingPage } />
         <Route path="/results" component={ Results } />
+        <Route path="/about" component={ AboutPage } />
         <Redirect to="/" />
       </Switch>
     </main>
