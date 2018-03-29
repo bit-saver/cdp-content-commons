@@ -123,7 +123,7 @@ class VideoModal extends Component {
         <ModalContentMeta
           type={ item.type }
           dateUpdated={ item.modified }
-          transcript={ item.selectedLanguageUnit.transcript.text }
+          transcript={ item.selectedLanguageUnit ? item.selectedLanguageUnit.transcript.text : '' }
         />
         <ModalDescription description={ item.description } />
         <ModalPostMeta
