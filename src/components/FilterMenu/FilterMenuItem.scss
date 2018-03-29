@@ -41,15 +41,11 @@
         width: 100%;
         border-bottom: 3px solid $blue;
       }
+    }
 
-      .icon {
-        
-        &::before {
-          transition: .5s;
-          transform: rotate(360deg);
-        }       
-      }     
-    }   
+    &:focus {
+      outline: 0;
+    }  
   }
 
 
