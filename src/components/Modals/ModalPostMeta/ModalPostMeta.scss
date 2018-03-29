@@ -1,0 +1,11 @@
+@import "../../../assets/styles/colors.scss";
+
+.modal_postmeta {
+
+  
+  &_content {
+    display: block;
+    font-size: 12px;
+    color: $shuttle-grey;
+  } 
+}
