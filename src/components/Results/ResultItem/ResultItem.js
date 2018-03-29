@@ -61,20 +61,19 @@ class ResultItem extends Component {
             </div>
           }
         >
-          <Modal.Content><VideoModal item={ item } /></Modal.Content>
+          <Modal.Content>
+            <VideoModal item={ item } />
+          </Modal.Content>
         </Modal>
         <Card.Content>
           <Card.Header className="card_header">
-            <Modal
-              closeIcon
-              trigger={
-                <p>{ item.title }</p>
-              }
-            >
-              <Modal.Content><VideoModal item={ item } /></Modal.Content>
+            <Modal closeIcon trigger={ <p>{ item.title }</p> }>
+              <Modal.Content>
+                <VideoModal item={ item } />
+              </Modal.Content>
             </Modal>
           </Card.Header>
-          <Card.Description className="card_excerpt">{ item.excerpt }</Card.Description>
+          <Card.Description className="card_excerpt">{ item.description }</Card.Description>
           <div className="card_metadata">
             <Card.Meta>{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</Card.Meta>
             <Card.Meta>

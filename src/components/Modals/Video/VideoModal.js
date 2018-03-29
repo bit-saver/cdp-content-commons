@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
-import { Image } from 'semantic-ui-react';
+import { Embed } from 'semantic-ui-react';
 
 import plusIcon from '../../../assets/images/plus.svg';
 
@@ -22,10 +22,41 @@ import Social from '../../Video/Social';
 import ShareMore from '../../Video/ShareMore';
 
 class VideoModal extends Component {
+  getVideoSource() {
+    const { item } = this.props;
+    if ( item && item.selectedLanguageUnit ) {
+      const selected = item.selectedLanguageUnit;
+      if ( selected.source && selected.source[0] && selected.source[0].stream && selected.source[0].stream.url ) {
+        return selected.source[0].stream.url;
+      }
+    } else {
+      return '';
+    }
+  }
+
+  getVideoTranscript() {
+    const { item } = this.props;
+    if ( item && item.selectedLanguageUnit ) {
+      const selected = item.selectedLanguageUnit;
+      if ( selected.transcript && selected.transcript.text ) {
+        return selected.transcript.text;
+      }
+    } else {
+      return '';
+    }
+  }
+
   getLanguage() {
     const { selectedLanguageUnit } = this.props.item;
     if ( !selectedLanguageUnit ) return 'English';
     return selectedLanguageUnit.language.display_name;
+  }
+
+  renderVideoPlayer() {
+    const url = this.getVideoSource();
+    const active = !!url;
+    const icon = active ? 'video play' : 'warning circle';
+    return <Embed active={ active } icon={ icon } placeholder={ this.props.item.thumbnail } url={ url } />;
   }
 
   renderCaptionTabTitle() {
@@ -87,10 +118,8 @@ class VideoModal extends Component {
                       component: (
                         <DownloadVideo
                           selectedLanguageUnit={ this.props.item.selectedLanguageUnit }
-                          instructions={
-                            `Download the original video file without captions in ${this.getLanguage()}.
-                            This download option is best for uploading this video to web pages.`
-                          }
+                          instructions={ `Download the original video file without captions in ${this.getLanguage()}.
+                            This download option is best for uploading this video to web pages.` }
                           burnedInCaptions="no"
                         />
                       )
@@ -100,10 +129,8 @@ class VideoModal extends Component {
                       component: (
                         <DownloadVideo
                           selectedLanguageUnit={ this.props.item.selectedLanguageUnit }
-                          instructions={
-                            `Download this video with open captions in ${this.getLanguage()}.
-                            This download option is best for uploading this video to social media`
-                          }
+                          instructions={ `Download this video with open captions in ${this.getLanguage()}.
+                            This download option is best for uploading this video to social media` }
                           burnedInCaptions="yes"
                         />
                       )
@@ -118,20 +145,11 @@ class VideoModal extends Component {
           </div>
         </div>
 
-        <Image src={ item.thumbnail } fluid />
+        { this.renderVideoPlayer() }
 
-        <ModalContentMeta
-          type={ item.type }
-          dateUpdated={ item.modified }
-          transcript={ item.selectedLanguageUnit.transcript.text }
-        />
+        <ModalContentMeta type={ item.type } dateUpdated={ item.modified } transcript={ this.getVideoTranscript() } />
         <ModalDescription description={ item.description } />
-        <ModalPostMeta
-          author={ item.author }
-          source={ item.sourcelink }
-          site={ item.site }
-          datePublished={ item.published }
-        />
+        <ModalPostMeta author={ item.author } source={ item.sourcelink } site={ item.site } datePublished={ item.published } />
         <ModalPostTags tags={ item.categories } />
       </ModalContent>
     );
