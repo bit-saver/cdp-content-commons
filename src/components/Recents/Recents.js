@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 import { func, object, string } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { Grid, Header, Item } from 'semantic-ui-react';
+import { Grid, Header, Item, Modal } from 'semantic-ui-react';
 import './Recents.css';
 import { normalizeItem } from '../../utils/parser';
+import VideoModal from '../Modals/Video/VideoModal';
 
 class Recents extends Component {
   componentDidMount() {
@@ -34,17 +34,26 @@ class Recents extends Component {
       } );
 
       itemsright.push( (
-        <Item as={ Link } to={ item.sourcelink } key={ item.id }>
-          <Item.Image src={ item.thumbnail } alt={ item.title } />
-          <Item.Content>
-            <Item.Header>{ item.title }</Item.Header>
-            <div className="meta">
-              <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
-              <span className="categories">{ categories }</span>
-              <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
-            </div>
-          </Item.Content>
-        </Item>
+        <Modal
+          closeIcon
+          trigger={
+            <Item key={ item.id } className="recentsItem">
+              <Item.Image src={ item.thumbnail } alt={ item.title } />
+              <Item.Content>
+                <Item.Header>{ item.title }</Item.Header>
+                <div className="meta">
+                  <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
+                  <span className="categories">{ categories }</span>
+                  <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
+                </div>
+              </Item.Content>
+            </Item>
+          }
+        >
+          <Modal.Content>
+            <VideoModal item={ item } />
+          </Modal.Content>
+        </Modal>
       ) );
     } );
 
@@ -54,18 +63,21 @@ class Recents extends Component {
         <Grid columns="equal" stackable stretched>
           <Grid.Column width={ 8 } className="recentsgridleft" >
             { items[0] &&
-            <a
-              href={ items[0].sourcelink }
-              className="recentsleft"
-              style={ {
-                backgroundImage: `url( ${items[0].thumbnail} )`
-              } }
-            >
-              <div className="recentsoverlay">
-                <div className="recentsoverlay_title">{ items[0].title }</div>
-                <img src={ items[0].icon } className="recentsoverlay_icon" alt={ `${this.props.type} icon` } />
-              </div>
-            </a>
+              <Modal
+                closeIcon
+                trigger={
+                  <div className="recentsleft" style={ { backgroundImage: `url( ${items[0].thumbnail} )` } }>
+                    <div className="recentsoverlay">
+                      <div className="recentsoverlay_title">{ items[0].title }</div>
+                      <img src={ items[0].icon } className="recentsoverlay_icon" alt={ `${this.props.type} icon` } />
+                    </div>
+                  </div>
+                }
+              >
+                <Modal.Content>
+                  <VideoModal item={ items[0] } />
+                </Modal.Content>
+              </Modal>
             }
           </Grid.Column>
           <Grid.Column width={ 8 }>
