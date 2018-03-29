@@ -37,27 +37,40 @@ header {
   z-index: 998;
 }
 
-.resultsbar header {
+.aboutbar {
+  background: white;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998;
+}
+
+.resultsbar header,
+.aboutpage header {
   @media screen and (max-width: 767px) {
     text-align: left;
   }
 }
 
 .resultsbar .ui.container,
-.bar .ui.container {
+.bar .ui.container,
+.aboutbar .ui.container {
   @media screen and (min-width: 768px) {
     width: 1600px;
   }
   position: relative;
 }
 
-.resultsbar a,
-.resultsbar a:hover {
+.resultsbar header a,
+.resultsbar header a:hover {
   color: #fff;
   font-size: 1.5em;
 }
 
-.resultsbar h1.ui.header {
+.resultsbar h1.ui.header, .aboutbar h1.ui.header {
   @media screen and (min-width: 768px) {
     float: left;
     padding-left: 0;
@@ -67,14 +80,16 @@ header {
   text-align: left;
 }
 
-.resultsbar .header .title {
+.resultsbar .header .title, .aboutbar .header .title {
   font-size: 1em;
   padding: 0.5em;
   padding-left: 0;
 }
 
 .resultsbar .sub.header.subtitle,
-.resultsbar .sub.header.subtext {
+.resultsbar .sub.header.subtext,
+.aboutbar .sub.header.subtitle,
+.aboutbar .sub.header.subtext {
   display: none;
 }
 
@@ -93,4 +108,8 @@ header {
 
 .resultsbar .search_bar .fields {
   margin: 0;
+}
+
+.aboutbar .search_bar {
+  display:none;
 }

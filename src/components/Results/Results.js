@@ -34,9 +34,9 @@ const Results = ( props ) => {
           <section>
             <ResultsHeader />
           </section>
-          <Grid className="results_wrapper">
+          <Grid className="results_wrapper" columns={ 12 }>
             { items.map( item => (
-              <Grid.Column mobile={ 16 } tablet={ 8 } computer={ 4 } className="card_wrapper" key={ item._id }>
+              <Grid.Column mobile={ 12 } tablet={ 6 } computer={ 4 } className="card_wrapper" key={ item._id }>
                 <ResultItem key={ item._id } item={ normalizeItem( item ) } />
               </Grid.Column>
             ) ) }
