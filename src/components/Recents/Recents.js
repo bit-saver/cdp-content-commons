@@ -35,9 +35,10 @@ class Recents extends Component {
 
       itemsright.push( (
         <Modal
+          key={ item.id }
           closeIcon
           trigger={
-            <Item key={ item.id } className="recentsItem">
+            <Item className="recentsItem">
               <Item.Image src={ item.thumbnail } alt={ item.title } />
               <Item.Content>
                 <Item.Header>{ item.title }</Item.Header>
