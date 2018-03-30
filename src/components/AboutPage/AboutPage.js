@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Header } from 'semantic-ui-react';
+import Breadcrumbs from '../Breadcrumbs';
 import './AboutPage.css';
 
 const AboutPage = () => (
   <section className="about">
+    <Breadcrumbs />
     <Header as="h1">About Content Commons</Header>
     <Container>
       <Header as="h2">Discover and share public diplomacy content from the U.S. Department of State</Header>
