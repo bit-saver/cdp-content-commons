@@ -13,9 +13,14 @@ class ResultsPagination extends Component {
     return (
       <Pagination
         className="resultsPagination"
+        nextItem="Next ⟩"
+        prevItem="⟨ Previous"
         activePage={ this.props.search.currentPage }
         onPageChange={ this.handlePaginationChange }
         totalPages={ this.props.search.totalPages }
+        siblingRange="2"
+        firstItem={ null }
+        lastItem={ null }
       />
     );
   }
