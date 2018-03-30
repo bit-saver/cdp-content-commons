@@ -7,6 +7,7 @@ import LandingPage from './components/LandingPage';
 import AboutPage from './components/AboutPage';
 import Header from './components/Header';
 import Results from './components/Results';
+import Footer from './components/Footer';
 
 ReactTapEventPlugin();
 
@@ -21,6 +22,7 @@ const App = () => (
         <Redirect to="/" />
       </Switch>
     </main>
+    <Footer />
   </div>
 );
 
