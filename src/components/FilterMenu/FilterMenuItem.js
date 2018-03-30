@@ -57,21 +57,21 @@ class FilterMenuItem extends Component {
   }
 
   render() {
-    const { value } = this.state;
+    const { value, filterItemOpen } = this.state;
     const { filterSelections } = this.props;
 
     return (
       <div className="filterMenu" ref={ ( filterMenu ) => { this.filterMenu = filterMenu; } }>
         <span
-          className={ this.state.filterItemOpen ? 'filterMenu_label active' : 'filterMenu_label' }
+          className={ filterItemOpen ? 'filterMenu_label active' : 'filterMenu_label' }
           onClick={ this.displayFilter }
           onKeyDown={ this.displayFilter }
           role="menuitem"
           tabIndex={ 0 }
         >
-          { this.props.menuName } <Icon name="chevron down" />
+          { this.props.menuName } <Icon name={ filterItemOpen ? 'chevron up' : 'chevron down' } />
         </span>
-        <Form className={ this.state.filterItemOpen ? 'filterMenu_options show' : 'filterMenu_options' }>
+        <Form className={ filterItemOpen ? 'filterMenu_options show' : 'filterMenu_options' }>
           <Form.Group>
             { !this.props.useCheckbox && this.props.menuOptions.map( opt => (
               <Form.Radio

@@ -29,6 +29,7 @@ class ResultsPagination extends Component {
   }
   handlePageClick( event ) {
     event.preventDefault();
+
     if ( parseInt( event.target.text, 10 ) > this.props.search.totalPages ) {
       return;
     }
