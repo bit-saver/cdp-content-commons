@@ -65,6 +65,11 @@ const getThumbnail = ( source, type ) => {
   return thumbnail || getDefaultThumbnail( type );
 };
 
+const getAuthor = ( author ) => {
+  if ( !author ) return '';
+  return author.name || author;
+};
+
 // send in locale to fetch applicable lang data props?
 const populateVideoItem = ( source ) => {
   const locale = 'en-US'; // this needs to come from search qry
@@ -139,7 +144,7 @@ export const normalizeItem = ( item ) => {
     sourcelink: `https://${source.site}`,
     type: source.type,
     icon: getIcon( source.type ),
-    author: source.author.name || source.author, // make video obj  w/id & name to be consistent??
+    author: getAuthor( source.author ), // make video obj  w/id & name to be consistent??
     link: source.link || '',
     published: source.published,
     modified: source.modified
