@@ -46,9 +46,7 @@ const Results = ( props ) => {
               </div>
             }
           </Grid>
-          <section>
-            <ResultsPagination />
-          </section>
+          <ResultsPagination />
         </div>
       }
     </section>
