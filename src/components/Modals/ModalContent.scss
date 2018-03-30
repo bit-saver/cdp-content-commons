@@ -3,9 +3,11 @@
 .modal {
 
   
-  &.ui .close {
-    left: -2.5rem;
+  &.ui .close {    
     font-size: 2em;
+    @media screen and (min-width: 1024px) {
+      left: -2.5rem;
+    }
   }
 
 
