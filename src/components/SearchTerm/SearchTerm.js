@@ -13,7 +13,9 @@ const SearchTerm = ( props ) => {
       <section className="searchTerm">
         <Header as="h1" className="searchTermQuery">
           { `"${currentQuery}"` }
-          <Header.Subheader className="searchTermTotal">{ numberWithCommas( total ) } items</Header.Subheader>
+          <Header.Subheader className="searchTermTotal">
+            { numberWithCommas( total ) } { ( total === 1 ) ? 'item' : 'items' }
+          </Header.Subheader>
         </Header>
       </section>
     );
