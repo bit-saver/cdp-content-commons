@@ -2,7 +2,7 @@
 
 .ui.container .about {
   max-width: 1000px;
-  margin: 70px auto;
+  margin: 4em auto;
 }
 
 main.ui.container .about h1 {
@@ -22,8 +22,8 @@ main.ui.container .about h1 {
 }
 
 .about .ui.breadcrumb {
-  margin-left: 1em;
   @media screen and (min-width: 768px) {
+    margin-left: 1em;
     padding-left: 1em;
   }
 }

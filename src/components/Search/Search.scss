@@ -38,8 +38,8 @@
           }
 
           input[type="text"] {
-            @media screen and (max-width: 640px) {
-              padding-top: 13px;
+            @media screen and (max-width: 767px) {
+              padding: 0.3em;
             }
           }
         }
@@ -53,6 +53,7 @@
           position: absolute;
           right: 0;
           @media screen and (max-width: 767px) {
+            padding: 0.42em;
             margin: 0;
           }
         }
