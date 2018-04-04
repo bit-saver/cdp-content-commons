@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
-import { Menu, Icon, Responsive } from 'semantic-ui-react';
+import { Menu, Icon, Responsive, Modal } from 'semantic-ui-react';
 
 class Nav extends Component {
   constructor( props ) {
@@ -53,15 +53,18 @@ class Nav extends Component {
           ) ) }
         </Responsive>
         { this.state.mobileNavVisible &&
-          <ul className="mobileMenu">
-            { menuItems.map( item => (
-              <li key={ item.key }>
-                <Link name={ item.name } to={ item.to } onClick={ this.navClick } onKeyUp={ this.keyUp }>
-                  { item.label }
-                </Link>
-              </li>
-            ) ) }
-          </ul>
+          <Responsive maxWidth={ 767 }>
+            <ul className="mobileMenu">
+              <li><Icon name="close" onClick={ this.navClick } onKeyUp={ this.keyUp } tabIndex={ 0 } /></li>
+              { menuItems.map( item => (
+                <li key={ item.key }>
+                  <Link name={ item.name } to={ item.to } onClick={ this.navClick } onKeyUp={ this.keyUp }>
+                    { item.label }
+                  </Link>
+                </li>
+              ) ) }
+            </ul>
+          </Responsive>
         }
       </nav>
     );
