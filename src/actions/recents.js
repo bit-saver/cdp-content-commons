@@ -13,7 +13,7 @@ export const recentsRequest = currentType => async ( dispatch ) => {
   let response;
   try {
     response = await queryRequest( {
-      size: 4,
+      size: 3,
       body: bodybuilder()
         .query( 'match', 'type', currentType )
         .sort( 'published', 'desc' )
