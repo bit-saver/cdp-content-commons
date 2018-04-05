@@ -7,13 +7,22 @@ import './AboutPage.css';
 
 class AboutPage extends Component {
   componentWillMount() {
+    const cachedAbout = sessionStorage.getItem('AboutPage');
+    if ( cachedAbout ) {
+      this.setState( { markdown: cachedAbout } );
+      return;
+    }
+
     fetch( config.ABOUT_URL )
       .then( response => response.text() )
-      .then( ( text ) => {
-        this.setState( {
-          markdown: text
-        } );
-      } );
+      .then( text => this.onFetchResult( text ) );
+  }
+
+  onFetchResult = ( text ) => {
+    sessionStorage.setItem('AboutPage', text);
+    this.setState( {
+      markdown: text
+    } );
   }
 
   render() {
