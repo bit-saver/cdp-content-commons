@@ -4,7 +4,8 @@
   margin-bottom: 6em;
 }
 .ui.grid .column.recentsgridleft {
-   padding-right: 0; 
+   padding-right: 0;
+   padding-bottom: 0;
    min-height: 320px; 
 }
 .recents h1.header {
@@ -50,12 +51,17 @@
   right: 0.5em;
 }
 
-.ui.items.rightitems {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+.recentsgridright {
+  
+  .ui.items {
+    height: 100%;
+
+    .item {
+      height: 50%;
+    }
+  } 
 }
+
 .ui.items .item {
   border: 1px solid $light-grey;
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);

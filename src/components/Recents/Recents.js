@@ -81,7 +81,7 @@ class Recents extends Component {
               </Modal>
             }
           </Grid.Column>
-          <Grid.Column width={ 8 }>
+          <Grid.Column width={ 8 } className="recentsgridright">
             <Item.Group>{ itemsright }</Item.Group>
           </Grid.Column>
         </Grid>
