@@ -39,7 +39,10 @@ class Recents extends Component {
           closeIcon
           trigger={
             <Item className="recentsItem">
-              <Item.Image src={ item.thumbnail } alt={ item.title } />
+              <div
+                className="recentsItem_img"
+                style={ { backgroundImage: `url( ${item.thumbnail} )` } }
+              />
               <Item.Content>
                 <Item.Header>{ item.title }</Item.Header>
                 <div className="meta">
