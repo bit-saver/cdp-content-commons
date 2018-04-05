@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
-import { Menu, Icon, Responsive, Modal } from 'semantic-ui-react';
+import { Menu, Icon, Responsive } from 'semantic-ui-react';
 
 class Nav extends Component {
   constructor( props ) {
