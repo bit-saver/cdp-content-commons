@@ -72,7 +72,7 @@ const getAuthor = ( author ) => {
 
 // send in locale to fetch applicable lang data props?
 const populateVideoItem = ( source ) => {
-  const locale = 'en-US'; // this needs to come from search qry
+  const locale = 'en-us'; // this needs to come from search qry
   const units = source.unit;
   const languageUnit = units.find( unit => unit.language.locale === locale );
   let obj = {};
