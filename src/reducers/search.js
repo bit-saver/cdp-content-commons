@@ -25,7 +25,7 @@ const INITIAL_STATE = {
   query: '',
   currentQuery: '',
   response: {},
-  sort: 'relevance',
+  sort: 'published',
   startIndex: 0,
   startPage: 1,
   tag: '',

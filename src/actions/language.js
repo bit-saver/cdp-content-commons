@@ -1,10 +1,5 @@
 import { languageAggRequest } from '../utils/api';
-import {
-  LOAD_LANGUAGES_PENDING,
-  LOAD_LANGUAGES_FAILED,
-  LOAD_LANGUAGES_SUCCESS,
-  LANGUAGE_CHANGE
-} from './types';
+import { LOAD_LANGUAGES_PENDING, LOAD_LANGUAGES_FAILED, LOAD_LANGUAGES_SUCCESS, LANGUAGE_CHANGE } from './types';
 
 export const languageUpdate = language => ( {
   type: LANGUAGE_CHANGE,
@@ -21,11 +16,16 @@ export const loadLanguages = () => async ( dispatch ) => {
     return dispatch( { type: LOAD_LANGUAGES_FAILED } );
   }
 
-  const { buckets } = response.aggregations.locale;
-  const payload = buckets.map( lang => ( {
-    key: lang.key,
-    display: lang.display.buckets[0].key
-  } ) );
+  const localeBuckets = response.aggregations.locale.buckets;
+  const displayBuckets = response.aggregations.display.buckets;
+
+  const payload = localeBuckets
+    .filter( ( bucket, index ) => displayBuckets[index] && displayBuckets[index].key )
+    .map( ( bucket, index ) => ( {
+      key: bucket.key,
+      display: displayBuckets[index].key,
+      count: bucket.doc_count
+    } ) );
 
   return dispatch( {
     type: LOAD_LANGUAGES_SUCCESS,

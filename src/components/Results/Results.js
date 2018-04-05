@@ -45,7 +45,7 @@ class Results extends Component {
     return (
       <section className="results">
         <Breadcrumbs />
-        { this.props.search.currentPage !== -1 &&
+        { this.props.search.currentPage !== -1 && (
           <div>
             <SearchTerm />
             <FilterMenu />
@@ -66,15 +66,15 @@ class Results extends Component {
                   <ResultItem key={ item._id } item={ normalizeItem( item ) } />
                 </Grid.Column>
               ) ) }
-              { isNoResults &&
+              { isNoResults && (
                 <div className="results_noResults">
                   <p>Sorry, your search did not return any results =(</p>
                 </div>
-              }
+              ) }
             </Grid>
             <ResultsPagination />
           </div>
-        }
+        ) }
       </section>
     );
   }

@@ -17,7 +17,7 @@ export const numberWithCommas = ( number ) => {
 export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
 
 // Following rules normalize types as languge, tag, etc are not at document root level
-const getLanguageQry = language => `language.locale: ${language} OR unit.language.locale: ${language}`;
+const getLanguageQry = language => `language.locale: ${language.locale} OR unit.language.locale: ${language.locale}`;
 const getTagQry = tag => `tags.name.keyword: ${tag}~2 OR unit.tags.name.keyword: ${tag}`;
 const getCategoryQry = category => `categories.name.keyword: ${category} OR unit.categories.name.keyword: ${category}`;
 
@@ -37,7 +37,7 @@ export const queryBuilder = ( store ) => {
     options.push( getTagQry( store.search.tag ) );
   }
 
-  if ( store.search.category ) {
+  if ( store.category.currentCategories.length ) {
     options.push( getCategoryQry( store.search.tag ) );
   }
 
@@ -75,7 +75,12 @@ export const queryBuilder = ( store ) => {
   }, '' );
 
   // add original search query last
-  body.query( 'query_string', 'query', `${store.search.query} AND (${optionStr})` );
+  if ( store.search.query ) {
+    body.query( 'query_string', 'query', `${store.search.query} AND (${optionStr})` );
+  } else {
+    body.query( 'query_string', 'query', optionStr );
+  }
+
   // body.query( 'query_string', 'query', optionStr ); // return all for testing
 
   return body.build();

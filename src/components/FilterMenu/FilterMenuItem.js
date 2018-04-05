@@ -61,7 +61,12 @@ class FilterMenuItem extends Component {
     const { filterSelections } = this.props;
 
     return (
-      <div className="filterMenu" ref={ ( filterMenu ) => { this.filterMenu = filterMenu; } }>
+      <div
+        className="filterMenu"
+        ref={ ( filterMenu ) => {
+          this.filterMenu = filterMenu;
+        } }
+      >
         <span
           className={ filterItemOpen ? 'filterMenu_label active' : 'filterMenu_label' }
           onClick={ this.displayFilter }
@@ -73,33 +78,34 @@ class FilterMenuItem extends Component {
         </span>
         <Form className={ filterItemOpen ? 'filterMenu_options show' : 'filterMenu_options' }>
           <Form.Group>
-            { !this.props.useCheckbox && this.props.menuOptions.map( opt => (
-              <Form.Radio
-                key={ opt.optionValue }
-                label={ opt.optionLabel }
-                value={ opt.optionValue }
-                checked={
-                  value === opt.optionValue
-                  && filterSelections.some( sel => opt.optionValue === sel.selectionValue )
-                }
-                onChange={ this.handleOnChange }
-                onClick={ this.props.handleFilterSelect }
-                data-submenu={ opt.hasSubMenu }
-                data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
-              />
-            ) ) }
-            { this.props.useCheckbox && this.props.menuOptions.map( opt => (
-              <Form.Checkbox
-                key={ opt.optionValue }
-                label={ opt.optionLabel }
-                value={ opt.optionValue }
-                checked={ filterSelections.some( sel => opt.optionValue === sel.selectionValue ) }
-                onChange={ this.handleOnChange }
-                onClick={ this.props.handleFilterSelect }
-                data-submenu={ opt.hasSubMenu }
-                data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
-              />
-            ) ) }
+            { !this.props.useCheckbox &&
+              this.props.menuOptions.map( opt => (
+                <Form.Radio
+                  key={ opt.optionValue }
+                  label={ opt.count ? `${opt.optionLabel} (${opt.count})` : opt.optionLabel }
+                  value={ opt.optionValue }
+                  checked={ value === opt.optionValue && filterSelections.some( sel => opt.optionValue === sel.value ) }
+                  onChange={ this.handleOnChange }
+                  onClick={ this.props.handleFilterSelect }
+                  action={ this.props.searchAction }
+                  data-submenu={ opt.hasSubMenu }
+                  data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
+                />
+              ) ) }
+            { this.props.useCheckbox &&
+              this.props.menuOptions.map( opt => (
+                <Form.Checkbox
+                  key={ opt.optionValue }
+                  label={ opt.count ? `${opt.optionLabel} (${opt.count})` : opt.optionLabel }
+                  value={ opt.optionValue }
+                  checked={ filterSelections.some( sel => opt.optionValue === sel.value ) }
+                  onChange={ this.handleOnChange }
+                  onClick={ this.props.handleFilterSelect }
+                  action={ this.props.searchAction }
+                  data-submenu={ opt.hasSubMenu }
+                  data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
+                />
+              ) ) }
           </Form.Group>
         </Form>
       </div>
@@ -113,7 +119,8 @@ FilterMenuItem.propTypes = {
   useCheckbox: bool,
   menuOptions: array,
   filterSelections: array,
-  handleFilterSelect: func
+  handleFilterSelect: func,
+  searchAction: string
 };
 
 export default FilterMenuItem;

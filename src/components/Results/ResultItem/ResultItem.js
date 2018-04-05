@@ -37,6 +37,7 @@ class ResultItem extends Component {
 
   render() {
     const { item } = this.props;
+
     return (
       <Card>
         <Modal
