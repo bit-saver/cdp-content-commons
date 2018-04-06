@@ -7,7 +7,7 @@ import './HelpPage.css';
 
 class HelpPage extends Component {
   componentWillMount() {
-    const cachedHelp = sessionStorage.getItem('HelpPage');
+    const cachedHelp = sessionStorage.getItem( 'HelpPage' );
     if ( cachedHelp ) {
       this.setState( { markdown: cachedHelp } );
       return;
@@ -19,7 +19,7 @@ class HelpPage extends Component {
   }
 
   onFetchResult = ( text ) => {
-    sessionStorage.setItem('HelpPage', text);
+    sessionStorage.setItem( 'HelpPage', text );
     this.setState( {
       markdown: text
     } );
