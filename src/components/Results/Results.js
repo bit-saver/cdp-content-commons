@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { shape, array, number } from 'prop-types';
 import { connect } from 'react-redux';
 import SearchTerm from '../SearchTerm';
@@ -11,48 +11,74 @@ import { Grid } from 'semantic-ui-react';
 import { normalizeItem } from '../../utils/parser';
 import './Results.css';
 
-const Results = ( props ) => {
-  let items;
+class Results extends Component {
+  constructor( props ) {
+    super( props );
+    this.state = {
+      view: 'gallery'
+    };
 
-  if ( props.search.response.hits ) {
-    items = props.search.response.hits.hits;
-  } else {
-    items = [];
+    this.toggleView = this.toggleView.bind( this );
   }
 
-  let isNoResults;
-  if ( !items.length && Object.keys( props.search.response ).length ) {
-    isNoResults = true;
+  toggleView( e ) {
+    const { view } = e.target.dataset;
+    this.setState( { view } );
   }
-  return (
-    <section className="results">
-      <Breadcrumbs />
-      { props.search.currentPage !== -1 &&
-        <div>
-          <SearchTerm />
-          <FilterMenu />
-          <section>
-            <ResultsHeader />
-          </section>
-          <Grid className="results_wrapper">
-            { items.map( item => (
-              <Grid.Column mobile={ 16 } tablet={ 8 } computer={ 4 } className="card_wrapper" key={ item._id }>
-                <ResultItem key={ item._id } item={ normalizeItem( item ) } />
-              </Grid.Column>
-            ) ) }
-            { isNoResults &&
-              <div className="Results__no__results">
-                Sorry, your search did not return any results =(
-              </div>
-            }
-          </Grid>
-          <ResultsPagination />
-        </div>
-      }
-    </section>
-  );
-};
 
+  render() {
+    const { view } = this.state;
+
+    let items;
+
+    if ( this.props.search.response.hits ) {
+      items = this.props.search.response.hits.hits;
+    } else {
+      items = [];
+    }
+
+    let isNoResults;
+    if ( !items.length && Object.keys( this.props.search.response ).length ) {
+      isNoResults = true;
+    }
+
+    return (
+      <section className="results">
+        <Breadcrumbs />
+        { this.props.search.currentPage !== -1 &&
+          <div>
+            <SearchTerm />
+            <FilterMenu />
+            <section>
+              <ResultsHeader toggleView={ this.toggleView } />
+            </section>
+            <Grid className="results_wrapper">
+              { items.map( item => (
+                <Grid.Column
+                  mobile={ 16 }
+                  tablet={ view === 'gallery' ? 8 : 16 }
+                  computer={ view === 'gallery' ? 4 : 16 }
+                  className={
+                    view === 'gallery' ? 'card_wrapper card_wrapper--gallery' : 'card_wrapper card_wrapper--list'
+                  }
+                  key={ item._id }
+                >
+                  <ResultItem key={ item._id } item={ normalizeItem( item ) } />
+                </Grid.Column>
+              ) ) }
+              { isNoResults &&
+                <div className="results_noResults">
+                  <p>Sorry, your search did not return any results =(</p>
+                </div>
+              }
+            </Grid>
+            <ResultsPagination />
+          </div>
+        }
+      </section>
+    );
+  }
+}
 
 const mapStateToProps = state => ( {
   search: state.search

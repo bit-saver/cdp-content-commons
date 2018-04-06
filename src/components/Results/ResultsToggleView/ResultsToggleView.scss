@@ -1,0 +1,13 @@
+.results_toggleView {
+  @media screen and (max-width: 767px) {
+    z-index: 3;
+    margin-top: 1em;
+  }
+
+
+  .icon {
+    font-size: 2em;
+    cursor: pointer;
+  }
+
+}

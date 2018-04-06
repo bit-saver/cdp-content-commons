@@ -1,67 +1,73 @@
 @import "../../../assets/styles/colors.scss";
 
-.ResultsHeader__component {
-  display: flex;
-  & > p {
-    flex: 0.8;
-    margin-top: 38px;
-  }
-  & > form {
-    flex: 0.2;
-  }
-  @media (max-width: 767px) {
-    flex-direction: column;
-  }
-}
-.ResultsHeader__total {
-  @media (max-width: 767px) {
-    order: 2;
-  }
-}
-.ResultsHeader__sort {
-  @media (max-width: 767px) {
-    width: 100% !important;
-    order: 1;
-  }
-}
+.results {
+  
 
-/******************
-    TEMP
-*******************/
-.ResultsHeader__component {
-  .ui.form .fields.results_sort {
-    margin: 0;
-
-    .field {
-      flex: 1;
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 767px) {
+      flex-direction: column;
     }
 
-    label {
-      margin: 0;
-      color: $medium-grey;
-      font-weight: normal;
+    & > p {
+      flex: 0.8;
     }
 
-    .ui.selection.dropdown {
-      padding-left: 0;
-      padding-right: 0;
-      margin: 0;
-      border: none;
-      border-bottom: 1px solid #000;
-      border-radius: 0;
+    & > form {
+      flex: 0.2;
+    }    
+  }
 
-      .dropdown.icon {
+
+  &_total {
+    @media (max-width: 767px) {
+      order: 2;
+    }  
+  }
+
+
+  &_sort {
+    @media (max-width: 767px) {
+      width: 100% !important;
+      order: 1;
+    }
+
+    &.ui.form {
+      margin: 0;
+
+      .field {
+        flex: 1;
+      }
+
+      label {
+        margin: 0;
+        color: $medium-grey;
+        font-weight: normal;
+      }
+
+      .ui.selection.dropdown {
+        padding-left: 0;
         padding-right: 0;
-      }
+        margin: 0;
+        border: none;
+        border-bottom: 1px solid #000;
+        border-radius: 0;
 
-      &.active {
-        box-shadow: none;
-
-        .menu {
-          border-radius: 0;
-          border-color: transparent;
+        .dropdown.icon {
+          padding-right: 0;
         }
-      }
+
+        &.active {
+          box-shadow: none;
+
+          .menu {
+            border-radius: 0;
+            border-color: transparent;
+          }
+        }
+      }  
     }
-  }
+  }  
 }
+

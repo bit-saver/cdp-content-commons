@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { numberWithCommas } from '../../../utils/helpers';
 import { sortRequest } from '../../../actions/search';
 // import { Form, Select } from 'semantic-ui-react';
+import ResultsToggleView from '../ResultsToggleView';
 import './ResultsHeader.css';
 
 /** **
@@ -27,11 +28,11 @@ class ResultsHeader extends Component {
 
     if ( this.props.search.response.took && this.props.search.response.hits.hits.length ) {
       return (
-        <div className="ResultsHeader__component">
+        <div className="results_header">
           { currentPage === 1 ? (
-            <p className="ResultsHeader__total">About { numberWithCommas( total ) } results</p>
+            <p className="results_total">About { numberWithCommas( total ) } results</p>
           ) : (
-            <p className="ResultsHeader__total">
+            <p className="results_total">
               Page { currentPage } of about { total } results
             </p>
           ) }
@@ -47,6 +48,8 @@ class ResultsHeader extends Component {
               />
             </Form.Group>
           </Form> */ }
+
+          <ResultsToggleView toggle={ this.props.toggleView } />
         </div>
       );
     }
@@ -61,7 +64,8 @@ const mapStateToProps = state => ( {
 
 ResultsHeader.propTypes = {
   search: object,
-  sortRequest: func
+  sortRequest: func,
+  toggleView: func
 };
 
 export default connect( mapStateToProps, { sortRequest } )( ResultsHeader );
