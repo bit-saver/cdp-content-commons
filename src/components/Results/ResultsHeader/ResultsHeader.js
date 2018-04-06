@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { object, func } from 'prop-types';
+import { object, func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { numberWithCommas } from '../../../utils/helpers';
 import { sortRequest } from '../../../actions/search';
@@ -25,6 +25,7 @@ class ResultsHeader extends Component {
 
   render() {
     const { currentPage, total } = this.props.search;
+    const { toggleView, currentView } = this.props;
 
     if ( this.props.search.response.took && this.props.search.response.hits.hits.length ) {
       return (
@@ -49,7 +50,7 @@ class ResultsHeader extends Component {
             </Form.Group>
           </Form> */ }
 
-          <ResultsToggleView toggle={ this.props.toggleView } />
+          <ResultsToggleView toggle={ toggleView } currentView={ currentView } />
         </div>
       );
     }
@@ -65,7 +66,8 @@ const mapStateToProps = state => ( {
 ResultsHeader.propTypes = {
   search: object,
   sortRequest: func,
-  toggleView: func
+  toggleView: func,
+  currentView: string
 };
 
 export default connect( mapStateToProps, { sortRequest } )( ResultsHeader );

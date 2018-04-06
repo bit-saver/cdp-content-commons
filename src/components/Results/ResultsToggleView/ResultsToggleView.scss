@@ -1,3 +1,5 @@
+@import "../../../assets/styles/colors.scss";
+
 .results_toggleView {
   @media screen and (max-width: 767px) {
     z-index: 3;
@@ -8,6 +10,11 @@
   .icon {
     font-size: 2em;
     cursor: pointer;
+
+    &.active {
+      color: $medium-grey;
+      cursor: default;
+    }
   }
 
 }
