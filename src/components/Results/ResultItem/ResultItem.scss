@@ -23,21 +23,33 @@
   .card {
 
     &.ui {
-      flex-direction: row;
+      display: block;
+      border-left: none;
+      border-right: none;
+      box-shadow: none;      
     }
 
     &_imgWrapper {
-      flex: 1;
+      display: inline-block;
+      width: 25%;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      vertical-align: top;
 
-      @media screen and (max-width: 425px) {
-        flex: auto;
+      .card_postIcon {
+        @media screen and (max-width: 500px) {
+          right: 50% !important;
+          bottom: 50% !important;
+          transform: translate(50%, 50%);
+          width: 25px;
+        }
       }
     }
 
-    .extra.content .icon {
-      @media screen and (min-width: 426px) {
-        font-size: 2em;
-      }
+    .content {
+      display: inline-block;
+      width: 75%;
+      border-top: none;
     }
   }
 }
