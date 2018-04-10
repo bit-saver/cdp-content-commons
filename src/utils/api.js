@@ -5,29 +5,27 @@ const SEARCH = `${process.env.REACT_APP_PUBLIC_API}/v1/search`;
 
 export const queryRequest = body => axios.post( SEARCH, body ).then( response => response.data );
 
-export const languageAggRequest = () =>
-  axios
+export const languageAggRequest = async () => {
+  const langsWithContent = await axios
     .post( SEARCH, {
       body: bodybuilder()
         .size( 0 )
-        .agg( 'terms', 'unit.language.locale.keyword', {}, 'locale' )
-        .agg( 'terms', 'unit.language.display_name.keyword', {}, 'display' )
+        .agg( 'terms', 'unit.language.locale.keyword', {}, 'locale' ) // will need to add language.locale for other types
         .build()
     } )
     .then( response => response.data );
 
-// export const languageAggRequest = () =>
-//   axios
-//     .post( SEARCH, {
-//       body: bodybuilder()
-//         .size( 0 )
-//         // .agg( 'terms', 'language.locale.keyword', {}, 'locale', a =>
-//         //   a.aggregation( 'terms', 'language.display_name.keyword', {}, 'display' ) )
-//         .agg( 'terms', 'unit.language.locale.keyword', {}, 'locale_unit', a =>
-//           a.aggregation( 'terms', 'unit.language.display_name.keyword', {}, 'display_unit' ) )
-//         .build()
-//     } )
-//     .then( response => response.data );
+  const allLangs = await axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 100 )
+        .query( 'query_string', 'query', '_index: languages' )
+        .build()
+    } )
+    .then( response => response.data );
+
+  return { langsWithContent, allLangs };
+};
 
 export const categoryAggRequest = () =>
   axios

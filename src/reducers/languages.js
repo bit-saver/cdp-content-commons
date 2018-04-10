@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   error: false,
   list: [],
   loading: false,
-  currentLanguage: { locale: 'en-US', display_name: 'English' }
+  currentLanguage: { locale: 'en-us', display_name: 'English' }
 };
 
 export default ( state = INITIAL_STATE, action ) => {

@@ -1,44 +1,43 @@
 import React, { Component } from 'react';
-import { func, array, object } from 'prop-types';
-import { Label, Icon } from 'semantic-ui-react';
+import { func, object } from 'prop-types';
 import FilterSelectionItem from './FilterSelectionItem';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import './FilterSelections.css';
 
 class FilterSelections extends Component {
-  state = { selections: this.props.selections };
+  state = {
+    selections: []
+  };
 
   componentWillReceiveProps( nextProps ) {
-    // if language has changed
-    if ( this.props.language.currentLanguage.locale !== nextProps.language.currentLanguage.locale ) {
-      const currentSelections = this.updateLanguage( nextProps );
-
-      this.setState( {
-        selections: currentSelections
-      } );
-    }
-  }
-
-  handleOnRemove = ( e, obj ) => {};
-
-  updateLanguage( nextProps ) {
-    const { selections } = this.state;
     const nextLanguage = nextProps.language.currentLanguage;
-    let items;
-    const item = {
+    const language = {
       label: nextLanguage.display_name,
       value: nextLanguage.locale,
-      filter: 'language'
+      filter: 'language',
+      single: true
     };
 
-    // if previous language exists, remove it
-    if ( this.props.language ) {
-      items = selections.filter( sel => sel.value !== this.props.language.currentLanguage.locale );
-    }
+    const nextTypes = nextProps.type.currentPostTypes.map( item => ( {
+      label: item.display_name,
+      value: item.type,
+      filter: 'format',
+      single: false
+    } ) );
 
-    // return new language
-    return items ? [...items, item] : [...selections, item];
+    const nextCategories = nextProps.category.currentCategories.map( item => ( {
+      label: item.display_name,
+      value: item.id,
+      filter: 'category',
+      single: false
+    } ) );
+
+    this.setState( {
+      selections: [
+        language, ...nextTypes, ...nextCategories
+      ]
+    } );
   }
 
   render() {
@@ -53,11 +52,18 @@ class FilterSelections extends Component {
               value={ selection.value }
               label={ selection.label }
               filter={ selection.filter }
-              onClick={ this.handleOnRemove }
+              single={ selection.single }
+              onClick={ this.props.onFilterChange }
             />
           ) ) }
         { selections.length > 0 && (
-          <div className="ui label clear_filter" role="button" tabIndex={ 0 }>
+          <div
+            className="ui label clear_filter"
+            onClick={ this.props.onFilterClearAll }
+            onKeyDown={ this.props.onFilterClearAll }
+            role="button"
+            tabIndex={ 0 }
+          >
             CLEAR ALL
           </div>
         ) }
@@ -67,15 +73,18 @@ class FilterSelections extends Component {
 }
 
 FilterSelections.propTypes = {
-  selections: array,
-  // removeAll: func,
-  language: object
+  language: object,
+  category: object,
+  type: object,
+  onFilterChange: func,
+  onFilterClearAll: func
 };
 
 const mapStateToProps = state => ( {
   search: state.search,
   language: state.language,
-  category: state.category
+  category: state.category,
+  type: state.type
 } );
 
 export default connect( mapStateToProps, actions )( FilterSelections );

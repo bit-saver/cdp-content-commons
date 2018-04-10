@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, string, array, bool } from 'prop-types';
+import { func, string, array, object } from 'prop-types';
 import { Form, Icon } from 'semantic-ui-react';
 import './FilterMenuItem.css';
 
@@ -7,18 +7,18 @@ class FilterMenuItem extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      value: '',
+      value: this.props.default || '',
       filterItemOpen: false
     };
-
-    this.handleOnChange = this.handleOnChange.bind( this );
-    this.displayFilter = this.displayFilter.bind( this );
-    this.closeFilter = this.closeFilter.bind( this );
   }
 
-  handleOnChange( e, { value } ) {
-    this.setState( { value } );
+  displayFilter = () => {
+    this.setState( { filterItemOpen: true }, () => {
+      document.addEventListener( 'click', this.closeFilter );
+    } );
+  };
 
+  toggleSubMenu = ( e ) => {
     const optionHasSubMenu = e.target.parentNode.dataset.submenu;
     if ( optionHasSubMenu === 'true' ) {
       this.setState( { filterItemOpen: false } );
@@ -27,15 +27,9 @@ class FilterMenuItem extends Component {
     } else {
       this.filterMenu.classList.remove( 'subMenuActive' );
     }
-  }
+  };
 
-  displayFilter() {
-    this.setState( { filterItemOpen: true }, () => {
-      document.addEventListener( 'click', this.closeFilter );
-    } );
-  }
-
-  closeFilter( e ) {
+  closeFilter = ( e ) => {
     const activeSubMenu = document.querySelector( '.filterMenu_sub.show' );
 
     if ( !this.filterMenu.contains( e.target ) || e.target.classList.contains( 'filterMenu_label' ) ) {
@@ -54,11 +48,42 @@ class FilterMenuItem extends Component {
         }
       } );
     }
-  }
+  };
+
+  handleOnChange = ( e, selected ) => {
+    this.setState( { value: selected.value } );
+    this.props.onFilterChange( selected );
+
+    this.toggleSubMenu( e );
+  };
+
+  renderOptions = () => {
+    if ( !this.props.options.length ) {
+      return;
+    }
+
+    const { options, children, selected } = this.props;
+    const child = React.Children.only( children );
+    const { name } = child.type._meta;
+
+    return options.map( option =>
+      React.cloneElement( child, {
+        key: option.value,
+        label: option.count ? `${option.label} (${option.count})` : option.label,
+        labelclean: option.label,
+        value: option.value,
+        count: option.count,
+        filter: this.props.filter,
+        onChange: this.handleOnChange,
+        checked:
+          name === 'FormRadio'
+            ? this.state.value === option.value
+            : selected.some( sel => sel.display_name === option.label )
+      } ) );
+  };
 
   render() {
-    const { value, filterItemOpen } = this.state;
-    const { filterSelections } = this.props;
+    const { filterItemOpen } = this.state;
 
     return (
       <div
@@ -74,39 +99,10 @@ class FilterMenuItem extends Component {
           role="menuitem"
           tabIndex={ 0 }
         >
-          { this.props.menuName } <Icon name={ filterItemOpen ? 'chevron up' : 'chevron down' } />
+          { this.props.filter } <Icon name={ filterItemOpen ? 'chevron up' : 'chevron down' } />
         </span>
         <Form className={ filterItemOpen ? 'filterMenu_options show' : 'filterMenu_options' }>
-          <Form.Group>
-            { !this.props.useCheckbox &&
-              this.props.menuOptions.map( opt => (
-                <Form.Radio
-                  key={ opt.optionValue }
-                  label={ opt.count ? `${opt.optionLabel} (${opt.count})` : opt.optionLabel }
-                  value={ opt.optionValue }
-                  checked={ value === opt.optionValue && filterSelections.some( sel => opt.optionValue === sel.value ) }
-                  onChange={ this.handleOnChange }
-                  onClick={ this.props.handleFilterSelect }
-                  action={ this.props.searchAction }
-                  data-submenu={ opt.hasSubMenu }
-                  data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
-                />
-              ) ) }
-            { this.props.useCheckbox &&
-              this.props.menuOptions.map( opt => (
-                <Form.Checkbox
-                  key={ opt.optionValue }
-                  label={ opt.count ? `${opt.optionLabel} (${opt.count})` : opt.optionLabel }
-                  value={ opt.optionValue }
-                  checked={ filterSelections.some( sel => opt.optionValue === sel.value ) }
-                  onChange={ this.handleOnChange }
-                  onClick={ this.props.handleFilterSelect }
-                  action={ this.props.searchAction }
-                  data-submenu={ opt.hasSubMenu }
-                  data-parentmenu={ opt.parentMenu ? opt.parentMenu : '' }
-                />
-              ) ) }
-          </Form.Group>
+          <Form.Group>{ this.renderOptions() }</Form.Group>
         </Form>
       </div>
     );
@@ -114,13 +110,13 @@ class FilterMenuItem extends Component {
 }
 
 FilterMenuItem.propTypes = {
-  closeSubMenu: func,
-  menuName: string,
-  useCheckbox: bool,
-  menuOptions: array,
-  filterSelections: array,
-  handleFilterSelect: func,
-  searchAction: string
+  options: array,
+  children: object,
+  filter: string,
+  default: string,
+  selected: array,
+  onFilterChange: func,
+  closeSubMenu: func
 };
 
 export default FilterMenuItem;

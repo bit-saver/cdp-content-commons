@@ -76,7 +76,7 @@ const getAuthor = ( author ) => {
 const populateVideoItem = ( source ) => {
   const { locale } = store.getState().language.currentLanguage;
   const units = source.unit;
-  const languageUnit = units.find( unit => unit.language.locale === locale );
+  const languageUnit = units.find( unit => unit.language.locale.toLowerCase() === locale.toLowerCase() );
   let obj = {};
 
   if ( languageUnit ) {

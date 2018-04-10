@@ -16,16 +16,14 @@ export const loadLanguages = () => async ( dispatch ) => {
     return dispatch( { type: LOAD_LANGUAGES_FAILED } );
   }
 
-  const localeBuckets = response.aggregations.locale.buckets;
-  const displayBuckets = response.aggregations.display.buckets;
+  const uniqLangWithContent = response.langsWithContent.aggregations.locale.buckets;
+  const allLanguages = response.allLangs.hits.hits.map( lang => lang._source );
 
-  const payload = localeBuckets
-    .filter( ( bucket, index ) => displayBuckets[index] && displayBuckets[index].key )
-    .map( ( bucket, index ) => ( {
-      key: bucket.key,
-      display: displayBuckets[index].key,
-      count: bucket.doc_count
-    } ) );
+  const payload = uniqLangWithContent.map( bucket => ( {
+    key: bucket.key,
+    display: allLanguages.filter( lang => lang.locale === bucket.key )[0].display_name,
+    count: bucket.doc_count
+  } ) );
 
   return dispatch( {
     type: LOAD_LANGUAGES_SUCCESS,
