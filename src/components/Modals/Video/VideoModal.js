@@ -176,7 +176,7 @@ class VideoModal extends Component {
         { this.renderVideoPlayer() }
 
         <ModalContentMeta type={ item.type } dateUpdated={ item.modified } transcript={ this.getVideoTranscript() } />
-        <ModalDescription description={ item.description } />
+        <ModalDescription description={ item.desc } />
         <ModalPostMeta
           author={ item.author }
           source={ item.sourcelink }
