@@ -42,13 +42,14 @@ class Recents extends Component {
               <div
                 className="recentsItem_img"
                 style={ { backgroundImage: `url( ${item.thumbnail} )` } }
-              />
+              >
+                <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
+              </div>
               <Item.Content>
                 <Item.Header>{ item.title }</Item.Header>
                 <div className="meta">
                   <span className="date">{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</span>
                   <span className="categories">{ categories }</span>
-                  <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
                 </div>
               </Item.Content>
             </Item>
