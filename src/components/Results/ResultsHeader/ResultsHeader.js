@@ -26,31 +26,33 @@ class ResultsHeader extends Component {
   render() {
     const { currentPage, total } = this.props.search;
     const { toggleView, currentView } = this.props;
+    console.log( this.props.search );
 
     if ( this.props.search.response.took && this.props.search.response.hits.hits.length ) {
       return (
-        <div className="results_header">
-          { currentPage === 1 ? (
-            <p className="results_total">About { numberWithCommas( total ) } results</p>
-          ) : (
-            <p className="results_total">
-              Page { currentPage } of about { total } results
-            </p>
-          ) }
-
-          { /* <Form>
-            <Form.Group className="results_sort">
-              <Form.Field
-                control={ Select }
-                label="Sort By"
-                value={ sort }
-                options={ options }
-                onChange={ this.handleOnChange }
-              />
-            </Form.Group>
-          </Form> */ }
-
+        <div>
           <ResultsToggleView toggle={ toggleView } currentView={ currentView } />
+          <div className="results_header">
+            { /* <Form>
+              <Form.Group className="results_sort">
+                <Form.Field
+                  control={ Select }
+                  label="Sort By"
+                  value={ sort }
+                  options={ options }
+                  onChange={ this.handleOnChange }
+                />
+              </Form.Group>
+            </Form> */ }
+
+            { currentPage === 1 ? (
+              <p className="results_total">About { numberWithCommas( total ) } results</p>
+            ) : (
+              <p className="results_total">
+                Page { currentPage } of about { total } results
+              </p>
+            ) }
+          </div>
         </div>
       );
     }
