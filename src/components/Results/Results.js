@@ -50,7 +50,7 @@ class Results extends Component {
             <SearchTerm />
             <FilterMenu />
             <section>
-              <ResultsHeader toggleView={ this.toggleView } />
+              <ResultsHeader toggleView={ this.toggleView } currentView={ this.state.view } />
             </section>
             <Grid className="results_wrapper">
               { items.map( item => (
