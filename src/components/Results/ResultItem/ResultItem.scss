@@ -50,6 +50,12 @@
       display: inline-block;
       width: 75%;
       border-top: none;
+
+      .card_excerpt {
+        @media screen and (max-width: 425px) {
+          display: none;
+        }
+      }
     }
   }
 }
