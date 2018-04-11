@@ -226,3 +226,32 @@ export const sortRequest = sortType => async ( dispatch, getState ) => {
     }
   } );
 };
+
+export const updateSizeRequest = newSize => async ( dispatch, getState ) => {
+  dispatch( showLoading() );
+  dispatch( { type: SEARCH_REQUEST_PENDING } );
+
+  let response;
+  const currentState = getState();
+  try {
+    response = await queryRequest( {
+      size: newSize,
+      body: queryBuilder( currentState )
+    } );
+  } catch ( err ) {
+    dispatch( hideLoading() );
+    return dispatch( { type: SEARCH_REQUEST_FAILED } );
+  }
+
+  dispatch( hideLoading() );
+  return dispatch( {
+    type: SEARCH_REQUEST_SUCCESS,
+    payload: {
+      response,
+      ...calculatePages( response.hits.total, 1 ),
+      sort: 'relevance',
+      currentQuery: currentState.search.query
+    }
+  } );
+};
+
