@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { object, func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { numberWithCommas } from '../../../utils/helpers';
-import { sortRequest } from '../../../actions/search';
+import { sortRequest, updateSizeRequest } from '../../../actions/search';
 import { Form, Select, Dropdown } from 'semantic-ui-react';
 import ResultsToggleView from '../ResultsToggleView';
 import './ResultsHeader.css';
@@ -21,17 +21,16 @@ class ResultsHeader extends Component {
   }
 
   handleOnChange( event, { value } ) {
-    this.props.sortRequest( value );
+    const { pageSize } = this.props.search;
+    this.props.sortRequest( value, pageSize );
   }
 
   toggleNumberOfResults( e, { value } ) {
-    console.log( this );
-    console.log( 'value: ', value );
+    this.props.updateSizeRequest( value );
   }
 
   render() {
     const {
-      currentPage,
       total,
       startIndex,
       endIndex,
@@ -42,10 +41,10 @@ class ResultsHeader extends Component {
     const resultItemsEnd = endIndex + 1;
 
     const numOfResultsDisplay = [
-      { text: '12', value: 12 },
-      { text: '24', value: 24 },
-      { text: '36', value: 36 },
-      { text: '48', value: 48 }
+      { text: '1', value: 1 },
+      { text: '2', value: 2 },
+      { text: '4', value: 4 },
+      { text: '8', value: 8 }
     ];
 
     if ( this.props.search.response.took && this.props.search.response.hits.hits.length ) {
@@ -63,23 +62,16 @@ class ResultsHeader extends Component {
                 />
               </Form.Group>
             </Form>
+            <div className="results_total">
+              { resultItemsStart }-{ resultItemsEnd } of { numberWithCommas( total ) } |
+              Show: <Dropdown
+                defaultValue={ numOfResultsDisplay[0].value }
+                options={ numOfResultsDisplay }
+                className="results_total_numOfResults"
+                onChange={ this.toggleNumberOfResults }
+              />
+            </div>
 
-            { currentPage === 1 ? (
-              <div className="results_total">
-                { resultItemsStart }-{ resultItemsEnd } of { numberWithCommas( total ) } |
-                Show:
-                <Dropdown
-                  defaultValue={ numOfResultsDisplay[0].value }
-                  options={ numOfResultsDisplay }
-                  className="results_total_numOfResults"
-                  onChange={ this.toggleNumberOfResults }
-                />
-              </div>
-            ) : (
-              <p className="results_total">
-                Page { currentPage } of about { total } results
-              </p>
-            ) }
           </div>
         </div>
       );
@@ -96,8 +88,9 @@ const mapStateToProps = state => ( {
 ResultsHeader.propTypes = {
   search: object,
   sortRequest: func,
+  updateSizeRequest: func,
   toggleView: func,
   currentView: string
 };
 
-export default connect( mapStateToProps, { sortRequest } )( ResultsHeader );
+export default connect( mapStateToProps, { sortRequest, updateSizeRequest } )( ResultsHeader );
