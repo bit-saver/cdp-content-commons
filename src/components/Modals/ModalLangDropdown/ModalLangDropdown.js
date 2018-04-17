@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { array } from 'prop-types';
+import { object, string, func } from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
+import { getAvailableLanguages } from '../../../utils/helpers';
 import './ModalLangDropdown.css';
 
 class ModalLangDropdown extends Component {
@@ -12,29 +13,42 @@ class ModalLangDropdown extends Component {
     };
 
     this.toggleArrow = this.toggleArrow.bind( this );
+    this.handleChange = this.handleChange.bind( this );
   }
 
   toggleArrow() {
     this.setState( { isOpen: !this.state.isOpen } );
   }
 
+  handleChange( e, { value } ) {
+    this.toggleArrow();
+    this.props.handleLanguageChange( value );
+  }
+
   render() {
-    const { languages } = this.props;
-    return (
-      <Dropdown
-        className="modal_languages"
-        defaultValue="English"
-        icon={ this.state.isOpen ? 'chevron up' : 'chevron down' }
-        options={ languages }
-        onClick={ this.toggleArrow }
-        onChange={ this.toggleArrow }
-      />
-    );
+    const { item } = this.props;
+    const { selected } = this.props;
+    const languages = getAvailableLanguages( item );
+    if ( languages.length > 1 ) {
+      return (
+        <Dropdown
+          className="modal_languages"
+          defaultValue={ selected }
+          icon={ this.state.isOpen ? 'chevron up' : 'chevron down' }
+          options={ languages }
+          onClick={ this.toggleArrow }
+          onChange={ this.handleChange }
+        />
+      );
+    }
+    return <div>{ selected }</div>;
   }
 }
 
 ModalLangDropdown.propTypes = {
-  languages: array
+  item: object,
+  selected: string,
+  handleLanguageChange: func
 };
 
 export default ModalLangDropdown;
