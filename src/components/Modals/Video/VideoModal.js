@@ -27,7 +27,7 @@ class VideoModal extends Component {
     this.state = {
       unit: this.props.item.selectedLanguageUnit,
       selectedLanguage: this.getLanguage(),
-      captions: false
+      captions: this.getCaptions()
     };
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
     this.handleCaptionChange = this.handleCaptionChange.bind( this );
@@ -36,10 +36,8 @@ class VideoModal extends Component {
   getVideoSource() {
     const { unit } = this.state;
     if ( unit && unit.source && unit.source[0] ) {
-      const sourceIndex = unit.source.findIndex( k => k.burnedInCaptions === this.state.captions );
-      if ( sourceIndex !== -1 ) {
-        return unit.source[sourceIndex].stream.url;
-      }
+      const source = unit.source.find( caption => caption.burnedInCaptions === this.state.captions );
+      if ( source ) return source.stream.url;
       return unit.source[0].stream.url;
     }
     return '';
@@ -62,13 +60,20 @@ class VideoModal extends Component {
     return selectedLanguageUnit.language.display_name;
   }
 
+  getCaptions() {
+    const { selectedLanguageUnit } = this.props.item;
+    if ( !selectedLanguageUnit ) return false;
+    return selectedLanguageUnit.source[0].burnedInCaptions;
+  }
+
   handleLanguageChange( value ) {
     if ( value ) {
-      const langIndex = this.props.item.units.findIndex( lang => lang.language.display_name === value );
-      if ( langIndex !== -1 ) {
+      const unit = this.props.item.units.find( lang => lang.language.display_name === value );
+      if ( unit ) {
         this.setState( {
-          unit: this.props.item.units[langIndex],
-          selectedLanguage: value
+          unit,
+          selectedLanguage: value,
+          captions: unit.source[0].burnedInCaptions
         } );
       }
     }
@@ -109,6 +114,7 @@ class VideoModal extends Component {
               { unit.source.length > 1 &&
                 <Checkbox
                   className="modal_captions"
+                  checked={ this.state.captions }
                   toggle
                   label="Video with captions"
                   onChange={ this.handleCaptionChange }
