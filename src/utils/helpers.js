@@ -15,7 +15,7 @@ export const numberWithCommas = ( number ) => {
 };
 
 export const getAvailableLanguages = ( item ) => {
-  if ( !item.type ) return [];
+  if ( !item || !item.type ) return [];
   switch ( item.type ) {
     case 'video':
       return item.units.map( unit => ( {
