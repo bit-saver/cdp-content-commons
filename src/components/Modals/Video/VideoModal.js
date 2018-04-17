@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
-import { Embed } from 'semantic-ui-react';
+import { Embed, Checkbox } from 'semantic-ui-react';
 
 import plusIcon from '../../../assets/images/plus.svg';
 
@@ -25,15 +25,15 @@ class VideoModal extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      item: this.props.item.selectedLanguageUnit,
+      unit: this.props.item.selectedLanguageUnit,
       selectedLanguage: this.getLanguage()
     };
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
   }
   getVideoSource() {
-    const { item } = this.state;
-    if ( item ) {
-      const selected = item;
+    const { unit } = this.state;
+    if ( unit ) {
+      const selected = unit;
       if ( selected.source && selected.source[0] && selected.source[0].stream && selected.source[0].stream.url ) {
         return selected.source[0].stream.url;
       }
@@ -43,9 +43,9 @@ class VideoModal extends Component {
   }
 
   getVideoTranscript() {
-    const { item } = this.state;
-    if ( item ) {
-      const selected = item;
+    const { unit } = this.state;
+    if ( unit ) {
+      const selected = unit;
       if ( selected.transcript && selected.transcript.text ) {
         return selected.transcript.text;
       }
@@ -60,20 +60,12 @@ class VideoModal extends Component {
     return selectedLanguageUnit.language.display_name;
   }
 
-  getAvailableLanguages() {
-    return this.props.item.units.map( item => ( {
-      key: item.language.language_code,
-      value: item.language.display_name,
-      text: item.language.display_name
-    } ) );
-  }
-
   handleLanguageChange( value ) {
     if ( value ) {
       for ( let i = 0; i < this.props.item.units.length; i += 1 ) {
         if ( this.props.item.units[i].language.display_name === value ) {
           this.setState( {
-            item: this.props.item.units[i],
+            unit: this.props.item.units[i],
             selectedLanguage: value
           } );
         }
@@ -98,15 +90,18 @@ class VideoModal extends Component {
   }
 
   render() {
-    const { item } = this.state;
+    const { unit } = this.state;
     return (
-      <ModalContent headline={ item.title }>
+      <ModalContent headline={ unit.title }>
         <div className="modal_options">
-          <ModalLangDropdown
-            languages={ this.getAvailableLanguages() }
-            selected={ this.state.selectedLanguage }
-            handleLanguageChange={ this.handleLanguageChange }
-          />
+          <div className="modal_options_left">
+            <ModalLangDropdown
+              item={ this.props.item }
+              selected={ this.state.selectedLanguage }
+              handleLanguageChange={ this.handleLanguageChange }
+            />
+            <Checkbox className="modal_captions" toggle label="Video with captions" />
+          </div>
           <div className="modal_options_share">
             <img src={ plusIcon } alt="" />
             <PopupTrigger
@@ -117,7 +112,7 @@ class VideoModal extends Component {
               content={
                 <PopupTabbed
                   title="How would you like to share this video?"
-                  item={ item }
+                  item={ unit }
                   panes={ [
                     { title: 'Copy Shortcode', component: <Shortcode /> },
                     { title: 'Social', component: <Social /> },
@@ -132,7 +127,7 @@ class VideoModal extends Component {
               toolTip="Download this video with an embed code"
               icon="download"
               position="right"
-              show={ item.type === 'video' }
+              show={ unit.type === 'video' }
               content={
                 <PopupTabbed
                   title="Download this video."
@@ -141,9 +136,9 @@ class VideoModal extends Component {
                       title: 'Original',
                       component: (
                         <DownloadVideo
-                          selectedLanguageUnit={ item }
+                          selectedLanguageUnit={ unit }
                           instructions={
-                            `Download the original video file without captions in ${item.language.display_name}.
+                            `Download the original video file without captions in ${unit.language.display_name}.
                             This download option is best for uploading this video to web pages.`
                           }
                           burnedInCaptions="no"
@@ -154,16 +149,16 @@ class VideoModal extends Component {
                       title: this.renderCaptionTabTitle(),
                       component: (
                         <DownloadVideo
-                          selectedLanguageUnit={ item }
+                          selectedLanguageUnit={ unit }
                           instructions={
-                            `Download this video with open captions in ${item.language.display_name}.
+                            `Download this video with open captions in ${unit.language.display_name}.
                             This download option is best for uploading this video to social media.`
                           }
                           burnedInCaptions="yes"
                         />
                       )
                     },
-                    { title: 'More', component: <DownloadMore units={ item.units } /> },
+                    { title: 'More', component: <DownloadMore units={ this.props.item.units } /> },
                     { title: 'Help', component: <DownloadHelp /> }
                   ] }
                   config={ { width: '87px', offset: '110px' } } // TODO: remove hardcoding, make it dynamic
@@ -175,15 +170,15 @@ class VideoModal extends Component {
 
         { this.renderVideoPlayer() }
 
-        <ModalContentMeta type={ item.type } dateUpdated={ item.modified } transcript={ this.getVideoTranscript() } />
-        <ModalDescription description={ item.desc } />
+        <ModalContentMeta type={ unit.type } dateUpdated={ unit.modified } transcript={ this.getVideoTranscript() } />
+        <ModalDescription description={ unit.desc } />
         <ModalPostMeta
-          author={ item.author }
-          source={ item.sourcelink }
-          site={ item.site }
-          datePublished={ item.published }
+          author={ unit.author }
+          source={ unit.sourcelink }
+          site={ unit.site }
+          datePublished={ unit.published }
         />
-        <ModalPostTags tags={ item.categories } />
+        <ModalPostTags tags={ unit.categories } />
       </ModalContent>
     );
   }

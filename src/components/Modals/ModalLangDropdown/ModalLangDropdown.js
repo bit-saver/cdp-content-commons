@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { array, string, func } from 'prop-types';
+import { object, string, func } from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
+import { getAvailableLanguages } from '../../../utils/helpers';
 import './ModalLangDropdown.css';
 
 class ModalLangDropdown extends Component {
@@ -25,8 +26,9 @@ class ModalLangDropdown extends Component {
   }
 
   render() {
-    const { languages } = this.props;
+    const { item } = this.props;
     const { selected } = this.props;
+    const languages = getAvailableLanguages( item );
     if ( languages.length > 1 ) {
       return (
         <Dropdown
@@ -44,7 +46,7 @@ class ModalLangDropdown extends Component {
 }
 
 ModalLangDropdown.propTypes = {
-  languages: array,
+  item: object,
   selected: string,
   handleLanguageChange: func
 };
