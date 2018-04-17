@@ -43,7 +43,9 @@ class ModalContentMeta extends Component {
             </button>
           </div>
         </div>
-        <ModalTranscript transcript={ transcript } classes={ isOpen ? 'transcript active' : 'transcript' } />
+        { transcript &&
+          <ModalTranscript transcript={ transcript } classes={ isOpen ? 'transcript active' : 'transcript' } />
+        }
       </section>
     );
   }
