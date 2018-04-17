@@ -149,7 +149,13 @@ class VideoModal extends Component {
 
         <ModalContentMeta type={ item.type } dateUpdated={ item.modified } transcript={ this.getVideoTranscript() } />
         <ModalDescription description={ item.description } />
-        <ModalPostMeta author={ item.author } source={ item.sourcelink } site={ item.site } datePublished={ item.published } />
+        <ModalPostMeta
+          type={ item.type }
+          author={ item.author }
+          source={ item.sourcelink }
+          site={ item.site }
+          datePublished={ item.published }
+        />
         <ModalPostTags tags={ item.categories } />
       </ModalContent>
     );

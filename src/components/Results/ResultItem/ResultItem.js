@@ -3,6 +3,8 @@ import { object } from 'prop-types';
 import moment from 'moment';
 import { Card, Image, Modal } from 'semantic-ui-react';
 import VideoModal from '../../Modals/Video/VideoModal';
+import ArticleModal from '../../Modals/Article/ArticleModal';
+import articleIcon from '../../../assets/images/icon_32px_post.png';
 import './ResultItem.css';
 
 class ResultItem extends Component {
@@ -45,19 +47,22 @@ class ResultItem extends Component {
           trigger={
             <div className="card_imgWrapper">
               <Image src={ item.thumbnail } width="100%" height="100%" />
-              <Image src={ item.icon } className="card_postIcon" />
+              { item.type === 'video' && <Image src={ item.icon } className="card_postIcon" /> }
+              { item.type === 'article' && <Image src={ articleIcon } className="card_postIcon" /> }
             </div>
           }
         >
           <Modal.Content>
-            <VideoModal item={ item } />
+            { item.type === 'video' && <VideoModal item={ item } /> }
+            { item.type === 'article' && <ArticleModal item={ item } /> }
           </Modal.Content>
         </Modal>
         <Card.Content>
           <Card.Header className="card_header">
             <Modal closeIcon trigger={ <p>{ item.title }</p> }>
               <Modal.Content>
-                <VideoModal item={ item } />
+                { item.type === 'video' && <VideoModal item={ item } /> }
+                { item.type === 'article' && <ArticleModal item={ item } /> }
               </Modal.Content>
             </Modal>
           </Card.Header>
