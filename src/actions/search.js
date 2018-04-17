@@ -17,9 +17,8 @@ import {
 import { queryRequest } from '../utils/api';
 import { queryBuilder } from '../utils/helpers';
 
-export const calculatePages = ( _total, _currentPage ) => {
+export const calculatePages = ( _total, _currentPage, pageSize = 1 ) => {
   const total = _total;
-  const pageSize = 12;
   const currentPage = _currentPage;
   const totalPages = Math.ceil( total / pageSize );
 
@@ -87,7 +86,8 @@ export const createRequest = () => async ( dispatch, getState ) => {
   const currentState = getState();
   try {
     response = await queryRequest( {
-      size: 12,
+      // size: 12,
+      size: 1,
       body: queryBuilder( currentState )
     } );
   } catch ( err ) {
@@ -107,65 +107,8 @@ export const createRequest = () => async ( dispatch, getState ) => {
   } );
 };
 
-export const previousRequest = () => async ( dispatch, getState ) => {
-  const OFFSET = 12;
-  dispatch( showLoading() );
-  dispatch( { type: SEARCH_PAGE_PENDING } );
-
-  let response;
-  const pageOffset = getState().search.currentPage * OFFSET;
-
-  try {
-    response = await queryRequest( {
-      body: queryBuilder( getState() ),
-      from: pageOffset - OFFSET,
-      size: 12
-    } );
-  } catch ( err ) {
-    return dispatch( { type: SEARCH_PAGE_FAILED } );
-  }
-
-  dispatch( hideLoading() );
-  window.scrollTo( 0, 0 );
-  return dispatch( {
-    type: SEARCH_PAGE_SUCCESS,
-    payload: {
-      response,
-      ...calculatePages( response.hits.total, getState().search.currentPage - 1 )
-    }
-  } );
-};
-
-export const nextRequest = () => async ( dispatch, getState ) => {
-  const OFFSET = 12;
-  dispatch( showLoading() );
-  dispatch( { type: SEARCH_PAGE_PENDING } );
-
-  let response;
-  try {
-    response = await queryRequest( {
-      body: queryBuilder( getState() ),
-      from: getState().search.currentPage * OFFSET,
-      size: 12
-    } );
-  } catch ( err ) {
-    dispatch( hideLoading() );
-    return dispatch( { type: SEARCH_PAGE_FAILED } );
-  }
-
-  dispatch( hideLoading() );
-  window.scrollTo( 0, 0 );
-  return dispatch( {
-    type: SEARCH_PAGE_SUCCESS,
-    payload: {
-      response,
-      ...calculatePages( response.hits.total, getState().search.currentPage + 1 )
-    }
-  } );
-};
-
-export const targetRequest = page => async ( dispatch, getState ) => {
-  let offset = 12;
+export const targetRequest = ( page, pageSize = 1 ) => async ( dispatch, getState ) => {
+  let offset = pageSize;
   const pageOffset = page * offset;
   offset = pageOffset - offset;
   dispatch( showLoading() );
@@ -176,7 +119,7 @@ export const targetRequest = page => async ( dispatch, getState ) => {
     response = await queryRequest( {
       body: queryBuilder( getState() ),
       from: offset,
-      size: 12
+      size: pageSize
     } );
   } catch ( err ) {
     dispatch( hideLoading() );
@@ -190,12 +133,12 @@ export const targetRequest = page => async ( dispatch, getState ) => {
     payload: {
       response,
       current: page,
-      ...calculatePages( response.hits.total, page )
+      ...calculatePages( response.hits.total, page, pageSize )
     }
   } );
 };
 
-export const sortRequest = sortType => async ( dispatch, getState ) => {
+export const sortRequest = ( sortType, pageSize = 1 ) => async ( dispatch, getState ) => {
   dispatch( showLoading() );
   dispatch( {
     type: SEARCH_SORT_PENDING,
@@ -210,7 +153,7 @@ export const sortRequest = sortType => async ( dispatch, getState ) => {
   try {
     response = await queryRequest( {
       body: queryBuilder( getState() ),
-      size: 12
+      size: pageSize
     } );
   } catch ( err ) {
     dispatch( hideLoading() );
@@ -222,7 +165,35 @@ export const sortRequest = sortType => async ( dispatch, getState ) => {
     type: SEARCH_SORT_SUCCESS,
     payload: {
       response,
-      ...calculatePages( response.hits.total, 1 )
+      ...calculatePages( response.hits.total, 1, pageSize )
     }
   } );
 };
+
+export const updateSizeRequest = newSize => async ( dispatch, getState ) => {
+  dispatch( showLoading() );
+  dispatch( { type: SEARCH_REQUEST_PENDING } );
+
+  let response;
+  const currentState = getState();
+  try {
+    response = await queryRequest( {
+      size: newSize,
+      body: queryBuilder( currentState )
+    } );
+  } catch ( err ) {
+    dispatch( hideLoading() );
+    return dispatch( { type: SEARCH_REQUEST_FAILED } );
+  }
+
+  dispatch( hideLoading() );
+
+  return dispatch( {
+    type: SEARCH_REQUEST_SUCCESS,
+    payload: {
+      response,
+      ...calculatePages( response.hits.total, 1, newSize )
+    }
+  } );
+};
+
