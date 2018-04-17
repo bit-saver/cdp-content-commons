@@ -14,6 +14,27 @@ export const numberWithCommas = ( number ) => {
   return number.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' );
 };
 
+export const getAvailableLanguages = ( item ) => {
+  if ( !item.type ) return [];
+  switch ( item.type ) {
+    case 'video':
+      return item.units.map( unit => ( {
+        key: unit.language.language_code,
+        value: unit.language.display_name,
+        text: unit.language.display_name
+      } ) );
+    case 'post':
+      return item.languages.map( post => ( {
+        id: post.post_id,
+        key: post.language.language_code,
+        value: post.language.display_name,
+        text: post.language.display_name
+      } ) );
+    default:
+      return [];
+  }
+};
+
 export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
 
 // Following rules normalize types as languge, tag, etc are not at document root level
