@@ -26,28 +26,30 @@ class VideoModal extends Component {
     super( props );
     this.state = {
       unit: this.props.item.selectedLanguageUnit,
-      selectedLanguage: this.getLanguage()
+      selectedLanguage: this.getLanguage(),
+      captions: false
     };
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
+    this.handleCaptionChange = this.handleCaptionChange.bind( this );
   }
+
   getVideoSource() {
     const { unit } = this.state;
-    if ( unit ) {
-      const selected = unit;
-      if ( selected.source && selected.source[0] && selected.source[0].stream && selected.source[0].stream.url ) {
-        return selected.source[0].stream.url;
+    if ( unit && unit.source && unit.source[0] ) {
+      const sourceIndex = unit.source.findIndex( k => k.burnedInCaptions === this.state.captions );
+      if ( sourceIndex !== -1 ) {
+        return unit.source[sourceIndex].stream.url;
       }
-    } else {
-      return '';
+      return unit.source[0].stream.url;
     }
+    return '';
   }
 
   getVideoTranscript() {
     const { unit } = this.state;
     if ( unit ) {
-      const selected = unit;
-      if ( selected.transcript && selected.transcript.text ) {
-        return selected.transcript.text;
+      if ( unit.transcript && unit.transcript.text ) {
+        return unit.transcript.text;
       }
     } else {
       return '';
@@ -73,6 +75,10 @@ class VideoModal extends Component {
     }
   }
 
+  handleCaptionChange() {
+    this.setState( { captions: !this.state.captions } );
+  }
+
   renderVideoPlayer() {
     const url = this.getVideoSource();
     const active = !!url;
@@ -91,96 +97,106 @@ class VideoModal extends Component {
 
   render() {
     const { unit } = this.state;
-    return (
-      <ModalContent headline={ unit.title }>
-        <div className="modal_options">
-          <div className="modal_options_left">
-            <ModalLangDropdown
-              item={ this.props.item }
-              selected={ this.state.selectedLanguage }
-              handleLanguageChange={ this.handleLanguageChange }
-            />
-            <Checkbox className="modal_captions" toggle label="Video with captions" />
-          </div>
-          <div className="modal_options_share">
-            <img src={ plusIcon } alt="" />
-            <PopupTrigger
-              toolTip="Copy the shortcode for this video or<br> share it social platforms."
-              icon="share"
-              // show={ item.type === 'video' }
-              show={ false }
-              content={
-                <PopupTabbed
-                  title="How would you like to share this video?"
-                  item={ unit }
-                  panes={ [
-                    { title: 'Copy Shortcode', component: <Shortcode /> },
-                    { title: 'Social', component: <Social /> },
-                    { title: 'More', component: <ShareMore /> },
-                    { title: 'Help', component: <DownloadHelp /> }
-                  ] }
-                  config={ { width: '141px', offset: '115px' } } // TODO: remove hardcoding, make it dynamic
+    if ( unit ) {
+      return (
+        <ModalContent headline={ unit.title }>
+          <div className="modal_options">
+            <div className="modal_options_left">
+              <ModalLangDropdown
+                item={ this.props.item }
+                selected={ this.state.selectedLanguage }
+                handleLanguageChange={ this.handleLanguageChange }
+              />
+              { unit.source.length > 1 &&
+                <Checkbox
+                  className="modal_captions"
+                  toggle
+                  label="Video with captions"
+                  onChange={ this.handleCaptionChange }
                 />
               }
-            />
-            <PopupTrigger
-              toolTip="Download this video with an embed code"
-              icon="download"
-              position="right"
-              show={ unit.type === 'video' }
-              content={
-                <PopupTabbed
-                  title="Download this video."
-                  panes={ [
-                    {
-                      title: 'Original',
-                      component: (
-                        <DownloadVideo
-                          selectedLanguageUnit={ unit }
-                          instructions={
-                            `Download the original video file without captions in ${unit.language.display_name}.
-                            This download option is best for uploading this video to web pages.`
-                          }
-                          burnedInCaptions="no"
-                        />
-                      )
-                    },
-                    {
-                      title: this.renderCaptionTabTitle(),
-                      component: (
-                        <DownloadVideo
-                          selectedLanguageUnit={ unit }
-                          instructions={
-                            `Download this video with open captions in ${unit.language.display_name}.
-                            This download option is best for uploading this video to social media.`
-                          }
-                          burnedInCaptions="yes"
-                        />
-                      )
-                    },
-                    { title: 'More', component: <DownloadMore units={ this.props.item.units } /> },
-                    { title: 'Help', component: <DownloadHelp /> }
-                  ] }
-                  config={ { width: '87px', offset: '110px' } } // TODO: remove hardcoding, make it dynamic
-                />
-              }
-            />
+            </div>
+            <div className="modal_options_share">
+              <img src={ plusIcon } alt="" />
+              <PopupTrigger
+                toolTip="Copy the shortcode for this video or<br> share it social platforms."
+                icon="share"
+                // show={ item.type === 'video' }
+                show={ false }
+                content={
+                  <PopupTabbed
+                    title="How would you like to share this video?"
+                    item={ unit }
+                    panes={ [
+                      { title: 'Copy Shortcode', component: <Shortcode /> },
+                      { title: 'Social', component: <Social /> },
+                      { title: 'More', component: <ShareMore /> },
+                      { title: 'Help', component: <DownloadHelp /> }
+                    ] }
+                    config={ { width: '141px', offset: '115px' } } // TODO: remove hardcoding, make it dynamic
+                  />
+                }
+              />
+              <PopupTrigger
+                toolTip="Download this video with an embed code"
+                icon="download"
+                position="right"
+                show={ unit.type === 'video' }
+                content={
+                  <PopupTabbed
+                    title="Download this video."
+                    panes={ [
+                      {
+                        title: 'Original',
+                        component: (
+                          <DownloadVideo
+                            selectedLanguageUnit={ unit }
+                            instructions={
+                              `Download the original video file without captions in ${unit.language.display_name}.
+                              This download option is best for uploading this video to web pages.`
+                            }
+                            burnedInCaptions="no"
+                          />
+                        )
+                      },
+                      {
+                        title: this.renderCaptionTabTitle(),
+                        component: (
+                          <DownloadVideo
+                            selectedLanguageUnit={ unit }
+                            instructions={
+                              `Download this video with open captions in ${unit.language.display_name}.
+                              This download option is best for uploading this video to social media.`
+                            }
+                            burnedInCaptions="yes"
+                          />
+                        )
+                      },
+                      { title: 'More', component: <DownloadMore units={ this.props.item.units } /> },
+                      { title: 'Help', component: <DownloadHelp /> }
+                    ] }
+                    config={ { width: '87px', offset: '110px' } } // TODO: remove hardcoding, make it dynamic
+                  />
+                }
+              />
+            </div>
           </div>
-        </div>
 
-        { this.renderVideoPlayer() }
+          { this.renderVideoPlayer() }
 
-        <ModalContentMeta type={ unit.type } dateUpdated={ unit.modified } transcript={ this.getVideoTranscript() } />
-        <ModalDescription description={ unit.desc } />
-        <ModalPostMeta
-          author={ unit.author }
-          source={ unit.sourcelink }
-          site={ unit.site }
-          datePublished={ unit.published }
-        />
-        <ModalPostTags tags={ unit.categories } />
-      </ModalContent>
-    );
+          <ModalContentMeta type={ unit.type } dateUpdated={ unit.modified } transcript={ this.getVideoTranscript() } />
+          <ModalDescription description={ unit.desc } />
+          <ModalPostMeta
+            author={ unit.author }
+            source={ unit.sourcelink }
+            site={ unit.site }
+            datePublished={ unit.published }
+          />
+          <ModalPostTags tags={ unit.categories } />
+        </ModalContent>
+      );
+    }
+    return <ModalContent headline="Video Unavailable" />;
   }
 }
 
