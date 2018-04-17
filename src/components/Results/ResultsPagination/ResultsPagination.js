@@ -7,7 +7,7 @@ import './ResultsPagination.css';
 import { Pagination } from 'semantic-ui-react';
 
 class ResultsPagination extends Component {
-  handlePaginationChange = ( e, { activePage } ) => this.props.targetRequest( activePage );
+  handlePaginationChange = ( e, { activePage } ) => this.props.targetRequest( activePage, this.props.search.pageSize );
 
   render() {
     if ( this.props.search.totalPages > 1 ) {

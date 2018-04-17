@@ -5,7 +5,11 @@ import './ModalPostMeta.css';
 
 const ModalPostMeta = ( props ) => {
   const {
-    author, source, site, datePublished
+    type,
+    author,
+    source,
+    site,
+    datePublished
   } = props;
 
   return (
@@ -13,12 +17,9 @@ const ModalPostMeta = ( props ) => {
       <span className="modal_postmeta_content">
         Source: <a href={ source } target="_blank">{ site }</a>
       </span>
-      <span className="modal_postmeta_content">
-        { author }
-        { /* TEMP */ }
-        Author: Jane Doe
-      </span>
-      <span className="modal_postmeta_content">Owner: IIP, Office of Video Production</span>
+      { author && <span className="modal_postmeta_content"> Author: { author } </span> }
+      { type === 'video' && <span className="modal_postmeta_content">Owner: IIP, Office of Video Production</span> }
+      { type === 'article' && <span className="modal_postmeta_content">Owner: IIP, Office of Editorial Content</span> }
       <span className="modal_postmeta_content">
         Date Published: { moment( datePublished ).format( 'MMMM DD, YYYY' ) }
       </span>
@@ -27,6 +28,7 @@ const ModalPostMeta = ( props ) => {
 };
 
 ModalPostMeta.propTypes = {
+  type: string,
   author: string,
   source: string,
   site: string,

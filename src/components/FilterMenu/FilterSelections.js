@@ -1,53 +1,90 @@
 import React, { Component } from 'react';
-import { func, array } from 'prop-types';
-import { Label, Icon } from 'semantic-ui-react';
+import { func, object } from 'prop-types';
+import FilterSelectionItem from './FilterSelectionItem';
+import * as actions from '../../actions';
+import { connect } from 'react-redux';
 import './FilterSelections.css';
 
 class FilterSelections extends Component {
+  state = {
+    selections: []
+  };
+
   componentWillReceiveProps( nextProps ) {
-    if ( nextProps.selections.length < 1 ) {
-      this.selectionsDisplay.classList.remove( 'display' );
-    } else {
-      this.selectionsDisplay.classList.add( 'display' );
-    }
+    const nextLanguage = nextProps.language.currentLanguage;
+    const language = {
+      label: nextLanguage.display_name,
+      value: nextLanguage.locale,
+      filter: 'language',
+      single: true
+    };
+
+    const nextTypes = nextProps.type.currentPostTypes.map( item => ( {
+      label: item.display_name,
+      value: item.type,
+      filter: 'format',
+      single: false
+    } ) );
+
+    const nextCategories = nextProps.category.currentCategories.map( item => ( {
+      label: item.display_name,
+      value: item.id,
+      filter: 'category',
+      single: false
+    } ) );
+
+    this.setState( {
+      selections: [
+        language, ...nextTypes, ...nextCategories
+      ]
+    } );
   }
 
   render() {
-    const { selections, onRemove, removeAll } = this.props;
+    const { selections } = this.state;
+
     return (
-      <div className="filterMenu_selections" ref={ ( node ) => { this.selectionsDisplay = node; } }>
+      <div className="filterMenu_selections">
         { selections.length > 0 &&
           selections.map( selection => (
-            <Label
-              key={ selection.selectionValue }
-              data-label={ selection.selectionValue }
-              data-parent={ selection.hasParentMenu }
-            >
-              { selection.selectionLabel }
-              <Icon name="delete" onClick={ onRemove } />
-            </Label>
-          ) )
-        }
-        { selections.length > 0 &&
+            <FilterSelectionItem
+              key={ selection.value }
+              value={ selection.value }
+              label={ selection.label }
+              filter={ selection.filter }
+              single={ selection.single }
+              onClick={ this.props.onFilterChange }
+            />
+          ) ) }
+        { selections.length > 0 && (
           <div
             className="ui label clear_filter"
-            onClick={ removeAll }
-            onKeyDown={ removeAll }
+            onClick={ this.props.onFilterClearAll }
+            onKeyDown={ this.props.onFilterClearAll }
             role="button"
             tabIndex={ 0 }
           >
             CLEAR ALL
           </div>
-        }
+        ) }
       </div>
     );
   }
 }
 
 FilterSelections.propTypes = {
-  selections: array,
-  onRemove: func,
-  removeAll: func
+  language: object,
+  category: object,
+  type: object,
+  onFilterChange: func,
+  onFilterClearAll: func
 };
 
-export default FilterSelections;
+const mapStateToProps = state => ( {
+  search: state.search,
+  language: state.language,
+  category: state.category,
+  type: state.type
+} );
+
+export default connect( mapStateToProps, actions )( FilterSelections );

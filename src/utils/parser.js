@@ -8,6 +8,8 @@ import thumbnailCourse from '../assets/images/thumbnail_course.jpg';
 import thumbnailAudio from '../assets/images/thumbnail_audio.jpg';
 import thumbnailVideo from '../assets/images/thumbnail_video.jpg';
 
+import store from '../utils/store';
+
 const getIcon = ( type ) => {
   let icon = '';
   switch ( type ) {
@@ -72,15 +74,15 @@ const getAuthor = ( author ) => {
 
 // send in locale to fetch applicable lang data props?
 const populateVideoItem = ( source ) => {
-  const locale = 'en-us'; // this needs to come from search qry
+  const { locale } = store.getState().language.currentLanguage;
   const units = source.unit;
-  const languageUnit = units.find( unit => unit.language.locale === locale );
+  const languageUnit = units.find( unit => unit.language.locale.toLowerCase() === locale.toLowerCase() );
   let obj = {};
 
   if ( languageUnit ) {
     obj = {
       title: languageUnit.title || '[TITLE]',
-      description: languageUnit.desc || '[DESCRIPTION]',
+      description: languageUnit.desc || '',
       thumbnail: getThumbnail( languageUnit.source, 'video' ),
       categories: languageUnit.categories || [],
       tags: languageUnit.tags || [],
@@ -92,7 +94,7 @@ const populateVideoItem = ( source ) => {
     // this may not be needed
     obj = {
       title: '[TITLE]',
-      description: '[DESCRIPTION]',
+      description: '',
       thumbnail: getDefaultThumbnail( 'video' ),
       categories: [],
       tags: [],
@@ -135,7 +137,7 @@ const getTypeSpecObj = ( source ) => {
   return obj;
 };
 
-export const normalizeItem = ( item ) => {
+export const normalizeItem = ( item, language ) => {
   const source = item._source;
 
   const obj = {

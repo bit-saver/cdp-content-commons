@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   error: false,
   list: [],
   loading: false,
-  currentPostType: 'video'
+  currentPostTypes: [{ type: 'video', display_name: 'Video' }]
 };
 
 export default ( state = INITIAL_STATE, action ) => {
@@ -34,9 +34,15 @@ export default ( state = INITIAL_STATE, action ) => {
         list: action.payload
       };
     case POST_TYPE_CHANGE:
+      // if there is no payload, clear selected currentPostTypes
+      if ( !action.payload ) {
+        return { ...state, currentPostTypes: [] };
+      }
       return {
         ...state,
-        currentPostType: action.payload
+        currentPostTypes: action.payload.checked
+          ? [...state.currentPostTypes, { type: action.payload.type, display_name: action.payload.display_name }]
+          : state.currentPostTypes.filter( category => category.type !== action.payload.type )
       };
     default:
       return state;

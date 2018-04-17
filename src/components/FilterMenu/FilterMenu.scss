@@ -1,18 +1,16 @@
 @import "../../assets/styles/colors.scss";
 
-.filterMenu {    
+.filterMenu {
   position: relative;
-  min-width: 150px;
+  min-width: 160px;
 
-
-  &_wrapper {    
+  &_wrapper {
     max-width: 768px;
     margin: 0 auto 2em auto;
     @media screen and (min-width: 768px) {
       padding-top: 1em;
-    }        
+    }
   }
-
 
   &_main {
     position: relative;
@@ -24,9 +22,8 @@
     }
 
     &.subMenuDisplay {
-
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -40,7 +37,6 @@
     }
   }
 
-
   &_sub {
     position: absolute;
     top: 100%;
@@ -52,9 +48,9 @@
     transition: opacity 0.3s ease, max-height 0.3s ease;
 
     &.show {
-      z-index: 2;   
+      z-index: 2;
       max-height: 1000px;
-      opacity: 1;  
+      opacity: 1;
     }
 
     .filterMenu {
@@ -65,12 +61,9 @@
 
         &:hover:after,
         &.active:after {
-          border-bottom: 3px solid $light-blue;          
+          border-bottom: 3px solid $light-blue;
         }
-      }      
-    }    
+      }
+    }
   }
-
 }
-
-

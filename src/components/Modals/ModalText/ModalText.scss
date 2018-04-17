@@ -1,0 +1,37 @@
+@import "../../../assets/styles/colors.scss";
+
+.modal_section--textContent {
+  
+
+  .textContent {
+    padding: 0 20px;
+    font-size: 18px;
+
+    &_label {
+      font-size: 12px;
+      color: $shuttle-grey;
+    }
+
+    img {
+      max-width: 100%;
+      margin-top: 1em !important;
+      margin-bottom: 1em !important;
+    }
+
+    .alignleft {
+      float: left;
+      margin-right: 1em;
+    }
+
+    .alignright {
+      float: right;
+      margin-left: 1em;
+    }
+
+    .aligncenter {
+      display: block;
+      margin: 0 auto;
+    }
+
+  }
+}

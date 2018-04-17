@@ -13,12 +13,6 @@ class Search extends Component {
     this.handleSubmit = this.handleSubmit.bind( this );
   }
 
-  componentWillMount() {
-    this.props.loadLanguages();
-    this.props.loadPostTypes();
-    this.props.loadSites();
-  }
-
   handleQueryOnChange( e ) {
     this.props.updateSearchQuery( e.target.value );
   }
@@ -56,9 +50,6 @@ const mapStateToProps = state => ( {
 } );
 
 Search.propTypes = {
-  loadLanguages: func,
-  loadPostTypes: func,
-  loadSites: func,
   updateSearchQuery: func,
   createRequest: func,
   history: object,

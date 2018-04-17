@@ -23,20 +23,38 @@
   .card {
 
     &.ui {
-      flex-direction: row;
+      display: block;
+      border-left: none;
+      border-right: none;
+      box-shadow: none;      
     }
 
     &_imgWrapper {
-      flex: 1;
+      display: inline-block;
+      width: 25%;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      vertical-align: top;
 
-      @media screen and (max-width: 425px) {
-        flex: auto;
+      .card_postIcon {
+        @media screen and (max-width: 500px) {
+          right: 50% !important;
+          bottom: 50% !important;
+          transform: translate(50%, 50%);
+          width: 25px;
+        }
       }
     }
 
-    .extra.content .icon {
-      @media screen and (min-width: 426px) {
-        font-size: 2em;
+    .content {
+      display: inline-block !important;
+      width: 75%;
+      border-top: none;
+
+      .card_excerpt {
+        @media screen and (max-width: 425px) {
+          display: none;
+        }
       }
     }
   }
@@ -62,42 +80,49 @@
   }
 
 
-  .content .card {
+  .content {
+    display: flex;
+    flex-direction: column;
 
-    &_header {
-      font-size: 18px;
-      font-weight: 700;
-      color: $blue;
+    .card {
 
-      > p {
+      &_header {
+        font-size: 18px;
+        font-weight: 700;
+        color: $blue;
+
+        > p {
+          cursor: pointer;
+        }
+      }
+
+      &_excerpt {
+        margin-bottom: auto;
+        color: #000;
+      }
+
+      &_metadata {
+        margin-top: 1em;
+        margin-bottom: 0;
+        font-size: 11px;
+        line-height: 1.428;
+        color: $grey;
+      }
+
+      &_icon {
+        position: relative;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
         cursor: pointer;
-      }
-    }
 
-    &_excerpt {
-      color: #000;
-    }
+        img {
+          width: 100%;
+        }
 
-    &_metadata {
-      margin-top: 1em;
-      font-size: 11px;
-      line-height: 1.428;
-      color: $grey;
-    }
-
-    &_icon {
-      position: relative;
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-
-      img {
-        width: 100%;
-      }
-
-      &--download {
-        float: right;
+        &--download {
+          float: right;
+        }
       }
     }
   }

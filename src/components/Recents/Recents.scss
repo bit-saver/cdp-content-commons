@@ -2,126 +2,136 @@
 
 .recents {
   margin-bottom: 6em;
-}
-.ui.grid .column.recentsgridleft {
-   padding-right: 0;
-   padding-bottom: 0;
-   min-height: 320px; 
-}
-.recents h1.header {
-  color: $blue;
-}
-.recentsleft {
-  cursor: pointer;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  @media screen and (max-width: 767px) {
-    height: 300px;
+
+  &left {
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    @media screen and (max-width: 767px) {
+      height: 300px;
+    }
+  }
+
+  .ui.stackable.grid > .column.recentsgridleft,
+  .ui.stackable.grid > .column.recentsgridright {
+    @media screen and (max-width: 767px) {
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+
+  &gridleft {    
+
+    &.column {
+      padding-right: 0 !important;
+      padding-bottom: 0 !important;
+      min-height: 320px;      
+    }
+  }
+
+  &gridright {
+
+    .ui.items {
+      height: 100%;
+
+      .item {
+        height: 50%;
+        @media screen and (max-width: 767px) {
+          height: auto;
+        }
+      }
+    }
+  }
+
+  &overlay {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+    bottom: 0;
+    width: 100%;
+    height: auto; 
+    color: white; 
+    font-size: 3em; 
+    padding: 0.5em;
+    line-height: 1em;
+    text-shadow: 
+      -1px -1px 0 rgba(0,0,0,0.3),
+      1px -1px 0 rgba(0,0,0,0.3),
+      -1px 1px 0 rgba(0,0,0,0.3), 
+      1px 1px 0 rgba(0,0,0,0.3);
+
+    &_title {
+      width: 80%;
+    }
+
+    &_icon {
+      position: absolute;
+      bottom: 0.5em;
+      right: 0.5em; 
+    }
+  }
+
+  h1.header {
+    color: $blue;
   }
 }
 
 
-.recentsItem {
+.ui.items .item.recentsItem {
+  border: 1px solid $light-grey;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
   cursor: pointer;
 
-  &_img {
-    width: 45%;
-    min-width: 170px;
+  .recentsItem_img { 
+    position: relative;
+    min-width: 195px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-  }
-}
-
-
-.recentsoverlay {
-  position: absolute;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
-  bottom: 0;
-  width: 100%;
-  height: auto; 
-  color: white; 
-  font-size: 3em; 
-  padding: 0.5em;
-  line-height: 1em;
-  text-shadow: 
-    -1px -1px 0 rgba(0,0,0,0.3),
-    1px -1px 0 rgba(0,0,0,0.3),
-    -1px 1px 0 rgba(0,0,0,0.3), 
-    1px 1px 0 rgba(0,0,0,0.3);
-}
-
-.recentsoverlay_title {
-  width: 80%;
-}
-
-.recentsoverlay_icon {
-  position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
-}
-
-
-.recentsgridright {
-  
-  .ui.items {
-    height: 100%;
-
-    .item {
-      height: 50%;
+    @media screen and (max-width: 767px) {
+      min-height: 195px;
+      height: 100%;
     }
-  } 
-}
 
+    .metaicon {
+      position: absolute;
+      right: 5px;
+      bottom: 10px;
+    }
+  }
 
-.ui.items .item {
-  border: 1px solid $light-grey;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  @media screen and (max-width: 767px) {
-    padding: 1em;
+  .content {
+    position: relative; 
+    padding: 1em;    
+
+    .header {
+      margin-bottom: 2.2em;  
+      font-size: 1.5em;
+      line-height: 1.2em;
+      color: $blue;
+      @media screen and (max-width: 991px) {
+        font-size: 1.28em;
+      }    
+    }
+
+    .meta {
+      position: absolute;
+      bottom: 0em;      
+      margin-bottom: 1em;
+      line-height: 1.2em;
+
+      .date {
+        display: block;
+        color: $blue;
+      }
+
+      .categories {
+        display: block;
+        color: $grey;
+      }      
+    }
   }
-}
-.recents .ui.items .item .image {
-  background: $light-grey;
-  position: relative;
-  overflow: hidden;
-  @media screen and (max-width: 767px) {
-    max-height: inherit!important;
-  }
-}
-.recents .ui.items .item .image img {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.ui.items .item .content {
-  padding: 1em;
-  position: relative;
-}
-.recents .ui.items .item .content .header {
-  color: $blue;
-  font-size: 1.5em;
-  line-height: 1.2em;
-  margin-bottom: 2.2em;
-}
-.recents .ui.items .item .content .meta {
-  position: absolute;
-  bottom: 0em;
-  line-height: 1.2em;
-  margin-bottom: 1em;
-}
-.recents .ui.items .item .content .meta .date {
-  display: block;
-  color: $blue;
-}
-.recents .ui.items .item .content .meta .categories {
-  display: block;
-  color: $grey;
-}
-.recents .ui.items .item .content .meta .metaicon {
-  position: absolute;
-  left: -4.3em;
-  bottom: -0.4em;
+
 }

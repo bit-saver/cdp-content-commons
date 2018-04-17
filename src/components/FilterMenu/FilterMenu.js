@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { func, object } from 'prop-types';
 import FilterMenuItem from './FilterMenuItem';
 import FilterSelections from './FilterSelections';
+import * as actions from '../../actions';
+import { Form } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+
 import './FilterMenu.css';
 
 class FilterMenu extends Component {
@@ -8,67 +13,76 @@ class FilterMenu extends Component {
     super( props );
 
     this.state = {
-      filterSelections: [],
-      subMenuVal: '',
+      // subMenuVal: '',
       displaySubMenu: false
     };
 
-    this.handleFilterSelect = this.handleFilterSelect.bind( this );
-    this.updateFilterSelections = this.updateFilterSelections.bind( this );
-    this.clearAllFilterSelections = this.clearAllFilterSelections.bind( this );
     this.showSubMenu = this.showSubMenu.bind( this );
     this.closeSubMenu = this.closeSubMenu.bind( this );
   }
 
-  handleFilterSelect( e ) {
-    const filterSelectionLabel = e.target.textContent;
+  componentWillMount() {
+    this.props.loadLanguages();
+    this.props.loadCategories();
+    this.props.loadPostTypes();
+  }
+
+  getOptions = ( type ) => {
+    if ( !type.list ) return [];
+
+    return type.list.map( item => ( {
+      label: item.display,
+      value: item.key,
+      count: item.count,
+      hasSubMenu: false
+    } ) );
+  };
+
+  updateSearchQuery = ( {
+    filter, value, labelclean, checked
+  } ) => {
+    switch ( filter.toLowerCase() ) {
+      case 'language':
+        this.props.languageUpdate( { locale: value, display_name: labelclean } );
+        break;
+
+      case 'category':
+        this.props.categoryUpdate( { id: value, display_name: labelclean, checked } );
+        break;
+
+      case 'format':
+        this.props.postTypeUpdate( { type: value, display_name: labelclean, checked } );
+        break;
+
+      default: {
+        // console.log( 'in' );
+      }
+    }
+    this.props.createRequest();
+  };
+
+  handleFilterClearAll = () => {
+    this.props.categoryUpdate();
+    this.props.postTypeUpdate();
+    this.props.createRequest();
+  };
+
+  handleFilterSelect = ( e, selected ) => {
     const filterSelection = e.target.previousSibling.value;
-    const inputType = e.target.previousSibling.type;
-    const hasParentMenu = ( e.target.parentNode.dataset.parentmenu )
-      ? e.target.parentNode.dataset.parentmenu
-      : '';
-    const { filterSelections } = this.state;
+    // const hasParentMenu = e.target.parentNode.dataset.parentmenu ? e.target.parentNode.dataset.parentmenu : '';
 
     this.showSubMenu( filterSelection );
+  };
 
-    const isTargetInFilterSelections = filterSelections.some( sel => sel.selectionValue === filterSelection );
-
-    if ( !isTargetInFilterSelections ) {
-      this.setState( {
-        filterSelections: [
-          ...filterSelections,
-          { selectionValue: filterSelection, selectionLabel: filterSelectionLabel, hasParentMenu }
-        ]
-      } );
-    } else if ( isTargetInFilterSelections && inputType === 'checkbox' ) {
-      const updatedFilterSelections = filterSelections.filter( sel => sel.selectionValue !== filterSelection );
-      this.setState( { filterSelections: updatedFilterSelections } );
-    }
-  }
-
-  updateFilterSelections( e ) {
-    const filterToRemove = e.target.parentNode.dataset.label;
-    const { filterSelections } = this.state;
-    const updatedFilterSelections = filterSelections
-      .filter( sel => sel.hasParentMenu !== filterToRemove )
-      .filter( sel => sel.selectionValue !== filterToRemove );
-
-    this.setState( { filterSelections: updatedFilterSelections } );
-  }
-
-  clearAllFilterSelections() {
-    this.setState( { filterSelections: [] } );
-  }
-
-  showSubMenu( filterSelection ) {
+  showSubMenu = ( filterSelection ) => {
     const activeSubMenu = document.querySelector( '.filterMenu_sub.show' );
     if ( !activeSubMenu ) {
       const subMenu = document.querySelector( `[data-submenu-for=${filterSelection}]` );
       if ( subMenu ) {
-        this.setState( { displaySubMenu: true, subMenuVal: filterSelection } );
+        // this.setState( { displaySubMenu: true, subMenuVal: filterSelection } );
       }
     }
-  }
+  };
 
   closeSubMenu() {
     this.setState( { displaySubMenu: false } );
@@ -77,102 +91,75 @@ class FilterMenu extends Component {
   render() {
     return (
       <section className="filterMenu_wrapper">
-        { /*
-        SELECTION DISPLAY
-         */ }
-        <FilterSelections
-          selections={ this.state.filterSelections }
-          onRemove={ this.updateFilterSelections }
-          removeAll={ this.clearAllFilterSelections }
-        />
+        { /* SELECTION DISPLAY */ }
+        <FilterSelections onFilterChange={ this.updateSearchQuery } onFilterClearAll={ this.handleFilterClearAll } />
 
         <div className={ this.state.displaySubMenu ? 'filterMenu_main subMenuDisplay' : 'filterMenu_main' }>
-          { /*
-          MAIN-MENU
-           */ }
+          { /*  MAIN-MENU */ }
           <FilterMenuItem
-            menuName="Most Recent"
-            filterSelections={ this.state.filterSelections }
-            handleFilterSelect={ this.handleFilterSelect }
+            filter="Most Recent"
+            onFilterChange={ this.updateSearchQuery }
             closeSubMenu={ this.closeSubMenu }
-            menuOptions={ [
-              { optionLabel: 'Most Recent', optionValue: 'mostRecent', hasSubMenu: false },
-              { optionLabel: 'Past Hour', optionValue: 'pastHour', hasSubMenu: false },
-              { optionLabel: 'Past 24 Hours', optionValue: 'past24Hours', hasSubMenu: false },
-              { optionLabel: 'Past Week', optionValue: 'pastWeek', hasSubMenu: false },
-              { optionLabel: 'Past Month', optionValue: 'pastMonth', hasSubMenu: false },
-              { optionLabel: 'Past Year', optionValue: 'pastYear', hasSubMenu: false },
-              { optionLabel: 'Oldest', optionValue: 'oldest', hasSubMenu: false },
-              { optionLabel: 'Custom', optionValue: 'custom', hasSubMenu: true }
+            options={ [
+              { label: 'Most Recent', value: 'mostRecent', hasSubMenu: false },
+              { label: 'Past Hour', value: 'pastHour', hasSubMenu: false },
+              { label: 'Past 24 Hours', value: 'past24Hours', hasSubMenu: false },
+              { label: 'Past Week', value: 'pastWeek', hasSubMenu: false },
+              { label: 'Past Month', value: 'pastMonth', hasSubMenu: false },
+              { label: 'Past Year', value: 'pastYear', hasSubMenu: false },
+              { label: 'Oldest', value: 'oldest', hasSubMenu: false },
+              { label: 'Custom', value: 'custom', hasSubMenu: true }
             ] }
-          />
+          >
+            <Form.Radio />
+          </FilterMenuItem>
           <FilterMenuItem
-            menuName="Format"
-            filterSelections={ this.state.filterSelections }
-            handleFilterSelect={ this.handleFilterSelect }
+            filter="Format"
+            options={ this.getOptions( this.props.type ) }
+            onFilterChange={ this.updateSearchQuery }
+            selected={ this.props.type.currentPostTypes }
+            default="video"
             closeSubMenu={ this.closeSubMenu }
-            menuOptions={ [
-              { optionLabel: 'Article', optionValue: 'article', hasSubMenu: false },
-              { optionLabel: 'Audio', optionValue: 'audio', hasSubMenu: false },
-              { optionLabel: 'Course', optionValue: 'course', hasSubMenu: false },
-              { optionLabel: 'Image', optionValue: 'image', hasSubMenu: false },
-              { optionLabel: 'Publication', optionValue: 'publication', hasSubMenu: false },
-              { optionLabel: 'Quiz', optionValue: 'quiz', hasSubMenu: false },
-              { optionLabel: 'Video', optionValue: 'video', hasSubMenu: true }
-            ] }
-          />
+          >
+            <Form.Checkbox />
+          </FilterMenuItem>
           <FilterMenuItem
-            menuName="Source"
-            filterSelections={ this.state.filterSelections }
-            handleFilterSelect={ this.handleFilterSelect }
+            filter="Source"
+            onFilterChange={ this.updateSearchQuery }
             closeSubMenu={ this.closeSubMenu }
-            useCheckbox
-            menuOptions={ [
-              { optionLabel: 'American Spaces', optionValue: 'american_spaces', hasSubMenu: false },
-              { optionLabel: 'IIP Interactive', optionValue: 'iip_interactive', hasSubMenu: false },
-              { optionLabel: 'IIP Video Production', optionValue: 'iip_video_prod', hasSubMenu: false },
-              { optionLabel: 'ShareAmerica', optionValue: 'share_america', hasSubMenu: false },
-              { optionLabel: 'YALI', optionValue: 'yali', hasSubMenu: false },
-              { optionLabel: 'YLAI', optionValue: 'ylai', hasSubMenu: false }
+            selected={ [] }
+            options={ [
+              { label: 'American Spaces', value: 'american_spaces', hasSubMenu: false },
+              { label: 'IIP Interactive', value: 'iip_interactive', hasSubMenu: false },
+              { label: 'IIP Video Production', value: 'iip_video_prod', hasSubMenu: false },
+              { label: 'ShareAmerica', value: 'share_america', hasSubMenu: false },
+              { label: 'YALI', value: 'yali', hasSubMenu: false },
+              { label: 'YLAI', value: 'ylai', hasSubMenu: false }
             ] }
-          />
+          >
+            <Form.Checkbox />
+          </FilterMenuItem>
           <FilterMenuItem
-            menuName="Language"
-            filterSelections={ this.state.filterSelections }
-            handleFilterSelect={ this.handleFilterSelect }
-            closeSubMenu={ this.closeSubMenu }
-            useCheckbox
-            menuOptions={ [
-              { optionLabel: 'English', optionValue: 'english', hasSubMenu: false },
-              { optionLabel: 'Espanol', optionValue: 'spanish', hasSubMenu: false },
-              { optionLabel: 'Francais', optionValue: 'french', hasSubMenu: false },
-              { optionLabel: 'Portugues', optionValue: 'portuguese', hasSubMenu: false },
-              { optionLabel: 'Pyccknn', optionValue: 'something', hasSubMenu: false }
-            ] }
-          />
-          <FilterMenuItem
-            menuName="Category"
-            filterSelections={ this.state.filterSelections }
-            handleFilterSelect={ this.handleFilterSelect }
-            closeSubMenu={ this.closeSubMenu }
-            useCheckbox
-            menuOptions={ [
-              { optionLabel: 'Art', optionValue: 'art', hasSubMenu: false },
-              { optionLabel: 'Business', optionValue: 'business', hasSubMenu: false },
-              { optionLabel: 'Education', optionValue: 'education', hasSubMenu: false },
-              { optionLabel: 'Policy', optionValue: 'policy', hasSubMenu: false },
-              { optionLabel: 'Region', optionValue: 'region', hasSubMenu: false }
-            ] }
-          />
+            filter="Language"
+            options={ this.getOptions( this.props.language ) }
+            default="en-us"
+            onFilterChange={ this.updateSearchQuery }
+          >
+            <Form.Radio />
+          </FilterMenuItem>
 
-          { /*
-          SUB-MENUS
-           */ }
-          <div
+          <FilterMenuItem
+            filter="Category"
+            options={ this.getOptions( this.props.category ) }
+            onFilterChange={ this.updateSearchQuery }
+            selected={ this.props.category.currentCategories }
+          >
+            <Form.Checkbox />
+          </FilterMenuItem>
+          { /* SUB-MENUS */ }
+          { /* <div
             className={
-              this.state.displaySubMenu && this.state.subMenuVal === 'video'
-              ? 'filterMenu_sub show'
-              : 'filterMenu_sub'
+              this.state.displaySubMenu && this.state.subMenuVal === 'video' ? 'filterMenu_sub show' : 'filterMenu_sub'
             }
             data-submenu-for="video"
           >
@@ -203,9 +190,7 @@ class FilterMenu extends Component {
           </div>
           <div
             className={
-              this.state.displaySubMenu && this.state.subMenuVal === 'custom'
-              ? 'filterMenu_sub show'
-              : 'filterMenu_sub'
+              this.state.displaySubMenu && this.state.subMenuVal === 'custom' ? 'filterMenu_sub show' : 'filterMenu_sub'
             }
             data-submenu-for="custom"
           >
@@ -229,11 +214,31 @@ class FilterMenu extends Component {
                 { optionLabel: 'Test 2', optionValue: 'opt_test2', parentMenu: 'custom' }
               ] }
             />
-          </div>
+          </div> */ }
         </div>
       </section>
     );
   }
 }
 
-export default FilterMenu;
+FilterMenu.propTypes = {
+  loadLanguages: func,
+  loadCategories: func,
+  loadPostTypes: func,
+  languageUpdate: func,
+  categoryUpdate: func,
+  postTypeUpdate: func,
+  createRequest: func,
+  language: object,
+  category: object,
+  type: object
+};
+
+const mapStateToProps = state => ( {
+  search: state.search,
+  language: state.language,
+  category: state.category,
+  type: state.type
+} );
+
+export default connect( mapStateToProps, actions )( FilterMenu );
