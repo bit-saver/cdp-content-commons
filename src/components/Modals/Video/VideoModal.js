@@ -64,13 +64,12 @@ class VideoModal extends Component {
 
   handleLanguageChange( value ) {
     if ( value ) {
-      for ( let i = 0; i < this.props.item.units.length; i += 1 ) {
-        if ( this.props.item.units[i].language.display_name === value ) {
-          this.setState( {
-            unit: this.props.item.units[i],
-            selectedLanguage: value
-          } );
-        }
+      const langIndex = this.props.item.units.findIndex( lang => lang.language.display_name === value );
+      if ( langIndex !== -1 ) {
+        this.setState( {
+          unit: this.props.item.units[langIndex],
+          selectedLanguage: value
+        } );
       }
     }
   }
