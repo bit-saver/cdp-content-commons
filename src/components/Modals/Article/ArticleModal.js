@@ -1,5 +1,5 @@
 import React from 'react';
-import { obj } from 'prop-types';
+import { object } from 'prop-types';
 
 import plusIcon from '../../../assets/images/plus.svg';
 
@@ -74,7 +74,7 @@ const ArticleModal = ( props ) => {
 };
 
 ArticleModal.propTypes = {
-  item: obj
+  item: object
 };
 
 export default ArticleModal;
