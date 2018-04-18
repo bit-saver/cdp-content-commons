@@ -35,7 +35,7 @@ class VideoModal extends Component {
 
   getVideoSource() {
     const { unit } = this.state;
-    if ( unit && unit.source && unit.source[0].stream ) {
+    if ( unit && unit.source[0] && unit.source[0].stream ) {
       const source = unit.source.find( caption => caption.burnedInCaptions === this.state.captions );
       if ( source ) return source.stream.url;
       return unit.source[0].stream.url;
@@ -73,7 +73,7 @@ class VideoModal extends Component {
         this.setState( {
           unit,
           selectedLanguage: value,
-          captions: unit.source[0].burnedInCaptions
+          captions: ( unit.source[0] ) ? unit.source[0].burnedInCaptions : false
         } );
       }
     }
