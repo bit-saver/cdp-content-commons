@@ -38,12 +38,13 @@ export const categoryAggRequest = () =>
     } )
     .then( response => response.data );
 
-export const typeRecentsRequest = currentType =>
+export const typeRecentsRequest = ( currentType, currentLang ) =>
   axios
     .post( SEARCH, {
       body: bodybuilder()
         .size( 3 )
         .query( 'match', 'type', currentType )
+        .query( 'query_string', 'query', `(language.locale: ${currentLang} OR unit.language.locale: ${currentLang})` )
         .sort( 'published', 'desc' )
         .build()
     } )

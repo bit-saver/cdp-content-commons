@@ -9,7 +9,8 @@ import VideoModal from '../Modals/Video/VideoModal';
 
 class Recents extends Component {
   componentWillMount() {
-    typeRecentsRequest( this.props.type )
+    const currentLang = 'en-us';
+    typeRecentsRequest( this.props.type, currentLang )
       .then( response => this.onFetchResult( response ) );
   }
 
