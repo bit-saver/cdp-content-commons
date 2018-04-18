@@ -141,7 +141,7 @@ export const normalizeItem = ( item, language ) => {
   const source = item._source;
 
   const obj = {
-    id: source.post_id,
+    id: ( source.post_id ) ? source.post_id : source.id,
     site: source.site,
     sourcelink: `https://${source.site}`,
     type: source.type,
