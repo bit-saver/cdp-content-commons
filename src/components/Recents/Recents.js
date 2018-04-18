@@ -63,7 +63,7 @@ class Recents extends Component {
           }
         >
           <Modal.Content>
--            <VideoModal item={ item } />
+            <VideoModal item={ item } />
           </Modal.Content>
         </Modal>
       ) );
