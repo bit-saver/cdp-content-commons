@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { func, object, string } from 'prop-types';
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import { string } from 'prop-types';
+import { typeRecentsRequest } from '../../utils/api';
 import { Grid, Header, Item, Modal } from 'semantic-ui-react';
 import './Recents.css';
 import { normalizeItem } from '../../utils/parser';
-import VideoModal from '../Modals/Video/VideoModal';
+import ModalContent from '../Modals/ModalContent';
 
 class Recents extends Component {
-  componentDidMount() {
-    this.props.recentsRequest( this.props.type );
+  componentWillMount() {
+    typeRecentsRequest( this.props.type )
+      .then( response => this.onFetchResult( response ) );
+  }
+
+  onFetchResult = ( response ) => {
+    this.setState( {
+      recents: response
+    } );
   }
 
   render() {
     let items;
-    if ( this.props.recents.items.response ) {
-      items = this.props.recents.items.response.hits.hits;
+    if ( this.state && this.state.recents.hits ) {
+      items = this.state.recents.hits.hits;
     } else {
       return <div />;
     }
@@ -56,7 +62,7 @@ class Recents extends Component {
           }
         >
           <Modal.Content>
-            <VideoModal item={ item } />
+            <ModalContent item={ item } />
           </Modal.Content>
         </Modal>
       ) );
@@ -80,7 +86,7 @@ class Recents extends Component {
                 }
               >
                 <Modal.Content>
-                  <VideoModal item={ items[0] } />
+                  <ModalContent item={ items[0] } />
                 </Modal.Content>
               </Modal>
             }
@@ -94,15 +100,9 @@ class Recents extends Component {
   }
 }
 
-const mapStateToProps = state => ( {
-  recents: state.recents
-} );
-
 Recents.propTypes = {
-  recentsRequest: func,
-  recents: object,
   type: string,
   label: string
 };
 
-export default connect( mapStateToProps, actions )( Recents );
+export default Recents;

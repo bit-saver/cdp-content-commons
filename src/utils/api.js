@@ -38,6 +38,17 @@ export const categoryAggRequest = () =>
     } )
     .then( response => response.data );
 
+export const typeRecentsRequest = currentType =>
+  axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 3 )
+        .query( 'match', 'type', currentType )
+        .sort( 'published', 'desc' )
+        .build()
+    } )
+    .then( response => response.data );
+
 export const categoryBaseRequest = () =>
   axios
     .post( SEARCH, {
