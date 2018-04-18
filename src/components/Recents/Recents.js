@@ -5,7 +5,7 @@ import { typeRecentsRequest } from '../../utils/api';
 import { Grid, Header, Item, Modal } from 'semantic-ui-react';
 import './Recents.css';
 import { normalizeItem } from '../../utils/parser';
-import ModalContent from '../Modals/ModalContent';
+import VideoModal from '../Modals/Video/VideoModal';
 
 class Recents extends Component {
   componentWillMount() {
@@ -62,7 +62,7 @@ class Recents extends Component {
           }
         >
           <Modal.Content>
-            <ModalContent item={ item } />
+-            <VideoModal item={ item } />
           </Modal.Content>
         </Modal>
       ) );
@@ -86,7 +86,7 @@ class Recents extends Component {
                 }
               >
                 <Modal.Content>
-                  <ModalContent item={ items[0] } />
+                  <VideoModal item={ items[0] } />
                 </Modal.Content>
               </Modal>
             }
