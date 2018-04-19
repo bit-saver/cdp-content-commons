@@ -59,20 +59,22 @@ class Results extends Component {
             </section>
             <Grid className="results_wrapper">
               { /* TEMP ARTICLE ITEM */ }
-              <Grid.Column
-                mobile={ 16 }
-                tablet={ view === 'gallery' ? 8 : 16 }
-                computer={ view === 'gallery' ? 4 : 16 }
-                className={
-                  view === 'gallery' ? 'card_wrapper card_wrapper--gallery' : 'card_wrapper card_wrapper--list'
-                }
-                key={ articleData.id }
-              >
-                <ResultItem key={ articleData.id } item={ articleData } />
-              </Grid.Column>
+              { articleData &&
+                <Grid.Column
+                  mobile={ 16 }
+                  tablet={ view === 'gallery' ? 8 : 16 }
+                  computer={ view === 'gallery' ? 4 : 16 }
+                  className={
+                    view === 'gallery' ? 'card_wrapper card_wrapper--gallery' : 'card_wrapper card_wrapper--list'
+                  }
+                  key={ articleData.id }
+                >
+                  <ResultItem key={ articleData.id } item={ articleData } />
+                </Grid.Column>
+              }
               { /* END TEMP ARTICLE ITEM */ }
 
-              { items.map( item => (
+              { items.length > 0 && items.map( item => (
                 <Grid.Column
                   mobile={ 16 }
                   tablet={ view === 'gallery' ? 8 : 16 }
