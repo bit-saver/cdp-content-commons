@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Social = () => <div>Video Social</div>;
+const Social = () => <div>Social</div>;
 
 export default Social;

@@ -37,12 +37,12 @@ const ArticleModal = ( props ) => {
         <div className="modal_options_share">
           <img src={ plusIcon } alt="" />
           <PopupTrigger
-            toolTip="Copy the shortcode for this video or<br> share it social platforms."
+            toolTip="Copy the shortcode for this article or<br> share it social platforms."
             icon="share"
             show={ item.type === 'article' }
             content={
               <PopupTabbed
-                title="How would you like to share this video?"
+                title="How would you like to share this article?"
                 item={ item }
                 panes={ [
                   { title: 'Copy Shortcode', component: <Shortcode /> },
