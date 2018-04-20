@@ -20,7 +20,7 @@ const INITIAL_STATE = {
   endPage: 0,
   error: '',
   isFetching: false,
-  pageSize: 9,
+  pageSize: 12,
   pages: [],
   query: '',
   currentQuery: '',
