@@ -15,14 +15,7 @@ export const languageAggRequest = async () => {
     } )
     .then( response => response.data );
 
-  const allLangs = await axios
-    .post( SEARCH, {
-      body: bodybuilder()
-        .size( 100 )
-        .query( 'query_string', 'query', '_index: languages' )
-        .build()
-    } )
-    .then( response => response.data );
+  const allLangs = await axios.post( SEARCH, { size: 200, index: 'languages' } ).then( response => response.data );
 
   return { langsWithContent, allLangs };
 };
