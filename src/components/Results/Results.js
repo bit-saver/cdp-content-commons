@@ -58,6 +58,8 @@ class Results extends Component {
               <ResultsHeader toggleView={ this.toggleView } currentView={ this.state.view } />
             </section>
             <Grid className="results_wrapper">
+
+
               { items.map( item => (
                 <Grid.Column
                   mobile={ 16 }
