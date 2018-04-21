@@ -70,6 +70,11 @@
   .card_imgWrapper {
     position: relative;
     cursor: pointer;
+    -ms-overflow-y: hidden;
+
+    > img {
+      height: auto !important;
+    }
   }
 
 

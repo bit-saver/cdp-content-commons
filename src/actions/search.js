@@ -17,7 +17,9 @@ import {
 import { queryRequest } from '../utils/api';
 import { queryBuilder } from '../utils/helpers';
 
-export const calculatePages = ( _total, _currentPage, pageSize = 1 ) => {
+const PAGE_SIZE = 12;
+
+export const calculatePages = ( _total, _currentPage, pageSize = PAGE_SIZE ) => {
   const total = _total;
   const currentPage = _currentPage;
   const totalPages = Math.ceil( total / pageSize );
@@ -86,8 +88,7 @@ export const createRequest = () => async ( dispatch, getState ) => {
   const currentState = getState();
   try {
     response = await queryRequest( {
-      // size: 12,
-      size: 1,
+      size: PAGE_SIZE,
       body: queryBuilder( currentState )
     } );
   } catch ( err ) {
@@ -107,7 +108,7 @@ export const createRequest = () => async ( dispatch, getState ) => {
   } );
 };
 
-export const targetRequest = ( page, pageSize = 1 ) => async ( dispatch, getState ) => {
+export const targetRequest = ( page, pageSize = PAGE_SIZE ) => async ( dispatch, getState ) => {
   let offset = pageSize;
   const pageOffset = page * offset;
   offset = pageOffset - offset;
@@ -138,7 +139,7 @@ export const targetRequest = ( page, pageSize = 1 ) => async ( dispatch, getStat
   } );
 };
 
-export const sortRequest = ( sortType, pageSize = 1 ) => async ( dispatch, getState ) => {
+export const sortRequest = ( sortType, pageSize = PAGE_SIZE ) => async ( dispatch, getState ) => {
   dispatch( showLoading() );
   dispatch( {
     type: SEARCH_SORT_PENDING,
@@ -196,4 +197,3 @@ export const updateSizeRequest = newSize => async ( dispatch, getState ) => {
     }
   } );
 };
-
