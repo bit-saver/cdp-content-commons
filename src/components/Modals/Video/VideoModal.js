@@ -43,6 +43,22 @@ class VideoModal extends Component {
     return '';
   }
 
+  getYouTubeId() {
+    const { unit } = this.state;
+    if ( unit && unit.source[0] && unit.source[0].streamUrl ) {
+      const streamUrls = unit.source[0].streamUrl;
+      const urls = streamUrls.filter( url => url.site === 'youtube' );
+      if ( urls[0] && urls[0].url ) {
+        const youtubeUrl = urls[0].url;
+
+        const re = /https:\/\/youtu.be\/(.*)/;
+        const id = youtubeUrl.match( re );
+        return id[1] || null;
+      }
+    }
+    return null;
+  }
+
   getVideoTranscript() {
     const { unit } = this.state;
     if ( unit ) {
@@ -63,7 +79,11 @@ class VideoModal extends Component {
   getCaptions() {
     const { selectedLanguageUnit } = this.props.item;
     if ( !selectedLanguageUnit ) return false;
-    return selectedLanguageUnit.source[0].burnedInCaptions;
+    const { source } = selectedLanguageUnit;
+    if ( !source ) return false;
+    if ( !source[0] ) return false;
+
+    return !!source[0].burnedInCaptions;
   }
 
   handleLanguageChange( value ) {
@@ -73,7 +93,7 @@ class VideoModal extends Component {
         this.setState( {
           unit,
           selectedLanguage: value,
-          captions: ( unit.source[0] ) ? unit.source[0].burnedInCaptions : false
+          captions: unit.source[0] ? unit.source[0].burnedInCaptions : false
         } );
       }
     }
@@ -85,8 +105,12 @@ class VideoModal extends Component {
 
   renderVideoPlayer() {
     const url = this.getVideoSource();
+    const youTubeId = this.getYouTubeId();
     const active = !!url;
     const icon = active ? 'video play' : 'warning circle';
+    if ( youTubeId ) {
+      return <Embed id={ youTubeId } placeholder={ this.props.item.thumbnail } source="youtube" />;
+    }
     return <Embed active={ active } icon={ icon } placeholder={ this.props.item.thumbnail } url={ url } />;
   }
 
@@ -111,7 +135,7 @@ class VideoModal extends Component {
                 selected={ this.state.selectedLanguage }
                 handleLanguageChange={ this.handleLanguageChange }
               />
-              { unit.source.length > 1 &&
+              { unit.source.length > 1 && (
                 <Checkbox
                   className="modal_captions"
                   checked={ this.state.captions }
@@ -119,7 +143,7 @@ class VideoModal extends Component {
                   label="Video with captions"
                   onChange={ this.handleCaptionChange }
                 />
-              }
+              ) }
             </div>
             <div className="modal_options_share">
               <img src={ plusIcon } alt="" />
@@ -156,10 +180,10 @@ class VideoModal extends Component {
                         component: (
                           <DownloadVideo
                             selectedLanguageUnit={ unit }
-                            instructions={
-                              `Download the original video file without captions in ${unit.language.display_name}.
-                              This download option is best for uploading this video to web pages.`
-                            }
+                            instructions={ `Download the original video file without captions in ${
+                              unit.language.display_name
+                            }.
+                              This download option is best for uploading this video to web pages.` }
                             burnedInCaptions="no"
                           />
                         )
@@ -169,10 +193,8 @@ class VideoModal extends Component {
                         component: (
                           <DownloadVideo
                             selectedLanguageUnit={ unit }
-                            instructions={
-                              `Download this video with open captions in ${unit.language.display_name}.
-                              This download option is best for uploading this video to social media.`
-                            }
+                            instructions={ `Download this video with open captions in ${unit.language.display_name}.
+                              This download option is best for uploading this video to social media.` }
                             burnedInCaptions="yes"
                           />
                         )

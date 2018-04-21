@@ -19,9 +19,7 @@ class Search extends Component {
 
   handleSubmit( e ) {
     e.preventDefault();
-    if ( !this.props.search.query ) {
-      return;
-    }
+
     this.props.createRequest();
     this.props.history.push( '/results' );
   }
