@@ -8,20 +8,16 @@ import './SearchTerm.css';
 const SearchTerm = ( props ) => {
   const { currentQuery, total } = props.search;
 
-  if ( props.search.response.took && props.search.response.hits.hits.length ) {
-    return (
-      <section className="searchTerm">
-        <Header as="h1" className="searchTermQuery">
-          { `"${currentQuery}"` }
-          <Header.Subheader className="searchTermTotal">
-            { numberWithCommas( total ) } { ( total === 1 ) ? 'item' : 'items' }
-          </Header.Subheader>
-        </Header>
-      </section>
-    );
-  }
-
-  return <div />;
+  return (
+    <section className="searchTerm">
+      <Header as="h1" className="searchTermQuery">
+        { currentQuery && `"${currentQuery}"` }
+        <Header.Subheader className="searchTermTotal">
+          { numberWithCommas( total ) } { total === 1 ? 'item' : 'items' }
+        </Header.Subheader>
+      </Header>
+    </section>
+  );
 };
 
 const mapStateToProps = state => ( {
