@@ -42,11 +42,6 @@ class Results extends Component {
       isNoResults = true;
     }
 
-    /* TEMP data for Article Display */
-    const articleData = items[0] ? Object.assign( {}, normalizeItem( items[0] ) ) : null;
-    if ( articleData ) articleData.type = 'article';
-    /* END TEMP */
-
     return (
       <section className="results">
         <Breadcrumbs />
@@ -58,8 +53,6 @@ class Results extends Component {
               <ResultsHeader toggleView={ this.toggleView } currentView={ this.state.view } />
             </section>
             <Grid className="results_wrapper">
-
-
               { items.map( item => (
                 <Grid.Column
                   mobile={ 16 }
