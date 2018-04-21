@@ -15,7 +15,7 @@ ReactTapEventPlugin();
 const App = () => (
   <div>
     <Header />
-    <main className="ui container">
+    <div className="ui container">
       <Switch>
         <Route path="/" exact component={ LandingPage } />
         <Route path="/results" component={ Results } />
@@ -23,7 +23,7 @@ const App = () => (
         <Route path="/help" component={ HelpPage } />
         <Redirect to="/" />
       </Switch>
-    </main>
+    </div>
     <Footer />
   </div>
 );
