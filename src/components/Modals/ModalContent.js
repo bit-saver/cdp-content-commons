@@ -2,7 +2,6 @@ import React from 'react';
 import { object } from 'prop-types';
 import VideoModal from '../Types/Video/VideoModal';
 import PostModal from '../Types/Post/PostModal';
-import './ModalContent.css';
 
 const ModalContent = ( props ) => {
   const { item } = props;
