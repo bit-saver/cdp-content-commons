@@ -5,7 +5,7 @@ import { Embed, Checkbox } from 'semantic-ui-react';
 // import plusIcon from '../../../assets/icons/icon_plus.svg';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
 
-import ModalContent from '../ModalContent';
+import ModalItem from '../ModalItem';
 import ModalLangDropdown from '../ModalLangDropdown/ModalLangDropdown';
 import ModalContentMeta from '../ModalContentMeta/ModalContentMeta';
 import ModalDescription from '../ModalDescription/ModalDescription';
@@ -143,7 +143,7 @@ class VideoModal extends Component {
     const { unit } = this.state;
     if ( unit ) {
       return (
-        <ModalContent headline={ unit.title }>
+        <ModalItem headline={ unit.title } >
           <div className="modal_options">
             <div className="modal_options_left">
               <ModalLangDropdown
@@ -244,10 +244,10 @@ class VideoModal extends Component {
             datePublished={ unit.published }
           />
           <ModalPostTags tags={ unit.categories } />
-        </ModalContent>
+        </ModalItem>
       );
     }
-    return <ModalContent headline="Video Unavailable" />;
+    return <ModalItem headline="Content Unavailable" />;
   }
 }
 

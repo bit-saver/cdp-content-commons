@@ -9,7 +9,6 @@ const ModalText = ( props ) => {
 
   return (
     <section className="modal_section modal_section--textContent">
-      <p className="textContent_label">Begin Text:</p>
       <div className="textContent" ref={ ( node ) => { if ( node ) node.appendChild( textContentWrapper ); } } />
     </section>
   );

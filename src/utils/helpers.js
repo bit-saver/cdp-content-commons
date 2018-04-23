@@ -24,12 +24,20 @@ export const getAvailableLanguages = ( item ) => {
         text: unit.language.display_name
       } ) );
     case 'post':
-      return item.languages.map( post => ( {
-        id: post.post_id,
-        key: post.language.language_code,
-        value: post.language.display_name,
-        text: post.language.display_name
-      } ) );
+      if ( item.languages ) {
+        return item.languages.map( post => ( {
+          id: post.post_id,
+          key: post.language.language_code,
+          value: post.language.display_name,
+          text: post.language.display_name
+        } ) );
+      }
+      return {
+        id: item.post_id,
+        key: 'en-us',
+        value: 'English',
+        text: 'English'
+      };
     default:
       return [];
   }

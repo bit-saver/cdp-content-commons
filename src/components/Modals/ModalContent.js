@@ -1,21 +1,18 @@
 import React from 'react';
-import { node, string } from 'prop-types';
+import { object } from 'prop-types';
+import VideoModal from './Video/VideoModal';
+import ArticleModal from './Article/ArticleModal';
 import './ModalContent.css';
 
 const ModalContent = ( props ) => {
-  const { headline } = props;
+  const { item } = props;
 
-  return (
-    <div className="modal">
-      <h1 className="modal_headline">{ headline }</h1>
-      { props.children }
-    </div>
-  );
+  if ( item && item.type === 'video' ) return <VideoModal item={ item } />;
+  if ( item && item.type === 'post' ) return <ArticleModal item={ item } />;
 };
 
 ModalContent.propTypes = {
-  headline: string,
-  children: node
+  item: object
 };
 
 export default ModalContent;
