@@ -9,19 +9,29 @@ const ModalPostMeta = ( props ) => {
     author,
     source,
     site,
-    datePublished
+    datePublished,
+    textDirection
   } = props;
 
   return (
     <section className="modal_section modal_section--postMeta">
-      <span className="modal_postmeta_content">
-        Source: <a href={ source } target="_blank">{ site }</a>
-      </span>
-      { author && <span className="modal_postmeta_content"> Author: { author } </span> }
+      { textDirection === 'ltr' &&
+        <span className="modal_postmeta_content">Source: <a href={ source } target="_blank">{ site }</a></span>
+      }
+      { textDirection === 'rtl' &&
+        <span className="modal_postmeta_content"><a href={ source } target="_blank">{ site }</a> :Source</span>
+      }
+      { author &&
+        <span className="modal_postmeta_content">
+          { textDirection === 'ltr' && `Author: ${author}` }
+          { textDirection === 'rtl' && `${author} :Author` }
+        </span>
+      }
       { type === 'video' && <span className="modal_postmeta_content">Owner: IIP, Office of Video Production</span> }
       { type === 'article' && <span className="modal_postmeta_content">Owner: IIP, Office of Editorial Content</span> }
       <span className="modal_postmeta_content">
-        Date Published: { moment( datePublished ).format( 'MMMM DD, YYYY' ) }
+        { textDirection === 'ltr' && `Date Published: ${moment( datePublished ).format( 'MMMM DD, YYYY' )}` }
+        { textDirection === 'rtl' && `${moment( datePublished ).format( 'MMMM DD, YYYY' )} :Date Published` }
       </span>
     </section>
   );
@@ -32,7 +42,8 @@ ModalPostMeta.propTypes = {
   author: string,
   source: string,
   site: string,
-  datePublished: string
+  datePublished: string,
+  textDirection: string
 };
 
 export default ModalPostMeta;

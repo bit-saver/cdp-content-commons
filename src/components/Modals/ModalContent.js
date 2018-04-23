@@ -1,12 +1,13 @@
 import React from 'react';
 import { node, string } from 'prop-types';
 import './ModalContent.css';
+import './ModalContentRTL.css';
 
 const ModalContent = ( props ) => {
-  const { headline } = props;
+  const { headline, textDirection } = props;
 
   return (
-    <div className="modal">
+    <div className={ `modal ${textDirection}` }>
       <h1 className="modal_headline">{ headline }</h1>
       { props.children }
     </div>
@@ -15,7 +16,8 @@ const ModalContent = ( props ) => {
 
 ModalContent.propTypes = {
   headline: string,
-  children: node
+  children: node,
+  textDirection: string
 };
 
 export default ModalContent;

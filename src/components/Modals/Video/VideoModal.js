@@ -29,7 +29,8 @@ class VideoModal extends Component {
     this.state = {
       unit: this.props.item.selectedLanguageUnit,
       selectedLanguage: this.getLanguage(),
-      captions: this.getCaptions()
+      captions: this.getCaptions(),
+      textDirection: 'ltr'
     };
 
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
@@ -105,7 +106,8 @@ class VideoModal extends Component {
         this.setState( {
           unit,
           selectedLanguage: value,
-          captions: unit.source[0] ? unit.source[0].burnedInCaptions === 'true' : false
+          captions: ( unit.source[0] ) ? unit.source[0].burnedInCaptions : false,
+          textDirection: unit.language.text_direction
         } );
       }
     }
@@ -140,10 +142,19 @@ class VideoModal extends Component {
   }
 
   render() {
-    const { unit } = this.state;
+    const { unit, textDirection } = this.state;
+    const {
+      type,
+      site,
+      sourcelink,
+      author,
+      published,
+      modified
+    } = this.props.item;
+
     if ( unit ) {
       return (
-        <ModalContent headline={ unit.title }>
+        <ModalContent headline={ unit.title } textDirection={ textDirection }>
           <div className="modal_options">
             <div className="modal_options_left">
               <ModalLangDropdown
@@ -172,7 +183,7 @@ class VideoModal extends Component {
               <PopupTrigger
                 toolTip="Copy the shortcode for this video or<br> share it social platforms."
                 icon="share"
-                // show={ item.type === 'video' }
+                // show={ type === 'video' }
                 show={ false }
                 content={
                   <PopupTabbed
@@ -192,7 +203,7 @@ class VideoModal extends Component {
                 toolTip="Download this video with an embed code"
                 icon={ downloadIcon }
                 position="right"
-                show={ this.props.item.type === 'video' }
+                show={ type === 'video' }
                 content={
                   <PopupTabbed
                     title="Download this video."
@@ -235,13 +246,21 @@ class VideoModal extends Component {
 
           { this.renderVideoPlayer() }
 
-          <ModalContentMeta type={ unit.type } dateUpdated={ unit.modified } transcript={ this.getVideoTranscript() } />
+          <ModalContentMeta
+            type={ type }
+            dateUpdated={ modified }
+            transcript={ this.getVideoTranscript() }
+            textDirection={ textDirection }
+            locale={ unit.language.locale }
+          />
           <ModalDescription description={ unit.desc } />
           <ModalPostMeta
-            author={ unit.author }
-            source={ unit.sourcelink }
-            site={ unit.site }
-            datePublished={ unit.published }
+            author={ author }
+            source={ sourcelink }
+            site={ site }
+            datePublished={ published }
+            textDirection={ textDirection }
+            locale={ unit.language.locale }
           />
           <ModalPostTags tags={ unit.categories } />
         </ModalContent>
