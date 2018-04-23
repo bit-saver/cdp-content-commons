@@ -29,31 +29,39 @@ class VideoModal extends Component {
       selectedLanguage: this.getLanguage(),
       captions: this.getCaptions()
     };
+
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
     this.handleCaptionChange = this.handleCaptionChange.bind( this );
   }
 
   getVideoSource() {
-    const { unit } = this.state;
-    if ( unit && unit.source[0] && unit.source[0].stream ) {
-      const source = unit.source.find( caption => caption.burnedInCaptions === this.state.captions );
-      if ( source ) return source.stream.url;
-      return unit.source[0].stream.url;
+    const { unit, captions } = this.state;
+    if ( unit && Array.isArray( unit.source ) ) {
+      const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
+      if ( source && source.stream && source.stream.url ) {
+        return source.stream.url;
+      }
     }
-    return '';
+    return null;
   }
 
+  // NOTE: Chrome is throwing an error when youtube is embedded:
+  // https://stackoverflow.com/questions/48714879/error-parsing-header-x-xss-protection-google-chrome
   getYouTubeId() {
-    const { unit } = this.state;
-    if ( unit && unit.source[0] && unit.source[0].streamUrl ) {
-      const streamUrls = unit.source[0].streamUrl;
-      const urls = streamUrls.filter( url => url.site === 'youtube' );
-      if ( urls[0] && urls[0].url ) {
-        const youtubeUrl = urls[0].url;
+    const { unit, captions } = this.state;
+    if ( unit && Array.isArray( unit.source ) ) {
+      const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
 
-        const re = /https:\/\/youtu.be\/(.*)/;
-        const id = youtubeUrl.match( re );
-        return id[1] || null;
+      if ( source && source.streamUrl ) {
+        const streamObj = source.streamUrl.find( stream => stream.site === 'youtube' );
+
+        if ( streamObj && streamObj.url ) {
+          const youtubeUrl = streamObj.url;
+
+          const re = /https:\/\/youtu.be\/(.*)/;
+          const id = youtubeUrl.match( re );
+          return id[1] || null;
+        }
       }
     }
     return null;
@@ -76,6 +84,8 @@ class VideoModal extends Component {
     return selectedLanguageUnit.language.display_name;
   }
 
+  // Note: The burnedInCaptions porperty is coming in as 'true' and 'false' strings.  Need to be careful
+  // need to coerce is spots to ensure valid comparison.  Going forweard, try to avoid 'true' and 'false' strings
   getCaptions() {
     const { selectedLanguageUnit } = this.props.item;
     if ( !selectedLanguageUnit ) return false;
@@ -83,7 +93,7 @@ class VideoModal extends Component {
     if ( !source ) return false;
     if ( !source[0] ) return false;
 
-    return !!source[0].burnedInCaptions;
+    return source[0].burnedInCaptions === 'true'; // coerce to a boolean
   }
 
   handleLanguageChange( value ) {
@@ -93,7 +103,7 @@ class VideoModal extends Component {
         this.setState( {
           unit,
           selectedLanguage: value,
-          captions: unit.source[0] ? unit.source[0].burnedInCaptions : false
+          captions: unit.source[0] ? unit.source[0].burnedInCaptions === 'true' : false
         } );
       }
     }
@@ -104,13 +114,18 @@ class VideoModal extends Component {
   }
 
   renderVideoPlayer() {
-    const url = this.getVideoSource();
+    // console.log( `rendering video with captions ${this.state.captions}` );
+    // render youtube player if link available
     const youTubeId = this.getYouTubeId();
-    const active = !!url;
-    const icon = active ? 'video play' : 'warning circle';
     if ( youTubeId ) {
       return <Embed id={ youTubeId } placeholder={ this.props.item.thumbnail } source="youtube" />;
     }
+    // console.log( 'loading cloudflare' );
+    // fallback to CloudFlare player if no youtube link available
+    const url = this.getVideoSource();
+    const active = !!url;
+    const icon = active ? 'video play' : 'warning circle';
+
     return <Embed active={ active } icon={ icon } placeholder={ this.props.item.thumbnail } url={ url } />;
   }
 
@@ -146,7 +161,13 @@ class VideoModal extends Component {
               ) }
             </div>
             <div className="modal_options_share">
-              <img src={ plusIcon } alt="" />
+              <PopupTrigger
+                toolTip=""
+                icon="plus circle"
+                // show={ item.type === 'video' }
+                show={ false }
+                content={ <div /> }
+              />
               <PopupTrigger
                 toolTip="Copy the shortcode for this video or<br> share it social platforms."
                 icon="share"
@@ -170,7 +191,7 @@ class VideoModal extends Component {
                 toolTip="Download this video with an embed code"
                 icon="download"
                 position="right"
-                show={ unit.type === 'video' }
+                show={ this.props.item.type === 'video' }
                 content={
                   <PopupTabbed
                     title="Download this video."
