@@ -33,15 +33,17 @@ class ModalContentMeta extends Component {
               Updated: { moment( dateUpdated ).format( 'MMMM DD, YYYY' ) }
             </span>
           </div>
-          <div className="modal_transcript">
-            <button
-              className={ isOpen ? 'ui button transcriptDisplay' : 'ui button' }
-              onClick={ this.toggleTranscript }
-            >
-              { isOpen ? 'Close Transcript' : 'Transcript' }
-              <Icon name={ isOpen ? 'chevron up' : 'chevron down' } />
-            </button>
-          </div>
+          { transcript &&
+            <div className="modal_transcript">
+              <button
+                className={ isOpen ? 'ui button transcriptDisplay' : 'ui button' }
+                onClick={ this.toggleTranscript }
+              >
+                { isOpen ? 'Close Transcript' : 'Transcript' }
+                <Icon name={ isOpen ? 'chevron up' : 'chevron down' } />
+              </button>
+            </div>
+          }
         </div>
         { transcript &&
           <ModalTranscript transcript={ transcript } classes={ isOpen ? 'transcript active' : 'transcript' } />
