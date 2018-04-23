@@ -7,6 +7,7 @@ export default {
   lightGrey: '#f1f1f1',
   mediumGrey: '#b2b4b8',
   altGrey: '#d6d7d9',
+  darkGrey: '#222',
   grey: '#5b616b',
   gold: ' #fdb81e',
   silver: '#C2C2C2',
