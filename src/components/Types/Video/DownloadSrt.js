@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import downloadIcon from '../../assets/icons/icon_download.svg';
+import downloadIcon from '../../../assets/icons/icon_download.svg';
 import { array, string } from 'prop-types';
 
 class DownloadSrt extends Component {

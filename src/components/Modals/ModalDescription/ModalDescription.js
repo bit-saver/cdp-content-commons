@@ -6,7 +6,6 @@ const ModalDescription = ( props ) => {
   const { description } = props;
   return (
     <section className="modal_section modal_section--description">
-      <p className="modal_description_label">Description:</p>
       <p className="modal_description_text">{ description }</p>
     </section>
   );

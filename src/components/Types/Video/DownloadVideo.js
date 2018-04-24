@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import downloadIcon from '../../assets/icons/icon_download.svg';
+import downloadIcon from '../../../assets/icons/icon_download.svg';
 import { object, string, bool } from 'prop-types';
 
 // NOTE: Using the 'download' attribute to trigger downloads

@@ -130,8 +130,11 @@ const populateItem = ( source ) => {
   const obj = {
     title: source.title,
     description: source.excerpt,
+    content: source.content,
     thumbnail: getThumbnail( source ) || getDefaultThumbnail( source.type ),
-    categories: source.categories || []
+    categories: source.categories || [],
+    language: source.language,
+    languages: source.languages || []
   };
 
   return obj;
