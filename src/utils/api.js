@@ -43,6 +43,16 @@ export const typeRecentsRequest = ( currentType, currentLang ) =>
     } )
     .then( response => response.data );
 
+export const getItemRequest = ( site, postId ) =>
+  axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 1 )
+        .query( 'query_string', 'query', `site: ${site} AND id: ${postId}` )
+        .build()
+    } )
+    .then( response => response.data );
+
 export const categoryBaseRequest = () =>
   axios
     .post( SEARCH, {
