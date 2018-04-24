@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { Embed, Checkbox } from 'semantic-ui-react';
 
-import plusIcon from '../../../assets/images/plus.svg';
+// import plusIcon from '../../../assets/icons/icon_plus.svg';
+import downloadIcon from '../../../assets/icons/icon_download.svg';
 
 import ModalContent from '../ModalContent';
 import ModalLangDropdown from '../ModalLangDropdown/ModalLangDropdown';
@@ -15,7 +16,8 @@ import PopupTrigger from '../../Popup/PopupTrigger';
 import PopupTabbed from '../../Popup/PopupTabbed';
 
 import DownloadVideo from '../../Video/DownloadVideo';
-import DownloadMore from '../../Video/DownloadMore';
+import DownloadSrt from '../../Video/DownloadSrt';
+import DownloadTranscript from '../../Video/DownloadTranscript';
 import DownloadHelp from '../../Video/DownloadHelp';
 import Shortcode from '../../Video/Shortcode';
 import Social from '../../Video/Social';
@@ -84,8 +86,8 @@ class VideoModal extends Component {
     return selectedLanguageUnit.language.display_name;
   }
 
-  // Note: The burnedInCaptions porperty is coming in as 'true' and 'false' strings.  Need to be careful
-  // need to coerce is spots to ensure valid comparison.  Going forweard, try to avoid 'true' and 'false' strings
+  // Note: The burnedInCaptions porperty is coming in as 'true' and 'false' strings. Need to coerce
+  //  in spots to ensure valid comparison.  Going forweard, try to avoid 'true' and 'false' strings
   getCaptions() {
     const { selectedLanguageUnit } = this.props.item;
     if ( !selectedLanguageUnit ) return false;
@@ -114,13 +116,12 @@ class VideoModal extends Component {
   }
 
   renderVideoPlayer() {
-    // console.log( `rendering video with captions ${this.state.captions}` );
     // render youtube player if link available
     const youTubeId = this.getYouTubeId();
     if ( youTubeId ) {
       return <Embed id={ youTubeId } placeholder={ this.props.item.thumbnail } source="youtube" />;
     }
-    // console.log( 'loading cloudflare' );
+
     // fallback to CloudFlare player if no youtube link available
     const url = this.getVideoSource();
     const active = !!url;
@@ -189,7 +190,7 @@ class VideoModal extends Component {
               />
               <PopupTrigger
                 toolTip="Download this video with an embed code"
-                icon="download"
+                icon={ downloadIcon }
                 position="right"
                 show={ this.props.item.type === 'video' }
                 content={
@@ -197,33 +198,35 @@ class VideoModal extends Component {
                     title="Download this video."
                     panes={ [
                       {
-                        title: 'Original',
+                        title: 'Video File',
                         component: (
                           <DownloadVideo
                             selectedLanguageUnit={ unit }
-                            instructions={ `Download the original video file without captions in ${
-                              unit.language.display_name
-                            }.
+                            instructions={ `Download the video and SRT files in ${unit.language.display_name}.
                               This download option is best for uploading this video to web pages.` }
-                            burnedInCaptions="no"
+                            burnedInCaptions={ this.state.captions }
                           />
                         )
                       },
                       {
-                        title: this.renderCaptionTabTitle(),
+                        title: 'SRT',
                         component: (
-                          <DownloadVideo
+                          <DownloadSrt
                             selectedLanguageUnit={ unit }
-                            instructions={ `Download this video with open captions in ${unit.language.display_name}.
-                              This download option is best for uploading this video to social media.` }
-                            burnedInCaptions="yes"
+                            instructions="Download SRTs"
+                            units={ this.props.item.units }
                           />
                         )
                       },
-                      { title: 'More', component: <DownloadMore units={ this.props.item.units } /> },
+                      {
+                        title: 'Transcript',
+                        component: (
+                          <DownloadTranscript units={ this.props.item.units } instructions="Download Transcripts" />
+                        )
+                      },
                       { title: 'Help', component: <DownloadHelp /> }
                     ] }
-                    config={ { width: '87px', offset: '110px' } } // TODO: remove hardcoding, make it dynamic
+                    config={ { width: '99px', offset: '121px' } } // TODO: remove hardcoding, make it dynamic
                   />
                 }
               />

@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Card, Image, Modal } from 'semantic-ui-react';
 import VideoModal from '../../Modals/Video/VideoModal';
 import ArticleModal from '../../Modals/Article/ArticleModal';
-import articleIcon from '../../../assets/images/icon_32px_post.png';
+import articleIcon from '../../../assets/icons/icon_32px_post.png';
 import './ResultItem.css';
 
 class ResultItem extends Component {

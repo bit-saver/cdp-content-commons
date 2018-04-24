@@ -1,7 +1,7 @@
 import React from 'react';
 import { object } from 'prop-types';
 
-import plusIcon from '../../../assets/images/plus.svg';
+import plusIcon from '../../../assets/icons/icon_plus.svg';
 
 import ModalContent from '../ModalContent';
 import ModalLangDropdown from '../ModalLangDropdown/ModalLangDropdown';

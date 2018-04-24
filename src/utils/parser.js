@@ -1,7 +1,7 @@
-import iconPost from '../assets/images/icon_32px_post.png';
-import iconCourse from '../assets/images/icon_32px_course.png';
-import iconAudio from '../assets/images/icon_32px_audio.png';
-import iconVideo from '../assets/images/icon_32px_video.png';
+import iconPost from '../assets/icons/icon_32px_post.png';
+import iconCourse from '../assets/icons/icon_32px_course.png';
+import iconAudio from '../assets/icons/icon_32px_audio.png';
+import iconVideo from '../assets/icons/icon_32px_video.png';
 
 import thumbnailPost from '../assets/images/thumbnail_post.jpg';
 import thumbnailCourse from '../assets/images/thumbnail_course.jpg';
