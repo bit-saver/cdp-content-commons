@@ -10,11 +10,6 @@ const ModalTranscript = ( props ) => {
       <p className="transcript_label">Transcript:</p>
       <div className="transcript_text">
         { transcript }
-
-        { /* TEMP */ }
-        <p>Transcript text</p>
-        <p>Transcript text</p>
-        <p>Transcript text</p>
       </div>
     </div>
   );
