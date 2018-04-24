@@ -21,7 +21,7 @@ const ModalPostMeta = ( props ) => {
         </span>
       }
       { type === 'video' && <span className="modal_postmeta_content">Owner: IIP, Office of Video Production</span> }
-      { type === 'article' && <span className="modal_postmeta_content">Owner: IIP, Office of Editorial Content</span> }
+      { type === 'post' && <span className="modal_postmeta_content">Owner: IIP, Office of Editorial Content</span> }
       <span className="modal_postmeta_content">
         { `Date Published: ${moment( datePublished ).format( 'MMMM DD, YYYY' )}` }
       </span>

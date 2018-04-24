@@ -112,7 +112,7 @@ class VideoModal extends Component {
         this.setState( {
           unit,
           selectedLanguage: value,
-          captions: unit.source[0] ? unit.source[0].burnedInCaptions === 'true' : false
+          captions: unit.source[0] ? unit.source[0].burnedInCaptions === 'true' : false,
           textDirection: unit.language.text_direction
         } );
       }
