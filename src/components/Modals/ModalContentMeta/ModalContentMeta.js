@@ -25,8 +25,7 @@ class ModalContentMeta extends Component {
     const {
       type,
       transcript,
-      textDirection,
-      locale
+      textDirection
     } = this.props;
     const dateUpdated = moment( this.props.dateUpdated ).format( 'MMMM DD, YYYY' );
 
@@ -63,8 +62,7 @@ ModalContentMeta.propTypes = {
   type: string,
   dateUpdated: string,
   transcript: string,
-  textDirection: string,
-  locale: string
+  textDirection: string
 };
 
 export default ModalContentMeta;
