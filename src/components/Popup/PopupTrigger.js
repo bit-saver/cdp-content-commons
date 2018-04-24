@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Popup } from 'semantic-ui-react';
+import { Popup, Button } from 'semantic-ui-react';
 import { string, node, bool } from 'prop-types';
 import { Tooltip } from 'react-lightweight-tooltip';
 import tooltipStyles from '../../utils/tooltip';
@@ -28,7 +28,11 @@ class PopupTrigger extends Component {
       <span style={ { float: this.props.position, display: this.props.show ? 'inline-block' : 'none' } }>
         <Tooltip content={ this.props.toolTip } styles={ tooltipStyles }>
           <Popup
-            trigger={ <img src={ this.props.icon } width="18" height="18" alt="Download video" /> }
+            trigger={
+              <Button className="trigger">
+                <img src={ this.props.icon } width="18" height="18" alt="Download video" />{ ' ' }
+              </Button>
+            }
             on="click"
             onOpen={ this.handleOnOpen }
             onClose={ this.handleOnClose }
