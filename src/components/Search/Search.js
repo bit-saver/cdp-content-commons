@@ -23,12 +23,13 @@ class Search extends Component {
   }
 
   handleQueryOnChange( e ) {
-    sessionStorage.setItem( 'currentSearch', e.target.value );
     this.props.updateSearchQuery( e.target.value );
   }
 
   handleSubmit( e ) {
     e.preventDefault();
+
+    sessionStorage.setItem( 'currentSearch', this.props.search.query );
 
     this.props.createRequest();
     this.props.history.push( '/results' );
