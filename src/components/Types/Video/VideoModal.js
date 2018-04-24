@@ -5,23 +5,23 @@ import { Embed, Checkbox } from 'semantic-ui-react';
 // import plusIcon from '../../../assets/icons/icon_plus.svg';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
 
-import ModalItem from '../ModalItem';
-import ModalLangDropdown from '../ModalLangDropdown/ModalLangDropdown';
-import ModalContentMeta from '../ModalContentMeta/ModalContentMeta';
-import ModalDescription from '../ModalDescription/ModalDescription';
-import ModalPostMeta from '../ModalPostMeta/ModalPostMeta';
-import ModalPostTags from '../ModalPostTags/ModalPostTags';
+import ModalItem from '../../Modals/ModalItem';
+import ModalLangDropdown from '../../Modals/ModalLangDropdown/ModalLangDropdown';
+import ModalContentMeta from '../../Modals/ModalContentMeta/ModalContentMeta';
+import ModalDescription from '../../Modals/ModalDescription/ModalDescription';
+import ModalPostMeta from '../../Modals/ModalPostMeta/ModalPostMeta';
+import ModalPostTags from '../../Modals/ModalPostTags/ModalPostTags';
 
 import PopupTrigger from '../../Popup/PopupTrigger';
 import PopupTabbed from '../../Popup/PopupTabbed';
 
-import DownloadVideo from '../../Video/DownloadVideo';
-import DownloadSrt from '../../Video/DownloadSrt';
-import DownloadTranscript from '../../Video/DownloadTranscript';
-import DownloadHelp from '../../Video/DownloadHelp';
-import Shortcode from '../../Video/Shortcode';
-import Social from '../../Video/Social';
-import ShareMore from '../../Video/ShareMore';
+import DownloadVideo from './DownloadVideo';
+import DownloadSrt from './DownloadSrt';
+import DownloadTranscript from './DownloadTranscript';
+import DownloadHelp from './DownloadHelp';
+import Shortcode from './Shortcode';
+import Social from './Social';
+import ShareMore from './ShareMore';
 
 class VideoModal extends Component {
   constructor( props ) {

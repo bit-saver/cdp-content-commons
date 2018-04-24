@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 
-import ModalItem from '../ModalItem';
-import ModalLangDropdown from '../ModalLangDropdown/ModalLangDropdown';
-import ModalContentMeta from '../ModalContentMeta/ModalContentMeta';
-import ModalPostMeta from '../ModalPostMeta/ModalPostMeta';
-import ModalPostTags from '../ModalPostTags/ModalPostTags';
-import ModalText from '../ModalText/ModalText';
+import ModalItem from '../../Modals/ModalItem';
+import ModalLangDropdown from '../../Modals/ModalLangDropdown/ModalLangDropdown';
+import ModalContentMeta from '../../Modals/ModalContentMeta/ModalContentMeta';
+import ModalPostMeta from '../../Modals/ModalPostMeta/ModalPostMeta';
+import ModalPostTags from '../../Modals/ModalPostTags/ModalPostTags';
+import ModalText from '../../Modals/ModalText/ModalText';
 
 import PopupTrigger from '../../Popup/PopupTrigger';
 import PopupTabbed from '../../Popup/PopupTabbed';
 
-import DownloadHelp from '../../Video/DownloadHelp';
-import Shortcode from '../../Video/Shortcode';
-import Social from '../../Video/Social';
-import ShareMore from '../../Video/ShareMore';
-
-class ArticleModal extends Component {
+class PostModal extends Component {
   constructor( props ) {
     super( props );
     this.state = {
@@ -59,29 +54,10 @@ class ArticleModal extends Component {
           </div>
           <div className="modal_options_share">
             <a href={ item.link } target="_blank">View Original</a>
-            <PopupTrigger
-              toolTip="Copy the shortcode for this article or<br> share it social platforms."
-              icon="share"
-              // show={ item.type === 'post' }
-              show={ false }
-              content={
-                <PopupTabbed
-                  title="How would you like to share this article?"
-                  item={ item }
-                  panes={ [
-                    { title: 'Copy Shortcode', component: <Shortcode /> },
-                    { title: 'Social', component: <Social /> },
-                    { title: 'More', component: <ShareMore /> },
-                    { title: 'Help', component: <DownloadHelp /> }
-                  ] }
-                  config={ { width: '141px', offset: '115px' } }
-                />
-              }
-            />
           </div>
         </div>
         <div className="modal_thumbnail">
-          <img src={ item.thumbnail } alt="article thumbnail" />
+          <img src={ item.thumbnail } alt="post thumbnail" />
         </div>
         <ModalContentMeta type={ item.type } dateUpdated={ item.modified } />
         <ModalText textContent={ ( item.content ) ? item.content : item.description } />
@@ -98,8 +74,8 @@ class ArticleModal extends Component {
   }
 }
 
-ArticleModal.propTypes = {
+PostModal.propTypes = {
   item: object
 };
 
-export default ArticleModal;
+export default PostModal;
