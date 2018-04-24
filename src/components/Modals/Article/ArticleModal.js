@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 
-import plusIcon from '../../../assets/icons/icon_plus.svg';
-
 import ModalItem from '../ModalItem';
 import ModalLangDropdown from '../ModalLangDropdown/ModalLangDropdown';
 import ModalContentMeta from '../ModalContentMeta/ModalContentMeta';
@@ -60,11 +58,12 @@ class ArticleModal extends Component {
             />
           </div>
           <div className="modal_options_share">
-            <img src={ plusIcon } alt="" />
+            <a href={ item.link } target="_blank">View Original</a>
             <PopupTrigger
               toolTip="Copy the shortcode for this article or<br> share it social platforms."
               icon="share"
-              show={ item.type === 'post' }
+              // show={ item.type === 'post' }
+              show={ false }
               content={
                 <PopupTabbed
                   title="How would you like to share this article?"
