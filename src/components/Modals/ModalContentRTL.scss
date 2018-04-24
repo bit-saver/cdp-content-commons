@@ -1,0 +1,10 @@
+.modal.rtl {
+
+  .modal_headline,
+  .modal_section--description,
+  .modal_section--textContent {
+    direction: rtl;
+    text-align: right;
+  }
+
+}

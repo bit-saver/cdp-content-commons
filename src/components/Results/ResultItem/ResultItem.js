@@ -4,14 +4,9 @@ import moment from 'moment';
 import { Card, Image, Modal } from 'semantic-ui-react';
 import ModalContent from '../../Modals/ModalContent';
 import './ResultItem.css';
+import './ResultItemRTL.css';
 
 class ResultItem extends Component {
-  getLanguage() {
-    const { selectedLanguageUnit } = this.props.item;
-    if ( !selectedLanguageUnit ) return 'English';
-    return selectedLanguageUnit.language.display_name;
-  }
-
   // eslint-disable-next-line class-methods-use-this
   renderCategory( category, index, arr ) {
     let { name } = category;
@@ -26,18 +21,11 @@ class ResultItem extends Component {
     return <span key={ key }>{ name.toLowerCase() }</span>;
   }
 
-  renderCaptionTabTitle() {
-    const { selectedLanguageUnit } = this.props.item;
-    if ( !selectedLanguageUnit ) {
-      return 'With Subtitles';
-    }
-    const source = selectedLanguageUnit.source.find( src => src.burnedInCaptions === 'no' );
-    return source ? 'With Captions' : 'With Subtitles';
-  }
-
   render() {
     const { item } = this.props;
-
+    const textDirection = item.selectedLanguageUnit
+      ? item.selectedLanguageUnit.language.text_direction
+      : item.language && item.language.text_direction ? item.language.text_direction : 'ltr' ;
     return (
       <Card>
         <Modal
@@ -53,7 +41,7 @@ class ResultItem extends Component {
             <ModalContent item={ item } />
           </Modal.Content>
         </Modal>
-        <Card.Content>
+        <Card.Content className={ textDirection }>
           <Card.Header className="card_header">
             <Modal closeIcon trigger={ <p>{ item.title }</p> }>
               <Modal.Content>

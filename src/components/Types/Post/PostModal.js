@@ -15,7 +15,8 @@ class PostModal extends Component {
     super( props );
     this.state = {
       item: this.props.item,
-      selectedLanguage: this.getLanguage()
+      selectedLanguage: this.getLanguage(),
+      textDirection: false
     };
 
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
@@ -23,10 +24,11 @@ class PostModal extends Component {
 
   onFetchResult = ( response, value ) => {
     if ( response && response.hits.total > 0 ) {
-      const item = response.hits.hits[0];
+      const item = normalizeItem( response.hits.hits[0] );
       this.setState( {
-        item: normalizeItem( item ),
-        selectedLanguage: value
+        item,
+        selectedLanguage: value,
+        textDirection: item.language.text_direction
       } );
     }
   }
@@ -48,9 +50,9 @@ class PostModal extends Component {
 
   render() {
     if ( this.state && this.state.item ) {
-      const { item } = this.state;
+      const { item, textDirection } = this.state;
       return (
-        <ModalItem headline={ item.title }>
+        <ModalItem headline={ item.title } textDirection={ textDirection ? 'rtl' : 'ltr' }>
           <div className="modal_options">
             <div className="modal_options_left">
               <ModalLangDropdown
