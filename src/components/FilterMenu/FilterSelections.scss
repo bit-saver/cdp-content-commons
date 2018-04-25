@@ -21,6 +21,10 @@
         border: 1px solid #d6d7d9;
         background-color: #fff;
       }
+
+      &.single {
+        background-color: $light-grey;
+      }
     }
 
     .clear_filter {

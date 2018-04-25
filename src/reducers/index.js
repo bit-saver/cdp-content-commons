@@ -5,7 +5,7 @@ import languagesReducer from './languages';
 import categoriesReducer from './categories';
 import postTypeReducer from './postTypes';
 import dateReducer from './date';
-import siteReducer from './sites';
+import sourceReducer from './sources';
 
 export default combineReducers( {
   search: searchReducer,
@@ -13,5 +13,5 @@ export default combineReducers( {
   category: categoriesReducer,
   type: postTypeReducer,
   date: dateReducer,
-  site: siteReducer
+  source: sourceReducer
 } );

@@ -13,7 +13,7 @@ const FilterSelectionItem = ( props ) => {
   };
 
   return (
-    <Label key={ props.value } data-label={ props.value }>
+    <Label key={ props.value } data-label={ props.value } className={ props.single ? 'single' : '' }>
       { props.label }
       { !props.single && <Icon name="delete" filter={ props.filter } onClick={ handleOnClick } /> }
     </Label>

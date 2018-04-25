@@ -33,9 +33,16 @@ class FilterSelections extends Component {
       single: false
     } ) );
 
+    const nextSources = nextProps.source.currentSources.map( item => ( {
+      label: item.display_name,
+      value: item.display_name,
+      filter: 'source',
+      single: false
+    } ) );
+
     this.setState( {
       selections: [
-        language, ...nextTypes, ...nextCategories
+        language, ...nextTypes, ...nextCategories, ...nextSources
       ]
     } );
   }
@@ -76,6 +83,7 @@ FilterSelections.propTypes = {
   language: object,
   category: object,
   type: object,
+  source: object,
   onFilterChange: func,
   onFilterClearAll: func
 };
@@ -84,6 +92,7 @@ const mapStateToProps = state => ( {
   search: state.search,
   language: state.language,
   category: state.category,
+  source: state.source,
   type: state.type
 } );
 

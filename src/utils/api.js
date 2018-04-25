@@ -31,6 +31,16 @@ export const categoryAggRequest = () =>
     } )
     .then( response => response.data );
 
+export const sourceAggRequest = () =>
+  axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 0 )
+        .agg( 'terms', 'owner.keyword', {}, 'source' )
+        .build()
+    } )
+    .then( response => response.data );
+
 export const typeRecentsRequest = ( currentType, currentLang ) =>
   axios
     .post( SEARCH, {

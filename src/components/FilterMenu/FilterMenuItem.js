@@ -69,7 +69,8 @@ class FilterMenuItem extends Component {
     return options.map( option =>
       React.cloneElement( child, {
         key: option.value,
-        label: option.count ? `${option.label} (${option.count})` : option.label,
+        // label: option.count ? `${option.label} (${option.count})` : option.label,
+        label: option.label,
         labelclean: option.label,
         value: option.value,
         count: option.count,

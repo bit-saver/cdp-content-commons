@@ -25,10 +25,11 @@ class FilterMenu extends Component {
     this.props.loadLanguages();
     this.props.loadCategories();
     this.props.loadPostTypes();
+    this.props.loadSources();
   }
 
   getOptions = ( type ) => {
-    if ( !type.list ) return [];
+    if ( !type.list.length ) return [];
 
     return type.list.map( item => ( {
       label: item.display,
@@ -54,6 +55,10 @@ class FilterMenu extends Component {
         this.props.postTypeUpdate( { type: value, display_name: labelclean, checked } );
         break;
 
+      case 'source':
+        this.props.sourceUpdate( { display_name: labelclean, checked } );
+        break;
+
       default: {
         // console.log( 'in' );
       }
@@ -64,6 +69,7 @@ class FilterMenu extends Component {
   handleFilterClearAll = () => {
     this.props.categoryUpdate();
     this.props.postTypeUpdate();
+    this.props.sourceUpdate();
     this.props.createRequest();
   };
 
@@ -127,15 +133,8 @@ class FilterMenu extends Component {
             filter="Source"
             onFilterChange={ this.updateSearchQuery }
             closeSubMenu={ this.closeSubMenu }
-            selected={ [] }
-            options={ [
-              { label: 'American Spaces', value: 'american_spaces', hasSubMenu: false },
-              { label: 'IIP Interactive', value: 'iip_interactive', hasSubMenu: false },
-              { label: 'IIP Video Production', value: 'iip_video_prod', hasSubMenu: false },
-              { label: 'ShareAmerica', value: 'share_america', hasSubMenu: false },
-              { label: 'YALI', value: 'yali', hasSubMenu: false },
-              { label: 'YLAI', value: 'ylai', hasSubMenu: false }
-            ] }
+            selected={ this.props.source.currentSources }
+            options={ this.getOptions( this.props.source ) }
           >
             <Form.Checkbox />
           </FilterMenuItem>
@@ -225,20 +224,24 @@ FilterMenu.propTypes = {
   loadLanguages: func,
   loadCategories: func,
   loadPostTypes: func,
+  loadSources: func,
   languageUpdate: func,
   categoryUpdate: func,
   postTypeUpdate: func,
+  sourceUpdate: func,
   createRequest: func,
   language: object,
   category: object,
-  type: object
+  type: object,
+  source: object
 };
 
 const mapStateToProps = state => ( {
   search: state.search,
   language: state.language,
   category: state.category,
-  type: state.type
+  type: state.type,
+  source: state.source
 } );
 
 export default connect( mapStateToProps, actions )( FilterMenu );

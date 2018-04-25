@@ -44,6 +44,12 @@ export const getAvailableLanguages = ( item ) => {
 };
 
 export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
+export const titleCase = str =>
+  str
+    .toLowerCase()
+    .split( ' ' )
+    .map( word => word.charAt( 0 ).toUpperCase() + word.slice( 1 ) )
+    .join( ' ' );
 
 // Following rules normalize language, categories, tags, etc as they appear at different document levels
 const getLanguageQry = language => `(language.locale: ${language.locale} OR unit.language.locale: ${language.locale})`;
@@ -59,6 +65,18 @@ const getCategoryQry = ( categories ) => {
 
   return `(${qry})`;
 };
+
+/* Need to add a keyword analyzer  before we can use this method
+const getSourceQry = ( sources ) => {
+  let qry = '';
+  const len = sources.length;
+  sources.forEach( ( source, index ) => {
+    qry += `owner.keyword: ${source.display_name}`;
+    if ( index < len - 1 ) qry += ' OR ';
+  } );
+  return `(${qry})`;
+};
+*/
 
 const getPostTypeQry = ( types ) => {
   let qry = '';
@@ -90,12 +108,18 @@ export const queryBuilder = ( store ) => {
     options.push( getCategoryQry( store.category.currentCategories ) );
   }
 
-  if ( store.type.currentPostTypes.length ) {
-    options.push( getPostTypeQry( store.type.currentPostTypes ) );
+  /* Need to add a keyword analyzer to the owner prop
+     before we can query via query string
+     options.push( getSourceQry( store.source.currentSources ) );
+    */
+  if ( store.source.currentSources.length ) {
+    store.source.currentSources.forEach( ( source, index ) => {
+      body.orFilter( 'term', 'owner.keyword', source.display_name );
+    } );
   }
 
-  if ( store.site.currentSite ) {
-    options.push( `site: ${store.site.currentSite}` );
+  if ( store.type.currentPostTypes.length ) {
+    options.push( getPostTypeQry( store.type.currentPostTypes ) );
   }
 
   if ( store.date.dateSelect ) {
@@ -129,6 +153,8 @@ export const queryBuilder = ( store ) => {
   } else {
     body.query( 'query_string', 'query', optionStr );
   }
+
+  body.notQuery( 'match', 'type.keyword', 'courses' );
 
   // body.query( 'query_string', 'query', optionStr ); // return all for testing
   return body.build();
