@@ -1,4 +1,5 @@
 import { categoryAggRequest, categoryBaseRequest } from '../utils/api';
+import { titleCase } from '../utils/helpers';
 import { LOAD_CATEGORIES_PENDING, LOAD_CATEGORIES_FAILED, LOAD_CATEGORIES_SUCCESS, CATEGORY_CHANGE } from './types';
 
 export const categoryUpdate = ( category, checked ) => ( {
@@ -27,7 +28,7 @@ export const loadCategories = () => async ( dispatch ) => {
     .filter( category => primaryCategories.includes( category.key ) )
     .map( ( category, index ) => ( {
       key: idBuckets[index].key,
-      display: category.key,
+      display: titleCase( category.key ),
       count: category.doc_count
     } ) );
 
