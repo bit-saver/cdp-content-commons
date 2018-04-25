@@ -189,12 +189,13 @@ export const normalizeItem = ( item, language ) => {
     type: source.type,
     icon: getIcon( source.type ),
     author: getAuthor( source.author ), // make video obj  w/id & name to be consistent??
+    owner: source.owner,
     link: source.link || '',
     published: source.published,
     modified: source.modified
   };
 
   const typeSpecificObj = getTypeSpecObj( source );
-  console.dir( { ...obj, ...typeSpecificObj } );
+
   return { ...obj, ...typeSpecificObj };
 };

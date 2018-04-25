@@ -151,9 +151,9 @@ class VideoModal extends Component {
     const { unit, textDirection } = this.state;
     const {
       type,
-      site,
-      sourcelink,
+      logo,
       author,
+      owner,
       published,
       modified
     } = this.props.item;
@@ -260,8 +260,8 @@ class VideoModal extends Component {
           <ModalDescription description={ unit.desc } />
           <ModalPostMeta
             author={ author }
-            source={ sourcelink }
-            site={ site }
+            logo={ logo }
+            source={ owner }
             datePublished={ published }
           />
           <ModalPostTags tags={ unit.categories } />
