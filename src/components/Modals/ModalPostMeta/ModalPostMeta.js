@@ -14,7 +14,13 @@ const ModalPostMeta = ( props ) => {
   } = props;
 
   let sourceItem = <div />;
-  if ( logo ) {
+  if ( logo && sourcelink ) {
+    sourceItem = (
+      <a href={ sourcelink } target="_blank">
+        <img src={ logo } alt={ source } className="modal_postmeta_logo" />
+      </a>
+    );
+  } else if ( logo ) {
     sourceItem = <img src={ logo } alt={ source } className="modal_postmeta_logo" />;
   } else if ( sourcelink ) {
     sourceItem = (
@@ -23,7 +29,7 @@ const ModalPostMeta = ( props ) => {
       </span>
     );
   } else {
-    sourceItem = <span className="modal_postmeta_content">Source: { source }</span>;
+    sourceItem = source ? <span className="modal_postmeta_content">Source: { source }</span> : '';
   }
 
   return (
@@ -34,8 +40,6 @@ const ModalPostMeta = ( props ) => {
           { `Author: ${author}` }
         </span>
       }
-      { type === 'video' && <span className="modal_postmeta_content">Owner: IIP, Office of Video Production</span> }
-      { type === 'post' && <span className="modal_postmeta_content">Owner: IIP, Office of Editorial Content</span> }
       <span className="modal_postmeta_content">
         { `Date Published: ${moment( datePublished ).format( 'MMMM DD, YYYY' )}` }
       </span>

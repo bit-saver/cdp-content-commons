@@ -73,9 +73,9 @@ class PostModal extends Component {
           <ModalPostMeta
             type={ item.type }
             author={ item.author }
-            source={ item.sourcelink }
+            sourcelink={ item.sourcelink }
             logo={ item.logo }
-            site={ item.site }
+            source={ item.site }
             datePublished={ item.published }
           />
           <ModalPostTags tags={ item.categories } />
