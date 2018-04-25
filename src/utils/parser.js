@@ -8,7 +8,25 @@ import thumbnailCourse from '../assets/images/thumbnail_course.jpg';
 import thumbnailAudio from '../assets/images/thumbnail_audio.jpg';
 import thumbnailVideo from '../assets/images/thumbnail_video.jpg';
 
+import logoYali from '../assets/images/logo_yali.svg';
+import logoYlai from '../assets/images/logo_ylai.svg';
+import logoShareamerica from '../assets/images/logo_shareamerica.svg';
+
 import store from '../utils/store';
+
+const logos = [
+  { name: 'yali', logo: logoYali },
+  { name: 'ylai', logo: logoYlai },
+  { name: 'shareamerica', logo: logoShareamerica }
+];
+
+const getLogo = ( site ) => {
+  const siteLogo = logos.filter( logo => site.indexOf( logo.name ) > -1 );
+  if ( siteLogo[0] && siteLogo[0].logo ) {
+    return siteLogo[0].logo;
+  }
+  return '';
+};
 
 const getIcon = ( type ) => {
   let icon = '';
@@ -166,6 +184,7 @@ export const normalizeItem = ( item, language ) => {
   const obj = {
     id: source.post_id ? source.post_id : source.id,
     site: source.site,
+    logo: getLogo( source.site ),
     sourcelink: `https://${source.site}`,
     type: source.type,
     icon: getIcon( source.type ),
@@ -176,6 +195,6 @@ export const normalizeItem = ( item, language ) => {
   };
 
   const typeSpecificObj = getTypeSpecObj( source );
-
+  console.dir( { ...obj, ...typeSpecificObj } );
   return { ...obj, ...typeSpecificObj };
 };
