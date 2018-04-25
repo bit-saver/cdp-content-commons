@@ -8,13 +8,19 @@ const ModalPostMeta = ( props ) => {
     type,
     author,
     source,
+    logo,
     site,
     datePublished
   } = props;
 
   return (
     <section className="modal_section modal_section--postMeta">
-      <span className="modal_postmeta_content">Source: <a href={ source } target="_blank">{ site }</a></span>
+      { logo && <img src={ logo } alt={ site } className="modal_postmeta_logo" /> }
+      { !logo &&
+        <span className="modal_postmeta_content">
+          Source: <a href={ source } target="_blank">{ site }</a>
+        </span>
+      }
       { author &&
         <span className="modal_postmeta_content">
           { `Author: ${author}` }
@@ -33,6 +39,7 @@ ModalPostMeta.propTypes = {
   type: string,
   author: string,
   source: string,
+  logo: string,
   site: string,
   datePublished: string
 };
