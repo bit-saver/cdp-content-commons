@@ -74,6 +74,7 @@ class PostModal extends Component {
             type={ item.type }
             author={ item.author }
             source={ item.sourcelink }
+            logo={ item.logo }
             site={ item.site }
             datePublished={ item.published }
           />
