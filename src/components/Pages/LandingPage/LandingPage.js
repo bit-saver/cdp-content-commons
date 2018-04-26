@@ -1,5 +1,5 @@
 import React from 'react';
-import Recents from '../Recents';
+import Recents from '../../Recents';
 import './LandingPage.css';
 
 const LandingPage = () => (

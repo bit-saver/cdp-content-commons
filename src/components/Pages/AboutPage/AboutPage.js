@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Header } from 'semantic-ui-react';
-import Breadcrumbs from '../Breadcrumbs';
-import config from '../../config';
+import Breadcrumbs from '../../Breadcrumbs';
+import config from '../../../config';
 import './AboutPage.css';
 
 class AboutPage extends Component {
   componentWillMount() {
-    const cachedAbout = sessionStorage.getItem('AboutPage');
+    const cachedAbout = sessionStorage.getItem( 'AboutPage' );
     if ( cachedAbout ) {
       this.setState( { markdown: cachedAbout } );
       return;
@@ -18,8 +18,12 @@ class AboutPage extends Component {
       .then( text => this.onFetchResult( text ) );
   }
 
+  componentDidMount() {
+    window.scrollTo( 0, 0 );
+  }
+
   onFetchResult = ( text ) => {
-    sessionStorage.setItem('AboutPage', text);
+    sessionStorage.setItem( 'AboutPage', text );
     this.setState( {
       markdown: text
     } );
