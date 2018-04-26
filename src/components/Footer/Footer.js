@@ -13,7 +13,7 @@ const Footer = () => (
         policies contained therein. IIP © 2018.
       </p>
       <Link name="privacy" to="privacy">Privacy Policy</Link>
-      <Link name="contact us" to="mailto:design@america.gov">Contact Us</Link>
+      <a href="mailto:design@america.gov">Contact Us</a>
     </Container>
     <img src={ flagImage } alt="United States Flag" />
   </footer>
