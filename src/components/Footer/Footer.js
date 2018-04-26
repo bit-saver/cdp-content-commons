@@ -10,9 +10,10 @@ const Footer = () => (
       <p>
         This site is managed by the Bureau of International Information Programs within the U.S. Department of State.
         External links to other Internet sites should not be construed as an endorsement of the views or privacy
-        policies contained therin. IIP © 2018.
+        policies contained therein. IIP © 2018.
       </p>
       <Link name="privacy" to="privacy">Privacy Policy</Link>
+      <Link name="contact us" to="mailto:design@america.gov">Contact Us</Link>
     </Container>
     <img src={ flagImage } alt="United States Flag" />
   </footer>
