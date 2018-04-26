@@ -201,7 +201,6 @@ class VideoModal extends Component {
                       { title: 'More', component: <ShareMore /> },
                       { title: 'Help', component: <DownloadHelp /> }
                     ] }
-                    config={ { width: '141px', offset: '115px' } } // TODO: remove hardcoding, make it dynamic
                   />
                 }
               />
@@ -243,7 +242,6 @@ class VideoModal extends Component {
                       },
                       { title: 'Help', component: <DownloadHelp /> }
                     ] }
-                    config={ { width: '99px', offset: '121px' } } // TODO: remove hardcoding, make it dynamic
                   />
                 }
               />
