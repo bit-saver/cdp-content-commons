@@ -5,7 +5,6 @@ import './ModalPostMeta.css';
 
 const ModalPostMeta = ( props ) => {
   const {
-    type,
     author,
     sourcelink,
     logo,
@@ -48,7 +47,6 @@ const ModalPostMeta = ( props ) => {
 };
 
 ModalPostMeta.propTypes = {
-  type: string,
   author: string,
   sourcelink: string,
   logo: string,
