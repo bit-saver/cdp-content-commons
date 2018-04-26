@@ -1,0 +1,18 @@
+@import "../../../assets/styles/colors.scss";
+
+.ui.container .privacy {
+  max-width: 1000px;
+  margin: 4em auto;
+  
+  h1.ui.header {
+    font-size: 4em;
+    text-align: center;
+    padding: 1em 0;
+    color: $blue;
+  }
+
+  h2, h3, h4 {
+    color: $blue;
+  }
+  
+}

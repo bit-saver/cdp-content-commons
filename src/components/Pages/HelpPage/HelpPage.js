@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Header } from 'semantic-ui-react';
-import Breadcrumbs from '../Breadcrumbs';
-import config from '../../config';
+import Breadcrumbs from '../../Breadcrumbs';
+import config from '../../../config';
 import './HelpPage.css';
 
 class HelpPage extends Component {
@@ -16,6 +16,10 @@ class HelpPage extends Component {
     fetch( config.HELP_URL )
       .then( response => response.text() )
       .then( text => this.onFetchResult( text ) );
+  }
+
+  componentDidMount() {
+    window.scrollTo( 0, 0 );
   }
 
   onFetchResult = ( text ) => {

@@ -1,0 +1,28 @@
+@import "../../../assets/styles/colors.scss";
+
+.ui.container .help {
+  max-width: 1000px;
+  margin: 4em auto;
+  
+  h1.ui.header {
+    font-size: 4em;
+    text-align: center;
+    padding: 1em 0;
+    color: $blue;
+
+    .sub.header {
+      font-size: 0.6em;
+      color: $blue;
+    }
+  }
+
+  h2, h3, h4 {
+    color: $blue;
+  }
+
+  blockquote {
+    text-align: center;
+    margin: 3em 0;
+  }
+
+}
