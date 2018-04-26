@@ -40,6 +40,34 @@
       left: auto;    
       color: #000;
     }
+    /* IE 10+ */
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      top: 0 !important;
+      right: 15px !important;
+      left: auto;
+      color: #fff;
+      @media screen and (min-width: 1225px) {
+        right: 10% !important;
+      }
+      @media screen and (max-width: 767px) {
+        top: 3px !important;
+        color: #000;
+      }
+    }
+    /* IE Edge */
+    @supports (-ms-ime-align: auto) {
+      top: 0 !important;
+      right: 15px !important;
+      left: auto;
+      color: #fff;
+      @media screen and (min-width: 1225px) {
+        right: 10% !important;
+      }
+      @media screen and (max-width: 767px) {
+        top: 3px !important;
+        color: #000;
+      }
+    }
   }
 
   &_section {
