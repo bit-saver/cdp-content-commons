@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, array, object } from 'prop-types';
+import { string, array } from 'prop-types';
 import { Header, Tab } from 'semantic-ui-react';
 import './Popup.css';
 
@@ -9,14 +9,18 @@ class PopupTabbed extends Component {
 
     this.state = {
       sliderStyle: {
-        width: this.props.config.width,
-        left: this.props.config.offset
+        width: 0,
+        left: 0
       },
       panes: this.props.panes.map( pane => ( {
         menuItem: pane.title,
         render: () => <Tab.Pane attached={ false }>{ pane.component }</Tab.Pane>
       } ) )
     };
+  }
+
+  componentDidMount() {
+    this.initSliderStyle();
   }
 
   handleOnTabChange = ( e ) => {
@@ -27,6 +31,16 @@ class PopupTabbed extends Component {
       }
     } );
   };
+
+  initSliderStyle() {
+    const initActiveMenuItem = document.querySelectorAll( '.popup .secondary.menu .active.item' )[0];
+    this.setState( {
+      sliderStyle: {
+        width: initActiveMenuItem.clientWidth,
+        left: initActiveMenuItem.offsetLeft
+      }
+    } );
+  }
 
   render() {
     return (
@@ -41,7 +55,6 @@ class PopupTabbed extends Component {
 
 PopupTabbed.propTypes = {
   panes: array,
-  config: object,
   title: string
 };
 
