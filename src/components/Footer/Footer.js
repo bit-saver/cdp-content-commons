@@ -16,8 +16,8 @@ const Footer = () => (
         External links to other Internet sites should not be construed as an endorsement of the views or privacy
         policies contained therein. IIP © 2018.
       </p>
-      <Link name="privacy" to="privacy">Privacy Policy</Link>
-      <a href="mailto:design@america.gov">Contact Us</a>
+      <Link name="privacy" to="privacy" className="footer_link">Privacy Policy</Link>
+      <a href="mailto:design@america.gov" className="footer_link">Contact Us</a>
     </Container>
     <img src={ flagImage } alt="United States Flag" />
   </footer>
