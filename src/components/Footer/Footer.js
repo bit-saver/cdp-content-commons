@@ -7,7 +7,9 @@ import flagImage from '../../assets/images/US-Flag-Color-735b69.png';
 const Footer = () => (
   <footer>
     <Container text>
-      <p>To request a video, ask questions, or provide feedback send us an email at <a href="mailto:design@america.gov">design@america.gov</a>.
+      <p>
+        To request a video, ask questions, or provide feedback send us an email
+        at <a href="mailto:design@america.gov">design@america.gov</a>.
       </p>
       <p>
         This site is managed by the Bureau of International Information Programs within the U.S. Department of State.
