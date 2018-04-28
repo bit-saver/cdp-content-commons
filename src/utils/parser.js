@@ -17,7 +17,7 @@ import store from '../utils/store';
 const logos = [
   { name: 'yali', logo: logoYali },
   { name: 'ylai', logo: logoYlai },
-  { name: 'shareamerica', logo: logoShareamerica }
+  { name: 'share', logo: logoShareamerica }
 ];
 
 const getLogo = ( site ) => {
