@@ -6,6 +6,7 @@
   .textContent {
     padding: 0;
     font-size: 18px;
+    overflow: auto;
 
     &_label {
       font-size: 12px;
