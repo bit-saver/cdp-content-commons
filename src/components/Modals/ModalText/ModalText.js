@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-import ReactHtmlParser from 'react-html-parser';
+import Parser from 'html-react-parser';
 import './ModalText.css';
 
 const ModalText = ( props ) => {
@@ -9,7 +9,7 @@ const ModalText = ( props ) => {
   return (
     <section className="modal_section modal_section--textContent">
       <div className="textContent">
-        { ReactHtmlParser( textContent ) }
+        { Parser( textContent ) }
       </div>
     </section>
   );
