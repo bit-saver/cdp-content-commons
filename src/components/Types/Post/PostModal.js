@@ -17,7 +17,7 @@ class PostModal extends Component {
     this.state = {
       item,
       selectedLanguage: this.getLanguage(),
-      textDirection: item.language.text_direction ? item.language.text_direction === 'true' : false
+      textDirection: item.language.text_direction
     };
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
   }
@@ -28,7 +28,7 @@ class PostModal extends Component {
       this.setState( {
         item,
         selectedLanguage: value,
-        textDirection: item.language.text_direction ? item.language.text_direction === 'true' : false
+        textDirection: item.language.text_direction
       } );
     }
   }
@@ -52,7 +52,7 @@ class PostModal extends Component {
     if ( this.state && this.state.item ) {
       const { item, textDirection } = this.state;
       return (
-        <ModalItem headline={ item.title } textDirection={ textDirection ? 'rtl' : 'ltr' }>
+        <ModalItem headline={ item.title } textDirection={ textDirection }>
           <div className="modal_options">
             <div className="modal_options_left">
               <ModalLangDropdown
