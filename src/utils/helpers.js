@@ -122,9 +122,9 @@ export const queryBuilder = ( store ) => {
     options.push( getPostTypeQry( store.type.currentPostTypes ) );
   }
 
-  if ( store.date.dateSelect ) {
-    if ( store.date.dateSelect !== 'custom' ) {
-      body.filter( 'range', 'published', { gte: store.date.dateSelect } );
+  if ( store.date.currentDate.key !== 'recent' ) {
+    if ( store.date.currentDate.key !== 'custom' ) {
+      body.filter( 'range', 'published', { gte: store.date.currentDate.key } );
     } else if ( store.date.dateSelect === 'custom' ) {
       body.filter( 'range', 'published', {
         gte: store.date.from,

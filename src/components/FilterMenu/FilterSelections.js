@@ -19,6 +19,14 @@ class FilterSelections extends Component {
       single: true
     };
 
+    const nextDate = nextProps.date.currentDate;
+    const date = {
+      label: nextDate.display,
+      value: nextDate.key,
+      filter: 'date',
+      single: true
+    };
+
     const nextTypes = nextProps.type.currentPostTypes.map( item => ( {
       label: item.display_name,
       value: item.type,
@@ -42,7 +50,7 @@ class FilterSelections extends Component {
 
     this.setState( {
       selections: [
-        language, ...nextTypes, ...nextCategories, ...nextSources
+        language, date, ...nextTypes, ...nextCategories, ...nextSources
       ]
     } );
   }
@@ -84,6 +92,7 @@ FilterSelections.propTypes = {
   category: object,
   type: object,
   source: object,
+  date: object,
   onFilterChange: func,
   onFilterClearAll: func
 };
@@ -93,7 +102,8 @@ const mapStateToProps = state => ( {
   language: state.language,
   category: state.category,
   source: state.source,
-  type: state.type
+  type: state.type,
+  date: state.date
 } );
 
 export default connect( mapStateToProps, actions )( FilterSelections );
