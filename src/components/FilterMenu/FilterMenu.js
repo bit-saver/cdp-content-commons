@@ -39,6 +39,7 @@ class FilterMenu extends Component {
     } ) );
   };
 
+  // TODO: make all prop names consistent
   updateSearchQuery = ( {
     filter, value, labelclean, checked
   } ) => {
@@ -59,6 +60,10 @@ class FilterMenu extends Component {
         this.props.sourceUpdate( { display_name: labelclean, checked } );
         break;
 
+      case 'most recent':
+        this.props.dateUpdate( { key: value, display: labelclean } );
+        break;
+
       default: {
         // console.log( 'in' );
       }
@@ -70,6 +75,8 @@ class FilterMenu extends Component {
     this.props.categoryUpdate();
     this.props.postTypeUpdate();
     this.props.sourceUpdate();
+    // this.props.languageUpdate( { key: 'en-us', display: 'English' } );
+    // this.props.dateUpdate( { key: 'recent', display: 'Most Recent' } );
     this.props.createRequest();
   };
 
@@ -105,17 +112,9 @@ class FilterMenu extends Component {
           <FilterMenuItem
             filter="Most Recent"
             onFilterChange={ this.updateSearchQuery }
+            default="recent"
             closeSubMenu={ this.closeSubMenu }
-            options={ [
-              { label: 'Most Recent', value: 'mostRecent', hasSubMenu: false },
-              { label: 'Past Hour', value: 'pastHour', hasSubMenu: false },
-              { label: 'Past 24 Hours', value: 'past24Hours', hasSubMenu: false },
-              { label: 'Past Week', value: 'pastWeek', hasSubMenu: false },
-              { label: 'Past Month', value: 'pastMonth', hasSubMenu: false },
-              { label: 'Past Year', value: 'pastYear', hasSubMenu: false },
-              { label: 'Oldest', value: 'oldest', hasSubMenu: false },
-              { label: 'Custom', value: 'custom', hasSubMenu: true }
-            ] }
+            options={ this.getOptions( this.props.date ) }
           >
             <Form.Radio />
           </FilterMenuItem>
@@ -229,11 +228,13 @@ FilterMenu.propTypes = {
   categoryUpdate: func,
   postTypeUpdate: func,
   sourceUpdate: func,
+  dateUpdate: func,
   createRequest: func,
   language: object,
   category: object,
   type: object,
-  source: object
+  source: object,
+  date: object
 };
 
 const mapStateToProps = state => ( {
@@ -241,7 +242,8 @@ const mapStateToProps = state => ( {
   language: state.language,
   category: state.category,
   type: state.type,
-  source: state.source
+  source: state.source,
+  date: state.date
 } );
 
 export default connect( mapStateToProps, actions )( FilterMenu );

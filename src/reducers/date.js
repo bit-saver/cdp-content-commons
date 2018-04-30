@@ -1,21 +1,34 @@
-import {
-  DATE_CHANGE,
-  TO_DATE_CHANGE,
-  FROM_DATE_CHANGE
-} from '../actions/types';
+import { DATE_CHANGE, TO_DATE_CHANGE, FROM_DATE_CHANGE } from '../actions/types';
 
 const INITIAL_STATE = {
-  dateSelect: '',
   from: new Date(),
   to: new Date(),
-  options: [
-    '',
-    'now-24h',
-    'now-1w',
-    'now-1M',
-    'now-1y',
-    'custom'
-  ]
+  list: [
+    { key: 'recent', display: 'Most Recent' },
+    // {
+    //   key: 'now-1h',
+    //   display: 'Past Hour'
+    // },
+    {
+      key: 'now-1d',
+      display: 'Past 24 Hours'
+    },
+    {
+      key: 'now-1w',
+      display: 'Past Week'
+    },
+    {
+      key: 'now-1M',
+      display: 'Past Month'
+    },
+    {
+      key: 'now-1y',
+      display: 'Past Year'
+    }
+    // { key: 'oldest', display: 'Oldest' },
+    // { key: 'custom', display: 'Custom' }
+  ],
+  currentDate: { key: 'recent', display: 'Most Recent' }
 };
 
 export default ( state = INITIAL_STATE, action ) => {
@@ -23,7 +36,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case DATE_CHANGE:
       return {
         ...state,
-        dateSelect: action.payload
+        currentDate: action.payload
       };
     case FROM_DATE_CHANGE:
       return {

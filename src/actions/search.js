@@ -103,7 +103,6 @@ export const createRequest = () => async ( dispatch, getState ) => {
     payload: {
       response,
       ...calculatePages( response.hits.total, 1 ),
-      sort: 'relevance',
       currentQuery: currentState.search.query
     }
   } );
