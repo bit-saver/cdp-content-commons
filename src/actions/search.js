@@ -86,6 +86,7 @@ export const createRequest = () => async ( dispatch, getState ) => {
 
   let response;
   const currentState = getState();
+
   try {
     response = await queryRequest( {
       size: PAGE_SIZE,

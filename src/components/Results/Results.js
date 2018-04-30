@@ -15,10 +15,14 @@ class Results extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      view: 'gallery'
+      view: 'gallery',
     };
 
     this.toggleView = this.toggleView.bind( this );
+  }
+
+  shouldComponentUpdate( nextProps, nextState ) {
+    return this.props.search.response.hits !== nextProps.search.response.hits;
   }
 
   toggleView( e ) {
