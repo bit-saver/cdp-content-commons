@@ -58,7 +58,7 @@ export const getItemRequest = ( site, postId ) =>
     .post( SEARCH, {
       body: bodybuilder()
         .size( 1 )
-        .query( 'query_string', 'query', `site: ${site} AND id: ${postId}` )
+        .query( 'query_string', 'query', `(site: ${site} AND post_id: ${postId})` )
         .build()
     } )
     .then( response => response.data );

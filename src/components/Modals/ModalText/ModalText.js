@@ -1,15 +1,16 @@
 import React from 'react';
 import { string } from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
 import './ModalText.css';
 
 const ModalText = ( props ) => {
   const { textContent } = props;
-  const textContentWrapper = document.createElement( 'div' );
-  textContentWrapper.innerHTML = textContent;
 
   return (
     <section className="modal_section modal_section--textContent">
-      <div className="textContent" ref={ ( node ) => { if ( node ) node.appendChild( textContentWrapper ); } } />
+      <div className="textContent">
+        { ReactHtmlParser( textContent ) }
+      </div>
     </section>
   );
 };

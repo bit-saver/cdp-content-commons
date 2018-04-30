@@ -25,12 +25,20 @@ export const getAvailableLanguages = ( item ) => {
       } ) );
     case 'post':
       if ( item.languages ) {
-        return item.languages.map( post => ( {
+        let langArray = [];
+        langArray = item.languages.map( post => ( {
           id: post.post_id,
           key: post.language.language_code,
           value: post.language.display_name,
           text: post.language.display_name
         } ) );
+        langArray.unshift( {
+          id: item.id,
+          key: item.language.language_code,
+          value: item.language.display_name,
+          text: item.language.display_name
+        } );
+        return langArray;
       }
       return {
         id: item.post_id,

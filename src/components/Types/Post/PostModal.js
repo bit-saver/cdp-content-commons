@@ -13,12 +13,12 @@ import ModalText from '../../Modals/ModalText/ModalText';
 class PostModal extends Component {
   constructor( props ) {
     super( props );
+    const { item } = this.props;
     this.state = {
-      item: this.props.item,
+      item,
       selectedLanguage: this.getLanguage(),
-      textDirection: false
+      textDirection: item.language.text_direction ? item.language.text_direction === 'true' : false
     };
-
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
   }
 
@@ -28,7 +28,7 @@ class PostModal extends Component {
       this.setState( {
         item,
         selectedLanguage: value,
-        textDirection: item.language.text_direction
+        textDirection: item.language.text_direction ? item.language.text_direction === 'true' : false
       } );
     }
   }
@@ -69,7 +69,7 @@ class PostModal extends Component {
             <img src={ item.thumbnail } alt="post thumbnail" />
           </div>
           <ModalContentMeta type={ item.type } dateUpdated={ item.modified } />
-          <ModalText textContent={ ( item.content ) ? item.content : item.description } />
+          <ModalText textContent={ item.content } />
           <ModalPostMeta
             type={ item.type }
             author={ item.author }
