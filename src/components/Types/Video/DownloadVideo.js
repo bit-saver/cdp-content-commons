@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
+import { Item } from 'semantic-ui-react';
 import { object, string, bool } from 'prop-types';
 
 // NOTE: Using the 'download' attribute to trigger downloads
@@ -42,12 +43,17 @@ class DownloadVideo extends Component {
     const fn = `${title.replace( /\s/g, '_' )}_${video.size.width}.${this.getFnExt( video.downloadUrl )}`;
 
     return (
-      <div key={ `fs_${index}` } style={ { marginBottom: '1em' } }>
-        <a href={ video.downloadUrl } download={ fn } title="Download video">
-          <img src={ downloadIcon } width="16" height="16" alt="Download video" style={ { marginRight: '.8em' } } />
-        </a>
-        { `${title} (${size.label}, ${size.weight})` }
-      </div>
+      <Item.Group key={ `fs_${index}` } className="download-item">
+        <Item as="a" href={ video.downloadUrl } download={ fn }>
+          <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
+          <Item.Content>
+            <Item.Header className="download-header">{ `Download "${title}"` } </Item.Header>
+            { /* <Item.Description>Typically takes 30 seconds to donwload a file this size in your area.</Item.Description> */ }
+            <Item.Meta> { `File size: ${size.weight}` } </Item.Meta>
+            <Item.Meta> { `Dimensions: ${size.label}` }</Item.Meta>
+          </Item.Content>
+        </Item>
+      </Item.Group>
     );
   }
 

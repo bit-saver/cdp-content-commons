@@ -8,16 +8,40 @@
     margin-bottom: 2em;
   }
 
-  .ui.button {
-    border-radius: 0;
-    background: $light-blue;
-    color: #fff;
-    padding-left: 1em;
-    padding-right: 1em;
-    margin-top: 2em;
+  // .ui.button {
+  //   border-radius: 0;
+  //   background: $light-blue;
+  //   color: #fff;
+  //   padding-left: 1em;
+  //   padding-right: 1em;
+  //   margin-top: 2em;
+
+  //   &:hover {
+  //     background: darken($light-blue, 5%);
+  //   }
+  // }
+
+  .ui.items > .item > .content > .header {
+    color: $light-blue;
+    font-size: 1.1em;
+  }
+
+  .ui.mini.image {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ui.items > .item .meta {
+    font-style: italic;
+  }
+
+  .download-item {
+    border: 1px solid $light-grey;
+    padding: 1em 1em 1em 1.2em;
+    box-shadow: -1px 5px 10px -11px rgba(0, 0, 0, 0.75);
 
     &:hover {
-      background: darken($light-blue, 5%);
+      box-shadow: -1px 5px 20px -11px rgba(0, 0, 0, 0.55);
     }
   }
 
