@@ -7,6 +7,29 @@ import './ResultItem.css';
 import './ResultItemRTL.css';
 
 class ResultItem extends Component {
+  getItemSource() {
+    const { item } = this.props;
+    let source;
+    if ( item.logo ) {
+      source = (
+        <div
+          style={ {
+            background: `url( ${item.logo} ) no-repeat left`,
+            height: '16px',
+            margin: '6px 0 0',
+            marginLeft: '-1px'
+          } }
+          alt={ item.site }
+        />
+      );
+    }
+    if ( !source && item.type === 'video' ) source = item.owner;
+    if ( !source ) source = item.site;
+    return item.type === 'video'
+      ? source
+      : <a target="_blank" rel="noopener noreferrer" href={ item.sourcelink }>{ source }</a>;
+  }
+
   // eslint-disable-next-line class-methods-use-this
   renderCategory( category, index, arr ) {
     let { name } = category;
@@ -23,9 +46,12 @@ class ResultItem extends Component {
 
   render() {
     const { item } = this.props;
-    const textDirection = item.selectedLanguageUnit
-      ? item.selectedLanguageUnit.language.text_direction
-      : item.language && item.language.text_direction ? item.language.text_direction : 'ltr' ;
+    let textDirection = 'ltr';
+    if ( item.selectedLanguageUnit ) {
+      textDirection = item.selectedLanguageUnit.language.text_direction;
+    } else if ( item.language && item.language.text_direction ) {
+      textDirection = item.language.text_direction;
+    }
     return (
       <Card>
         <Modal
@@ -52,12 +78,8 @@ class ResultItem extends Component {
           <Card.Description className="card_excerpt">{ item.description }</Card.Description>
           <div className="card_metadata">
             <Card.Meta>{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</Card.Meta>
-            <Card.Meta>
-              <a target="_blank" rel="noopener noreferrer" href={ item.sourcelink }>
-                { item.site }
-              </a>
-            </Card.Meta>
             <Card.Meta>{ item.categories && item.categories.map( this.renderCategory ) }</Card.Meta>
+            <Card.Meta>{ this.getItemSource() }</Card.Meta>
           </div>
         </Card.Content>
       </Card>
