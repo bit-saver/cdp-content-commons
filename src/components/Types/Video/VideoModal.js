@@ -63,7 +63,10 @@ class VideoModal extends Component {
 
           const re = /https:\/\/youtu.be\/(.*)/;
           const id = youtubeUrl.match( re );
-          return id[1] || null;
+          if ( id && id[1] ) {
+            return id[1];
+          }
+          return null;
         }
       }
     }
@@ -150,12 +153,7 @@ class VideoModal extends Component {
   render() {
     const { unit, textDirection } = this.state;
     const {
-      type,
-      logo,
-      author,
-      owner,
-      published,
-      modified
+      type, logo, author, owner, published, modified
     } = this.props.item;
 
     if ( unit ) {
@@ -250,18 +248,9 @@ class VideoModal extends Component {
 
           { this.renderVideoPlayer() }
 
-          <ModalContentMeta
-            type={ type }
-            dateUpdated={ modified }
-            transcript={ this.getVideoTranscript() }
-          />
+          <ModalContentMeta type={ type } dateUpdated={ modified } transcript={ this.getVideoTranscript() } />
           <ModalDescription description={ unit.desc } />
-          <ModalPostMeta
-            author={ author }
-            logo={ logo }
-            source={ owner }
-            datePublished={ published }
-          />
+          <ModalPostMeta author={ author } logo={ logo } source={ owner } datePublished={ published } />
           <ModalPostTags tags={ unit.categories } />
         </ModalItem>
       );
