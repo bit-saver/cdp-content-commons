@@ -6,9 +6,7 @@
   cursor: pointer;
 }
 
-
 .popupElem {
-
   &_wrapper {
     min-height: 425px;
 
@@ -113,7 +111,7 @@
       left: 0;
       top: 41px;
       border: none;
-      height: 3px;
+      height: 4px;
       z-index: 1;
       background: $light-blue;
       transition: all 0.3s ease-in-out;
