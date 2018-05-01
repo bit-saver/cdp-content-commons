@@ -75,8 +75,8 @@ class FilterMenu extends Component {
     this.props.categoryUpdate();
     this.props.postTypeUpdate();
     this.props.sourceUpdate();
-    // this.props.languageUpdate( { key: 'en-us', display: 'English' } );
-    // this.props.dateUpdate( { key: 'recent', display: 'Most Recent' } );
+    this.props.languageUpdate( { locale: 'en-us', display_name: 'English' } );
+    this.props.dateUpdate( { key: 'recent', display: 'Most Recent' } );
     this.props.createRequest();
   };
 
