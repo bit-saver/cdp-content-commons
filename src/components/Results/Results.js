@@ -22,7 +22,7 @@ class Results extends Component {
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
-    return this.props.search.response.hits !== nextProps.search.response.hits;
+    return ( this.props.search.response.hits !== nextProps.search.response.hits || this.state.view !== nextState.view );
   }
 
   toggleView( e ) {
