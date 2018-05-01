@@ -7,14 +7,15 @@ import './ResultItem.css';
 import './ResultItemRTL.css';
 
 class ResultItem extends Component {
-  getItemSource() {
+  getItemSource( textDirection ) {
     const { item } = this.props;
     let source;
     if ( item.logo ) {
+      textDirection = textDirection === 'ltr' ? 'left' : 'right';
       source = (
         <div
           style={ {
-            background: `url( ${item.logo} ) no-repeat left`,
+            background: `url( ${item.logo} ) no-repeat ${textDirection}`,
             height: '16px',
             margin: '6px 0 0',
             marginLeft: '-1px'
@@ -79,7 +80,7 @@ class ResultItem extends Component {
           <div className="card_metadata">
             <Card.Meta>{ moment( item.published ).format( 'MMMM DD, YYYY' ) }</Card.Meta>
             <Card.Meta>{ item.categories && item.categories.map( this.renderCategory ) }</Card.Meta>
-            <Card.Meta>{ this.getItemSource() }</Card.Meta>
+            <Card.Meta>{ this.getItemSource( textDirection ) }</Card.Meta>
           </div>
         </Card.Content>
       </Card>
