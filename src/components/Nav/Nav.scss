@@ -11,18 +11,6 @@ nav {
   }
 }
 
-.bar nav {
-  @media screen and (max-width: 767px) {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999;
-    padding: 0;
-    background: white;
-    width: 100%;
-  }
-}
-
 nav .ui.menu .item {
   color: $blue;
   font-weight: bold;

@@ -4,26 +4,61 @@ header {
   text-align: center;
 }
 
-.bar header {
-  padding: 10em 0 3em;
-  @media screen and (max-width: 767px) {
-    padding: 4em 0 2em;
+.bar {
+  background: url('../../assets/images/cdp_home_hero.png');
+  background-size: cover;
+  margin-bottom: 3em;
+
+  header {
+    padding: 10em 0 1em;
+    @media screen and (max-width: 767px) {
+      padding: 4em 0 2em;
+    }
   }
-}
 
-.bar .search_bar {
-  margin: 3em auto;
-}
+  nav {
+    @media screen and (max-width: 767px) {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 999;
+      padding: 0;
+      width: 100%;
+    }
+  }
 
-.bar h1.ui.header .sub.header.subtitle {
-  font-size: 1em;
-  color: $blue;
-  margin: 0.5em 0;
-}
+  nav .content.icon {
+    color: white;
+  }
 
-.bar h1.ui.header .sub.header.subtext {
-  color: $grey;
-  margin: 0;
+  nav .ui.menu .item, nav .ui.menu .item:last-child {
+    color: white;
+    border-radius: 0;
+  }
+
+  nav .ui.menu .item:hover {
+    color: white;
+    border-bottom: 2px solid white;
+  }
+
+  .title, .title:hover {
+    color: white;
+  }
+
+  .search_bar {
+    margin: 3em auto;
+  }
+
+  h1.ui.header .sub.header.subtitle {
+    font-size: 1em;
+    color: white;
+    margin: 0.5em 0;
+  }
+
+  h1.ui.header .sub.header.subtext {
+    color: white;
+    margin: 0;
+  }
 }
 
 .resultsbar {
@@ -35,6 +70,36 @@ header {
   top: 0;
   width: 100%;
   z-index: 998;
+
+  header {
+    @media screen and (max-width: 767px) {
+      text-align: left;
+    }
+  }
+
+  header a,
+  header a:hover {
+    color: #fff;
+    font-size: 1.5em;
+  }
+
+  .search_bar {
+    @media screen and (min-width: 768px) {
+      padding: 0.6em;
+      width: 400px;
+      float: center;
+    }
+    @media screen and (min-width: 900px) {
+      width: 500px;
+    }
+    width: 100%;
+    padding: 0.8em 0;
+    box-shadow: none;
+  }
+  
+  .search_bar .fields {
+    margin: 0;
+  }
 }
 
 .aboutbar, .helpbar, .privacybar {
@@ -48,12 +113,6 @@ header {
   z-index: 998;
 }
 
-.resultsbar header {
-  @media screen and (max-width: 767px) {
-    text-align: left;
-  }
-}
-
 .resultsbar .ui.container,
 .bar .ui.container,
 .aboutbar .ui.container,
@@ -63,12 +122,6 @@ header {
     width: 1600px;
   }
   position: relative;
-}
-
-.resultsbar header a,
-.resultsbar header a:hover {
-  color: #fff;
-  font-size: 1.5em;
 }
 
 .resultsbar h1.ui.header,
@@ -106,24 +159,6 @@ header {
 .privacybar .sub.header.subtitle,
 .privacybar .sub.header.subtext {
   display: none;
-}
-
-.resultsbar .search_bar {
-  @media screen and (min-width: 768px) {
-    padding: 0.6em;
-    width: 400px;
-    float: center;
-  }
-  @media screen and (min-width: 900px) {
-    width: 500px;
-  }
-  width: 100%;
-  padding: 0.8em 0;
-  box-shadow: none;
-}
-
-.resultsbar .search_bar .fields {
-  margin: 0;
 }
 
 .aboutbar .search_bar,
