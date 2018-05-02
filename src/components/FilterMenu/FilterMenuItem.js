@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, string, array, object } from 'prop-types';
+import { func, string, array, object, oneOfType } from 'prop-types';
 import { Form, Icon } from 'semantic-ui-react';
 import './FilterMenuItem.css';
 
@@ -7,7 +7,6 @@ class FilterMenuItem extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      value: this.props.default || '',
       filterItemOpen: false
     };
   }
@@ -51,7 +50,6 @@ class FilterMenuItem extends Component {
   };
 
   handleOnChange = ( e, selected ) => {
-    this.setState( { value: selected.value } );
     this.props.onFilterChange( selected );
 
     this.toggleSubMenu( e );
@@ -77,9 +75,7 @@ class FilterMenuItem extends Component {
         filter: this.props.filter,
         onChange: this.handleOnChange,
         checked:
-          name === 'FormRadio'
-            ? this.state.value === option.value
-            : selected.some( sel => sel.display_name === option.label )
+          name === 'FormRadio' ? selected.key === option.value : selected.some( sel => sel.display_name === option.label )
       } ) );
   };
 
@@ -114,8 +110,7 @@ FilterMenuItem.propTypes = {
   options: array,
   children: object,
   filter: string,
-  default: string,
-  selected: array,
+  selected: oneOfType( [array, object] ),
   onFilterChange: func,
   closeSubMenu: func
 };

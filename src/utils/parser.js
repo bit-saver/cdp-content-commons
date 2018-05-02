@@ -111,10 +111,10 @@ const getAuthor = ( author ) => {
 
 // send in locale to fetch applicable lang data props?
 const populateVideoItem = ( source ) => {
-  const { locale } = store.getState().language.currentLanguage;
+  const { key } = store.getState().language.currentLanguage;
   const thumbnail = getThumbnail( source );
   const units = source.unit;
-  const languageUnit = units.find( unit => unit.language.locale.toLowerCase() === locale.toLowerCase() );
+  const languageUnit = units.find( unit => unit.language.locale.toLowerCase() === key.toLowerCase() );
   let obj = {};
 
   if ( languageUnit ) {

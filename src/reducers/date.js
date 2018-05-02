@@ -36,7 +36,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case DATE_CHANGE:
       return {
         ...state,
-        currentDate: action.payload
+        currentDate: action.payload ? action.payload : { key: 'recent', display: 'Most Recent' }
       };
     case FROM_DATE_CHANGE:
       return {
