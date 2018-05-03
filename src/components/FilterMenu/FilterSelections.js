@@ -14,7 +14,7 @@ class FilterSelections extends Component {
     const nextLanguage = nextProps.language.currentLanguage;
     const language = {
       label: nextLanguage.display_name,
-      value: nextLanguage.locale,
+      value: nextLanguage.key,
       filter: 'language',
       single: true
     };

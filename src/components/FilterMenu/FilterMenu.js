@@ -45,7 +45,7 @@ class FilterMenu extends Component {
   } ) => {
     switch ( filter.toLowerCase() ) {
       case 'language':
-        this.props.languageUpdate( { locale: value, display_name: labelclean } );
+        this.props.languageUpdate( { key: value, display_name: labelclean } );
         break;
 
       case 'category':
@@ -71,12 +71,13 @@ class FilterMenu extends Component {
     this.props.createRequest();
   };
 
+  // state will reset if no selected value is sent
   handleFilterClearAll = () => {
     this.props.categoryUpdate();
     this.props.postTypeUpdate();
     this.props.sourceUpdate();
-    this.props.languageUpdate( { locale: 'en-us', display_name: 'English' } );
-    this.props.dateUpdate( { key: 'recent', display: 'Most Recent' } );
+    this.props.languageUpdate();
+    this.props.dateUpdate();
     this.props.createRequest();
   };
 
@@ -112,7 +113,7 @@ class FilterMenu extends Component {
           <FilterMenuItem
             filter="Most Recent"
             onFilterChange={ this.updateSearchQuery }
-            default="recent"
+            selected={ this.props.date.currentDate }
             closeSubMenu={ this.closeSubMenu }
             options={ this.getOptions( this.props.date ) }
           >
@@ -123,7 +124,6 @@ class FilterMenu extends Component {
             options={ this.getOptions( this.props.type ) }
             onFilterChange={ this.updateSearchQuery }
             selected={ this.props.type.currentPostTypes }
-            default="video"
             closeSubMenu={ this.closeSubMenu }
           >
             <Form.Checkbox />
@@ -140,7 +140,7 @@ class FilterMenu extends Component {
           <FilterMenuItem
             filter="Language"
             options={ this.getOptions( this.props.language ) }
-            default="en-us"
+            selected={ this.props.language.currentLanguage }
             onFilterChange={ this.updateSearchQuery }
           >
             <Form.Radio />

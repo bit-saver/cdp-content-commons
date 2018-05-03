@@ -60,7 +60,7 @@ export const titleCase = str =>
     .join( ' ' );
 
 // Following rules normalize language, categories, tags, etc as they appear at different document levels
-const getLanguageQry = language => `(language.locale: ${language.locale} OR unit.language.locale: ${language.locale})`;
+const getLanguageQry = language => `(language.locale: ${language.key} OR unit.language.locale: ${language.key})`;
 const getTagQry = tag => `tags.name.keyword: ${tag}~2 OR unit.tags.name.keyword: ${tag}`;
 
 const getCategoryQry = ( categories ) => {
