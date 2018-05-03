@@ -11,6 +11,7 @@
     "jszip": "^3.1.5",
     "jszip-utils": "0.0.2",
     "lodash.range": "^3.2.0",
+    "lodash.sortby": "^4.7.0",
     "moment": "^2.20.1",
     "normalize.css": "^8.0.0",
     "npm-run-all": "^4.1.2",

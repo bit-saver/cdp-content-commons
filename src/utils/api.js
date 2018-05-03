@@ -25,8 +25,31 @@ export const categoryAggRequest = () =>
     .post( SEARCH, {
       body: bodybuilder()
         .size( 0 )
-        .agg( 'terms', 'unit.categories.name.keyword', {}, 'category' )
-        .agg( 'terms', 'unit.categories.id.keyword', {}, 'id' )
+        // .agg( 'terms', 'unit.categories.name.keyword', {}, 'unitCategory' )
+        // .agg( 'terms', 'categories.name.keyword', {}, 'category' )
+        .agg( 'terms', 'unit.categories.id.keyword', {}, 'unitId' )
+        .agg( 'terms', 'categories.id.keyword', {}, 'id' )
+        .build()
+    } )
+    .then( response => response.data );
+
+export const categoryPrimaryRequest = () =>
+  axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 100 )
+        .query( 'query_string', 'query', '_type: term AND primary: true' )
+        .build()
+    } )
+    .then( response => response.data );
+
+// TODO: search only taxonomy index
+export const categoryValueNameRequest = ( ids = [] ) =>
+  axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 200 )
+        .orFilter( 'terms', '_id', ids.map( id => id.key ) )
         .build()
     } )
     .then( response => response.data );
@@ -59,16 +82,6 @@ export const getItemRequest = ( site, postId ) =>
       body: bodybuilder()
         .size( 1 )
         .query( 'query_string', 'query', `(site: ${site} AND post_id: ${postId})` )
-        .build()
-    } )
-    .then( response => response.data );
-
-export const categoryBaseRequest = () =>
-  axios
-    .post( SEARCH, {
-      body: bodybuilder()
-        .size( 100 )
-        .query( 'query_string', 'query', '_type: term AND primary: true' )
         .build()
     } )
     .then( response => response.data );
