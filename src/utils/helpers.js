@@ -163,6 +163,7 @@ export const queryBuilder = ( store ) => {
   }
 
   body.notQuery( 'match', 'type.keyword', 'courses' );
+  body.notQuery( 'match', 'type.keyword', 'page' );
 
   // body.query( 'query_string', 'query', optionStr ); // return all for testing
   return body.build();

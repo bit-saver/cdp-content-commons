@@ -18,9 +18,9 @@ export const loadPostTypes = () => async ( dispatch ) => {
   }
 
   const { buckets } = response.aggregations.postType;
-  const payload = buckets.filter( type => type.key !== 'courses' ).map( type => ( {
+  const payload = buckets.filter( type => type.key !== 'courses' && type.key !== 'page' ).map( type => ( {
     key: type.key,
-    display: capitalizeFirst( type.key ),
+    display: type.key === 'post' ? 'Article' : capitalizeFirst( type.key ),
     count: type.doc_count
   } ) );
 
