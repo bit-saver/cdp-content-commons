@@ -112,8 +112,11 @@
       line-height: 1.2em;
       color: $blue;
       @media screen and (max-width: 991px) {
-        font-size: 1.28em;
-      }    
+        font-size: 1em;
+      }
+      @media screen and (max-width: 767px) {
+        margin-bottom: 1em;
+      }
     }
 
     .meta {
@@ -121,6 +124,9 @@
       bottom: 0em;      
       margin-bottom: 1em;
       line-height: 1.2em;
+      @media screen and (max-width: 991px) {
+        position: relative;
+      }
 
       .date {
         display: block;
@@ -130,6 +136,9 @@
       .categories {
         display: block;
         color: $grey;
+        @media screen and (max-width: 991px) {
+          font-size: 0.8em;
+        }
       }      
     }
   }
