@@ -51,6 +51,15 @@ export const getAvailableLanguages = ( item ) => {
   }
 };
 
+/**
+ * Escape the id if the first letter is a reserved character
+ * @param {string } id ES _id
+ */
+export const escape = ( id ) => {
+  const re = /[+\-=!(){}[\]"~*?:\\^/]/;
+  return re.test( id.charAt( 0 ) ) ? `\\${id}` : id;
+};
+
 export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
 export const titleCase = str =>
   str
@@ -67,7 +76,7 @@ const getCategoryQry = ( categories ) => {
   let qry = '';
   const len = categories.length;
   categories.forEach( ( category, index ) => {
-    qry += `categories.id.keyword: ${category.id} OR unit.categories.id.keyword: ${category.id}`;
+    qry += `categories.id.keyword: ${escape( category.id )} OR unit.categories.id.keyword: ${escape( category.id )}`;
     if ( index < len - 1 ) qry += ' OR ';
   } );
 
