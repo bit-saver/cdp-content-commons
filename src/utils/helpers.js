@@ -1,5 +1,16 @@
 import Bodybuilder from 'bodybuilder';
 
+// TODO: Create type objects where all type related tasks, vars are held
+// i.e. fields to search, parser, etc.
+const fields = {
+  post: [
+    'title', 'author', 'content', 'excerpt', 'categories', 'tags'
+  ],
+  video: [
+    'author', 'unit.title', 'unit.desc', 'unit.transcript.text', 'unit.categories.name', 'unit.tags'
+  ]
+};
+
 export const millisToSeconds = ( millis ) => {
   if ( typeof millis !== 'number' ) {
     throw new Error( '_millisToSeconds(): Provided parameter is not a number' );
@@ -106,9 +117,21 @@ const getPostTypeQry = ( types ) => {
   return `(${qry})`;
 };
 
+const getQryFields = ( types ) => {
+  const set = new Set();
+  types.forEach( ( t ) => {
+    const flds = fields[t.type];
+    flds.forEach( fld => set.add( fld ) );
+  } );
+
+  return [...set];
+};
+
 export const queryBuilder = ( store ) => {
   const body = new Bodybuilder();
   const options = [];
+  const hasSelectedTypes = store.type.currentPostTypes.length;
+
   if ( store.language.currentLanguage ) {
     options.push( getLanguageQry( store.language.currentLanguage ) );
   }
@@ -135,7 +158,7 @@ export const queryBuilder = ( store ) => {
     } );
   }
 
-  if ( store.type.currentPostTypes.length ) {
+  if ( hasSelectedTypes ) {
     options.push( getPostTypeQry( store.type.currentPostTypes ) );
   }
 
@@ -166,7 +189,11 @@ export const queryBuilder = ( store ) => {
 
   // add original search query last
   if ( store.search.query ) {
-    body.query( 'query_string', 'query', `${store.search.query} AND (${optionStr})` );
+    const qryObj = { query: `${store.search.query} AND (${optionStr})` };
+    if ( hasSelectedTypes ) {
+      qryObj.fields = getQryFields( store.type.currentPostTypes );
+    }
+    body.query( 'query_string', qryObj );
   } else {
     body.query( 'query_string', 'query', optionStr );
   }
