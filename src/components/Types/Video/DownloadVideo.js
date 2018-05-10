@@ -20,7 +20,7 @@ class DownloadVideo extends Component {
     if ( !size ) return null;
     return {
       label: `${size.width} x ${size.height}`,
-      weight: `${( size.filesize / 1000 / 1000 ).toFixed( 1 )}MB`
+      weight: this.formatBytes( size.filesize )
     };
   };
 
@@ -28,6 +28,21 @@ class DownloadVideo extends Component {
     const extRe = /([0-9a-z]+)$/i;
     const exts = url.match( extRe );
     return exts[0];
+  };
+
+  formatBytes = ( bytes, decimals ) => {
+    if ( bytes === 0 ) return;
+    const k = 1024;
+    const dm = decimals || 2;
+    const sizes = [
+      'Bytes',
+      'KB',
+      'MB',
+      'GB',
+      'TB'
+    ];
+    const i = Math.floor( Math.log( bytes ) / Math.log( k ) );
+    return `${parseFloat( ( bytes / ( k ** i ) ).toFixed( dm ) )}  ${sizes[i]}`;
   };
 
   sortByFilesize = ( a, b ) => {
@@ -48,7 +63,11 @@ class DownloadVideo extends Component {
           <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
           <Item.Content>
             <Item.Header className="download-header">{ `Download "${title}"` } </Item.Header>
-            { /* <Item.Description>Typically takes 30 seconds to donwload a file this size in your area.</Item.Description> */ }
+            { /*
+              <Item.Description>
+                Typically takes 30 seconds to donwload a file this size in your area.
+              </Item.Description>
+            */ }
             <Item.Meta> { `File size: ${size.weight}` } </Item.Meta>
             <Item.Meta> { `Dimensions: ${size.label}` }</Item.Meta>
           </Item.Content>
