@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import './Footer.css';
 import flagImage from '../../assets/images/US-Flag-Color-735b69.png';
+import DOSseal from '../../assets/images/DOS_Seal.png';
 
 const Footer = () => (
-  <footer>
+  <footer className="ui container">
     <Container text>
       <p>
         To request a video, ask questions, or provide feedback send us an email
@@ -19,7 +20,8 @@ const Footer = () => (
       <Link name="privacy" to="privacy" className="footer_link">Privacy Policy</Link>
       <a href="mailto:design@america.gov" className="footer_link">Contact Us</a>
     </Container>
-    <img src={ flagImage } alt="United States Flag" />
+    <img src={ flagImage } alt="United States Flag" className="footer_img footer_img--usflag" />
+    <img src={ DOSseal } alt="Department of State Seal" className="footer_img footer_img--dosseal" />
   </footer>
 );
 
