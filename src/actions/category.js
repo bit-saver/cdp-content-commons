@@ -2,14 +2,12 @@ import { categoryAggRequest, categoryPrimaryRequest, categoryValueNameRequest } 
 import { titleCase } from '../utils/helpers';
 import { LOAD_CATEGORIES_PENDING, LOAD_CATEGORIES_FAILED, LOAD_CATEGORIES_SUCCESS, CATEGORY_CHANGE } from './types';
 import sortBy from 'lodash.sortby';
+import uniqBy from 'lodash.uniqby';
 
 export const categoryUpdate = ( category, checked ) => ( {
   type: CATEGORY_CHANGE,
   payload: category
 } );
-
-const removeDuplicates = ( targetArr, prop ) =>
-  targetArr.filter( ( obj, pos, arr ) => arr.map( mapObj => mapObj[prop] ).indexOf( obj[prop] ) === pos );
 
 export const loadCategories = () => async ( dispatch ) => {
   dispatch( { type: LOAD_CATEGORIES_PENDING } );
@@ -29,11 +27,8 @@ export const loadCategories = () => async ( dispatch ) => {
   // get all category ids that have associated content
   const allIds = [...response.aggregations.id.buckets, ...response.aggregations.unitId.buckets];
 
-  // remove duplicate ids
-  const uniqueIds = removeDuplicates( allIds, 'key' );
-
-  // get associated category name from id
-  const categoryNameValuePairs = await categoryValueNameRequest( uniqueIds );
+  // get associated category name from id arr of unique values
+  const categoryNameValuePairs = await categoryValueNameRequest( uniqBy( allIds, 'key' ) );
 
   // onlu include category if it is a primary
   const primaryCats = categoryNameValuePairs.hits.hits.filter( category =>

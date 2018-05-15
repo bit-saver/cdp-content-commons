@@ -5,34 +5,50 @@ const SEARCH = `${process.env.REACT_APP_PUBLIC_API}/v1/search`;
 
 export const queryRequest = body => axios.post( SEARCH, body ).then( response => response.data );
 
-export const languageAggRequest = async () => {
-  const langsWithContent = await axios
+/**
+ * Get languages that have associated content
+ */
+export const languageAggRequest = () =>
+  axios
     .post( SEARCH, {
       body: bodybuilder()
         .size( 0 )
-        .agg( 'terms', 'unit.language.locale.keyword', {}, 'locale' ) // will need to add language.locale for other types
+        .agg( 'terms', 'unit.language.locale.keyword', {}, 'unitLocale' )
+        .agg( 'terms', 'language.locale.keyword', {}, 'locale' )
         .build()
     } )
     .then( response => response.data );
 
-  const allLangs = await axios.post( SEARCH, { size: 200, index: 'languages' } ).then( response => response.data );
+/**
+ * Get all languages in languages index
+ */
+export const languagesRequest = () =>
+  axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 200 )
+        .query( 'query_string', 'query', '_type: language' )
+        .build()
+    } )
+    .then( response => response.data );
 
-  return { langsWithContent, allLangs };
-};
-
+/**
+ * Get categories that have associated content
+ */
 export const categoryAggRequest = () =>
   axios
     .post( SEARCH, {
       body: bodybuilder()
         .size( 0 )
-        // .agg( 'terms', 'unit.categories.name.keyword', {}, 'unitCategory' )
-        // .agg( 'terms', 'categories.name.keyword', {}, 'category' )
         .agg( 'terms', 'unit.categories.id.keyword', {}, 'unitId' )
         .agg( 'terms', 'categories.id.keyword', {}, 'id' )
         .build()
     } )
     .then( response => response.data );
 
+/**
+ * Get primary categories
+ */
 export const categoryPrimaryRequest = () =>
   axios
     .post( SEARCH, {
@@ -43,7 +59,12 @@ export const categoryPrimaryRequest = () =>
     } )
     .then( response => response.data );
 
-// TODO: search only taxonomy index
+/**
+ * Get the categories that match supplied ids,used to fetch category display name
+ * TODO: search only taxonomy index
+ *
+ * @param {array} ids taxonomy ids
+ */
 export const categoryValueNameRequest = ( ids = [] ) =>
   axios
     .post( SEARCH, {
@@ -54,6 +75,9 @@ export const categoryValueNameRequest = ( ids = [] ) =>
     } )
     .then( response => response.data );
 
+/**
+ * Get all sources that have associated content
+ */
 export const sourceAggRequest = () =>
   axios
     .post( SEARCH, {
@@ -64,6 +88,11 @@ export const sourceAggRequest = () =>
     } )
     .then( response => response.data );
 
+/**
+ *
+ * @param {*} currentType
+ * @param {*} currentLang
+ */
 export const typeRecentsRequest = ( currentType, currentLang ) =>
   axios
     .post( SEARCH, {
@@ -76,6 +105,11 @@ export const typeRecentsRequest = ( currentType, currentLang ) =>
     } )
     .then( response => response.data );
 
+/**
+ *
+ * @param {*} site
+ * @param {*} postId
+ */
 export const getItemRequest = ( site, postId ) =>
   axios
     .post( SEARCH, {
@@ -86,22 +120,15 @@ export const getItemRequest = ( site, postId ) =>
     } )
     .then( response => response.data );
 
+/**
+ * Get all post types that have associated content
+ */
 export const postTypeAggRequest = () =>
   axios
     .post( SEARCH, {
       body: bodybuilder()
         .size( 0 )
         .agg( 'terms', 'type.keyword', {}, 'postType' )
-        .build()
-    } )
-    .then( response => response.data );
-
-export const siteAggRequest = () =>
-  axios
-    .post( SEARCH, {
-      body: bodybuilder()
-        .size( 0 )
-        .agg( 'terms', 'site.keyword', {}, 'site' )
         .build()
     } )
     .then( response => response.data );

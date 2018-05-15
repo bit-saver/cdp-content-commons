@@ -25,6 +25,23 @@ export const numberWithCommas = ( number ) => {
   return number.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' );
 };
 
+/**
+ * Escape the id if the first letter is a reserved character
+ * @param {string } id ES _id
+ */
+export const escape = ( id ) => {
+  const re = /[+\-=!(){}[\]"~*?:\\^/]/;
+  return re.test( id.charAt( 0 ) ) ? `\\${id}` : id;
+};
+
+export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
+export const titleCase = str =>
+  str
+    .toLowerCase()
+    .split( ' ' )
+    .map( word => word.charAt( 0 ).toUpperCase() + word.slice( 1 ) )
+    .join( ' ' );
+
 export const getAvailableLanguages = ( item ) => {
   if ( !item || !item.type ) return [];
   switch ( item.type ) {
@@ -61,23 +78,6 @@ export const getAvailableLanguages = ( item ) => {
       return [];
   }
 };
-
-/**
- * Escape the id if the first letter is a reserved character
- * @param {string } id ES _id
- */
-export const escape = ( id ) => {
-  const re = /[+\-=!(){}[\]"~*?:\\^/]/;
-  return re.test( id.charAt( 0 ) ) ? `\\${id}` : id;
-};
-
-export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
-export const titleCase = str =>
-  str
-    .toLowerCase()
-    .split( ' ' )
-    .map( word => word.charAt( 0 ).toUpperCase() + word.slice( 1 ) )
-    .join( ' ' );
 
 // Following rules normalize language, categories, tags, etc as they appear at different document levels
 const getLanguageQry = language => `(language.locale: ${language.key} OR unit.language.locale: ${language.key})`;
