@@ -14,6 +14,8 @@ export const loadLanguages = () => async ( dispatch ) => {
   let languages = [];
   let response;
   let all;
+
+  // Fetch languages that have content AND all languages in language index
   try {
     response = await languageAggRequest();
     all = await languagesRequest();
@@ -27,17 +29,18 @@ export const loadLanguages = () => async ( dispatch ) => {
     console.log( 'There are no languages avaialble' );
   }
 
-  // get all languages that have associated content across content types
+  // Get all languages that have associated content across content types
   const { aggregations } = response;
   const allLocales = [...aggregations.locale.buckets, ...aggregations.unitLocale.buckets].map( locale => ( {
     key: locale.key.toLowerCase(),
     count: locale.doc_count
   } ) );
-  const uniqueLocales = uniqBy( allLocales, 'key' );
-  const sorted = sortBy( uniqueLocales, ['key'] );
 
-  // get associated language name from locale
-  const payload = sorted.map( ( locale ) => {
+  // Return onlu unique, valid language locales
+  const uniqueLocales = uniqBy( allLocales, 'key' ).filter( locale => languages.find( l => l.locale === locale.key ) );
+
+  // Get associated language name from locale
+  const payload = uniqueLocales.map( ( locale ) => {
     const language = languages.find( l => l.locale === locale.key );
     return {
       key: language.locale,
@@ -48,6 +51,6 @@ export const loadLanguages = () => async ( dispatch ) => {
 
   return dispatch( {
     type: LOAD_LANGUAGES_SUCCESS,
-    payload
+    payload: sortBy( payload, ['display'] )
   } );
 };
