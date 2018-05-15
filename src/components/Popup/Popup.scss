@@ -39,13 +39,13 @@
     }
 
     &--mobile {
+
       &.ui.popup {
+        position: absolute;
         left: 50% !important;
         transform: translateX(-50%);
         min-width: 300px;
-        max-width: 300px;
-        position: absolute;
-        left: 0;
+        max-width: 300px;        
         width: 100%;
       }
     }
@@ -60,11 +60,23 @@
     }
 
     .ui.segment {
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
+      max-height: 300px;
       padding: 1em 0;
       margin: 0;
+      border: none;
+      border-radius: 0;
+      overflow-y: auto;
+      box-shadow: none;
+
+      .item {
+        @media screen and (max-width: 767px) {
+          margin: 0;
+
+          .content {
+            padding: 0 !important;
+          }
+        }
+      }
     }
 
     .ui.secondary.menu {
@@ -110,9 +122,9 @@
       position: relative;
       left: 0;
       top: 41px;
-      border: none;
-      height: 4px;
       z-index: 1;
+      border: none;
+      height: 4px;      
       background: $light-blue;
       transition: all 0.3s ease-in-out;
     }
