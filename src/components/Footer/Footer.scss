@@ -6,11 +6,16 @@ footer {
 
   p {
     font-size: 11px;
-  }
+  }  
 
-  img {
+  .footer_img {
     width: 36px;
     margin-top: 1em;
+
+    &--dosseal {
+      transform: translateY(25%);
+      margin-left: 5px;
+    }
   }
 
   .footer_link {
