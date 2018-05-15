@@ -52,6 +52,8 @@ class VideoModal extends Component {
   // https://stackoverflow.com/questions/48714879/error-parsing-header-x-xss-protection-google-chrome
   getYouTubeId() {
     const { unit, captions } = this.state;
+    let id = null;
+
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
 
@@ -61,16 +63,23 @@ class VideoModal extends Component {
         if ( streamObj && streamObj.url ) {
           const youtubeUrl = streamObj.url;
 
-          const re = /https:\/\/youtu.be\/(.*)/;
-          const id = youtubeUrl.match( re );
+          const reShort = /https:\/\/youtu.be\/(.*)/;
+          const reLong = /https:\/\/www.youtube.com\/watch\?v=(.*)/;
+
+          id = youtubeUrl.match( reShort );
           if ( id && id[1] ) {
             return id[1];
           }
-          return null;
+
+          id = youtubeUrl.match( reLong );
+          if ( id && id[1] ) {
+            return id[1];
+          }
         }
       }
     }
-    return null;
+
+    return id;
   }
 
   getVideoTranscript() {
