@@ -42,7 +42,7 @@ class VideoModal extends Component {
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.url ) {
-        return source.stream.url;
+        return source.stream.uid;
       }
     }
     return null;
@@ -143,11 +143,18 @@ class VideoModal extends Component {
     }
 
     // fallback to CloudFlare player if no youtube link available
-    const url = this.getVideoSource();
-    const active = !!url;
+    const uid = this.getVideoSource();
+    const active = !!uid;
     const icon = active ? 'video play' : 'warning circle';
 
-    return <Embed active={ active } icon={ icon } placeholder={ this.props.item.thumbnail } url={ url } />;
+    return (
+      <Embed
+        active={ active }
+        icon={ icon }
+        placeholder={ this.props.item.thumbnail }
+        url={ ` https://iframe.cloudflarestream.com/${uid}` }
+      />
+    );
   }
 
   renderCaptionTabTitle() {
