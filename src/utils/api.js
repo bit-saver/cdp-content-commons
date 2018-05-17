@@ -13,8 +13,8 @@ export const languageAggRequest = () =>
     .post( SEARCH, {
       body: bodybuilder()
         .size( 0 )
-        .agg( 'terms', 'unit.language.locale.keyword', {}, 'unitLocale' )
-        .agg( 'terms', 'language.locale.keyword', {}, 'locale' )
+        .agg( 'terms', 'unit.language.locale.keyword', { size: 50 }, 'unitLocale' )
+        .agg( 'terms', 'language.locale.keyword', { size: 50 }, 'locale' )
         .build()
     } )
     .then( response => response.data );
