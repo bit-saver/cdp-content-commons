@@ -42,18 +42,33 @@ class Nav extends Component {
         <Responsive
           as={ Icon }
           name="content"
-          maxWidth={ 767 }
+          maxWidth={ 992 }
           onClick={ this.navClick }
           onKeyUp={ this.keyUp }
           tabIndex={ 0 }
         />
-        <Responsive as={ Menu } compact secondary minWidth={ 768 }>
+        <Responsive as={ Menu } compact secondary minWidth={ 993 }>
           { menuItems.map( item => (
-            <Menu.Item key={ item.key } as={ Link } name={ item.name } to={ item.to }>{ item.label }</Menu.Item>
+            <Menu.Item
+              key={ item.key }
+              as={ Link }
+              name={ item.name }
+              to={ item.to }
+            >
+              { item.label }
+            </Menu.Item>
           ) ) }
+          <a
+            href="https://goo.gl/forms/PyLjAiaJVt3xONsd2"
+            target="_blank"
+            className="item feedback"
+            rel="noopener noreferrer"
+          >
+            Feedback
+          </a>
         </Responsive>
         { this.state.mobileNavVisible &&
-          <Responsive maxWidth={ 767 }>
+          <Responsive maxWidth={ 992 }>
             <ul className="mobileMenu">
               <li><Icon name="close" onClick={ this.navClick } onKeyUp={ this.keyUp } tabIndex={ 0 } /></li>
               { menuItems.map( item => (
@@ -63,6 +78,16 @@ class Nav extends Component {
                   </Link>
                 </li>
               ) ) }
+              <li>
+                <a
+                  href="https://goo.gl/forms/PyLjAiaJVt3xONsd2"
+                  target="_blank"
+                  className="item feedback"
+                  rel="noopener noreferrer"
+                >
+                  Feedback
+                </a>
+              </li>
             </ul>
           </Responsive>
         }
