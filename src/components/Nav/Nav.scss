@@ -6,8 +6,8 @@ nav {
   right: 0;
   z-index: 999;
   padding: 0;
-  @media screen and (min-width: 768px) {    
-    padding: 0 0 0 .8em;
+  @media screen and (min-width: 768px) {
+    padding: .8em;
   }
 }
 
@@ -27,15 +27,10 @@ nav .ui.menu .item {
   }
 
   &.feedback {
-    padding: 1.5em;
     margin-right: 0;
     border-radius: 0 !important;
     color: $blue !important;
-    background-color: $orange;    
-    @media screen and (min-width: 993px) and (max-width: 1085px) {
-      padding-left: .8em;
-      padding-right: .8em;
-    }
+    background-color: $orange;
 
     &:hover {
       border-bottom: none !important;
@@ -83,7 +78,7 @@ nav .mobileMenu li a {
   letter-spacing: 0.05em;
 
   &.feedback {
-    padding: 15px;
+    padding: 10px;
     color: $blue;
     background-color: $orange;
   }
