@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { func, string, shape } from 'prop-types';
+import { func, string, object } from 'prop-types';
 import { typeRecentsRequest } from '../../utils/api';
 import { Grid, Header, Item, Modal } from 'semantic-ui-react';
 import { withRouter, Link } from 'react-router-dom';
@@ -20,6 +20,8 @@ class Recents extends Component {
     const currentLang = 'en-us';
     typeRecentsRequest( this.props.postType, currentLang )
       .then( response => this.onFetchResult( response ) );
+
+    this.props.loadPostTypes();
   }
 
   onFetchResult = ( response ) => {
@@ -28,14 +30,21 @@ class Recents extends Component {
     } );
   }
 
+  getLabel = ( type ) => {
+    if ( !type.list.length ) return '';
+    const typeObj = type.list.find( item => item.key === this.props.postType );
+    if ( !typeObj.display ) return '';
+    return typeObj.display;
+  }
+
   handleClick( e ) {
     e.preventDefault();
 
-    // remove video due to being defaulted
-    this.props.postTypeUpdate( { type: 'video', display_name: 'Video', checked: false } );
+    // send blank payload to clear pre-checked options
+    this.props.postTypeUpdate();
 
     // enable post type in filter
-    this.props.postTypeUpdate( { type: this.props.postType, display_name: this.props.label, checked: true } );
+    this.props.postTypeUpdate( { type: this.props.postType, display_name: this.getLabel( this.props.type ), checked: true } );
 
     this.props.createRequest();
     this.props.history.push( '/results' );
@@ -93,9 +102,9 @@ class Recents extends Component {
     return (
       <section className="recents">
         <div className="recentstitle">
-          <Header as="h1" size="large">Most Recent { this.props.label }s</Header>
+          <Header as="h1" size="large">Most Recent { this.getLabel( this.props.type ) }s</Header>
           <Link to="/results" className="browseAll" onClick={ this.handleClick } >
-            Browse All { this.props.label }s
+            Browse All { this.getLabel( this.props.type ) }s
           </Link>
         </div>
         <Grid columns="equal" stackable stretched>
@@ -137,12 +146,11 @@ const mapStateToProps = state => ( {
 
 Recents.propTypes = {
   createRequest: func,
+  loadPostTypes: func,
   postTypeUpdate: func,
   postType: string,
-  label: string,
-  history: shape( {
-    push: func
-  } )
+  type: object,
+  history: object
 };
 
 export default withRouter( connect( mapStateToProps, actions )( Recents ) );
