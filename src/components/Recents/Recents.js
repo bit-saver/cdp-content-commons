@@ -44,7 +44,11 @@ class Recents extends Component {
     this.props.postTypeUpdate();
 
     // enable post type in filter
-    this.props.postTypeUpdate( { type: this.props.postType, display_name: this.getLabel( this.props.type ), checked: true } );
+    this.props.postTypeUpdate( {
+      type: this.props.postType,
+      display_name: this.getLabel( this.props.type ),
+      checked: true
+    } );
 
     this.props.createRequest();
     this.props.history.push( '/results' );
