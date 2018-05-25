@@ -3,6 +3,17 @@
 .recents {
   margin-bottom: 6em;
 
+  &title {
+    display: flex;
+    justify-content: space-between;
+
+    .browseAll {
+      position: relative;
+      top: 0.5em;
+    }
+
+  }
+
   &left {
     cursor: pointer;
     background-size: cover;

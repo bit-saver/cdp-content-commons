@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { string } from 'prop-types';
+import { func, string, shape } from 'prop-types';
 import { typeRecentsRequest } from '../../utils/api';
 import { Grid, Header, Item, Modal } from 'semantic-ui-react';
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import './Recents.css';
 import { normalizeItem } from '../../utils/parser';
 import ModalContent from '../Modals/ModalContent';
 
 class Recents extends Component {
+  constructor( props ) {
+    super( props );
+    this.handleClick = this.handleClick.bind( this );
+  }
+
   componentWillMount() {
     const currentLang = 'en-us';
-    typeRecentsRequest( this.props.type, currentLang )
+    typeRecentsRequest( this.props.postType, currentLang )
       .then( response => this.onFetchResult( response ) );
   }
 
@@ -18,6 +26,19 @@ class Recents extends Component {
     this.setState( {
       recents: response
     } );
+  }
+
+  handleClick( e ) {
+    e.preventDefault();
+
+    // remove video due to being defaulted
+    this.props.postTypeUpdate( { type: 'video', display_name: 'Video', checked: false } );
+
+    // enable post type in filter
+    this.props.postTypeUpdate( { type: this.props.postType, display_name: this.props.label, checked: true } );
+
+    this.props.createRequest();
+    this.props.history.push( '/results' );
   }
 
   render() {
@@ -50,7 +71,7 @@ class Recents extends Component {
                 className="recentsItem_img"
                 style={ { backgroundImage: `url( ${item.thumbnail} )` } }
               >
-                <img src={ item.icon } className="metaicon" alt={ `${this.props.type} icon` } />
+                <img src={ item.icon } className="metaicon" alt={ `${this.props.postType} icon` } />
               </div>
               <Item.Content>
                 <Item.Header>{ item.title }</Item.Header>
@@ -71,7 +92,12 @@ class Recents extends Component {
 
     return (
       <section className="recents">
-        <Header as="h1" size="large">Most Recent { this.props.label }</Header>
+        <div className="recentstitle">
+          <Header as="h1" size="large">Most Recent { this.props.label }s</Header>
+          <Link to="/results" className="browseAll" onClick={ this.handleClick } >
+            Browse All { this.props.label }s
+          </Link>
+        </div>
         <Grid columns="equal" stackable stretched>
           <Grid.Column width={ 8 } className="recentsgridleft" >
             { items[0] &&
@@ -81,7 +107,11 @@ class Recents extends Component {
                   <div className="recentsleft" style={ { backgroundImage: `url( ${items[0].thumbnail} )` } }>
                     <div className="recentsoverlay">
                       <div className="recentsoverlay_title">{ items[0].title }</div>
-                      <img src={ items[0].icon } className="recentsoverlay_icon" alt={ `${this.props.type} icon` } />
+                      <img
+                        src={ items[0].icon }
+                        className="recentsoverlay_icon"
+                        alt={ `${this.props.postType} icon` }
+                      />
                     </div>
                   </div>
                 }
@@ -101,9 +131,18 @@ class Recents extends Component {
   }
 }
 
+const mapStateToProps = state => ( {
+  type: state.type
+} );
+
 Recents.propTypes = {
-  type: string,
-  label: string
+  createRequest: func,
+  postTypeUpdate: func,
+  postType: string,
+  label: string,
+  history: shape( {
+    push: func
+  } )
 };
 
-export default Recents;
+export default withRouter( connect( mapStateToProps, actions )( Recents ) );
