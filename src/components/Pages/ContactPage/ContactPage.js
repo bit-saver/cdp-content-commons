@@ -3,11 +3,11 @@ import ReactMarkdown from 'react-markdown';
 import { Header } from 'semantic-ui-react';
 import Breadcrumbs from '../../Breadcrumbs';
 import config from '../../../config';
-import './ContactUs.css';
+import './ContactPage.css';
 
-class ContactUs extends Component {
+class ContactPage extends Component {
   componentWillMount() {
-    const cachedContact = sessionStorage.getItem( 'ContactUs' );
+    const cachedContact = sessionStorage.getItem( 'ContactPage' );
     if ( cachedContact ) {
       this.setState( { markdown: cachedContact } );
       return;
@@ -23,7 +23,7 @@ class ContactUs extends Component {
   }
 
   onFetchResult = ( text ) => {
-    sessionStorage.setItem( 'ContactUs', text );
+    sessionStorage.setItem( 'ContactPage', text );
     this.setState( {
       markdown: text
     } );
@@ -44,4 +44,4 @@ class ContactUs extends Component {
   }
 }
 
-export default ContactUs;
+export default ContactPage;
