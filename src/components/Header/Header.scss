@@ -60,7 +60,7 @@ header {
   h1.ui.header .sub.header.subtext {
     margin: 0;
     font-size: 18px;
-    color: white;    
+    color: white;
   }
 }
 
@@ -107,7 +107,8 @@ header {
 
 .aboutbar,
 .helpbar,
-.privacybar {
+.privacybar,
+.contactbar {
   background: white;
   border: none;
   border-radius: 0;
@@ -122,7 +123,8 @@ header {
 .bar .ui.container,
 .aboutbar .ui.container,
 .helpbar .ui.container,
-.privacybar .ui.container {
+.privacybar .ui.container,
+.contactbar .ui.container {
   @media screen and (min-width: 768px) {
     width: 1600px;
   }
@@ -132,7 +134,8 @@ header {
 .resultsbar h1.ui.header,
 .aboutbar h1.ui.header,
 .helpbar h1.ui.header,
-.privacybar h1.ui.header {
+.privacybar h1.ui.header,
+.contactbar h1.ui.header {
   @media screen and (min-width: 768px) {
     float: left;
     padding-top: 0.3em;
@@ -145,7 +148,8 @@ header {
 .resultsbar .header .title,
 .aboutbar .header .title,
 .helpbar .header .title,
-.privacybar .header .title {
+.privacybar .header .title,
+.contactbar .header .title {
   padding: 0;
   font-size: 0.8em;
   @media screen and (min-width: 768px) {
@@ -162,12 +166,15 @@ header {
 .helpbar .sub.header.subtitle,
 .helpbar .sub.header.subtext,
 .privacybar .sub.header.subtitle,
-.privacybar .sub.header.subtext {
+.privacybar .sub.header.subtext,
+.contactbar .sub.header.subtitle,
+.contactbar .sub.header.subtext {
   display: none;
 }
 
 .aboutbar .search_bar,
 .helpbar .search_bar,
-.privacybar .search_bar {
+.privacybar .search_bar,
+.contactbar .search_bar {
   display: none;
 }
