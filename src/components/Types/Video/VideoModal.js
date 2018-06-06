@@ -219,7 +219,7 @@ class VideoModal extends Component {
                 }
               />
               <PopupTrigger
-                toolTip="Download this video with an embed code"
+                toolTip="Download video"
                 icon={ downloadIcon }
                 position="right"
                 show={ type === 'video' }
