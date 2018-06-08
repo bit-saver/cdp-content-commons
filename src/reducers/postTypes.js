@@ -5,11 +5,14 @@ import {
   POST_TYPE_CHANGE
 } from '../actions/types';
 
-const INITIAL_STATE = {
+let currentState = sessionStorage.getItem( 'currentState' );
+currentState = JSON.parse( currentState );
+
+const INITIAL_STATE = ( currentState && window.location.pathname !== '/' ) ? currentState.type : {
   error: false,
   list: [],
   loading: false,
-  currentPostTypes: [{ type: 'video', display_name: 'Video' }]
+  currentPostTypes: []
 };
 
 export default ( state = INITIAL_STATE, action ) => {
@@ -29,7 +32,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case LOAD_POST_TYPES_SUCCESS:
       return {
         ...state,
-        error: true,
+        error: false,
         loading: false,
         list: action.payload
       };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { shape, array, number } from 'prop-types';
+import { func, object, shape, array, number } from 'prop-types';
 import { connect } from 'react-redux';
 import SearchTerm from '../SearchTerm';
 import Breadcrumbs from '../Breadcrumbs';
@@ -8,6 +8,7 @@ import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
 import { Grid } from 'semantic-ui-react';
+import * as actions from '../../actions';
 import { normalizeItem } from '../../utils/parser';
 import './Results.css';
 
@@ -15,10 +16,15 @@ class Results extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      view: 'gallery',
+      view: 'gallery'
     };
 
     this.toggleView = this.toggleView.bind( this );
+  }
+
+  componentWillMount() {
+    this.props.createRequest();
+    this.props.history.push( '/results' );
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
@@ -89,6 +95,8 @@ const mapStateToProps = state => ( {
 } );
 
 Results.propTypes = {
+  createRequest: func,
+  history: object,
   search: shape( {
     response: shape( {
       hits: shape( {
@@ -99,4 +107,4 @@ Results.propTypes = {
   } )
 };
 
-export default connect( mapStateToProps )( Results );
+export default connect( mapStateToProps, actions )( Results );

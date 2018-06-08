@@ -73,6 +73,7 @@ class FilterMenu extends Component {
 
   // state will reset if no selected value is sent
   handleFilterClearAll = () => {
+    sessionStorage.removeItem( 'currentState' );
     this.props.categoryUpdate();
     this.props.postTypeUpdate();
     this.props.sourceUpdate();
