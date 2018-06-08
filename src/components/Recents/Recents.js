@@ -41,7 +41,11 @@ class Recents extends Component {
     e.preventDefault();
 
     // send blank payload to clear pre-checked options
+    this.props.categoryUpdate();
     this.props.postTypeUpdate();
+    this.props.sourceUpdate();
+    this.props.languageUpdate();
+    this.props.dateUpdate();
 
     // enable post type in filter
     this.props.postTypeUpdate( {
@@ -151,7 +155,11 @@ const mapStateToProps = state => ( {
 Recents.propTypes = {
   createRequest: func,
   loadPostTypes: func,
+  languageUpdate: func,
+  categoryUpdate: func,
   postTypeUpdate: func,
+  sourceUpdate: func,
+  dateUpdate: func,
   postType: string,
   type: object,
   history: object
