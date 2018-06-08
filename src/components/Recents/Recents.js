@@ -47,6 +47,9 @@ class Recents extends Component {
     this.props.languageUpdate();
     this.props.dateUpdate();
 
+    // set query to blank
+    this.props.search.query = '';
+
     // enable post type in filter
     this.props.postTypeUpdate( {
       type: this.props.postType,
@@ -149,7 +152,8 @@ class Recents extends Component {
 }
 
 const mapStateToProps = state => ( {
-  type: state.type
+  type: state.type,
+  search: state.search
 } );
 
 Recents.propTypes = {
@@ -162,7 +166,8 @@ Recents.propTypes = {
   dateUpdate: func,
   postType: string,
   type: object,
-  history: object
+  history: object,
+  search: object
 };
 
 export default withRouter( connect( mapStateToProps, actions )( Recents ) );
