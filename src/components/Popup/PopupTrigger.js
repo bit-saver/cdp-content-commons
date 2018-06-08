@@ -18,7 +18,7 @@ class PopupTrigger extends Component {
   }
 
   isMobile = () => {
-    if ( window.outerWidth < 768 ) {
+    if ( window.outerWidth < 600 ) {
       this.setState( { isMobile: true } );
     }
   };
@@ -38,6 +38,8 @@ class PopupTrigger extends Component {
             onClose={ this.handleOnClose }
             className={ !this.state.isMobile ? 'popupElem_wrapper' : 'popupElem_wrapper popupElem_wrapper--mobile' }
             content={ this.props.content }
+            horizontalOffset={ 4 }
+            position={ this.state.isMobile ? 'bottom center' : 'bottom right' }
           />
         </Tooltip>
       </span>
