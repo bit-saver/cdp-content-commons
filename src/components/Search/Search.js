@@ -7,33 +7,16 @@ import { Form } from 'semantic-ui-react';
 import './Search.css';
 
 class Search extends Component {
-  constructor( props ) {
-    super( props );
-    this.handleQueryOnChange = this.handleQueryOnChange.bind( this );
-    this.handleSubmit = this.handleSubmit.bind( this );
-  }
-
-  componentDidMount() {
-    if ( !this.props.search.query && this.props.location.pathname === '/results' ) {
-      this.props.search.query = sessionStorage.getItem( 'currentSearch' );
-
-      this.props.createRequest();
-      this.props.history.push( '/results' );
-    }
-  }
-
-  handleQueryOnChange( e ) {
+  handleQueryOnChange = ( e ) => {
     this.props.updateSearchQuery( e.target.value );
-  }
+  };
 
-  handleSubmit( e ) {
+  handleSubmit = ( e ) => {
     e.preventDefault();
-
-    sessionStorage.setItem( 'currentSearch', this.props.search.query );
 
     this.props.createRequest();
     this.props.history.push( '/results' );
-  }
+  };
 
   render() {
     return (
@@ -62,7 +45,6 @@ Search.propTypes = {
   updateSearchQuery: func,
   createRequest: func,
   history: object,
-  location: object,
   search: shape( {
     query: string
   } )

@@ -9,18 +9,6 @@ import { connect } from 'react-redux';
 import './FilterMenu.css';
 
 class FilterMenu extends Component {
-  constructor( props ) {
-    super( props );
-
-    this.state = {
-      // subMenuVal: '',
-      displaySubMenu: false
-    };
-
-    this.showSubMenu = this.showSubMenu.bind( this );
-    this.closeSubMenu = this.closeSubMenu.bind( this );
-  }
-
   componentWillMount() {
     this.props.loadLanguages();
     this.props.loadCategories();
@@ -81,34 +69,13 @@ class FilterMenu extends Component {
     this.props.createRequest();
   };
 
-  handleFilterSelect = ( e, selected ) => {
-    const filterSelection = e.target.previousSibling.value;
-    // const hasParentMenu = e.target.parentNode.dataset.parentmenu ? e.target.parentNode.dataset.parentmenu : '';
-
-    this.showSubMenu( filterSelection );
-  };
-
-  showSubMenu = ( filterSelection ) => {
-    const activeSubMenu = document.querySelector( '.filterMenu_sub.show' );
-    if ( !activeSubMenu ) {
-      const subMenu = document.querySelector( `[data-submenu-for=${filterSelection}]` );
-      if ( subMenu ) {
-        // this.setState( { displaySubMenu: true, subMenuVal: filterSelection } );
-      }
-    }
-  };
-
-  closeSubMenu() {
-    this.setState( { displaySubMenu: false } );
-  }
-
   render() {
     return (
       <section className="filterMenu_wrapper">
         { /* SELECTION DISPLAY */ }
         <FilterSelections onFilterChange={ this.updateSearchQuery } onFilterClearAll={ this.handleFilterClearAll } />
 
-        <div className={ this.state.displaySubMenu ? 'filterMenu_main subMenuDisplay' : 'filterMenu_main' }>
+        <div className="filterMenu_main">
           { /*  MAIN-MENU */ }
           <FilterMenuItem
             filter="Most Recent"
@@ -154,65 +121,6 @@ class FilterMenu extends Component {
           >
             <Form.Checkbox />
           </FilterMenuItem>
-          { /* SUB-MENUS */ }
-          { /* <div
-            className={
-              this.state.displaySubMenu && this.state.subMenuVal === 'video' ? 'filterMenu_sub show' : 'filterMenu_sub'
-            }
-            data-submenu-for="video"
-          >
-            <FilterMenuItem
-              menuName="File Type"
-              filterSelections={ this.state.filterSelections }
-              handleFilterSelect={ this.handleFilterSelect }
-              closeSubMenu={ this.closeSubMenu }
-              menuOptions={ [
-                { optionLabel: '.mp4', optionValue: 'mp4', parentMenu: 'video' },
-                { optionLabel: '.mov', optionValue: 'mov', parentMenu: 'video' }
-              ] }
-            />
-            <FilterMenuItem
-              menuName="Length"
-              filterSelections={ this.state.filterSelections }
-              handleFilterSelect={ this.handleFilterSelect }
-              closeSubMenu={ this.closeSubMenu }
-              menuOptions={ [
-                { optionLabel: '< 1 minute', optionValue: 'opt_under1minute', parentMenu: 'video' },
-                { optionLabel: '1-5 minutes', optionValue: 'opt_1_5minutes', parentMenu: 'video' },
-                { optionLabel: '5-10 minute', optionValue: 'opt_5_10minutes', parentMenu: 'video' },
-                { optionLabel: '10-15 minute', optionValue: 'opt_10_15minutes', parentMenu: 'video' },
-                { optionLabel: '15-30 minute', optionValue: 'opt_15_30minutes', parentMenu: 'video' },
-                { optionLabel: '> 30 minute', optionValue: 'opt_greater30minutes', parentMenu: 'video' }
-              ] }
-            />
-          </div>
-          <div
-            className={
-              this.state.displaySubMenu && this.state.subMenuVal === 'custom' ? 'filterMenu_sub show' : 'filterMenu_sub'
-            }
-            data-submenu-for="custom"
-          >
-            <FilterMenuItem
-              menuName="Custom 1"
-              filterSelections={ this.state.filterSelections }
-              handleFilterSelect={ this.handleFilterSelect }
-              closeSubMenu={ this.closeSubMenu }
-              menuOptions={ [
-                { optionLabel: 'Custom 1', optionValue: 'custom_1', parentMenu: 'custom' },
-                { optionLabel: 'Custom 2', optionValue: 'custom_2', parentMenu: 'custom' }
-              ] }
-            />
-            <FilterMenuItem
-              menuName="Custom 2"
-              filterSelections={ this.state.filterSelections }
-              handleFilterSelect={ this.handleFilterSelect }
-              closeSubMenu={ this.closeSubMenu }
-              menuOptions={ [
-                { optionLabel: 'Test 1', optionValue: 'opt_test1', parentMenu: 'custom' },
-                { optionLabel: 'Test 2', optionValue: 'opt_test2', parentMenu: 'custom' }
-              ] }
-            />
-          </div> */ }
         </div>
       </section>
     );

@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   error: false,
   list: [],
   loading: false,
-  currentPostTypes: [{ type: 'video', display_name: 'Video' }]
+  currentPostTypes: []
 };
 
 export default ( state = INITIAL_STATE, action ) => {
