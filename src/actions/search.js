@@ -86,6 +86,7 @@ export const createRequest = () => async ( dispatch, getState ) => {
 
   let response;
   const currentState = getState();
+  sessionStorage.setItem( 'currentState', JSON.stringify( currentState ) );
 
   try {
     response = await queryRequest( {

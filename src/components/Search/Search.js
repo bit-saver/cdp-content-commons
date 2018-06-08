@@ -13,23 +13,12 @@ class Search extends Component {
     this.handleSubmit = this.handleSubmit.bind( this );
   }
 
-  componentDidMount() {
-    if ( !this.props.search.query && this.props.location.pathname === '/results' ) {
-      this.props.search.query = sessionStorage.getItem( 'currentSearch' );
-
-      this.props.createRequest();
-      this.props.history.push( '/results' );
-    }
-  }
-
   handleQueryOnChange( e ) {
     this.props.updateSearchQuery( e.target.value );
   }
 
   handleSubmit( e ) {
     e.preventDefault();
-
-    sessionStorage.setItem( 'currentSearch', this.props.search.query );
 
     this.props.createRequest();
     this.props.history.push( '/results' );
@@ -62,7 +51,6 @@ Search.propTypes = {
   updateSearchQuery: func,
   createRequest: func,
   history: object,
-  location: object,
   search: shape( {
     query: string
   } )

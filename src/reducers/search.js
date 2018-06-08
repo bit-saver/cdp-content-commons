@@ -13,7 +13,10 @@ import {
   SEARCH_TAG_UPDATE
 } from '../actions/types';
 
-const INITIAL_STATE = {
+let currentState = sessionStorage.getItem( 'currentState' );
+currentState = JSON.parse( currentState );
+
+const INITIAL_STATE = ( currentState && window.location.pathname !== '/' ) ? currentState.search : {
   author: '',
   currentPage: -1,
   endIndex: 0,

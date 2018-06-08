@@ -5,7 +5,10 @@ import {
   LANGUAGE_CHANGE
 } from '../actions/types';
 
-const INITIAL_STATE = {
+let currentState = sessionStorage.getItem( 'currentState' );
+currentState = JSON.parse( currentState );
+
+const INITIAL_STATE = ( currentState && window.location.pathname !== '/' ) ? currentState.language : {
   error: false,
   list: [],
   loading: false,
@@ -29,7 +32,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case LOAD_LANGUAGES_SUCCESS:
       return {
         ...state,
-        error: true,
+        error: false,
         loading: false,
         list: action.payload
       };

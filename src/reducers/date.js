@@ -1,6 +1,9 @@
 import { DATE_CHANGE, TO_DATE_CHANGE, FROM_DATE_CHANGE } from '../actions/types';
 
-const INITIAL_STATE = {
+let currentState = sessionStorage.getItem( 'currentState' );
+currentState = JSON.parse( currentState );
+
+const INITIAL_STATE = ( currentState && window.location.pathname !== '/' ) ? currentState.date : {
   from: new Date(),
   to: new Date(),
   list: [
