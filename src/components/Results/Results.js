@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, object, shape, array, number } from 'prop-types';
+import { shape, array, number, object } from 'prop-types';
 import { connect } from 'react-redux';
 import SearchTerm from '../SearchTerm';
 import Breadcrumbs from '../Breadcrumbs';
@@ -8,7 +8,6 @@ import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
 import ResultsPagination from './ResultsPagination';
 import { Grid } from 'semantic-ui-react';
-import * as actions from '../../actions';
 import { normalizeItem } from '../../utils/parser';
 import './Results.css';
 
@@ -20,11 +19,6 @@ class Results extends Component {
     };
 
     this.toggleView = this.toggleView.bind( this );
-  }
-
-  componentWillMount() {
-    this.props.createRequest();
-    this.props.history.push( '/results' );
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
@@ -51,6 +45,8 @@ class Results extends Component {
     if ( !items.length && Object.keys( this.props.search.response ).length ) {
       isNoResults = true;
     }
+
+    sessionStorage.setItem( 'currentState', JSON.stringify( this.props.state ) );
 
     return (
       <section className="results">
@@ -91,12 +87,11 @@ class Results extends Component {
 }
 
 const mapStateToProps = state => ( {
-  search: state.search
+  search: state.search,
+  state
 } );
 
 Results.propTypes = {
-  createRequest: func,
-  history: object,
   search: shape( {
     response: shape( {
       hits: shape( {
@@ -104,7 +99,8 @@ Results.propTypes = {
       } )
     } ),
     currentPage: number
-  } )
+  } ),
+  state: object
 };
 
-export default connect( mapStateToProps, actions )( Results );
+export default connect( mapStateToProps )( Results );
