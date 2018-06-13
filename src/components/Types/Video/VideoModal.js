@@ -152,7 +152,7 @@ class VideoModal extends Component {
         active={ active }
         icon={ icon }
         placeholder={ this.props.item.thumbnail }
-        url={ ` https://iframe.cloudflarestream.com/${uid}` }
+        url={ `https://watch.cloudflarestream.com/${uid}` }
       />
     );
   }
