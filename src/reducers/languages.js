@@ -2,7 +2,8 @@ import {
   LOAD_LANGUAGES_PENDING,
   LOAD_LANGUAGES_FAILED,
   LOAD_LANGUAGES_SUCCESS,
-  LANGUAGE_CHANGE
+  LANGUAGE_CHANGE,
+  CLEAR_FILTERS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,6 +20,7 @@ export default ( state = INITIAL_STATE, action ) => {
         ...state,
         loading: true
       };
+
     case LOAD_LANGUAGES_FAILED:
       return {
         ...state,
@@ -26,6 +28,7 @@ export default ( state = INITIAL_STATE, action ) => {
         error: true,
         loading: false
       };
+
     case LOAD_LANGUAGES_SUCCESS:
       return {
         ...state,
@@ -33,10 +36,17 @@ export default ( state = INITIAL_STATE, action ) => {
         loading: false,
         list: action.payload
       };
+
     case LANGUAGE_CHANGE:
       return {
         ...state,
         currentLanguage: action.payload ? action.payload : { key: 'en-us', display_name: 'English' }
+      };
+
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        currentLanguage: { key: 'en-us', display_name: 'English' }
       };
 
     default:

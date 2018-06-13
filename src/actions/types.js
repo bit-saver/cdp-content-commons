@@ -31,6 +31,8 @@ export const LOAD_POST_TYPES_FAILED = 'load_post_types_failed';
 export const LOAD_POST_TYPES_SUCCESS = 'load_post_types_success';
 export const POST_TYPE_CHANGE = 'post_type_change';
 
+export const CLEAR_FILTERS = 'clear_filters';
+
 export const DATE_CHANGE = 'date_change';
 export const FROM_DATE_CHANGE = 'from_date_change';
 export const TO_DATE_CHANGE = 'to_date_change';

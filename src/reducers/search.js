@@ -10,7 +10,8 @@ import {
   SEARCH_SORT_FAILED,
   SEARCH_SORT_SUCCESS,
   SEARCH_AUTHOR_UPDATE,
-  SEARCH_TAG_UPDATE
+  SEARCH_TAG_UPDATE,
+  CLEAR_FILTERS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -107,6 +108,12 @@ export default ( state = INITIAL_STATE, action ) => {
         ...action.payload,
         isFetching: false
       };
+
+    case CLEAR_FILTERS:
+      return {
+        ...INITIAL_STATE
+      };
+
     default:
       return state;
   }

@@ -1,34 +1,28 @@
-import { DATE_CHANGE, TO_DATE_CHANGE, FROM_DATE_CHANGE } from '../actions/types';
+import { DATE_CHANGE, TO_DATE_CHANGE, FROM_DATE_CHANGE, CLEAR_FILTERS } from '../actions/types';
 
 const INITIAL_STATE = {
   from: new Date(),
   to: new Date(),
   list: [
-    { key: 'recent', display: 'Most Recent' },
-    // {
-    //   key: 'now-1h',
-    //   display: 'Past Hour'
-    // },
+    { key: 'recent', display_name: 'Most Recent' },
     {
       key: 'now-1d',
-      display: 'Past 24 Hours'
+      display_name: 'Past 24 Hours'
     },
     {
       key: 'now-1w',
-      display: 'Past Week'
+      display_name: 'Past Week'
     },
     {
       key: 'now-1M',
-      display: 'Past Month'
+      display_name: 'Past Month'
     },
     {
       key: 'now-1y',
-      display: 'Past Year'
+      display_name: 'Past Year'
     }
-    // { key: 'oldest', display: 'Oldest' },
-    // { key: 'custom', display: 'Custom' }
   ],
-  currentDate: { key: 'recent', display: 'Most Recent' }
+  currentDate: { key: 'recent', display_name: 'Most Recent' }
 };
 
 export default ( state = INITIAL_STATE, action ) => {
@@ -36,18 +30,27 @@ export default ( state = INITIAL_STATE, action ) => {
     case DATE_CHANGE:
       return {
         ...state,
-        currentDate: action.payload ? action.payload : { key: 'recent', display: 'Most Recent' }
+        currentDate: action.payload ? action.payload : { key: 'recent', display_name: 'Most Recent' }
       };
+
     case FROM_DATE_CHANGE:
       return {
         ...state,
         from: action.payload
       };
+
     case TO_DATE_CHANGE:
       return {
         ...state,
         to: action.payload
       };
+
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        currentDate: { key: 'recent', display_name: 'Most Recent' }
+      };
+
     default:
       return state;
   }
