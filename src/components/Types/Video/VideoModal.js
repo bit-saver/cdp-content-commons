@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { Embed, Checkbox } from 'semantic-ui-react';
+import config from '../../../config';
 
 // import plusIcon from '../../../assets/icons/icon_plus.svg';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
@@ -30,11 +31,28 @@ class VideoModal extends Component {
       unit: this.props.item.selectedLanguageUnit,
       selectedLanguage: this.getLanguage(),
       captions: this.getCaptions(),
-      textDirection: this.getTextDirection()
+      textDirection: this.getTextDirection(),
+      youtubeId: null,
+      youtubeDisplay: 0
     };
 
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
     this.handleCaptionChange = this.handleCaptionChange.bind( this );
+  }
+
+  componentWillMount() {
+    const youtubeId = this.getYouTubeId();
+    if ( youtubeId ) {
+      // todo: set url, key in config
+      const url = `${config.YOUTUBE_API_URL}?part=id&id=${youtubeId}&key=${config.YOUTUBE_API_KEY}`;
+
+      fetch( url )
+        .then( response => response.json() )
+        .then( json => this.setState( {
+          youtubeId: json.items[0] ? json.items[0].id : null,
+          youtubeDisplay: json.pageInfo.totalResults
+        } ) );
+    }
   }
 
   getVideoSource() {
@@ -137,11 +155,15 @@ class VideoModal extends Component {
 
   renderVideoPlayer() {
     // render youtube player if link available
-    const youTubeId = this.getYouTubeId();
-    if ( youTubeId ) {
-      return <Embed id={ youTubeId } placeholder={ this.props.item.thumbnail } source="youtube" />;
+    if ( this.state.youtubeDisplay && this.state.youtubeId ) {
+      return (
+        <Embed
+          id={ this.state.youtubeId }
+          placeholder={ this.props.item.thumbnail }
+          source="youtube"
+        />
+      );
     }
-
     // fallback to CloudFlare player if no youtube link available
     const uid = this.getVideoSource();
     const active = !!uid;
@@ -152,7 +174,7 @@ class VideoModal extends Component {
         active={ active }
         icon={ icon }
         placeholder={ this.props.item.thumbnail }
-        url={ ` https://iframe.cloudflarestream.com/${uid}` }
+        url={ `https://iframe.cloudflarestream.com/${uid}` }
       />
     );
   }
