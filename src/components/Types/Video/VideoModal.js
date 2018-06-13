@@ -48,7 +48,7 @@ class VideoModal extends Component {
 
       fetch( url )
         .then( response => response.json() )
-        .then( json => this.setState( {
+        .then( json => !json.error && this.setState( {
           youtubeId: json.items[0] ? json.items[0].id : null,
           youtubeDisplay: json.pageInfo.totalResults
         } ) );
