@@ -44,13 +44,13 @@ export const loadLanguages = () => async ( dispatch ) => {
     const language = languages.find( l => l.locale === locale.key );
     return {
       key: language.locale,
-      display: language.display_name,
+      display_name: language.display_name,
       count: locale.count
     };
   } );
 
   return dispatch( {
     type: LOAD_LANGUAGES_SUCCESS,
-    payload: sortBy( payload, ['display'] )
+    payload: sortBy( payload, ['display_name'] )
   } );
 };

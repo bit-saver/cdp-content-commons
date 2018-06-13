@@ -40,7 +40,7 @@ export const loadCategories = () => async ( dispatch ) => {
   // only display primary categories that have associated content
   const payload = sorted.map( category => ( {
     key: category._id,
-    display: titleCase( category._source.language.en ),
+    display_name: titleCase( category._source.language.en ),
     count: category.doc_count
   } ) );
 
