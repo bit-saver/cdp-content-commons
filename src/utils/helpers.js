@@ -87,7 +87,7 @@ const getCategoryQry = ( categories ) => {
   let qry = '';
   const len = categories.length;
   categories.forEach( ( category, index ) => {
-    qry += `categories.id.keyword: ${escape( category.id )} OR unit.categories.id.keyword: ${escape( category.id )}`;
+    qry += `categories.id.keyword: ${escape( category.key )} OR unit.categories.id.keyword: ${escape( category.key )}`;
     if ( index < len - 1 ) qry += ' OR ';
   } );
 
@@ -110,13 +110,20 @@ const getPostTypeQry = ( types ) => {
   let qry = '';
   const len = types.length;
   types.forEach( ( type, index ) => {
-    qry += `type.keyword: ${type.type}`;
+    qry += `type.keyword: ${type.key}`;
     if ( index < len - 1 ) qry += ' OR ';
   } );
 
   return `(${qry})`;
 };
 
+/**
+ * Return an array of unique selected types
+ * Set object only accepts unique values
+ *
+ * @param {array} types Selected post types
+ * @return Array of unique post types
+ */
 const getQryFields = ( types ) => {
   const set = new Set();
   types.forEach( ( t ) => {
@@ -148,8 +155,8 @@ export const queryBuilder = ( store ) => {
     options.push( getCategoryQry( store.category.currentCategories ) );
   }
 
-  /* Need to add a keyword analyzer to the owner prop
-     before we can query via query string
+  /* Need to add an elastic keyword analyzer to the owner prop
+     mapping before we can query via query string
      options.push( getSourceQry( store.source.currentSources ) );
     */
   if ( store.source.currentSources.length ) {
@@ -200,9 +207,10 @@ export const queryBuilder = ( store ) => {
     body.query( 'query_string', 'query', optionStr );
   }
 
+  // Do not fetch courses or page content type
   body.notQuery( 'match', 'type.keyword', 'courses' );
   body.notQuery( 'match', 'type.keyword', 'page' );
 
-  // body.query( 'query_string', 'query', optionStr ); // return all for testing
+  // body.query( 'query_string', 'query', optionStr ); // return all for TESTING
   return body.build();
 };

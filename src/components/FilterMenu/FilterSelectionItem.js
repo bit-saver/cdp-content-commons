@@ -7,7 +7,7 @@ const FilterSelectionItem = ( props ) => {
     props.onClick( {
       value: props.value,
       filter: props.filter,
-      labelclean: props.label,
+      label: props.label,
       checked: false
     } );
   };
