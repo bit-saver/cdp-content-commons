@@ -57,7 +57,7 @@ class FilterMenu extends Component {
         break;
 
       case 'source':
-        this.props.sourceUpdate( { display_name: labelclean, checked } );
+        this.props.sourceUpdate( { key: value, display_name: labelclean, checked } );
         break;
 
       case 'most recent':

@@ -153,8 +153,10 @@ export const queryBuilder = ( store ) => {
      options.push( getSourceQry( store.source.currentSources ) );
     */
   if ( store.source.currentSources.length ) {
-    store.source.currentSources.forEach( ( source, index ) => {
-      body.orFilter( 'term', 'owner.keyword', source.display_name );
+    store.source.currentSources.forEach( ( source ) => {
+      source.key.forEach( ( src ) => {
+        body.orFilter( 'term', 'owner.keyword', src );
+      } );
     } );
   }
 

@@ -36,7 +36,7 @@ export default ( state = INITIAL_STATE, action ) => {
       return {
         ...state,
         currentSources: action.payload.checked
-          ? [...state.currentSources, { display_name: action.payload.display_name }]
+          ? [...state.currentSources, { key: action.payload.key, display_name: action.payload.display_name }]
           : state.currentSources.filter( source => source.display_name !== action.payload.display_name )
       };
     default:
