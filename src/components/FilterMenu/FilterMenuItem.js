@@ -62,6 +62,8 @@ class FilterMenuItem extends Component {
   };
 
   shouldCheck = ( FormItem, selected, option ) => {
+    console.log( FormItem );
+    console.dir( selected );
     if ( FormItem.name === 'FormRadio' ) {
       return selected.key === option.value;
     }
