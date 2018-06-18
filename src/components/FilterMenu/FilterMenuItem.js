@@ -61,6 +61,18 @@ class FilterMenuItem extends Component {
     this.props.createRequest();
   };
 
+  shouldCheck = ( FormItem, selected, option ) => {
+    if ( FormItem.name === 'FormRadio' ) {
+      return selected.key === option.value;
+    }
+
+    if ( Array.isArray( selected ) ) {
+      return selected.some( sel => sel.display_name === option.label );
+    }
+
+    return false;
+  };
+
   render() {
     const { filterItemOpen } = this.state;
     const { FormItem, selected } = this.props;
@@ -92,11 +104,7 @@ class FilterMenuItem extends Component {
                 filter={ this.props.filter }
                 count={ option.count }
                 onChange={ this.handleOnChange }
-                checked={
-                  FormItem.name === 'FormRadio'
-                    ? selected.key === option.value
-                    : selected.some( sel => sel.display_name === option.label )
-                }
+                checked={ this.shouldCheck( FormItem, selected, option ) }
               />
             ) ) }
           </Form.Group>
