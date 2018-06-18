@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { shape, array, number } from 'prop-types';
+import { shape, array, number, func } from 'prop-types';
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import SearchTerm from '../SearchTerm';
 import Breadcrumbs from '../Breadcrumbs';
 import FilterMenu from '../FilterMenu/FilterMenu';
@@ -15,36 +16,30 @@ class Results extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      view: 'gallery',
+      view: 'gallery'
     };
+  }
 
-    this.toggleView = this.toggleView.bind( this );
+  componentDidMount() {
+    if ( !this.props.search.response.hits ) {
+      // No current search and no saved session results so execute default search
+      this.props.createRequest();
+    }
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
-    return ( this.props.search.response.hits !== nextProps.search.response.hits || this.state.view !== nextState.view );
+    return this.props.search.response.hits !== nextProps.search.response.hits || this.state.view !== nextState.view;
   }
 
-  toggleView( e ) {
+  toggleView = ( e ) => {
     const { view } = e.target.dataset;
     this.setState( { view } );
-  }
+  };
 
   render() {
     const { view } = this.state;
-
-    let items;
-
-    if ( this.props.search.response.hits ) {
-      items = this.props.search.response.hits.hits;
-    } else {
-      items = [];
-    }
-
-    let isNoResults;
-    if ( !items.length && Object.keys( this.props.search.response ).length ) {
-      isNoResults = true;
-    }
+    const { hits } = this.props.search.response;
+    const items = hits ? hits.hits : [];
 
     return (
       <section className="results">
@@ -70,7 +65,7 @@ class Results extends Component {
                   <ResultItem key={ item._id } item={ normalizeItem( item ) } />
                 </Grid.Column>
               ) ) }
-              { isNoResults && (
+              { !items.length && (
                 <div className="results_noResults">
                   <p>Sorry, your search did not return any results =(</p>
                 </div>
@@ -89,6 +84,7 @@ const mapStateToProps = state => ( {
 } );
 
 Results.propTypes = {
+  createRequest: func,
   search: shape( {
     response: shape( {
       hits: shape( {
@@ -99,4 +95,4 @@ Results.propTypes = {
   } )
 };
 
-export default connect( mapStateToProps )( Results );
+export default connect( mapStateToProps, actions )( Results );

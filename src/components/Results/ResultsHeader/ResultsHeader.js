@@ -20,7 +20,7 @@ class ResultsHeader extends Component {
     this.toggleNumberOfResults = this.toggleNumberOfResults.bind( this );
 
     this.state = {
-      pageSize: 12
+      pageSize: props.search.pageSize
     };
   }
 
@@ -43,8 +43,7 @@ class ResultsHeader extends Component {
   };
 
   handleOnChange( event, { value } ) {
-    const { pageSize } = this.props.search;
-    this.props.sortRequest( value, pageSize );
+    this.props.sortRequest( value );
   }
 
   toggleNumberOfResults( e, { value } ) {

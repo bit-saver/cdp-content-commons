@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import { func, string, array, object, oneOfType } from 'prop-types';
 import { Form, Icon } from 'semantic-ui-react';
+import * as actions from '../../actions';
+import { connect } from 'react-redux';
 import './FilterMenuItem.css';
 
 class FilterMenuItem extends Component {
   constructor( props ) {
     super( props );
+
     this.state = {
       filterItemOpen: false
     };
   }
+
+  /**
+   * Load external data
+   */
+  componentDidMount() {
+    if ( typeof this.props.loadOptions === 'function' ) {
+      this.props.loadOptions();
+    }
+  }
+
+  /**
+   * Format data into state that dopdowns will use
+   */
+  formatOptions = options =>
+    options.map( option => ( {
+      label: option.display_name,
+      value: option.key,
+      count: option.count
+    } ) );
 
   displayFilter = () => {
     this.setState( { filterItemOpen: true }, () => {
@@ -17,70 +39,31 @@ class FilterMenuItem extends Component {
     } );
   };
 
-  toggleSubMenu = ( e ) => {
-    const optionHasSubMenu = e.target.parentNode.dataset.submenu;
-    if ( optionHasSubMenu === 'true' ) {
-      this.setState( { filterItemOpen: false } );
-      // Toggle filterMenu subMenuActive class (blue background)
-      this.filterMenu.classList.add( 'subMenuActive' );
-    } else {
-      this.filterMenu.classList.remove( 'subMenuActive' );
-    }
-  };
-
   closeFilter = ( e ) => {
-    const activeSubMenu = document.querySelector( '.filterMenu_sub.show' );
-
-    if ( !this.filterMenu.contains( e.target ) || e.target.classList.contains( 'filterMenu_label' ) ) {
-      this.setState( { filterItemOpen: false }, () => {
-        document.removeEventListener( 'click', this.closeFilter );
-
-        // Close any filter sub menus if click target is NOT a submenu
-        if ( activeSubMenu && !activeSubMenu.contains( e.target ) ) {
-          this.props.closeSubMenu();
-
-          // Remove any filterMenus w/ subMenuActive class
-          const filterSubMenuActive = document.querySelector( '.filterMenu.subMenuActive' );
-          if ( filterSubMenuActive ) {
-            filterSubMenuActive.classList.remove( 'subMenuActive' );
-          }
-        }
-      } );
+    if ( this.filterMenu ) {
+      if ( !this.filterMenu.contains( e.target ) || e.target.classList.contains( 'filterMenu_label' ) ) {
+        this.setState( { filterItemOpen: false }, () => {
+          document.removeEventListener( 'click', this.closeFilter );
+        } );
+      }
     }
   };
 
   handleOnChange = ( e, selected ) => {
-    this.props.onFilterChange( selected );
+    const { value, checked, label } = selected;
 
-    this.toggleSubMenu( e );
-  };
+    this.props.onFilterChange( {
+      key: value,
+      display_name: label,
+      checked
+    } );
 
-  renderOptions = () => {
-    if ( !this.props.options.length ) {
-      return;
-    }
-
-    const { options, children, selected } = this.props;
-    const child = React.Children.only( children );
-    const { name } = child.type._meta;
-
-    return options.map( option =>
-      React.cloneElement( child, {
-        key: option.value,
-        // label: option.count ? `${option.label} (${option.count})` : option.label,
-        label: option.label,
-        labelclean: option.label,
-        value: option.value,
-        count: option.count,
-        filter: this.props.filter,
-        onChange: this.handleOnChange,
-        checked:
-          name === 'FormRadio' ? selected.key === option.value : selected.some( sel => sel.display_name === option.label )
-      } ) );
+    this.props.createRequest();
   };
 
   render() {
     const { filterItemOpen } = this.state;
+    const { FormItem, selected } = this.props;
 
     return (
       <div
@@ -99,7 +82,24 @@ class FilterMenuItem extends Component {
           { this.props.filter } <Icon name={ filterItemOpen ? 'chevron up' : 'chevron down' } />
         </span>
         <Form className={ filterItemOpen ? 'filterMenu_options show' : 'filterMenu_options' }>
-          <Form.Group>{ this.renderOptions() }</Form.Group>
+          <Form.Group>
+            { this.formatOptions( this.props.options ).map( option => (
+              <FormItem
+                key={ option.value }
+                label={ option.label }
+                // labelWithCount={ option.count ? `${option.label} (${option.count})` : option.label }
+                value={ option.value }
+                filter={ this.props.filter }
+                count={ option.count }
+                onChange={ this.handleOnChange }
+                checked={
+                  FormItem.name === 'FormRadio'
+                    ? selected.key === option.value
+                    : selected.some( sel => sel.display_name === option.label )
+                }
+              />
+            ) ) }
+          </Form.Group>
         </Form>
       </div>
     );
@@ -107,12 +107,13 @@ class FilterMenuItem extends Component {
 }
 
 FilterMenuItem.propTypes = {
-  options: array,
-  children: object,
+  FormItem: func,
   filter: string,
+  options: array,
   selected: oneOfType( [array, object] ),
   onFilterChange: func,
-  closeSubMenu: func
+  createRequest: func,
+  loadOptions: func
 };
 
-export default FilterMenuItem;
+export default connect( null, actions )( FilterMenuItem );

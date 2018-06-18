@@ -7,6 +7,15 @@ import { Form } from 'semantic-ui-react';
 import './Search.css';
 
 class Search extends Component {
+  componentDidMount() {
+    // Clear session if on home page
+    if ( this.props.location.pathname === '/' ) {
+      // TODO: cache default query (set up general caching strategy)
+      this.props.clearFilters();
+      this.props.createRequest();
+    }
+  }
+
   handleQueryOnChange = ( e ) => {
     this.props.updateSearchQuery( e.target.value );
   };
@@ -44,7 +53,9 @@ const mapStateToProps = state => ( {
 Search.propTypes = {
   updateSearchQuery: func,
   createRequest: func,
+  clearFilters: func,
   history: object,
+  location: object,
   search: shape( {
     query: string
   } )

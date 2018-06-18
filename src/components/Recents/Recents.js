@@ -11,41 +11,33 @@ import { normalizeItem } from '../../utils/parser';
 import ModalContent from '../Modals/ModalContent';
 
 class Recents extends Component {
-  constructor( props ) {
-    super( props );
-    this.handleClick = this.handleClick.bind( this );
-  }
-
-  componentWillMount() {
+  async componentWillMount() {
     const currentLang = 'en-us';
-    typeRecentsRequest( this.props.postType, currentLang )
-      .then( response => this.onFetchResult( response ) );
-
-    this.props.loadPostTypes();
-  }
-
-  onFetchResult = ( response ) => {
+    const response = await typeRecentsRequest( this.props.postType, currentLang );
     this.setState( {
       recents: response
     } );
   }
 
+  componentDidMount() {
+    this.props.loadPostTypes();
+  }
+
   getLabel = ( type ) => {
     if ( !type.list.length ) return '';
     const typeObj = type.list.find( item => item.key === this.props.postType );
-    if ( !typeObj.display ) return '';
-    return typeObj.display;
+    if ( !typeObj.display_name ) return '';
+    return typeObj.display_name;
   }
 
-  handleClick( e ) {
+  handleClick = ( e ) => {
     e.preventDefault();
-
-    // send blank payload to clear pre-checked options
-    this.props.postTypeUpdate();
+    // NOTE: filters are cleared from search component when on landing page
+    // so no need to clear filters here
 
     // enable post type in filter
     this.props.postTypeUpdate( {
-      type: this.props.postType,
+      key: this.props.postType,
       display_name: this.getLabel( this.props.type ),
       checked: true
     } );

@@ -82,15 +82,9 @@ export const loadSources = () => async ( dispatch ) => {
   const sources = response.aggregations.source.buckets;
   const normalized = normalize( sources );
 
-<<<<<<< HEAD
   const payload = normalized.filter( bucket => bucket.key && bucket.key !== 'IIP Courses' ).map( bucket => ( {
     key: normalizeKeys( bucket.key ),
-    display: normalizeDisplay( bucket.key ),
-=======
-  const payload = sources.filter( bucket => bucket.key && bucket.key !== 'IIP Courses' ).map( bucket => ( {
-    key: bucket.key,
-    display_name: bucket.key,
->>>>>>> Standardized property names
+    display_name: normalizeDisplay( bucket.key ),
     count: bucket.doc_count
   } ) );
 

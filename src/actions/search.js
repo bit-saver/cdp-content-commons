@@ -17,9 +17,15 @@ import {
 import { queryRequest } from '../utils/api';
 import { queryBuilder } from '../utils/helpers';
 
-const PAGE_SIZE = 12;
+const calculatePageOffset = ( currentPage, pageSize ) => {
+  if ( currentPage < 0 ) {
+    return 0;
+  }
+  const pageOffset = currentPage * pageSize;
+  return pageOffset - pageSize;
+};
 
-export const calculatePages = ( _total, _currentPage, pageSize = PAGE_SIZE ) => {
+export const calculatePages = ( _total, _currentPage, pageSize ) => {
   const total = _total;
   const currentPage = _currentPage;
   const totalPages = Math.ceil( total / pageSize );
@@ -45,7 +51,7 @@ export const calculatePages = ( _total, _currentPage, pageSize = PAGE_SIZE ) => 
   }
 
   // calculate start and end item indices
-  const startIndex = ( currentPage - 1 ) * pageSize;
+  const startIndex = currentPage > 0 ? ( currentPage - 1 ) * pageSize : 0;
   const offset = startIndex + pageSize;
   const endIndex = Math.min( offset - 1, total - 1 );
 
@@ -86,11 +92,13 @@ export const createRequest = () => async ( dispatch, getState ) => {
 
   let response;
   const currentState = getState();
+  const { pageSize, query } = currentState.search;
 
   try {
     response = await queryRequest( {
-      size: PAGE_SIZE,
-      body: queryBuilder( currentState )
+      body: queryBuilder( currentState ),
+      // from: calculatePageOffset( currentPage, pageSize ),
+      size: pageSize
     } );
   } catch ( err ) {
     dispatch( hideLoading() );
@@ -102,24 +110,25 @@ export const createRequest = () => async ( dispatch, getState ) => {
     type: SEARCH_REQUEST_SUCCESS,
     payload: {
       response,
-      ...calculatePages( response.hits.total, 1 ),
-      currentQuery: currentState.search.query
+      ...calculatePages( response.hits.total, 1, pageSize ), // currentPage
+      pageSize,
+      currentQuery: query
     }
   } );
 };
 
-export const targetRequest = ( page, pageSize = PAGE_SIZE ) => async ( dispatch, getState ) => {
-  let offset = pageSize;
-  const pageOffset = page * offset;
-  offset = pageOffset - offset;
+export const targetRequest = page => async ( dispatch, getState ) => {
   dispatch( showLoading() );
   dispatch( { type: SEARCH_PAGE_PENDING } );
+
+  const currentState = getState();
+  const { pageSize } = currentState.search;
 
   let response;
   try {
     response = await queryRequest( {
       body: queryBuilder( getState() ),
-      from: offset,
+      from: calculatePageOffset( page, pageSize ),
       size: pageSize
     } );
   } catch ( err ) {
@@ -139,7 +148,7 @@ export const targetRequest = ( page, pageSize = PAGE_SIZE ) => async ( dispatch,
   } );
 };
 
-export const sortRequest = ( sortType, pageSize = PAGE_SIZE ) => async ( dispatch, getState ) => {
+export const sortRequest = sortType => async ( dispatch, getState ) => {
   dispatch( showLoading() );
   dispatch( {
     type: SEARCH_SORT_PENDING,
@@ -151,9 +160,12 @@ export const sortRequest = ( sortType, pageSize = PAGE_SIZE ) => async ( dispatc
   } );
 
   let response;
+  const currentState = getState();
+  const { pageSize } = currentState.search;
+
   try {
     response = await queryRequest( {
-      body: queryBuilder( getState() ),
+      body: queryBuilder( currentState ),
       size: pageSize
     } );
   } catch ( err ) {
@@ -177,9 +189,11 @@ export const updateSizeRequest = newSize => async ( dispatch, getState ) => {
 
   let response;
   const currentState = getState();
+
   try {
     response = await queryRequest( {
       size: newSize,
+      // from: startIndex,
       body: queryBuilder( currentState )
     } );
   } catch ( err ) {
@@ -193,7 +207,7 @@ export const updateSizeRequest = newSize => async ( dispatch, getState ) => {
     type: SEARCH_REQUEST_SUCCESS,
     payload: {
       response,
-      ...calculatePages( response.hits.total, 1, newSize )
+      ...calculatePages( response.hits.total, 1, newSize ) // currentPage
     }
   } );
 };

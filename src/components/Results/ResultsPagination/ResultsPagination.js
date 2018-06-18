@@ -7,7 +7,7 @@ import './ResultsPagination.css';
 import { Pagination } from 'semantic-ui-react';
 
 class ResultsPagination extends Component {
-  handlePaginationChange = ( e, { activePage } ) => this.props.targetRequest( activePage, this.props.search.pageSize );
+  handlePaginationChange = ( e, { activePage } ) => this.props.targetRequest( activePage );
 
   render() {
     if ( this.props.search.totalPages > 1 ) {
@@ -18,7 +18,7 @@ class ResultsPagination extends Component {
           <Pagination
             nextItem={ { content: 'Next ⟩', disabled: nextDisabled } }
             prevItem={ { content: '⟨ Previous', disabled: prevDisabled } }
-            activePage={ this.props.search.currentPage }
+            activePage={ this.props.search.currentPage < 0 ? 1 : this.props.search.currentPage }
             onPageChange={ this.handlePaginationChange }
             totalPages={ this.props.search.totalPages }
             siblingRange="2"

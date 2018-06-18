@@ -23,3 +23,8 @@ src/**/*.css
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+launch.json
+
+# Ignore until integrated
+docker/
+
