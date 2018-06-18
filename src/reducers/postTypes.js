@@ -32,7 +32,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case LOAD_POST_TYPES_SUCCESS:
       return {
         ...state,
-        error: true,
+        error: false,
         loading: false,
         list: action.payload
       };
