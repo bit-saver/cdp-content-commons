@@ -93,11 +93,11 @@ class FilterMenuItem extends Component {
                 filter={ this.props.filter }
                 count={ option.count }
                 onChange={ this.handleOnChange }
-                // checked={
-                //   FormItem.name === 'FormRadio'
-                //     ? selected.key === option.value
-                //     : selected.some( sel => sel.display_name === option.label )
-                // }
+                checked={
+                  FormItem.name === 'FormRadio'
+                    ? selected.key === option.value
+                    : selected.some( sel => sel.display_name === option.label )
+                }
               />
             ) ) }
           </Form.Group>
