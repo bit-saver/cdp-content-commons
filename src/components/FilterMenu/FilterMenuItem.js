@@ -76,6 +76,7 @@ class FilterMenuItem extends Component {
   render() {
     const { filterItemOpen } = this.state;
     const { FormItem, selected } = this.props;
+    const { name } = FormItem;
 
     return (
       <div
@@ -104,7 +105,7 @@ class FilterMenuItem extends Component {
                 filter={ this.props.filter }
                 count={ option.count }
                 onChange={ this.handleOnChange }
-                checked={ this.shouldCheck( FormItem.name, selected, option ) }
+                checked={ this.shouldCheck( name, selected, option ) }
               />
             ) ) }
           </Form.Group>
