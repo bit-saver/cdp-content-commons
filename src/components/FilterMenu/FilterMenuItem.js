@@ -61,24 +61,11 @@ class FilterMenuItem extends Component {
     this.props.createRequest();
   };
 
-  shouldCheck = ( FormItem, selected, option ) => {
-    console.log( FormItem );
-    console.dir( selected );
-    if ( FormItem.name === 'FormRadio' ) {
-      return selected.key === option.value;
-    }
-
-    if ( Array.isArray( selected ) ) {
-      return selected.some( sel => sel.display_name === option.label );
-    }
-
-    return false;
-  };
-
   render() {
     const { filterItemOpen } = this.state;
     const { FormItem, selected } = this.props;
-
+    console.log( typeof selected );
+    console.log( selected );
     return (
       <div
         className="filterMenu"
@@ -106,7 +93,11 @@ class FilterMenuItem extends Component {
                 filter={ this.props.filter }
                 count={ option.count }
                 onChange={ this.handleOnChange }
-                checked={ this.shouldCheck( FormItem, selected, option ) }
+                // checked={
+                //   FormItem.name === 'FormRadio'
+                //     ? selected.key === option.value
+                //     : selected.some( sel => sel.display_name === option.label )
+                // }
               />
             ) ) }
           </Form.Group>
