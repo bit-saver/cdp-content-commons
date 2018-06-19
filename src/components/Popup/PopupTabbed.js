@@ -43,13 +43,24 @@ class PopupTabbed extends Component {
   }
 
   render() {
-    const { title, simpleTabs } = this.props;
+    const {
+      title,
+      simpleTabs,
+      noTabsMenu,
+      classes
+    } = this.props;
+
+    const tabClasses = `
+      ${simpleTabs ? 'simpleTabs ' : ''}
+      ${noTabsMenu ? 'noTabsMenu' : ''}
+    `;
+
     return (
-      <div>
+      <div className={ classes }>
         <Header as="h2">{ title }</Header>
         <div className="slider" style={ this.state.sliderStyle } />
         <Tab
-          className={ simpleTabs ? 'simpleTabs' : '' }
+          className={ tabClasses.trim() }
           menu={ { secondary: true } }
           panes={ this.state.panes }
           onTabChange={ this.handleOnTabChange }
@@ -62,7 +73,9 @@ class PopupTabbed extends Component {
 PopupTabbed.propTypes = {
   panes: array,
   title: string,
-  simpleTabs: bool
+  simpleTabs: bool,
+  noTabsMenu: bool,
+  classes: string
 };
 
 export default PopupTabbed;

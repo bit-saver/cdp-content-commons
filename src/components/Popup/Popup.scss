@@ -110,6 +110,10 @@
       justify-content: left;
     }
 
+    .noTabsMenu > .ui.secondary.menu {
+      display: none;
+    }
+
     .ui.secondary.menu {
       border-bottom: 1px solid $alt-grey;
       display: flex;
