@@ -25,7 +25,7 @@ class PostModal extends Component {
     this.state = {
       item,
       selectedLanguage: this.getLanguage(),
-      textDirection: item.language.text_direction
+      textDirection: String( item.language.text_direction )
     };
     this.handleLanguageChange = this.handleLanguageChange.bind( this );
   }
@@ -84,6 +84,7 @@ class PostModal extends Component {
                         component: (
                           <PostEmbedCode
                             instructions="Copy and paste the code below to embed article on your site"
+                            embedItem={ item }
                           />
                         )
                       },

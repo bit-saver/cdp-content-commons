@@ -17,7 +17,6 @@ const ClipboardCopy = ( props ) => {
   };
 
   const { copyItem, label } = props;
-
   return (
     <div className="clipboardcopy_wrapper">
       <div className="clipboardcopy">
@@ -31,8 +30,9 @@ const ClipboardCopy = ( props ) => {
                 this.input = input;
               } }
               type="text"
-              defaultValue={ copyItem }
+              value={ copyItem }
               tabIndex="-1"
+              readOnly
             />
           </div>
           <Button primary content="Copy" onClick={ handleCopyClick } />
