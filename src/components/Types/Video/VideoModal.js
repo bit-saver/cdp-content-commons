@@ -82,6 +82,17 @@ class VideoModal extends Component {
     return id;
   }
 
+  getVimeo( type = 'id' ) {
+    const { unit, captions } = this.state;
+    if ( unit && Array.isArray( unit.source ) ) {
+      const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
+      if ( source && source.stream && source.stream.site === 'vimeo' && source.stream.url ) {
+        return type === 'link' ? source.stream.url : source.stream.uid;
+      }
+    }
+    return null;
+  }
+
   getVideoTranscript() {
     const { unit } = this.state;
     if ( unit ) {
@@ -142,7 +153,13 @@ class VideoModal extends Component {
       return <Embed id={ youTubeId } placeholder={ this.props.item.thumbnail } source="youtube" />;
     }
 
-    // fallback to CloudFlare player if no youtube link available
+    // fallback to Vimeo if no youtube link available
+    const vimeoId = this.getVimeo();
+    if ( vimeoId ) {
+      return <Embed id={ vimeoId } placeholder={ this.props.item.thumbnail } source="vimeo" />;
+    }
+
+    // fallback to CloudFlare player if no youtube or vimeo link available
     const uid = this.getVideoSource();
     const active = !!uid;
     const icon = active ? 'video play' : 'warning circle';
