@@ -43,15 +43,21 @@ class VideoModal extends Component {
   componentWillMount() {
     const youtubeId = this.getYouTubeId();
     if ( youtubeId ) {
-      // todo: set url, key in config
-      const url = `${config.YOUTUBE_API_URL}?part=id&id=${youtubeId}&key=${config.YOUTUBE_API_KEY}`;
+      if ( config.YOUTUBE_API_URL && process.env.REACT_APP_YOUTUBE_API_KEY ) {
+        const url = `${config.YOUTUBE_API_URL}?part=id&id=${youtubeId}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
 
-      fetch( url )
-        .then( response => response.json() )
-        .then( json => !json.error && this.setState( {
-          youtubeId: json.items[0] ? json.items[0].id : null,
-          youtubeDisplay: json.pageInfo.totalResults
-        } ) );
+        fetch( url )
+          .then( response => response.json() )
+          .then( json => !json.error && this.setState( {
+            youtubeId: json.items[0] ? json.items[0].id : null,
+            youtubeDisplay: json.pageInfo.totalResults
+          } ) );
+      } else {
+        this.setState( {
+          youtubeId,
+          youtubeDisplay: 1
+        } );
+      }
     }
   }
 
