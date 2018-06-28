@@ -26,12 +26,22 @@ class FilterMenuItem extends Component {
   /**
    * Format data into state that dopdowns will use
    */
-  formatOptions = options =>
-    options.map( option => ( {
+  formatOptions = ( options, filter ) => {
+    /* Sort Source filter alphabetically */
+    if ( filter === 'Source' ) {
+      return options.map( option => ( {
+        label: option.display_name,
+        value: option.key,
+        count: option.count
+      } ) ).sort( ( a, b ) => a.label.localeCompare( b.label ) );
+    }
+
+    return options.map( option => ( {
       label: option.display_name,
       value: option.key,
       count: option.count
     } ) );
+  };
 
   displayFilter = () => {
     this.setState( { filterItemOpen: true }, () => {
@@ -83,22 +93,23 @@ class FilterMenuItem extends Component {
         </span>
         <Form className={ filterItemOpen ? 'filterMenu_options show' : 'filterMenu_options' }>
           <Form.Group>
-            { this.formatOptions( this.props.options ).map( option => (
-              <FormItem
-                key={ option.value }
-                label={ option.label }
-                // labelWithCount={ option.count ? `${option.label} (${option.count})` : option.label }
-                value={ option.value }
-                filter={ this.props.filter }
-                count={ option.count }
-                onChange={ this.handleOnChange }
-                checked={
-                  FormItem._meta.name === 'FormRadio'
-                    ? selected.key === option.value
-                    : selected.some( sel => sel.display_name === option.label )
-                }
-              />
-            ) ) }
+            { this.formatOptions( this.props.options, this.props.filter )
+                .map( option => (
+                  <FormItem
+                    key={ option.value }
+                    label={ option.label }
+                    // labelWithCount={ option.count ? `${option.label} (${option.count})` : option.label }
+                    value={ option.value }
+                    filter={ this.props.filter }
+                    count={ option.count }
+                    onChange={ this.handleOnChange }
+                    checked={
+                      FormItem._meta.name === 'FormRadio'
+                        ? selected.key === option.value
+                        : selected.some( sel => sel.display_name === option.label )
+                    }
+                  />
+                ) ) }
           </Form.Group>
         </Form>
       </div>
