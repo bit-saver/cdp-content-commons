@@ -40,7 +40,6 @@ class Results extends Component {
     const { view } = this.state;
     const { hits } = this.props.search.response;
     const items = hits ? hits.hits : [];
-
     return (
       <section className="results">
         <Breadcrumbs />

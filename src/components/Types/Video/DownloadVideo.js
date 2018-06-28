@@ -62,7 +62,9 @@ class DownloadVideo extends Component {
         <Item as="a" href={ video.downloadUrl } download={ fn }>
           <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
           <Item.Content>
-            <Item.Header className="download-header">{ `Download "${title}"` } </Item.Header>
+            <Item.Header className="download-header">
+              Download <span className="lightweight">{ `"${title}"` }</span> for web
+            </Item.Header>
             { /*
               <Item.Description>
                 Typically takes 30 seconds to donwload a file this size in your area.
