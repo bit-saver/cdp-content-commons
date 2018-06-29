@@ -1,11 +1,11 @@
-@import "../../assets/styles/colors.scss";
+@import '../../assets/styles/colors.scss';
 
 header {
   text-align: center;
 }
 
 .bar {
-  background: url("../../assets/images/cdp_home_hero.jpg");
+  background: url('../../assets/images/cdp_home_hero.jpg');
   background-size: cover;
   margin-bottom: 3em;
 
@@ -64,7 +64,8 @@ header {
   }
 }
 
-.resultsbar {
+.resultsbar,
+.videobar {
   background-image: linear-gradient(60deg, $light-blue 2%, $bright-blue 100%);
   border: none;
   border-radius: 0;
@@ -120,6 +121,7 @@ header {
 }
 
 .resultsbar .ui.container,
+.videobar .ui.container,
 .bar .ui.container,
 .aboutbar .ui.container,
 .helpbar .ui.container,
@@ -132,6 +134,7 @@ header {
 }
 
 .resultsbar h1.ui.header,
+.videobar h1.ui.header,
 .aboutbar h1.ui.header,
 .helpbar h1.ui.header,
 .privacybar h1.ui.header,
@@ -146,6 +149,7 @@ header {
 }
 
 .resultsbar .header .title,
+.videobar .header .title,
 .aboutbar .header .title,
 .helpbar .header .title,
 .privacybar .header .title,
@@ -161,6 +165,8 @@ header {
 
 .resultsbar .sub.header.subtitle,
 .resultsbar .sub.header.subtext,
+.videobar .sub.header.subtitle,
+.videobar .sub.header.subtext,
 .aboutbar .sub.header.subtitle,
 .aboutbar .sub.header.subtext,
 .helpbar .sub.header.subtitle,
