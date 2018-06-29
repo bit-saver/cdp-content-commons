@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import * as actions from '../../../actions';
-import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { getItemRequest } from '../../../utils/api';
 import { normalizeItem } from '../../../utils/parser';
@@ -46,4 +44,4 @@ VideoPage.propTypes = {
   location: object
 };
 
-export default withRouter( connect( null, actions )( VideoPage ) );
+export default withRouter( VideoPage );

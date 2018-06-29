@@ -26,7 +26,41 @@ import Share from '../../Share/Share';
 import './Video.css';
 
 class Video extends Component {
-  state = {};
+  constructor( props ) {
+    super( props );
+
+    const { item } = this.props;
+    this.state = {
+      unit: item.selectedLanguageUnit,
+      selectedLanguage: this.getLanguage( item.selectedLanguageUnit )
+    };
+  }
+
+  componentDidMount() {
+    this.willUpdateUrl();
+  }
+
+  shouldComponentUpdate( nextProps, nextState ) {
+    const { selectedLanguageUnit } = nextProps.item;
+    if ( selectedLanguageUnit.language.locale !== nextState.selectedLanguage.locale ) {
+      return true;
+    }
+    return false;
+  }
+
+  componentDidUpdate() {
+    this.willUpdateUrl();
+  }
+
+  componentWillUnmount() {
+    this.updateUrl( '/' );
+  }
+
+  getSelectedUnit() {
+    return this.state.language
+      ? this.props.item.units.find( lang => lang.language.display_name === this.state.language )
+      : this.props.item.selectedLanguageUnit;
+  }
 
   getShareLink( unit, captions ) {
     const youtube = this.getYouTube( unit, captions, 'link' );
@@ -111,13 +145,6 @@ class Video extends Component {
     return { display_name: 'English', locale: 'en-us', text_direction: 'ltr' };
   };
 
-  /*
-  is there only  1 source video show whatever is availalbe and not the toggle
-  is there is more than one video with at least with AND wo captions, show toggle and use unit captiosns flag
-  if there is more than one video of only different sizes (not captions/no captions), not toggle and show what is availalbe
-
-  */
-
   // Note: The burnedInCaptions porperty is coming in as 'true' and 'false' strings. Need to coerce
   //  in spots to ensure valid comparison.  Going forweard, try to avoid 'true' and 'false' strings
   getCaptions = ( unit ) => {
@@ -127,9 +154,27 @@ class Video extends Component {
     return false;
   };
 
+  willUpdateUrl() {
+    const { id, site } = this.props.item;
+    const { selectedLanguage } = this.state;
+    if ( id && site && selectedLanguage ) {
+      this.updateUrl( `/video?id=${id}&site=${site}&language=${selectedLanguage.locale}` );
+    }
+  }
+
+  updateUrl = ( url ) => {
+    window.history.replaceState( {}, '', url );
+  };
+
   handleLanguageChange = ( value ) => {
     if ( value ) {
-      this.setState( { language: value } );
+      const unit = this.props.item.units.find( lang => lang.language.display_name === value );
+      if ( unit ) {
+        this.setState( {
+          unit,
+          selectedLanguage: this.getLanguage( unit )
+        } );
+      }
     }
   };
 
@@ -166,115 +211,110 @@ class Video extends Component {
   }
 
   render() {
-    if ( this.props.item ) {
-      const unit = this.state.language
-        ? this.props.item.units.find( lang => lang.language.display_name === this.state.language )
-        : this.props.item.selectedLanguageUnit;
+    const { unit, selectedLanguage } = this.state;
+    const {
+      type, logo, author, owner, published, modified, id, site
+    } = this.props.item;
 
-      const {
-        type, logo, author, owner, published, modified, id, site
-      } = this.props.item;
+    if ( unit && selectedLanguage ) {
+      const captions = this.getCaptions( unit );
 
-      if ( unit ) {
-        const selectedLanguage = this.getLanguage( unit );
-        const captions = this.getCaptions( unit );
-
-        return (
-          <ModalItem headline={ unit.title } textDirection={ selectedLanguage.text_direction }>
-            <div className="modal_options">
-              <div className="modal_options_left">
-                <ModalLangDropdown
-                  item={ this.props.item }
-                  selected={ selectedLanguage.display_name }
-                  handleLanguageChange={ this.handleLanguageChange }
+      return (
+        <ModalItem headline={ unit.title } textDirection={ selectedLanguage.text_direction }>
+          <div className="modal_options">
+            <div className="modal_options_left">
+              <ModalLangDropdown
+                item={ this.props.item }
+                selected={ selectedLanguage.display_name }
+                handleLanguageChange={ this.handleLanguageChange }
+              />
+              { unit.source.length > 1 && (
+                <Checkbox
+                  className="modal_captions"
+                  checked={ captions }
+                  toggle
+                  label="Video with captions"
+                  onChange={ this.handleCaptionChange }
                 />
-                { unit.source.length > 1 && (
-                  <Checkbox
-                    className="modal_captions"
-                    checked={ captions }
-                    toggle
-                    label="Video with captions"
-                    onChange={ this.handleCaptionChange }
-                  />
-                ) }
-              </div>
-              <div className="modal_options_share">
-                <PopupTrigger
-                  toolTip=""
-                  icon={ { img: shareIcon, dim: 20 } }
-                  // show={ item.type === 'video' }
-                  show={ false }
-                  content={ <div /> }
-                />
-                <PopupTrigger
-                  toolTip="Share video"
-                  icon={ { img: shareIcon, dim: 20 } }
-                  show={ type === 'video' }
-                  content={
-                    <Popup title="Share this video.">
-                      <Share
-                        link={ this.getShareLink( unit, captions ) }
-                        id={ id }
-                        site={ site }
-                        language={ selectedLanguage.locale }
-                      />
-                    </Popup>
-                  }
-                />
-                <PopupTrigger
-                  toolTip="Download video"
-                  icon={ { img: downloadIcon, dim: 18 } }
-                  position="right"
-                  show={ type === 'video' }
-                  content={
-                    <PopupTabbed
-                      title="Download this video."
-                      panes={ [
-                        {
-                          title: 'Video File',
-                          component: (
-                            <DownloadVideo
-                              selectedLanguageUnit={ unit }
-                              instructions={ `Download the video and SRT files in ${unit.language.display_name}.
-                              This download option is best for uploading this video to web pages.` }
-                              burnedInCaptions={ captions }
-                            />
-                          )
-                        },
-                        {
-                          title: 'SRT',
-                          component: (
-                            <DownloadSrt
-                              selectedLanguageUnit={ unit }
-                              instructions="Download SRTs"
-                              units={ this.props.item.units }
-                            />
-                          )
-                        },
-                        {
-                          title: 'Transcript',
-                          component: (
-                            <DownloadTranscript units={ this.props.item.units } instructions="Download Transcripts" />
-                          )
-                        },
-                        { title: 'Help', component: <DownloadHelp /> }
-                      ] }
-                    />
-                  }
-                />
-              </div>
+              ) }
             </div>
+            <div className="modal_options_share">
+              <PopupTrigger
+                toolTip=""
+                icon={ { img: shareIcon, dim: 20 } }
+                // show={ item.type === 'video' }
+                show={ false }
+                content={ <div /> }
+              />
+              <PopupTrigger
+                toolTip="Share video"
+                icon={ { img: shareIcon, dim: 20 } }
+                show={ type === 'video' }
+                content={
+                  <Popup title="Share this video.">
+                    <Share
+                      link={ this.getShareLink( unit, captions ) }
+                      id={ id }
+                      site={ site }
+                      language={ selectedLanguage.locale }
+                    />
+                  </Popup>
+                }
+              />
+              <PopupTrigger
+                toolTip="Download video"
+                icon={ { img: downloadIcon, dim: 18 } }
+                position="right"
+                show={ type === 'video' }
+                content={
+                  <PopupTabbed
+                    title="Download this video."
+                    panes={ [
+                      {
+                        title: 'Video File',
+                        component: (
+                          <DownloadVideo
+                            selectedLanguageUnit={ unit }
+                            instructions={ `Download the video and SRT files in ${unit.language.display_name}.
+                              This download option is best for uploading this video to web pages.` }
+                            burnedInCaptions={ captions }
+                          />
+                        )
+                      },
+                      {
+                        title: 'SRT',
+                        component: (
+                          <DownloadSrt
+                            selectedLanguageUnit={ unit }
+                            instructions="Download SRTs"
+                            units={ this.props.item.units }
+                          />
+                        )
+                      },
+                      {
+                        title: 'Transcript',
+                        component: (
+                          <DownloadTranscript units={ this.props.item.units } instructions="Download Transcripts" />
+                        )
+                      },
+                      { title: 'Help', component: <DownloadHelp /> }
+                    ] }
+                  />
+                }
+              />
+            </div>
+          </div>
 
-            { this.renderVideoPlayer( unit, captions ) }
+          { this.renderVideoPlayer( unit, captions ) }
 
-            <ModalContentMeta type={ type } dateUpdated={ modified } transcript={ this.getVideoTranscript() } />
-            <ModalDescription description={ unit.desc } />
-            <ModalPostMeta author={ author } logo={ logo } source={ owner } datePublished={ published } />
-            <ModalPostTags tags={ unit.categories } />
-          </ModalItem>
-        );
-      }
+          <ModalContentMeta type={ type } dateUpdated={ modified } transcript={ this.getVideoTranscript() } />
+          <ModalDescription description={ unit.desc } />
+          <ModalPostMeta author={ author } logo={ logo } source={ owner } datePublished={ published } />
+          <ModalPostTags tags={ unit.categories } />
+        </ModalItem>
+      );
     }
+    // }
     return <ModalItem headline="Content Unavailable" />;
   }
 }
