@@ -9,7 +9,8 @@ class ModalLangDropdown extends Component {
     super( props );
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      languages: this.props.item ? getAvailableLanguages( this.props.item ) : null
     };
 
     this.toggleArrow = this.toggleArrow.bind( this );
@@ -26,16 +27,16 @@ class ModalLangDropdown extends Component {
   }
 
   render() {
-    const { item } = this.props;
     const { selected } = this.props;
-    const languages = getAvailableLanguages( item );
-    if ( languages.length > 1 ) {
+    const { languages } = this.state;
+
+    if ( languages && languages.length > 1 ) {
       return (
         <Dropdown
           className="modal_languages"
-          defaultValue={ selected }
+          value={ selected }
           icon={ this.state.isOpen ? 'chevron up' : 'chevron down' }
-          options={ languages }
+          options={ this.state.languages }
           onClick={ this.toggleArrow }
           onChange={ this.handleChange }
         />

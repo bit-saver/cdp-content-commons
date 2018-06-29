@@ -109,9 +109,17 @@ const getAuthor = ( author ) => {
   return author.name || author;
 };
 
+const getLocaleKey = ( locale ) => {
+  if ( locale ) {
+    return locale;
+  }
+  return store.getState().language.currentLanguage.key;
+};
+
 // send in locale to fetch applicable lang data props?
-const populateVideoItem = ( source ) => {
-  const { key } = store.getState().language.currentLanguage;
+const populateVideoItem = ( source, language ) => {
+  // const { key } = store.getState().language.currentLanguage;
+  const key = getLocaleKey( language );
   const thumbnail = getThumbnail( source );
   const units = source.unit;
   const languageUnit = units.find( unit => unit.language.locale.toLowerCase() === key.toLowerCase() );
@@ -158,12 +166,12 @@ const populateItem = ( source ) => {
   return obj;
 };
 
-const getTypeSpecObj = ( source ) => {
+const getTypeSpecObj = ( source, language ) => {
   let obj;
 
   switch ( source.type ) {
     case 'video':
-      obj = populateVideoItem( source );
+      obj = populateVideoItem( source, language );
       break;
 
     case 'post':
@@ -183,6 +191,7 @@ export const normalizeItem = ( item, language ) => {
 
   const obj = {
     id: source.post_id ? source.post_id : source.id,
+    indexId: item._id,
     site: source.site,
     logo: getLogo( source.site ),
     sourcelink: `https://${source.site}`,
@@ -195,7 +204,7 @@ export const normalizeItem = ( item, language ) => {
     modified: source.modified
   };
 
-  const typeSpecificObj = getTypeSpecObj( source );
+  const typeSpecificObj = getTypeSpecObj( source, language );
 
   return { ...obj, ...typeSpecificObj };
 };

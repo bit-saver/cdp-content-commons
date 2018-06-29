@@ -89,6 +89,19 @@ export const sourceAggRequest = () =>
     .then( response => response.data );
 
 /**
+ * Get all post types that have associated content
+ */
+export const postTypeAggRequest = () =>
+  axios
+    .post( SEARCH, {
+      body: bodybuilder()
+        .size( 0 )
+        .agg( 'terms', 'type.keyword', {}, 'postType' )
+        .build()
+    } )
+    .then( response => response.data );
+
+/**
  *
  * @param {*} currentType
  * @param {*} currentLang
@@ -116,19 +129,6 @@ export const getItemRequest = ( site, postId ) =>
       body: bodybuilder()
         .size( 1 )
         .query( 'query_string', 'query', `(site: ${site} AND post_id: ${postId})` )
-        .build()
-    } )
-    .then( response => response.data );
-
-/**
- * Get all post types that have associated content
- */
-export const postTypeAggRequest = () =>
-  axios
-    .post( SEARCH, {
-      body: bodybuilder()
-        .size( 0 )
-        .agg( 'terms', 'type.keyword', {}, 'postType' )
         .build()
     } )
     .then( response => response.data );
