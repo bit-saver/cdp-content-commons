@@ -4,6 +4,7 @@ import { Embed, Checkbox } from 'semantic-ui-react';
 
 // import plusIcon from '../../../assets/icons/icon_plus.svg';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
+import shareIcon from '../../../assets/icons/icon_share.svg';
 
 import ModalItem from '../../Modals/ModalItem';
 import ModalLangDropdown from '../../Modals/ModalLangDropdown/ModalLangDropdown';
@@ -14,44 +15,75 @@ import ModalPostTags from '../../Modals/ModalPostTags/ModalPostTags';
 
 import PopupTrigger from '../../Popup/PopupTrigger';
 import PopupTabbed from '../../Popup/PopupTabbed';
+import Popup from '../../Popup/Popup';
 
 import DownloadVideo from './DownloadVideo';
 import DownloadSrt from './DownloadSrt';
 import DownloadTranscript from './DownloadTranscript';
 import DownloadHelp from './DownloadHelp';
-import Shortcode from './Shortcode';
-import Social from './Social';
-import ShareMore from './ShareMore';
+import Share from '../../Share/Share';
 
-class VideoModal extends Component {
+import './Video.css';
+
+class Video extends Component {
   constructor( props ) {
     super( props );
-    this.state = {
-      unit: this.props.item.selectedLanguageUnit,
-      selectedLanguage: this.getLanguage(),
-      captions: this.getCaptions(),
-      textDirection: this.getTextDirection()
-    };
 
-    this.handleLanguageChange = this.handleLanguageChange.bind( this );
-    this.handleCaptionChange = this.handleCaptionChange.bind( this );
+    const { item } = this.props;
+    this.state = {
+      unit: item.selectedLanguageUnit,
+      selectedLanguage: this.getLanguage( item.selectedLanguageUnit )
+    };
   }
 
-  getVideoSource() {
-    const { unit, captions } = this.state;
+  componentDidMount() {
+    this.willUpdateUrl();
+  }
+
+  shouldComponentUpdate( nextProps, nextState ) {
+    const { selectedLanguageUnit } = nextProps.item;
+    if ( selectedLanguageUnit.language.locale !== nextState.selectedLanguage.locale ) {
+      return true;
+    }
+    return false;
+  }
+
+  componentDidUpdate() {
+    this.willUpdateUrl();
+  }
+
+  componentWillUnmount() {
+    this.updateUrl( '/' );
+  }
+
+  getSelectedUnit() {
+    return this.state.language
+      ? this.props.item.units.find( lang => lang.language.display_name === this.state.language )
+      : this.props.item.selectedLanguageUnit;
+  }
+
+  getShareLink( unit, captions ) {
+    const youtube = this.getYouTube( unit, captions, 'link' );
+    if ( youtube ) {
+      return youtube;
+    }
+
+    return this.getVideoSource( 'link' );
+  }
+
+  getVideoSource = ( unit, captions, type = 'id' ) => {
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.url ) {
-        return source.stream.uid;
+        return type === 'link' ? source.stream.url : source.stream.uid;
       }
     }
     return null;
-  }
+  };
 
   // NOTE: Chrome is throwing an error when youtube is embedded:
   // https://stackoverflow.com/questions/48714879/error-parsing-header-x-xss-protection-google-chrome
-  getYouTubeId() {
-    const { unit, captions } = this.state;
+  getYouTube = ( unit, captions, type = 'id' ) => {
     let id = null;
 
     if ( unit && Array.isArray( unit.source ) ) {
@@ -60,7 +92,11 @@ class VideoModal extends Component {
       if ( source && source.streamUrl ) {
         const streamObj = source.streamUrl.find( stream => stream.site === 'youtube' );
 
-        if ( streamObj && streamObj.url ) {
+        if ( streamObj && streamObj.site === 'youtube' && streamObj.url ) {
+          if ( type === 'link' ) {
+            return streamObj.url;
+          }
+
           const youtubeUrl = streamObj.url;
 
           const reShort = /https:\/\/youtu.be\/(.*)/;
@@ -80,10 +116,9 @@ class VideoModal extends Component {
     }
 
     return id;
-  }
+  };
 
-  getVimeo( type = 'id' ) {
-    const { unit, captions } = this.state;
+  getVimeo = ( unit, captions, type = 'id' ) => {
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.site === 'vimeo' && source.stream.url ) {
@@ -91,10 +126,9 @@ class VideoModal extends Component {
       }
     }
     return null;
-  }
+  };
 
-  getVideoTranscript() {
-    const { unit } = this.state;
+  getVideoTranscript = ( unit ) => {
     if ( unit ) {
       if ( unit.transcript && unit.transcript.text ) {
         return unit.transcript.text;
@@ -102,65 +136,67 @@ class VideoModal extends Component {
     } else {
       return '';
     }
-  }
+  };
 
-  getLanguage() {
-    const { selectedLanguageUnit } = this.props.item;
-    if ( !selectedLanguageUnit ) return 'English';
-    return selectedLanguageUnit.language.display_name;
-  }
+  getLanguage = ( unit ) => {
+    if ( unit && unit.language ) {
+      return unit.language;
+    }
+    return { display_name: 'English', locale: 'en-us', text_direction: 'ltr' };
+  };
 
   // Note: The burnedInCaptions porperty is coming in as 'true' and 'false' strings. Need to coerce
   //  in spots to ensure valid comparison.  Going forweard, try to avoid 'true' and 'false' strings
-  getCaptions() {
-    const { selectedLanguageUnit } = this.props.item;
-    if ( !selectedLanguageUnit ) return false;
-    const { source } = selectedLanguageUnit;
-    if ( !source ) return false;
-    if ( !source[0] ) return false;
+  getCaptions = ( unit ) => {
+    if ( unit && unit.source && unit.source[0] ) {
+      return unit.source[0].burnedInCaptions === 'true'; // coerce to a boolean
+    }
+    return false;
+  };
 
-    return source[0].burnedInCaptions === 'true'; // coerce to a boolean
+  willUpdateUrl() {
+    const { id, site } = this.props.item;
+    const { selectedLanguage } = this.state;
+    if ( id && site && selectedLanguage ) {
+      this.updateUrl( `/video?id=${id}&site=${site}&language=${selectedLanguage.locale}` );
+    }
   }
 
-  getTextDirection() {
-    const { selectedLanguageUnit } = this.props.item;
-    if ( !selectedLanguageUnit ) return 'ltr';
-    return selectedLanguageUnit.language.text_direction;
-  }
+  updateUrl = ( url ) => {
+    window.history.replaceState( {}, '', url );
+  };
 
-  handleLanguageChange( value ) {
+  handleLanguageChange = ( value ) => {
     if ( value ) {
       const unit = this.props.item.units.find( lang => lang.language.display_name === value );
       if ( unit ) {
         this.setState( {
           unit,
-          selectedLanguage: value,
-          captions: unit.source[0] ? unit.source[0].burnedInCaptions === 'true' : false,
-          textDirection: unit.language.text_direction
+          selectedLanguage: this.getLanguage( unit )
         } );
       }
     }
-  }
+  };
 
-  handleCaptionChange() {
+  handleCaptionChange = () => {
     this.setState( { captions: !this.state.captions } );
-  }
+  };
 
-  renderVideoPlayer() {
+  renderVideoPlayer( unit, captions ) {
     // render youtube player if link available
-    const youTubeId = this.getYouTubeId();
+    const youTubeId = this.getYouTube( unit, captions );
     if ( youTubeId ) {
       return <Embed id={ youTubeId } placeholder={ this.props.item.thumbnail } source="youtube" />;
     }
 
     // fallback to Vimeo if no youtube link available
-    const vimeoId = this.getVimeo();
+    const vimeoId = this.getVimeo( unit, captions );
     if ( vimeoId ) {
       return <Embed id={ vimeoId } placeholder={ this.props.item.thumbnail } source="vimeo" />;
     }
 
     // fallback to CloudFlare player if no youtube or vimeo link available
-    const uid = this.getVideoSource();
+    const uid = this.getVideoSource( unit, captions );
     const active = !!uid;
     const icon = active ? 'video play' : 'warning circle';
 
@@ -174,35 +210,28 @@ class VideoModal extends Component {
     );
   }
 
-  renderCaptionTabTitle() {
-    const { selectedLanguageUnit } = this.props.item;
-    if ( !selectedLanguageUnit ) {
-      return 'With Subtitles';
-    }
-    const source = selectedLanguageUnit.source.find( src => src.burnedInCaptions === 'no' );
-    return source ? 'With Captions' : 'With Subtitles';
-  }
-
   render() {
-    const { unit, textDirection } = this.state;
+    const { unit, selectedLanguage } = this.state;
     const {
-      type, logo, author, owner, published, modified
+      type, logo, author, owner, published, modified, id, site
     } = this.props.item;
 
-    if ( unit ) {
+    if ( unit && selectedLanguage ) {
+      const captions = this.getCaptions( unit );
+
       return (
-        <ModalItem headline={ unit.title } textDirection={ textDirection }>
+        <ModalItem headline={ unit.title } textDirection={ selectedLanguage.text_direction }>
           <div className="modal_options">
             <div className="modal_options_left">
               <ModalLangDropdown
                 item={ this.props.item }
-                selected={ this.state.selectedLanguage }
+                selected={ selectedLanguage.display_name }
                 handleLanguageChange={ this.handleLanguageChange }
               />
               { unit.source.length > 1 && (
                 <Checkbox
                   className="modal_captions"
-                  checked={ this.state.captions }
+                  checked={ captions }
                   toggle
                   label="Video with captions"
                   onChange={ this.handleCaptionChange }
@@ -212,32 +241,29 @@ class VideoModal extends Component {
             <div className="modal_options_share">
               <PopupTrigger
                 toolTip=""
-                icon="plus circle"
+                icon={ { img: shareIcon, dim: 20 } }
                 // show={ item.type === 'video' }
                 show={ false }
                 content={ <div /> }
               />
               <PopupTrigger
-                toolTip="Copy the shortcode for this video or<br> share it social platforms."
-                icon="share"
-                // show={ type === 'video' }
-                show={ false }
+                toolTip="Share video"
+                icon={ { img: shareIcon, dim: 20 } }
+                show={ type === 'video' }
                 content={
-                  <PopupTabbed
-                    title="How would you like to share this video?"
-                    item={ unit }
-                    panes={ [
-                      { title: 'Copy Shortcode', component: <Shortcode /> },
-                      { title: 'Social', component: <Social /> },
-                      { title: 'More', component: <ShareMore /> },
-                      { title: 'Help', component: <DownloadHelp /> }
-                    ] }
-                  />
+                  <Popup title="Share this video.">
+                    <Share
+                      link={ this.getShareLink( unit, captions ) }
+                      id={ id }
+                      site={ site }
+                      language={ selectedLanguage.locale }
+                    />
+                  </Popup>
                 }
               />
               <PopupTrigger
                 toolTip="Download video"
-                icon={ downloadIcon }
+                icon={ { img: downloadIcon, dim: 18 } }
                 position="right"
                 show={ type === 'video' }
                 content={
@@ -251,7 +277,7 @@ class VideoModal extends Component {
                             selectedLanguageUnit={ unit }
                             instructions={ `Download the video and SRT files in ${unit.language.display_name}.
                               This download option is best for uploading this video to web pages.` }
-                            burnedInCaptions={ this.state.captions }
+                            burnedInCaptions={ captions }
                           />
                         )
                       },
@@ -279,7 +305,7 @@ class VideoModal extends Component {
             </div>
           </div>
 
-          { this.renderVideoPlayer() }
+          { this.renderVideoPlayer( unit, captions ) }
 
           <ModalContentMeta type={ type } dateUpdated={ modified } transcript={ this.getVideoTranscript() } />
           <ModalDescription description={ unit.desc } />
@@ -288,12 +314,13 @@ class VideoModal extends Component {
         </ModalItem>
       );
     }
+    // }
     return <ModalItem headline="Content Unavailable" />;
   }
 }
 
-VideoModal.propTypes = {
+Video.propTypes = {
   item: object
 };
 
-export default VideoModal;
+export default Video;

@@ -1,21 +1,20 @@
-@import "../../assets/styles/colors.scss";
+@import '../../assets/styles/colors.scss';
 
 .clipboardcopy {
   display: flex;
   justify-content: space-between;
-  margin-left: 40px;
   @media screen and (max-width: 767px) {
     display: block;
     margin-left: 0;
   }
 
   &_wrapper {
-    margin-bottom: 25px;
+    margin: 2em 0;
   }
 
   &_label {
     position: absolute;
-    top: 0;
+    top: 7px;
     right: 0;
     width: 100%;
     margin-bottom: 0;
@@ -63,7 +62,7 @@
       border-radius: 0;
 
       &.copied:after {
-        content: "COPIED!";
+        content: 'COPIED!';
         position: absolute;
         top: 0;
         right: 50%;

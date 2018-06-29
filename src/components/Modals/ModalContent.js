@@ -1,12 +1,12 @@
 import React from 'react';
 import { object } from 'prop-types';
-import VideoModal from '../Types/Video/VideoModal';
+import Video from '../Types/Video/Video';
 import PostModal from '../Types/Post/PostModal';
 
 const ModalContent = ( props ) => {
   const { item } = props;
 
-  if ( item && item.type === 'video' ) return <VideoModal item={ item } />;
+  if ( item && item.type === 'video' ) return <Video item={ item } />;
   if ( item && item.type === 'post' ) return <PostModal item={ item } />;
 };
 
