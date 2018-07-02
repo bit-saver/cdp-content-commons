@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { Embed, Checkbox } from 'semantic-ui-react';
 
+import { updateUrl } from '../../../utils/browser';
+
 // import plusIcon from '../../../assets/icons/icon_plus.svg';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
 import shareIcon from '../../../assets/icons/icon_share.svg';
@@ -53,7 +55,7 @@ class Video extends Component {
   }
 
   componentWillUnmount() {
-    this.updateUrl( '/' );
+    updateUrl( '/' );
   }
 
   getSelectedUnit() {
@@ -158,13 +160,9 @@ class Video extends Component {
     const { id, site } = this.props.item;
     const { selectedLanguage } = this.state;
     if ( id && site && selectedLanguage ) {
-      this.updateUrl( `/video?id=${id}&site=${site}&language=${selectedLanguage.locale}` );
+      updateUrl( `/video?id=${id}&site=${site}&language=${selectedLanguage.locale}` );
     }
   }
-
-  updateUrl = ( url ) => {
-    window.history.replaceState( {}, '', url );
-  };
 
   handleLanguageChange = ( value ) => {
     if ( value ) {
@@ -256,6 +254,7 @@ class Video extends Component {
                       link={ this.getShareLink( unit, captions ) }
                       id={ id }
                       site={ site }
+                      title={ unit.title }
                       language={ selectedLanguage.locale }
                     />
                   </Popup>

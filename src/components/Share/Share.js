@@ -2,18 +2,16 @@ import React from 'react';
 import { string, number } from 'prop-types';
 import { List } from 'semantic-ui-react';
 import ClipboardCopy from '../ClipboardCopy/ClipboardCopy';
-import queryString from 'query-string';
+import { stringifyQueryString } from '../../utils/browser';
 
 import './Share.css';
 
 const Share = ( props ) => {
   const {
-    id, site, language, link
+    id, site, language, title, link
   } = props;
 
-  const title = 'My title';
-  const queryStr = queryString.stringify( { id, site, language } );
-
+  const queryStr = stringifyQueryString( { id, site, language } );
   const directLink = `${window.location.protocol}//${window.location.host}/video?${queryStr}`;
   const facebookURL = `https://www.facebook.com/sharer/sharer.php?u=${link}`;
   const tweet = `https://twitter.com/home?status=${title} ${link}`;
@@ -41,7 +39,8 @@ Share.propTypes = {
   id: number,
   site: string,
   language: string,
-  link: string
+  link: string,
+  title: string
 };
 
 export default Share;
