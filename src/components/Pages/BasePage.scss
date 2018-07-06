@@ -1,23 +1,35 @@
-@import "../../../assets/styles/colors.scss";
+@import "../../assets/styles/colors.scss";
 
-.ui.container .about {
-  max-width: 1000px;
+.page {
+  max-width: 1200px;
   margin: 4em auto;
+  font-size: 18px;
 
   h1.ui.header {
     font-size: 4em;
     text-align: center;
     padding: 1em 0;
     color: $blue;
-  }
+
+    .sub.header {
+      font-size: 0.6em;
+      color: $blue;
+    }
+  }  
+
 
   h2, h3, h4 {
     color: $blue;
   }
+
 
   blockquote {
     text-align: center;
     margin: 3em 0;
   }
 
+
+  ul {
+    line-height: 1.4285em;
+  }
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Header } from 'semantic-ui-react';
+import Page from '../PageTmpl';
 import Breadcrumbs from '../../Breadcrumbs';
 import config from '../../../config';
-import './ContactPage.css';
 
 class ContactPage extends Component {
   componentWillMount() {
@@ -33,11 +33,11 @@ class ContactPage extends Component {
     if ( this.state ) {
       const { markdown } = this.state;
       return (
-        <section className="contact">
+        <Page>
           <Breadcrumbs />
           <Header as="h1">Contact Us</Header>
           <ReactMarkdown source={ markdown } />
-        </section>
+        </Page>
       );
     }
     return <div />;
