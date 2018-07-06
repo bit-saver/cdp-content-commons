@@ -10,6 +10,6 @@ const Page = props => (
 
 Page.propTypes = {
   children: node
-}
+};
 
 export default Page;
