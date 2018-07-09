@@ -27,20 +27,18 @@ class FilterMenuItem extends Component {
    * Format data into state that dopdowns will use
    */
   formatOptions = ( options, filter ) => {
-    /* Sort Source filter alphabetically */
-    if ( filter === 'Source' ) {
-      return options.map( option => ( {
-        label: option.display_name,
-        value: option.key,
-        count: option.count
-      } ) ).sort( ( a, b ) => a.label.localeCompare( b.label ) );
-    }
-
-    return options.map( option => ( {
+    let filterOptions = options.map( option => ( {
       label: option.display_name,
       value: option.key,
       count: option.count
     } ) );
+
+    /* Sort Source filter alphabetically */
+    if ( filter === 'Source' ) {
+      filterOptions = filterOptions.sort( ( a, b ) => a.label.localeCompare( b.label ) );
+    }
+
+    return filterOptions;
   };
 
   displayFilter = () => {
