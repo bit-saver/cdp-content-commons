@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Header } from 'semantic-ui-react';
+import Page from '../PageTmpl';
 import Breadcrumbs from '../../Breadcrumbs';
 import config from '../../../config';
-import './PrivacyPage.css';
 
 class PrivacyPage extends Component {
   componentWillMount() {
@@ -33,11 +33,11 @@ class PrivacyPage extends Component {
     if ( this.state ) {
       const { markdown } = this.state;
       return (
-        <section className="privacy">
+        <Page>
           <Breadcrumbs />
           <Header as="h1">Privacy Policy</Header>
           <ReactMarkdown source={ markdown } />
-        </section>
+        </Page>
       );
     }
     return <div />;
