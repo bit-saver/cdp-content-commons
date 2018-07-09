@@ -39,14 +39,13 @@
     .item {
 
       &:hover {
-        &:before,
+        .item_hover,
         &:after {
           opacity: 1;
         } 
       }
 
-      &:before {
-        content: 'Download for web';
+      &_hover {
         z-index: 3;
         position: absolute;
         top: 50%;
@@ -55,7 +54,7 @@
         color: #fff;
         font-weight: bold;        
         opacity: 0;
-        transition: opacity 0.5s linear;        
+        transition: opacity 0.5s linear; 
       }
 
       &:after {

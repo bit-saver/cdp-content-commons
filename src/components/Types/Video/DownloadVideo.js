@@ -56,6 +56,7 @@ class DownloadVideo extends Component {
     const { title } = this.props.selectedLanguageUnit;
     const size = this.getSizeInfo( video.size );
     const fn = `${title.replace( /\s/g, '_' )}_${video.size.width}.${this.getFnExt( video.downloadUrl )}`;
+    const videoQuality = `${video.video_quality && video.video_quality === 'broadcast' ? 'broadcast' : 'web'}`;
 
     return (
       <Item.Group key={ `fs_${index}` } className="download-item">
@@ -63,15 +64,11 @@ class DownloadVideo extends Component {
           <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
           <Item.Content>
             <Item.Header className="download-header">
-              Download <span className="lightweight">{ `"${title}"` }</span> for web
+              Download <span className="lightweight">{ `"${title}"` }</span> for { `${videoQuality}` }
             </Item.Header>
-            { /*
-              <Item.Description>
-                Typically takes 30 seconds to donwload a file this size in your area.
-              </Item.Description>
-            */ }
             <Item.Meta> { `File size: ${size.weight}` } </Item.Meta>
             <Item.Meta> { `Dimensions: ${size.label}` }</Item.Meta>
+            <span className="item_hover">Download for { `${videoQuality}` }</span>
           </Item.Content>
         </Item>
       </Item.Group>
