@@ -24,6 +24,7 @@ import DownloadSrt from './DownloadSrt';
 import DownloadTranscript from './DownloadTranscript';
 import DownloadHelp from './DownloadHelp';
 import Share from '../../Share/Share';
+import config from '../../../config';
 
 import './Video.css';
 
@@ -83,10 +84,23 @@ class Video extends Component {
     return null;
   };
 
+  getYouTubeId = ( url ) => {
+    const reShort = /https:\/\/youtu.be\/(.*)/;
+    const reLong = /https:\/\/www.youtube.com\/watch\?v=(.*)/;
+    const idShort = url.match( reShort );
+    const idLong = url.match( reLong );
+    if ( idShort ) {
+      return idShort[1];
+    } else if ( idLong ) {
+      return idShort[2];
+    }
+    return null;
+  };
+
   // NOTE: Chrome is throwing an error when youtube is embedded:
   // https://stackoverflow.com/questions/48714879/error-parsing-header-x-xss-protection-google-chrome
   getYouTube = ( unit, captions, type = 'id' ) => {
-    let id = null;
+    let videoId = null;
 
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
@@ -100,24 +114,16 @@ class Video extends Component {
           }
 
           const youtubeUrl = streamObj.url;
-
-          const reShort = /https:\/\/youtu.be\/(.*)/;
-          const reLong = /https:\/\/www.youtube.com\/watch\?v=(.*)/;
-
-          id = youtubeUrl.match( reShort );
-          if ( id && id[1] ) {
-            return id[1];
-          }
-
-          id = youtubeUrl.match( reLong );
-          if ( id && id[1] ) {
-            return id[1];
+          videoId = this.getYouTubeId( youtubeUrl );
+          if ( videoId ) {
+            this.checkForValidYouTube( videoId )
+              .then( id => id )
+              .catch( err => console.log( err ) );
           }
         }
       }
     }
-
-    return id;
+    return videoId;
   };
 
   getVimeo = ( unit, captions, type = 'id' ) => {
@@ -154,6 +160,15 @@ class Video extends Component {
       return unit.source[0].burnedInCaptions === 'true'; // coerce to a boolean
     }
     return false;
+  };
+
+  checkForValidYouTube = async ( id ) => {
+    if ( config.YOUTUBE_API_URL && process.env.REACT_APP_YOUTUBE_API_KEY ) {
+      const url = `${config.YOUTUBE_API_URL}?part=id&id=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
+      const res = await ( await fetch( url ) ).json();
+      if ( !res.error ) return id;
+    }
+    return null;
   };
 
   willUpdateUrl() {
@@ -251,7 +266,7 @@ class Video extends Component {
                 content={
                   <Popup title="Share this video.">
                     <Share
-                      link={ this.getShareLink( unit, captions ) }
+                      // link={ this.getShareLink( unit, captions ) }
                       id={ id }
                       site={ site }
                       title={ unit.title }
