@@ -43,6 +43,11 @@ class Video extends Component {
     };
   }
 
+  /**
+   * Update the url location and fetch the video player properties
+   * Fetch video props here as opoposed to render because we have to
+   * do an async request to check validity of youtube link
+   */
   componentDidMount() {
     this.willUpdateUrl();
     this.willFetchVideoPlayer();
@@ -50,7 +55,8 @@ class Video extends Component {
 
   shouldComponentUpdate( nextProps, nextState ) {
     const { selectedLanguageUnit } = nextProps.item;
-    if ( selectedLanguageUnit.language.locale !== nextState.selectedLanguage.locale || this.state.videoProps !== nextState.videoProps ) {
+    if ( selectedLanguageUnit.language.locale !== nextState.selectedLanguage.locale ||
+      this.state.videoProps !== nextState.videoProps ) {
       return true;
     }
     return false;
@@ -64,12 +70,21 @@ class Video extends Component {
     updateUrl( '/' );
   }
 
+  /**
+   * Get the video data associated with currently selected language
+   */
   getSelectedUnit() {
     return this.state.language
       ? this.props.item.units.find( lang => lang.language.display_name === this.state.language )
       : this.props.item.selectedLanguageUnit;
   }
 
+  /**
+   * Fetch video properties associated with the currently
+   * selected language.& captions state
+   * @param {object} unit currently selected language
+   * @return video props object
+   */
   getVideoSource = ( unit ) => {
     const captions = this.getCaptions( unit );
     if ( unit && Array.isArray( unit.source ) ) {
@@ -81,6 +96,12 @@ class Video extends Component {
     return null;
   };
 
+  /**
+   * Fetch id fron url. A Youtube link can either use the
+   * short form or long form so check both
+   * @param {string} url youtube share url
+   * @return youtube id
+   */
   getYouTubeId = ( url ) => {
     const reShort = /https:\/\/youtu.be\/(.*)/;
     const reLong = /https:\/\/www.youtube.com\/watch\?v=(.*)/;
@@ -94,8 +115,17 @@ class Video extends Component {
     return null;
   };
 
-  // NOTE: Chrome is throwing an error when youtube is embedded:
-  // https://stackoverflow.com/questions/48714879/error-parsing-header-x-xss-protection-google-chrome
+
+  /**
+   * Fetches a video props from a valid youtube link by:
+   * 1. Checks for available stream object in selected language
+   * 2. Fetches youtube id from available stream object
+   * 3. If valid youtube id is returned, checks to see if url is reachable
+   * 4. If reachable url, return props else return null
+   *
+   * @param {object} unit currently selected language
+   * @return Resolved Promise with video props or null
+   */
   getYouTube = async ( unit ) => {
     const captions = this.getCaptions( unit );
 
@@ -121,7 +151,13 @@ class Video extends Component {
     return Promise.resolve( null );
   };
 
-  getVimeo = ( unit, type = 'id' ) => {
+  /**
+   * Search selected language and return Vimeo id it exists
+   *
+   * @param {object} unit currently selected language
+   * @return vimreo id
+   */
+  getVimeo = ( unit ) => {
     const captions = this.getCaptions( unit );
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
@@ -149,8 +185,15 @@ class Video extends Component {
     return { display_name: 'English', locale: 'en-us', text_direction: 'ltr' };
   };
 
-  // Note: The burnedInCaptions porperty is coming in as 'true' and 'false' strings. Need to coerce
-  //  in spots to ensure valid comparison.  Going forweard, try to avoid 'true' and 'false' strings
+  /**
+   * Some videos have 2 formats: clean (no burned in captions) and
+   * with captions (video has captions burned into file). Check see what format to return
+   * Note: The burnedInCaptions porperty is coming in as 'true' and 'false' strings. Need to coerce
+   * in spots to ensure valid comparison.  Going forweard, try to avoid 'true' and 'false' strings
+   *
+   * @param {object} unit currently selected language
+   * @return true (format to load video with captions) or false (clean file)
+   */
   getCaptions = ( unit ) => {
     if ( unit && unit.source && unit.source[0] ) {
       return unit.source[0].burnedInCaptions === 'true'; // coerce to a boolean
@@ -158,6 +201,11 @@ class Video extends Component {
     return false;
   };
 
+  /**
+   * Helper function to fetch video properties
+   * Using it to set state as it is bad practice to set state
+   * in componentDidMount
+   */
   async willFetchVideoPlayer() {
     const video = await this.fetchVideoPlayer( this.state.unit );
     this.setState( {
@@ -166,6 +214,12 @@ class Video extends Component {
     } );
   }
 
+  /**
+   * Executes youtube API call to verify reachable, valid youitube url
+   *
+   * @param {string} youitube id
+   * @return Promise
+   */
   checkForValidYouTube = async ( id ) => {
     if ( config.YOUTUBE_API_URL && process.env.REACT_APP_YOUTUBE_API_KEY ) {
       const url = `${config.YOUTUBE_API_URL}?part=id&id=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
@@ -179,6 +233,9 @@ class Video extends Component {
     return Promise.resolve( null );
   };
 
+  /**
+   * Update the location url the direct link to selected video
+   */
   willUpdateUrl() {
     const { id, site } = this.props.item;
     const { selectedLanguage } = this.state;
@@ -206,6 +263,13 @@ class Video extends Component {
     this.setState( { captions: !this.state.captions } );
   };
 
+  /**
+   * Fetches video props from available source
+   * YouTube > Vimeo > CloudFlare
+   *
+   * @param {object} unit currently selected language
+   * @return Promise with video props
+   */
   async fetchVideoPlayer( unit ) {
     // render youtube player if link available
     const youTubeProps = await this.getYouTube( unit );

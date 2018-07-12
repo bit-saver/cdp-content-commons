@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { v4 } from 'uuid';
 import { func, string, object } from 'prop-types';
 import { typeRecentsRequest } from '../../utils/api';
 import { Grid, Header, Item, Modal } from 'semantic-ui-react';
@@ -68,7 +69,7 @@ class Recents extends Component {
 
       itemsright.push( (
         <Modal
-          key={ item.id }
+          key={ v4() }
           closeIcon
           trigger={
             <Item className="recentsItem">
