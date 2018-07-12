@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
 import { Embed, Checkbox } from 'semantic-ui-react';
+import axios from 'axios';
 
 import { updateUrl } from '../../../utils/browser';
 
@@ -35,17 +36,21 @@ class Video extends Component {
     const { item } = this.props;
     this.state = {
       unit: item.selectedLanguageUnit,
-      selectedLanguage: this.getLanguage( item.selectedLanguageUnit )
+      selectedLanguage: this.getLanguage( item.selectedLanguageUnit ),
+      captions: this.getCaptions( item.selectedLanguageUnit ),
+      videoProps: null,
+      shareLink: ''
     };
   }
 
   componentDidMount() {
     this.willUpdateUrl();
+    this.willFetchVideoPlayer();
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
     const { selectedLanguageUnit } = nextProps.item;
-    if ( selectedLanguageUnit.language.locale !== nextState.selectedLanguage.locale ) {
+    if ( selectedLanguageUnit.language.locale !== nextState.selectedLanguage.locale || this.state.videoProps !== nextState.videoProps ) {
       return true;
     }
     return false;
@@ -65,20 +70,12 @@ class Video extends Component {
       : this.props.item.selectedLanguageUnit;
   }
 
-  getShareLink( unit, captions ) {
-    const youtube = this.getYouTube( unit, captions, 'link' );
-    if ( youtube ) {
-      return youtube;
-    }
-
-    return this.getVideoSource( 'link' );
-  }
-
-  getVideoSource = ( unit, captions, type = 'id' ) => {
+  getVideoSource = ( unit ) => {
+    const captions = this.getCaptions( unit );
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.url ) {
-        return type === 'link' ? source.stream.url : source.stream.uid;
+        return source.stream.uid;
       }
     }
     return null;
@@ -92,15 +89,15 @@ class Video extends Component {
     if ( idShort ) {
       return idShort[1];
     } else if ( idLong ) {
-      return idShort[2];
+      return idLong[1];
     }
     return null;
   };
 
   // NOTE: Chrome is throwing an error when youtube is embedded:
   // https://stackoverflow.com/questions/48714879/error-parsing-header-x-xss-protection-google-chrome
-  getYouTube = ( unit, captions, type = 'id' ) => {
-    let videoId = null;
+  getYouTube = async ( unit ) => {
+    const captions = this.getCaptions( unit );
 
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
@@ -109,28 +106,27 @@ class Video extends Component {
         const streamObj = source.streamUrl.find( stream => stream.site === 'youtube' );
 
         if ( streamObj && streamObj.site === 'youtube' && streamObj.url ) {
-          if ( type === 'link' ) {
-            return streamObj.url;
-          }
-
           const youtubeUrl = streamObj.url;
-          videoId = this.getYouTubeId( youtubeUrl );
+          const videoId = this.getYouTubeId( youtubeUrl );
+
           if ( videoId ) {
-            this.checkForValidYouTube( videoId )
-              .then( id => id )
-              .catch( err => console.log( err ) );
+            const res = await this.checkForValidYouTube( videoId );
+            if ( res ) {
+              return Promise.resolve( { videoId, shareLink: streamObj.url } );
+            }
           }
         }
       }
     }
-    return videoId;
+    return Promise.resolve( null );
   };
 
-  getVimeo = ( unit, captions, type = 'id' ) => {
+  getVimeo = ( unit, type = 'id' ) => {
+    const captions = this.getCaptions( unit );
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.site === 'vimeo' && source.stream.url ) {
-        return type === 'link' ? source.stream.url : source.stream.uid;
+        return source.stream.uid;
       }
     }
     return null;
@@ -162,13 +158,25 @@ class Video extends Component {
     return false;
   };
 
+  async willFetchVideoPlayer() {
+    const video = await this.fetchVideoPlayer( this.state.unit );
+    this.setState( {
+      videoProps: video.props,
+      shareLink: video.shareLink
+    } );
+  }
+
   checkForValidYouTube = async ( id ) => {
     if ( config.YOUTUBE_API_URL && process.env.REACT_APP_YOUTUBE_API_KEY ) {
       const url = `${config.YOUTUBE_API_URL}?part=id&id=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
-      const res = await ( await fetch( url ) ).json();
-      if ( !res.error ) return id;
+      try {
+        const res = await axios.get( url );
+        return res;
+      } catch ( err ) {
+        return Promise.resolve( null );
+      }
     }
-    return null;
+    return Promise.resolve( null );
   };
 
   willUpdateUrl() {
@@ -179,13 +187,16 @@ class Video extends Component {
     }
   }
 
-  handleLanguageChange = ( value ) => {
+  handleLanguageChange = async ( value ) => {
     if ( value ) {
       const unit = this.props.item.units.find( lang => lang.language.display_name === value );
+      const video = await this.fetchVideoPlayer( unit );
       if ( unit ) {
         this.setState( {
           unit,
-          selectedLanguage: this.getLanguage( unit )
+          selectedLanguage: this.getLanguage( unit ),
+          videoProps: video.props,
+          shareLink: video.shareLink
         } );
       }
     }
@@ -195,43 +206,36 @@ class Video extends Component {
     this.setState( { captions: !this.state.captions } );
   };
 
-  renderVideoPlayer( unit, captions ) {
+  async fetchVideoPlayer( unit ) {
     // render youtube player if link available
-    const youTubeId = this.getYouTube( unit, captions );
-    if ( youTubeId ) {
-      return <Embed id={ youTubeId } placeholder={ this.props.item.thumbnail } source="youtube" />;
+    const youTubeProps = await this.getYouTube( unit );
+    if ( youTubeProps && youTubeProps.videoId ) {
+      return Promise.resolve( { props: { id: youTubeProps.videoId, source: 'youtube' }, shareLink: youTubeProps.shareLink } );
     }
 
     // fallback to Vimeo if no youtube link available
-    const vimeoId = this.getVimeo( unit, captions );
+    const vimeoId = this.getVimeo( unit );
     if ( vimeoId ) {
-      return <Embed id={ vimeoId } placeholder={ this.props.item.thumbnail } source="vimeo" />;
+      return Promise.resolve( { props: { id: vimeoId, source: 'vimeo' } } );
     }
 
     // fallback to CloudFlare player if no youtube or vimeo link available
-    const uid = this.getVideoSource( unit, captions );
+    const uid = this.getVideoSource( unit );
     const active = !!uid;
     const icon = active ? 'video play' : 'warning circle';
 
-    return (
-      <Embed
-        active={ active }
-        icon={ icon }
-        placeholder={ this.props.item.thumbnail }
-        url={ `https://iframe.cloudflarestream.com/${uid}` }
-      />
-    );
+    return Promise.resolve( { props: { active, icon, url: `https://iframe.cloudflarestream.com/${uid}` } } );
   }
 
   render() {
-    const { unit, selectedLanguage } = this.state;
+    const {
+      unit, selectedLanguage, captions, videoProps, shareLink
+    } = this.state;
     const {
       type, logo, author, owner, published, modified, id, site
     } = this.props.item;
 
     if ( unit && selectedLanguage ) {
-      const captions = this.getCaptions( unit );
-
       return (
         <ModalItem headline={ unit.title } textDirection={ selectedLanguage.text_direction }>
           <div className="modal_options">
@@ -266,7 +270,7 @@ class Video extends Component {
                 content={
                   <Popup title="Share this video.">
                     <Share
-                      // link={ this.getShareLink( unit, captions ) }
+                      link={ shareLink }
                       id={ id }
                       site={ site }
                       title={ unit.title }
@@ -319,7 +323,7 @@ class Video extends Component {
             </div>
           </div>
 
-          { this.renderVideoPlayer( unit, captions ) }
+          <Embed { ...videoProps } placeholder={ this.props.item.thumbnail } />
 
           <ModalContentMeta type={ type } dateUpdated={ modified } transcript={ this.getVideoTranscript() } />
           <ModalDescription description={ unit.desc } />
@@ -328,7 +332,7 @@ class Video extends Component {
         </ModalItem>
       );
     }
-    // }
+
     return <ModalItem headline="Content Unavailable" />;
   }
 }
