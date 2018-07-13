@@ -215,7 +215,7 @@ class Video extends Component {
   }
 
   /**
-   * Executes youtube API call to verify reachable, valid youitube url
+   * Executes youtube API call to verify reachable, valid youtube url
    *
    * @param {string} youitube id
    * @return Promise
@@ -225,7 +225,7 @@ class Video extends Component {
       const url = `${config.YOUTUBE_API_URL}?part=id&id=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
       try {
         const res = await axios.get( url );
-        return res;
+        if ( res.data && res.data.pageInfo && res.data.pageInfo.totalResults > 0 ) return res;
       } catch ( err ) {
         return Promise.resolve( null );
       }
@@ -274,7 +274,10 @@ class Video extends Component {
     // render youtube player if link available
     const youTubeProps = await this.getYouTube( unit );
     if ( youTubeProps && youTubeProps.videoId ) {
-      return Promise.resolve( { props: { id: youTubeProps.videoId, source: 'youtube' }, shareLink: youTubeProps.shareLink } );
+      return Promise.resolve( {
+        props: { id: youTubeProps.videoId, source: 'youtube' },
+        shareLink: youTubeProps.shareLink
+      } );
     }
 
     // fallback to Vimeo if no youtube link available
