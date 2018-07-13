@@ -12,9 +12,7 @@ class PrivacyPage extends Component {
   constructor() {
     super();
     this.state = {
-      error: null,
-      isLoaded: false,
-      markdown: null
+      content: <div>Loading...</div>
     };
   }
 
@@ -30,54 +28,37 @@ class PrivacyPage extends Component {
   onFetchResult = ( result ) => {
     sessionStorage.setItem( 'PrivacyPage', result );
     this.setState( {
-      isLoaded: true,
-      markdown: result
+      content: <ReactMarkdown source={ result } />
     } );
   }
 
   onError = ( error ) => {
     this.setState( {
-      isLoaded: true,
-      error
+      content: (
+        <div>
+          Oops! Something went wrong. If this issue persists, please email the IIP Office of Design
+          at <a href="mailto:design@america.gov">design@america.gov</a>.
+        </div>
+      )
     } );
   }
 
   checkSessionStorage() {
     const cachedPrivacy = sessionStorage.getItem( 'PrivacyPage' );
     if ( cachedPrivacy ) {
-      this.setState( { isLoaded: true, markdown: cachedPrivacy } );
+      this.setState( { content: <ReactMarkdown source={ cachedPrivacy } /> } );
       return true;
     }
     return false;
   }
 
   render() {
-    const { error, isLoaded, markdown } = this.state;
-    if ( error ) {
-      return (
-        <Page>
-          <Breadcrumbs />
-          <Header as="h1">Privacy Policy</Header>
-          <div>
-            Oops! Something went wrong. If this issue persists,
-            please email the IIP Office of Design at <a href="mailto:design@america.gov">design@america.gov</a>.
-          </div>
-        </Page>
-      );
-    } else if ( !isLoaded ) {
-      return (
-        <Page>
-          <Breadcrumbs />
-          <Header as="h1">Privacy Policy</Header>
-          <div>Loading...</div>
-        </Page>
-      );
-    }
+    const { content } = this.state;
     return (
       <Page>
         <Breadcrumbs />
         <Header as="h1">Privacy Policy</Header>
-        <ReactMarkdown source={ markdown } />
+        { content }
       </Page>
     );
   }
