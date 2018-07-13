@@ -1,46 +1,85 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Header } from 'semantic-ui-react';
+import axios from 'axios';
+
 import Page from '../PageTmpl';
 import Breadcrumbs from '../../Breadcrumbs';
+
 import config from '../../../config';
 
 class PrivacyPage extends Component {
-  componentWillMount() {
-    const cachedPrivacy = sessionStorage.getItem( 'PrivacyPage' );
-    if ( cachedPrivacy ) {
-      this.setState( { markdown: cachedPrivacy } );
-      return;
-    }
-
-    fetch( config.PRIVACY_URL )
-      .then( response => response.text() )
-      .then( text => this.onFetchResult( text ) );
+  constructor() {
+    super();
+    this.state = {
+      error: null,
+      isLoaded: false,
+      markdown: null
+    };
   }
 
   componentDidMount() {
     window.scrollTo( 0, 0 );
+    const cached = this.checkSessionStorage();
+    if ( !cached ) {
+      axios.get( config.PRIVACY_URL )
+        .then( response => this.onFetchResult( response.data ), error => this.onError( error ) );
+    }
   }
 
-  onFetchResult = ( text ) => {
-    sessionStorage.setItem( 'PrivacyPage', text );
+  onFetchResult = ( result ) => {
+    sessionStorage.setItem( 'PrivacyPage', result );
     this.setState( {
-      markdown: text
+      isLoaded: true,
+      markdown: result
     } );
   }
 
+  onError = ( error ) => {
+    this.setState( {
+      isLoaded: true,
+      error
+    } );
+  }
+
+  checkSessionStorage() {
+    const cachedPrivacy = sessionStorage.getItem( 'PrivacyPage' );
+    if ( cachedPrivacy ) {
+      this.setState( { isLoaded: true, markdown: cachedPrivacy } );
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    if ( this.state ) {
-      const { markdown } = this.state;
+    const { error, isLoaded, markdown } = this.state;
+    if ( error ) {
       return (
         <Page>
           <Breadcrumbs />
           <Header as="h1">Privacy Policy</Header>
-          <ReactMarkdown source={ markdown } />
+          <div>
+            Oops! Something went wrong. If this issue persists,
+            please email the IIP Office of Design at <a href="mailto:design@america.gov">design@america.gov</a>.
+          </div>
+        </Page>
+      );
+    } else if ( !isLoaded ) {
+      return (
+        <Page>
+          <Breadcrumbs />
+          <Header as="h1">Privacy Policy</Header>
+          <div>Loading...</div>
         </Page>
       );
     }
-    return <div />;
+    return (
+      <Page>
+        <Breadcrumbs />
+        <Header as="h1">Privacy Policy</Header>
+        <ReactMarkdown source={ markdown } />
+      </Page>
+    );
   }
 }
 
