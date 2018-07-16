@@ -15,6 +15,7 @@ class DownloadSrt extends Component {
         <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
         <Item.Content>
           <Item.Header className="download-header">{ `Download ${unit.language.display_name} SRT` }</Item.Header>
+          <span className="item_hover">{ `Download ${unit.language.display_name} SRT` }</span>
         </Item.Content>
       </Item>
     </Item.Group>

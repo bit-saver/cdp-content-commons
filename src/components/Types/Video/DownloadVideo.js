@@ -68,7 +68,7 @@ class DownloadVideo extends Component {
             </Item.Header>
             <Item.Meta> { `File size: ${size.weight}` } </Item.Meta>
             <Item.Meta> { `Dimensions: ${size.label}` }</Item.Meta>
-            <span className="item_hover">Download for { `${videoQuality}` }</span>
+            <span className="item_hover">{ `Download for ${videoQuality}` }</span>
           </Item.Content>
         </Item>
       </Item.Group>

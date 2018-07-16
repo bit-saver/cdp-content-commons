@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Item } from 'semantic-ui-react';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
 import { array, string } from 'prop-types';
 
@@ -11,12 +12,15 @@ class DownloadTranscript extends Component {
   }
 
   renderFormItem = ( unit, i ) => (
-    <div key={ `fs_${i}` } style={ { marginBottom: '1em' } }>
-      <a href={ unit.transcript.srcUrl } download={ `${unit.language.display_name}_SRT` } title="Download SRT">
-        <img src={ downloadIcon } width="16" height="16" alt="Download SRT" style={ { marginRight: '.8em' } } />
-      </a>
-      { `${unit.language.display_name} SRT` }
-    </div>
+    <Item.Group key={ `fs_${i}` } className="download-item">
+      <Item as="a" href={ unit.transcript.srcUrl } download={ `${unit.language.display_name}_Transcript` }>
+        <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
+        <Item.Content>
+          <Item.Header className="download-header">{ `Download ${unit.language.display_name} Transcript` }</Item.Header>
+          <span className="item_hover">{ `Download ${unit.language.display_name} Transcript` }</span>
+        </Item.Content>
+      </Item>
+    </Item.Group>
   );
 
   render() {
