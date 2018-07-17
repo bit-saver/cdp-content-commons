@@ -34,12 +34,7 @@ class PrivacyPage extends Component {
 
   onError = ( error ) => {
     this.setState( {
-      content: (
-        <div>
-          Oops! Something went wrong. If this issue persists, please email the IIP Office of Design
-          at <a href="mailto:design@america.gov">design@america.gov</a>.
-        </div>
-      )
+      content: config.ERROR_MESSAGE
     } );
   }
 
