@@ -1,4 +1,5 @@
 import { sourceAggRequest } from '../utils/api';
+import uniqby from 'lodash.uniqby';
 import { LOAD_SOURCES_PENDING, LOAD_SOURCES_FAILED, LOAD_SOURCES_SUCCESS, SOURCE_CHANGE } from './types';
 
 /**
@@ -79,14 +80,18 @@ export const loadSources = () => async ( dispatch ) => {
     return dispatch( { type: LOAD_SOURCES_FAILED } );
   }
 
-  const sources = response.aggregations.source.buckets;
-  const normalized = normalize( sources );
+  const { buckets } = response.aggregations.source;
 
-  const payload = normalized.filter( bucket => bucket.key && bucket.key !== 'IIP Courses' ).map( bucket => ( {
+  const sources = buckets.filter( bucket => bucket.key && bucket.key !== 'IIP Courses' ).map( bucket => ( {
     key: normalizeKeys( bucket.key ),
     display_name: normalizeDisplay( bucket.key ),
     count: bucket.doc_count
   } ) );
+
+  // When doucment counts are introduced, we will need to add together all
+  // counts form duplicates sources, i.e. Young African Leaders Initiative & Young African Leaders Initiative Network
+  // will need to be totaled
+  const payload = uniqby( sources, 'key' );
 
   return dispatch( {
     type: LOAD_SOURCES_SUCCESS,
