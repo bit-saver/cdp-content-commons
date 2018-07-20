@@ -18,21 +18,6 @@ const MAPPINGS = [
 ];
 
 /**
- * Remove duplicates that appear due to young leader sites having inconsistent owner names
- * @param {array} sources site owners
- */
-const normalize = sources =>
-  sources.filter( ( source ) => {
-    const isYl =
-      source.key.includes( 'Young African Leaders Initiative' ) ||
-      source.key.includes( 'Young Leaders of the Americas Initiative' );
-
-    if ( !isYl ) return true;
-
-    return !source.key.includes( 'Network' );
-  } );
-
-/**
  * Fetch abbreviated name for young leader sites
  * @param {array} key owner key returned from ES index
  */
