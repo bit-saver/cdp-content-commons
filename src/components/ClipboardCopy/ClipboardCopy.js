@@ -13,7 +13,7 @@ const ClipboardCopy = ( props ) => {
 
     // Notify selection copied
     btn.classList.add( 'copied' );
-    setTimeout( () => btn.classList.remove( 'copied' ), 1000 );
+    setTimeout( () => btn.classList.remove( 'copied' ), 5000 );
   };
 
   const { copyItem, label } = props;
