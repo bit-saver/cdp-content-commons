@@ -36,3 +36,15 @@ All notable changes to this project will be documented in this file.
 - Updated help text for video downloads
 - Source action creator now accepts an array of owners and not a string as it's search key
 - Created owners mappings in source action to (1) support inconsistent owner names and (2) assign a custom name
+
+# [1.2.0](2018-07-18)
+
+**Features**
+- Added Vimeo support
+- Provided a Vimeo/CloudFlare fallback option when YouTube is not available
+- Provided a sharable, direct link to the video page
+- Updated UI to provide "web" and "broadcast" video quality display
+- Updated various UI styles
+
+**Bug Fixes**
+- Sources dropdown now sorted alphabetically

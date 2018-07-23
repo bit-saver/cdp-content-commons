@@ -124,11 +124,14 @@ const getPostTypeQry = ( types ) => {
  * @param {array} types Selected post types
  * @return Array of unique post types
  */
-const getQryFields = ( types ) => {
+const getQryFields = ( types = [] ) => {
   const set = new Set();
+
   types.forEach( ( t ) => {
-    const flds = fields[t.type];
-    flds.forEach( fld => set.add( fld ) );
+    const flds = fields[t.key];
+    if ( flds ) {
+      flds.forEach( fld => set.add( fld ) );
+    }
   } );
 
   return [...set];
