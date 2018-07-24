@@ -16,7 +16,10 @@ class ModalText extends Component {
     const { parsedHTML } = this.state;
 
     parsedHTML
-      .filter( el => el.props && el.props.children.type === 'script' )
+      .filter( ( el ) => {
+        if ( !el.props ) return false;
+        return el.props.children && el.props.children.type === 'script';
+      } )
       .forEach( ( el ) => {
         if ( !parsedHTMLScripts.includes( el.props.children.props.src ) ) {
           parsedHTMLScripts.push( el.props.children.props.src );
@@ -32,7 +35,10 @@ class ModalText extends Component {
 
   render() {
     const { parsedHTML } = this.state;
-    const parsedHTMLRemovedScripts = parsedHTML.filter( el => el.props && el.props.children.type !== 'script' );
+    const parsedHTMLRemovedScripts = parsedHTML.filter( ( el ) => {
+      if ( !el.props ) return false;
+      return el.props.children && el.props.children.type !== 'script';
+    } );
 
     return (
       <section className="modal_section modal_section--textContent">
