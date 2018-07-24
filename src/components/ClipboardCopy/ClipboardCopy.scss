@@ -26,6 +26,7 @@
     @media screen and (max-width: 767px) {
       position: relative;
       font-size: 12px;
+      top: 0;
     }
 
     &_wrapper {
@@ -54,6 +55,7 @@
         border-radius: 0;
         border: none;
         background-color: $light-grey;
+        padding: 2px 8px;
       }
     }
 
