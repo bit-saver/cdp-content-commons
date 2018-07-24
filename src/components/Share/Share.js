@@ -3,6 +3,7 @@ import { string, number } from 'prop-types';
 import { List } from 'semantic-ui-react';
 import ClipboardCopy from '../ClipboardCopy/ClipboardCopy';
 import { stringifyQueryString } from '../../utils/browser';
+import ShareButton from './ShareButton';
 
 import './Share.css';
 
@@ -20,14 +21,8 @@ const Share = ( props ) => {
     <div>
       { link && (
         <List className="share_list">
-          <List.Item as="a" href={ facebookURL } target="_blank">
-            <List.Icon name="facebook f" size="large" />
-            <List.Content>Share on Facebook</List.Content>
-          </List.Item>
-          <List.Item as="a" href={ tweet } target="_blank">
-            <List.Icon name="twitter" size="large" />
-            <List.Content>Share on Twitter</List.Content>
-          </List.Item>
+          <ShareButton url={ facebookURL } icon="facebook f" label="Share on Facebook" />
+          <ShareButton url={ tweet } icon="twitter" label="Share on Twitter" />
         </List>
       ) }
       <ClipboardCopy label="Direct Link" copyItem={ directLink } />
