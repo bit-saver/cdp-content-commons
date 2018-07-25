@@ -18,10 +18,6 @@ class AboutPage extends Component {
       .then( text => this.onFetchResult( text ) );
   }
 
-  componentDidMount() {
-    window.scrollTo( 0, 0 );
-  }
-
   onFetchResult = ( text ) => {
     sessionStorage.setItem( 'AboutPage', text );
     this.setState( {

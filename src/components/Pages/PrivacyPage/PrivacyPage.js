@@ -17,7 +17,6 @@ class PrivacyPage extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo( 0, 0 );
     const cached = this.checkSessionStorage();
     if ( !cached ) {
       axios.get( config.PRIVACY_URL )

@@ -15,10 +15,16 @@ import Footer from './components/Footer';
 
 ReactTapEventPlugin();
 
+const ScrollToTop = () => {
+  window.scrollTo( 0, 0 );
+  return null;
+};
+
 const App = () => (
   <div>
     <Header />
     <div className="ui container">
+      <Route component={ ScrollToTop } />
       <Switch>
         <Route path="/" exact component={ LandingPage } />
         <Route path="/results" component={ Results } />
