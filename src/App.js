@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import * as ReactTapEventPlugin from 'react-tap-event-plugin';
 
 import './App.css';
+import { ScrollToTop } from './utils/helpers';
 import LandingPage from './components/Pages/LandingPage';
 import AboutPage from './components/Pages/AboutPage';
 import HelpPage from './components/Pages/HelpPage';
@@ -14,11 +15,6 @@ import Results from './components/Results';
 import Footer from './components/Footer';
 
 ReactTapEventPlugin();
-
-const ScrollToTop = () => {
-  window.scrollTo( 0, 0 );
-  return null;
-};
 
 const App = () => (
   <div>

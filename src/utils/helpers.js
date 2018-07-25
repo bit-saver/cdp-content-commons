@@ -217,3 +217,8 @@ export const queryBuilder = ( store ) => {
   // body.query( 'query_string', 'query', optionStr ); // return all for TESTING
   return body.build();
 };
+
+export const ScrollToTop = () => {
+  window.scrollTo( 0, 0 );
+  return null;
+};
