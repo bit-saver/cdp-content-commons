@@ -9,13 +9,14 @@ const ModalPostMeta = ( props ) => {
     sourcelink,
     logo,
     source,
-    datePublished
+    datePublished,
+    originalLink
   } = props;
 
   let sourceItem = <div />;
   if ( logo && sourcelink ) {
     sourceItem = (
-      <a href={ sourcelink } target="_blank">
+      <a href={ sourcelink } target="_blank" rel="noopener noreferrer">
         <img src={ logo } alt={ source } className="modal_postmeta_logo" />
       </a>
     );
@@ -24,7 +25,7 @@ const ModalPostMeta = ( props ) => {
   } else if ( sourcelink ) {
     sourceItem = (
       <span className="modal_postmeta_content">
-        Source: <a href={ sourcelink } target="_blank">{ source }</a>
+        Source: <a href={ sourcelink } target="_blank" rel="noopener noreferrer">{ source }</a>
       </span>
     );
   } else {
@@ -42,6 +43,7 @@ const ModalPostMeta = ( props ) => {
       <span className="modal_postmeta_content">
         { `Date Published: ${moment( datePublished ).format( 'MMMM DD, YYYY' )}` }
       </span>
+      { originalLink && <a href={ originalLink } target="_blank" rel="noopener noreferrer">View Original</a> }
     </section>
   );
 };
@@ -51,7 +53,9 @@ ModalPostMeta.propTypes = {
   sourcelink: string,
   logo: string,
   source: string,
-  datePublished: string
+  datePublished: string,
+  originalLink: string
 };
 
 export default ModalPostMeta;
+

@@ -8,6 +8,7 @@ import { updateUrl } from '../../../utils/browser';
 // import plusIcon from '../../../assets/icons/icon_plus.svg';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
 import shareIcon from '../../../assets/icons/icon_share.svg';
+import embedIcon from '../../../assets/icons/icon_embed.svg';
 
 import ModalItem from '../../Modals/ModalItem';
 import ModalLangDropdown from '../../Modals/ModalLangDropdown/ModalLangDropdown';
@@ -25,6 +26,8 @@ import DownloadSrt from './DownloadSrt';
 import DownloadTranscript from './DownloadTranscript';
 import DownloadHelp from './DownloadHelp';
 import Share from '../../Share/Share';
+import EmbedVideo from '../../Embed/Embed';
+import EmbedHelp from './EmbedHelp';
 import config from '../../../config';
 
 import './Video.css';
@@ -322,13 +325,29 @@ class Video extends Component {
                 />
               ) }
             </div>
-            <div className="modal_options_share">
+            <div className="trigger-container">
               <PopupTrigger
-                toolTip=""
-                icon={ { img: shareIcon, dim: 20 } }
-                // show={ item.type === 'video' }
-                show={ false }
-                content={ <div /> }
+                toolTip="Embed video."
+                icon={ { img: embedIcon, dim: 24 } }
+                show
+                content={
+                  <PopupTabbed
+                    title="Embed this video on your site"
+
+                    panes={ [
+                      {
+                        title: 'Copy Embed Code',
+                        component: (
+                          <EmbedVideo
+                            instructions="Copy and paste the code below to embed video on your site"
+                            // embedItem={ item }
+                          />
+                        )
+                      },
+                      { title: 'Help', component: <EmbedHelp /> }
+                    ] }
+                  />
+                }
               />
               <PopupTrigger
                 toolTip="Share video"

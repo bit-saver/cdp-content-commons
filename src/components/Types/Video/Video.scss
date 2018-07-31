@@ -1,5 +1,12 @@
 @import '../../../assets/styles/colors.scss';
 
+.trigger-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
 .popupElem_wrapper {
   .form-group_instructions {
     color: $grey;
@@ -7,7 +14,6 @@
     font-size: 0.857em;
     margin-bottom: 2em;
   }
-
 
   .ui.items > .item > .content > .header {
     color: $light-blue;
