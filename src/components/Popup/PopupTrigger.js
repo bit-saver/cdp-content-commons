@@ -25,7 +25,7 @@ class PopupTrigger extends Component {
 
   render() {
     return (
-      <span style={ { float: this.props.position, display: this.props.show ? 'inline-block' : 'none' } }>
+      <span style={ { display: this.props.show ? 'inline-block' : 'none' } }>
         <Tooltip content={ this.props.toolTip } styles={ tooltipStyles }>
           <Popup
             trigger={
@@ -56,7 +56,6 @@ PopupTrigger.propTypes = {
   toolTip: string,
   icon: object,
   content: node,
-  position: string,
   show: bool
 };
 
