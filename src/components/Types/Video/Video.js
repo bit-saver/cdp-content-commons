@@ -56,7 +56,8 @@ class Video extends Component {
   shouldComponentUpdate( nextProps, nextState ) {
     const { selectedLanguageUnit } = nextProps.item;
     if ( selectedLanguageUnit.language.locale !== nextState.selectedLanguage.locale ||
-      this.state.videoProps !== nextState.videoProps ) {
+      this.state.videoProps !== nextState.videoProps ||
+      this.state.captions !== nextState.captions ) {
       return true;
     }
     return false;
@@ -86,7 +87,7 @@ class Video extends Component {
    * @return video props object
    */
   getVideoSource = ( unit ) => {
-    const captions = this.getCaptions( unit );
+    const { captions } = this.state;
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.url ) {
@@ -127,7 +128,7 @@ class Video extends Component {
    * @return Resolved Promise with video props or null
    */
   getYouTube = async ( unit ) => {
-    const captions = this.getCaptions( unit );
+    const { captions } = this.state;
 
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
@@ -158,7 +159,7 @@ class Video extends Component {
    * @return vimreo id
    */
   getVimeo = ( unit ) => {
-    const captions = this.getCaptions( unit );
+    const { captions } = this.state;
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.site === 'vimeo' && source.stream.url ) {
@@ -244,24 +245,28 @@ class Video extends Component {
     }
   }
 
-  handleLanguageChange = async ( value ) => {
-    if ( value ) {
+  handleLanguageChange = ( value ) => {
+    if ( value && value !== this.state.selectedLanguage.display_name ) {
       const unit = this.props.item.units.find( lang => lang.language.display_name === value );
-      const video = await this.fetchVideoPlayer( unit );
-      if ( unit ) {
-        this.setState( {
-          unit,
-          selectedLanguage: this.getLanguage( unit ),
-          videoProps: video.props,
-          shareLink: video.shareLink
-        } );
-      }
+      this.setState( { captions: this.getCaptions( unit ) }, async () => {
+        const video = await this.fetchVideoPlayer( unit );
+        if ( unit ) {
+          this.setState( {
+            unit,
+            selectedLanguage: this.getLanguage( unit ),
+            videoProps: video.props,
+            shareLink: video.shareLink
+          } );
+        }
+      } );
     }
   };
 
   handleCaptionChange = () => {
-    this.setState( { captions: !this.state.captions } );
-  };
+    this.setState( { captions: !this.state.captions }, () => {
+      this.willFetchVideoPlayer();
+    } );
+  }
 
   /**
    * Fetches video props from available source
