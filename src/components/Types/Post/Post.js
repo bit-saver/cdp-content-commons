@@ -3,6 +3,9 @@ import { object } from 'prop-types';
 import { getItemRequest } from '../../../utils/api';
 import { normalizeItem } from '../../../utils/parser';
 
+import embedIcon from '../../../assets/icons/icon_embed.svg';
+import shareIcon from '../../../assets/icons/icon_share.svg';
+
 import ModalItem from '../../Modals/ModalItem';
 import ModalLangDropdown from '../../Modals/ModalLangDropdown/ModalLangDropdown';
 import ModalContentMeta from '../../Modals/ModalContentMeta/ModalContentMeta';
@@ -10,7 +13,15 @@ import ModalPostMeta from '../../Modals/ModalPostMeta/ModalPostMeta';
 import ModalPostTags from '../../Modals/ModalPostTags/ModalPostTags';
 import ModalText from '../../Modals/ModalText/ModalText';
 
-class PostModal extends Component {
+import PopupTrigger from '../../Popup/PopupTrigger';
+import PopupTabbed from '../../Popup/PopupTabbed';
+import Popup from '../../Popup/Popup';
+
+// import Share from '../../Share/Share';
+import EmbedPost from './EmbedPost';
+import EmbedHelp from './EmbedHelp';
+
+class Post extends Component {
   constructor( props ) {
     super( props );
     const { item } = this.props;
@@ -61,8 +72,45 @@ class PostModal extends Component {
                 handleLanguageChange={ this.handleLanguageChange }
               />
             </div>
-            <div className="modal_options_share">
-              <a href={ item.link } target="_blank">View Original</a>
+            <div className="trigger-container">
+              <PopupTrigger
+                toolTip="Embed this article."
+                icon={ { img: embedIcon, dim: 24 } }
+                show
+                content={
+                  <PopupTabbed
+                    title="Embed this article on your site"
+                    panes={ [
+                      {
+                        title: 'Copy Embed Code',
+                        component: (
+                          <EmbedPost
+                            instructions="Copy and paste the code below to embed article on your site"
+                            embedItem={ item }
+                          />
+                        )
+                      },
+                      { title: 'Help', component: <EmbedHelp /> }
+                    ] }
+                  />
+                }
+              />
+              <PopupTrigger
+                toolTip="Share article"
+                icon={ { img: shareIcon, dim: 20 } }
+                show
+                content={
+                  <Popup title="Share this article.">
+                    { /* <Share
+                      link={ shareLink }
+                      id={ id }
+                      site={ site }
+                      title={ unit.title }
+                      language={ selectedLanguage.locale }
+                    /> */ }
+                  </Popup>
+                }
+              />
             </div>
           </div>
           <div className="modal_thumbnail">
@@ -77,6 +125,7 @@ class PostModal extends Component {
             logo={ item.logo }
             source={ item.site }
             datePublished={ item.published }
+            originalLink={ item.link }
           />
           <ModalPostTags tags={ item.categories } />
         </ModalItem>
@@ -86,8 +135,8 @@ class PostModal extends Component {
   }
 }
 
-PostModal.propTypes = {
+Post.propTypes = {
   item: object
 };
 
-export default PostModal;
+export default Post;
