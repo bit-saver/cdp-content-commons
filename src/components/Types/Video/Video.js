@@ -307,6 +307,8 @@ class Video extends Component {
       type, logo, author, owner, published, modified, id, site
     } = this.props.item;
 
+    const toggleCaptions = [...new Set( unit.source.map( item => item.burnedInCaptions ) )];
+
     if ( unit && selectedLanguage ) {
       return (
         <ModalItem headline={ unit.title } textDirection={ selectedLanguage.text_direction }>
@@ -317,7 +319,7 @@ class Video extends Component {
                 selected={ selectedLanguage.display_name }
                 handleLanguageChange={ this.handleLanguageChange }
               />
-              { unit.source.length > 1 && (
+              { toggleCaptions.length > 1 && (
                 <Checkbox
                   className="modal_captions"
                   checked={ captions }

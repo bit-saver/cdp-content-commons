@@ -42,7 +42,7 @@ class ModalLangDropdown extends Component {
         />
       );
     }
-    return <div>{ selected }</div>;
+    return <div className="modal_languages_single">{ selected }</div>;
   }
 }
 
