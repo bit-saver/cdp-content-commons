@@ -1,46 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { string } from 'prop-types';
 import { Button } from 'semantic-ui-react';
 import './ClipboardCopy.css';
 
-const ClipboardCopy = ( props ) => {
-  const handleCopyClick = ( e, data ) => {
-    const btn = e.target;
+class ClipboardCopy extends Component {
+  constructor( props ) {
+    super( props );
+    this.state = {
+      label: 'Copy',
+      cls: ''
+    };
+  }
+
+  toggleCls( label = 'Copy', cls = '' ) {
+    this.setState( { label, cls } );
+  }
+
+
+  handleCopyClick = ( e, data ) => {
+    // Notify selection copied
+    this.toggleCls( '✓ Copied', 'copied' );
+
+    // select text
+    window.getSelection().selectAllChildren( this.div );
 
     // Copy input value to document clipboard
-    this.input.select();
     document.execCommand( 'copy' );
 
-    // Notify selection copied
-    btn.classList.add( 'copied' );
-    setTimeout( () => btn.classList.remove( 'copied' ), 5000 );
+    // Reset button
+    setTimeout( () => {
+      this.toggleCls();
+    }, 5000 );
   };
 
-  const { copyItem, label } = props;
+  render() {
+    const { copyItem, label } = this.props;
 
-  return (
-    <div className="clipboardcopy_wrapper">
-      <div className="clipboardcopy">
-        <div className="clipboardcopy_label_wrapper">
-          <p className="clipboardcopy_label">{ label }</p>
-        </div>
-        <div className="clipboardcopy_item">
-          <div className="ui disabled input">
-            <input
-              ref={ ( input ) => {
-                this.input = input;
-              } }
-              type="text"
-              defaultValue={ copyItem }
-              tabIndex="-1"
-            />
+    return (
+      <div className="clipboardcopy_wrapper">
+        <div className="clipboardcopy">
+          <div className="clipboardcopy_label_wrapper">
+            <p className="clipboardcopy_label">{ label }</p>
           </div>
-          <Button primary content="Copy" onClick={ handleCopyClick } />
+          <div className="clipboardcopy_item">
+            <div
+              className="clipboardcopy_item_text"
+              ref={ ( div ) => {
+                this.div = div;
+              } }
+            >
+              { copyItem }
+
+            </div>
+            <Button className={ this.state.cls } primary onClick={ this.handleCopyClick }>{ this.state.label }</Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 ClipboardCopy.propTypes = {
   copyItem: string,

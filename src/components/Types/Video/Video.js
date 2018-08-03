@@ -77,11 +77,9 @@ class Video extends Component {
   /**
    * Get the video data associated with currently selected language
    */
-  getSelectedUnit() {
-    return this.state.language
-      ? this.props.item.units.find( lang => lang.language.display_name === this.state.language )
-      : this.props.item.selectedLanguageUnit;
-  }
+  getSelectedUnit = ( language = 'English' ) => (
+    this.props.item.units.find( lang => lang.language.display_name === language )
+  )
 
   /**
    * Fetch video properties associated with the currently
@@ -166,7 +164,10 @@ class Video extends Component {
     if ( unit && Array.isArray( unit.source ) ) {
       const source = unit.source.find( caption => ( caption.burnedInCaptions === 'true' ) === captions );
       if ( source && source.stream && source.stream.site === 'vimeo' && source.stream.url ) {
-        return source.stream.uid;
+        return {
+          videoId: source.stream.uid,
+          shareLink: source.stream.url
+        };
       }
     }
     return null;
@@ -250,7 +251,7 @@ class Video extends Component {
 
   handleLanguageChange = ( value ) => {
     if ( value && value !== this.state.selectedLanguage.display_name ) {
-      const unit = this.props.item.units.find( lang => lang.language.display_name === value );
+      const unit = this.getSelectedUnit( value );
       this.setState( { captions: this.getCaptions( unit ) }, async () => {
         const video = await this.fetchVideoPlayer( unit );
         if ( unit ) {
@@ -265,6 +266,9 @@ class Video extends Component {
     }
   };
 
+  /**
+   * Toggle video between one with burned in captions and one without
+   */
   handleCaptionChange = () => {
     this.setState( { captions: !this.state.captions }, () => {
       this.willFetchVideoPlayer();
@@ -289,9 +293,12 @@ class Video extends Component {
     }
 
     // fallback to Vimeo if no youtube link available
-    const vimeoId = this.getVimeo( unit );
-    if ( vimeoId ) {
-      return Promise.resolve( { props: { id: vimeoId, source: 'vimeo' } } );
+    const vimeoProps = this.getVimeo( unit );
+    if ( vimeoProps && vimeoProps.videoId ) {
+      return Promise.resolve( {
+        props: { id: vimeoProps.videoId, source: 'vimeo' },
+        shareLink: vimeoProps.shareLink
+      } );
     }
 
     // fallback to CloudFlare player if no youtube or vimeo link available
@@ -309,6 +316,8 @@ class Video extends Component {
     const {
       type, logo, author, owner, published, modified, id, site
     } = this.props.item;
+
+    const embedItem = `<iframe src="${shareLink}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
 
     if ( unit && selectedLanguage ) {
       return (
@@ -345,7 +354,7 @@ class Video extends Component {
                         component: (
                           <EmbedVideo
                             instructions="Copy and paste the code below to embed video on your site"
-                            // embedItem={ item }
+                            embedItem={ embedItem || null }
                           />
                         )
                       },
