@@ -144,7 +144,8 @@ class Video extends Component {
           if ( videoId ) {
             const res = await this.checkForValidYouTube( videoId );
             if ( res ) {
-              return Promise.resolve( { videoId, shareLink: streamObj.url } );
+              // use youtube embed format to avoid x-origin issuues
+              return Promise.resolve( { videoId, shareLink: `https://www.youtube.com/embed/${videoId}` } );
             }
           }
         }
@@ -318,7 +319,10 @@ class Video extends Component {
     } = this.props.item;
 
     const toggleCaptions = [...new Set( unit.source.map( item => item.burnedInCaptions ) )];
-    const embedItem = `<iframe src="${shareLink}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
+    const embedItem = ( shareLink )
+    // eslint-disable-next-line max-len
+      ? `<iframe src="${shareLink}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`
+      : '';
 
     if ( unit && selectedLanguage ) {
       return (
@@ -341,6 +345,7 @@ class Video extends Component {
               ) }
             </div>
             <div className="trigger-container">
+              { embedItem && (
               <PopupTrigger
                 toolTip="Embed video."
                 icon={ { img: embedIcon, dim: 24 } }
@@ -363,7 +368,7 @@ class Video extends Component {
                     ] }
                   />
                 }
-              />
+              /> ) }
               <PopupTrigger
                 toolTip="Share video"
                 icon={ { img: shareIcon, dim: 20 } }
