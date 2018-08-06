@@ -6,10 +6,19 @@ import './ClipboardCopy.css';
 class ClipboardCopy extends Component {
   constructor( props ) {
     super( props );
+    this.timeoutID = null;
     this.state = {
       label: 'Copy',
       cls: ''
     };
+  }
+
+  /**
+   * CLear timer created in handleCopyClick method in the
+   * event component is unmoumted before timer has completed
+   */
+  componentWillUnmount() {
+    window.clearTimeout( this.timeoutID );
   }
 
   toggleCls( label = 'Copy', cls = '' ) {
@@ -28,7 +37,7 @@ class ClipboardCopy extends Component {
     document.execCommand( 'copy' );
 
     // Reset button
-    setTimeout( () => {
+    this.timeoutID = setTimeout( () => {
       this.toggleCls();
     }, 5000 );
   };
