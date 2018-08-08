@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.3.0](2018-078-08)
+
+**Features**
+
+- Embed code to display to embed both youtube and vimeo videos now active
+- Share windows now are either a popup for desktop or a new page for mobile
+
+**Bug Fixes**git st
+
+- Caption toggle now operates correctly and loads correct video based on caption selection
+- Fixed direct link UI display
+
+# [1.2.0](2018-07-18)
+
+**Features**
+
+- Added Vimeo support
+- Provided a Vimeo/CloudFlare fallback option when YouTube is not available
+- Provided a sharable, direct link to the video page
+- Updated UI to provide "web" and "broadcast" video quality display
+- Updated various UI styles
+
+**Bug Fixes**
+
+- Sources dropdown now sorted alphabetically
+
+# [1.1.0](2018-06-15)
+
+**Features**
+
+- Added Contact Us page
+- Added Browse all [type] link above each recents section on Landing page
+- Updated help text for video downloads
+- Source action creator now accepts an array of owners and not a string as it's search key
+- Created owners mappings in source action to (1) support inconsistent owner names and (2) assign a custom name
+
 # [1.0.0](2018-05-29)
 
 **Features**
@@ -26,25 +62,3 @@ All notable changes to this project will be documented in this file.
   - Link to original source
   - Article meta data
 - Result pagination
-
-# [1.1.0](2018-06-15)
-
-**Features**
-
-- Added Contact Us page
-- Added Browse all [type] link above each recents section on Landing page
-- Updated help text for video downloads
-- Source action creator now accepts an array of owners and not a string as it's search key
-- Created owners mappings in source action to (1) support inconsistent owner names and (2) assign a custom name
-
-# [1.2.0](2018-07-18)
-
-**Features**
-- Added Vimeo support
-- Provided a Vimeo/CloudFlare fallback option when YouTube is not available
-- Provided a sharable, direct link to the video page
-- Updated UI to provide "web" and "broadcast" video quality display
-- Updated various UI styles
-
-**Bug Fixes**
-- Sources dropdown now sorted alphabetically
