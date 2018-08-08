@@ -72,7 +72,7 @@ class Post extends Component {
                 handleLanguageChange={ this.handleLanguageChange }
               />
             </div>
-            <div className="trigger-container">
+            <div className="trigger-container" style={ { display: 'none' } }>
               <PopupTrigger
                 toolTip="Embed this article."
                 icon={ { img: embedIcon, dim: 24 } }
