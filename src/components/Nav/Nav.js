@@ -28,6 +28,7 @@ class Nav extends Component {
   }
 
   render() {
+    const { mobileNavVisible } = this.state;
     const menuItems = [
       {
         key: 1,
@@ -51,7 +52,15 @@ class Nav extends Component {
 
     return (
       <nav>
-        <Responsive as={ Icon } name="content" maxWidth={ 992 } onClick={ this.navClick } onKeyUp={ this.keyUp } tabIndex={ 0 } />
+        <Responsive
+          as={ Icon }
+          name="content"
+          maxWidth={ 992 }
+          onClick={ this.navClick }
+          onKeyUp={ this.keyUp }
+          tabIndex={ 0 }
+          className={ mobileNavVisible ? 'mobileNav' : 'fullNav' }
+        />
         <Responsive as={ Menu } compact secondary minWidth={ 993 }>
           { menuItems.map( item => (
             <Menu.Item key={ item.key } as={ Link } name={ item.name } to={ item.to }>
