@@ -1,9 +1,10 @@
 @import '../../assets/styles/colors.scss';
 
 .bar {
-
+  z-index: 100;
   
   header {
+    position: relative;
     display: flex;
     justify-content: space-between;    
     text-align: center;
@@ -101,6 +102,10 @@
     .search_bar {
       display: none;
     }
+
+    nav .ui.menu .item.nav_loggedin .loggedinIcon {
+      fill: $blue;
+    }
   }
 
 
@@ -128,6 +133,10 @@
         width: 500px;
       }
     }
+
+    .ui.secondary.menu .item.nav_loggedin {
+      padding: 0.2em;      
+    }
   }
 
 
@@ -151,8 +160,7 @@
   &--video,
   &--login {
     position: fixed;
-    top: 0;
-    z-index: 2;
+    top: 0;    
     width: 100%;    
     background-image: linear-gradient(60deg, $light-blue 3%, $bright-blue 100%);    
   }  

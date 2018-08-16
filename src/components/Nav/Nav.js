@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { bool } from 'prop-types';
+import { connect } from 'react-redux';
 import './Nav.css';
-import { Menu, Icon, Responsive } from 'semantic-ui-react';
+import { Icon, Responsive } from 'semantic-ui-react';
+import LoggedOutNav from './LoggedOutNav';
+import LoggedInNav from './LoggedInNav';
 
 class Nav extends Component {
   constructor( props ) {
@@ -29,26 +32,6 @@ class Nav extends Component {
 
   render() {
     const { mobileNavVisible } = this.state;
-    const menuItems = [
-      {
-        key: 1,
-        name: 'about',
-        to: 'about',
-        label: 'About'
-      },
-      {
-        key: 2,
-        name: 'help',
-        to: 'help',
-        label: 'Help'
-      },
-      {
-        key: 3,
-        name: 'login',
-        to: 'login',
-        label: 'Login'
-      }
-    ];
 
     return (
       <nav>
@@ -61,50 +44,32 @@ class Nav extends Component {
           tabIndex={ 0 }
           className={ mobileNavVisible ? 'mobileNav' : 'fullNav' }
         />
-        <Responsive as={ Menu } compact secondary minWidth={ 993 }>
-          { menuItems.map( item => (
-            <Menu.Item key={ item.key } as={ Link } name={ item.name } to={ item.to }>
-              { item.label }
-            </Menu.Item>
-          ) ) }
-          <a
-            href="https://goo.gl/forms/9cJ3IBHH9QTld2Mj2"
-            target="_blank"
-            className="item feedback"
-            rel="noopener noreferrer"
-          >
-            Feedback
-          </a>
-        </Responsive>
-        { this.state.mobileNavVisible && (
-          <Responsive maxWidth={ 992 }>
-            <ul className="mobileMenu">
-              <li>
-                <Icon name="close" onClick={ this.navClick } onKeyUp={ this.keyUp } tabIndex={ 0 } />
-              </li>
-              { menuItems.map( item => (
-                <li key={ item.key }>
-                  <Link name={ item.name } to={ item.to } onClick={ this.navClick } onKeyUp={ this.keyUp }>
-                    { item.label }
-                  </Link>
-                </li>
-              ) ) }
-              <li>
-                <a
-                  href="https://goo.gl/forms/PyLjAiaJVt3xONsd2"
-                  target="_blank"
-                  className="item feedback"
-                  rel="noopener noreferrer"
-                >
-                  Feedback
-                </a>
-              </li>
-            </ul>
-          </Responsive>
-        ) }
+
+        { !this.props.loggedIn &&
+          <LoggedOutNav
+            mobileNavVisible={ mobileNavVisible }
+            toggleMobileNav={ this.navClick }
+            keyUp={ this.keyUp }
+          />
+        }
+        { this.props.loggedIn &&
+          <LoggedInNav
+            mobileNavVisible={ mobileNavVisible }
+            toggleMobileNav={ this.navClick }
+            keyUp={ this.keyUp }
+          />
+        }
       </nav>
     );
   }
 }
 
-export default Nav;
+const mapStateToProps = ( { loggedIn } ) => ( {
+  loggedIn
+} );
+
+Nav.propTypes = {
+  loggedIn: bool
+};
+
+export default connect( mapStateToProps )( Nav );
