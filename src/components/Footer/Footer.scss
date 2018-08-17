@@ -2,25 +2,117 @@
 
 footer {
   text-align: center;
-  margin: 5.78em;
+  margin: 5.78em 0 0;
+  background-color: $light-blue;
+  color: #fff;
+
+  a,
+  a:hover,
+  a:visited,
+  a:active {
+    color: #fff;
+  }
 
   p {
-    font-size: 11px;
-  }  
+    font-size: 14px;
+    font-weight: normal;
+
+    &.small-text {
+      font-size: 11px;
+    }
+  }
+
+  .footer-feedback {
+    background-color: $gold;
+    color: $blue;
+
+    p {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 9px;
+
+      a,
+      a:hover,
+      a:visited,
+      a:active {
+        color: $blue;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .footer-nav.ui.divided.horizontal.list {
+    > .item {
+      border-left-color: #fff;
+      font-weight: bold;
+    }
+
+    > .item:not(:last-child) {
+      padding-right: 0.8em;
+    }
+
+    > .item:not(:first-child) {
+      padding-left: 0.8em;
+    }
+  }
+
+  .footer-content {
+    padding: 2em 0;
+  }
+
+  .header {
+    color: #fff;
+    font-weight: normal;
+
+    a,
+    a:hover,
+    a:visited,
+    a:active {
+      text-decoration: underline;
+    }
+  }
+
+  .header > img.footer_img--slack {
+    width: 92px;
+    height: 26px;
+    margin-top: 0;
+    margin-right: 5px;
+    margin-left: 5px;
+    transform: translateY(20%);
+  }
+
+  h1.ui.header .sub.header {
+
+    &.subtitle {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+    }
+
+    &.subtext {
+      font-size: 14px;
+      color: white;
+    }
+
+    &.smalltext {
+      font-size: 11px;
+      color: white;
+      margin-bottom: 15px;
+    }
+  }
+
+  .ui.divided.horizontal.list.footer-nav {
+    margin-bottom: 15px;
+  }
 
   .footer_img {
     width: 36px;
-    margin-top: 1em;
+    //margin-top: 1em;
 
     &--dosseal {
       transform: translateY(25%);
       margin-left: 5px;
     }
-  }
-
-  .footer_link {
-    font-size: 11px;
-    padding: 10px;
   }
   
 }
