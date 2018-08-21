@@ -33,7 +33,8 @@ class PopupTabbed extends Component {
   };
 
   initSliderStyle() {
-    const initActiveMenuItem = document.querySelectorAll( '.popup .secondary.menu .active.item' )[0];
+    const initActiveMenuItem = Array.from( document.querySelectorAll( '.popup .secondary.menu .active.item' ) )
+      .filter( select => select.innerHTML === this.props.panes[0].title )[0];
     this.setState( {
       sliderStyle: {
         width: initActiveMenuItem.clientWidth,
