@@ -2,14 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-# [1.3.0](2018-078-08)
+# [1.3.0](2018-08-08)
 
 **Features**
 
 - Embed code to display to embed both youtube and vimeo videos now active
 - Share windows now are either a popup for desktop or a new page for mobile
 
-**Bug Fixes**git st
+**Bug Fixes**
 
 - Caption toggle now operates correctly and loads correct video based on caption selection
 - Fixed direct link UI display
