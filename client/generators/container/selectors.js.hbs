@@ -1,0 +1,20 @@
+import { createSelector } from 'reselect';
+import { INITIAL_STATE } from './reducer';
+
+/**
+ * Direct selector to the {{ camelCase name }} state 
+ */
+const select{{ properCase name }} = state => state.{{ camelCase name }};
+
+/**
+ * Other specific selectors
+ */
+
+/**
+ * Default selector used by {{ properCase name }}
+ */
+const makeSelect{{ properCase name }} = props =>
+  createSelector( select{{ properCase name }}, substate => substate );
+
+export default makeSelect{{ properCase name }};
+export { select{{ properCase name }} };

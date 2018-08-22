@@ -1,0 +1,39 @@
+/**
+ *
+ * {{properCase name }}
+ *
+ */
+import React from 'react';
+// import PropTypes from 'prop-types';
+{{#if wantHeaders}}
+import { Helmet } from 'react-helmet';
+{{/if}}
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import * as actions from './actions';
+import makeSelect{{properCase name}} from './selectors';
+
+
+import './{{properCase name}}.css';
+
+const {{ properCase name }} = ( props ) => {
+  return (
+    <div>
+    {{#if wantHeaders}}
+      <Helmet>
+        <title>{{properCase name}}</title>
+        <meta name="description" content="Description of {{properCase name}}" />
+      </Helmet>
+    {{/if}}
+    </div>
+  );
+}
+
+{{ properCase name }}.propTypes = {
+};
+
+const mapStateToProps = ( state, props ) => createStructuredSelector( {
+  {{ lowerCase name }}: makeSelect{{properCase name}}()
+} );
+
+export default connect( mapStateToProps, actions )( {{ properCase name }} );
