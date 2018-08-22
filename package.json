@@ -8,7 +8,8 @@
     "server": "nodemon server/index.js --ignore tests",
     "client": "npm run start --prefix client",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+    "build": "npm run copy && npm install && npm install --prefix client && npm run build --prefix client",
+    "copy": "cp .env client/.env"
   },
   "author": "Office of Design",
   "license": "MIT",
