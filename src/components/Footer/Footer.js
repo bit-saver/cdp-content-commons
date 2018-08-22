@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, List } from 'semantic-ui-react';
+import { Responsive, Container, Header, List } from 'semantic-ui-react';
 import './Footer.css';
 import flagImage from '../../assets/images/US-Flag-Color-735b69.png';
 import DOSseal from '../../assets/images/DOS_Seal.png';
@@ -38,7 +38,8 @@ const Footer = () => {
     <footer className="ui">
       <div className="footer-feedback">
         <p>
-          Help us improve <Link name="home" to="/" className="footer_link">Content Commons</Link>. We are looking for&nbsp;
+          Help us improve <Link name="home" to="/" className="footer_link">Content Commons</Link>.
+          We are looking for&nbsp;
           <a
             href="https://goo.gl/forms/9cJ3IBHH9QTld2Mj2"
             target="_blank"
@@ -58,7 +59,7 @@ const Footer = () => {
         </Header>
         <List horizontal divided className="footer-nav">
           { menuItems.map( item => (
-            <List.Item>
+            <List.Item key={ item.name }>
               <Link name={ item.name } to={ item.to } className="footer_link">
                 { item.label }
               </Link>
