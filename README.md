@@ -18,5 +18,3 @@ REACT_APP_PUBLIC_API=http://localhost:3000
 npm install
 npm start
 ```
-hola
-1
