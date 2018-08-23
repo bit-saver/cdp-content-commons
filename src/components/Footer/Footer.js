@@ -22,17 +22,17 @@ const Footer = () => {
       name: 'privacy',
       to: 'privacy',
       label: 'Privacy Policy'
-    },
-    {
-      name: 'tos',
-      to: 'tos',
-      label: 'Terms of Service'
-    },
-    {
-      name: 'sitemap',
-      to: 'sitemap',
-      label: 'Sitemap'
     }
+    // {
+    //   name: 'tos',
+    //   to: 'tos',
+    //   label: 'Terms of Service'
+    // },
+    // {
+    //   name: 'sitemap',
+    //   to: 'sitemap',
+    //   label: 'Sitemap'
+    // }
   ];
   return (
     <footer className="ui">
