@@ -44,6 +44,12 @@ module.exports = {
       name: 'wantLoadable',
       default: true,
       message: 'Do you want to load resources asynchronously?'
+    },
+    {
+      type: 'confirm',
+      name: 'wantStyleSheet',
+      default: true,
+      message: 'Do you a stylesheet?'
     }
   ],
   actions: ( data ) => {
@@ -135,6 +141,16 @@ module.exports = {
         type: 'add',
         path: '../src/containers/{{properCase name}}/Loadable.js',
         templateFile: './component/loadable.js.hbs',
+        abortOnFail: true
+      } );
+    }
+
+    // If want Loadable.js to load the component asynchronously
+    if ( data.wantStyleSheet ) {
+      actions.push( {
+        type: 'add',
+        path: '../src/containers/{{properCase name}}/{{properCase name}}.scss',
+        templateFile: './component/stylesheet.scss.hbs',
         abortOnFail: true
       } );
     }

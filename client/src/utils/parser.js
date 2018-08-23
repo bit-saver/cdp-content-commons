@@ -12,7 +12,7 @@ import logoYali from '../assets/images/logo_yali.svg';
 import logoYlai from '../assets/images/logo_ylai.svg';
 import logoShareamerica from '../assets/images/logo_shareamerica.svg';
 
-import store from '../utils/store';
+import store from '../store';
 
 const logos = [
   { name: 'yali', logo: logoYali },
@@ -113,7 +113,7 @@ const getLocaleKey = ( locale ) => {
   if ( locale ) {
     return locale;
   }
-  return store.getState().language.currentLanguage.key;
+  return store.getState().global.languages.default.key;
 };
 
 // send in locale to fetch applicable lang data props?

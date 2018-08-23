@@ -54,5 +54,12 @@ module.exports = {
         'import/no-unresolved': 'off'
       }
     }
-  ]
+  ],
+  settings: {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
+  }
 };

@@ -1,11 +1,29 @@
-@import '../../assets/styles/colors.scss';
+@import "../../assets/styles/colors.scss";
 
 header {
   text-align: center;
 }
 
-.bar {
-  background: url('../../assets/images/cdp_home_hero.jpg');
+.title,
+.title:hover {
+  color: $blue;
+  @media screen and (min-width: 641px) {
+    font-size: 60px;
+  }
+}
+
+.beta {
+  font-size: 40%;
+  vertical-align: super;
+  color: $blue;
+  padding: 1px 6px;
+  background: $gold;
+  margin-left: 6px;
+}
+
+.bar,
+.adminbar {
+  background: url("../../assets/images/cdp_home_hero.jpg");
   background-size: cover;
   margin-bottom: 3em;
 

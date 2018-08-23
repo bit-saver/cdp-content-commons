@@ -1,0 +1,63 @@
+@import "../../assets/styles/colors.scss";
+
+.ui.header .sub.header {
+  margin-bottom: 30px;
+}
+
+.search_bar {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  width: 70%;
+  margin: 0 auto;
+
+  @media screen and (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+/* Form */
+.search_bar {
+  .ui.form {
+    .fields {
+      @media screen and (max-width: 767px) {
+        flex-wrap: nowrap;
+        margin: 0;
+      }
+      @media screen and (max-width: 540px) {
+        flex-wrap: wrap;
+      }
+
+      .field {
+        padding-left: 0;
+        padding-right: 0;
+
+        &.search_input {
+          width: 100%;
+          font-size: 18px;
+          @media screen and (max-width: 540px) {
+            flex: 1;
+          }
+
+          input[type="text"] {
+            @media screen and (max-width: 767px) {
+              padding: 0.3em;
+            }
+          }
+        }
+
+        .ui.button {
+          padding: 14px 11px;
+          border-left: none;
+          font-size: 18px;
+          background-color: transparent;
+          color: $light-blue;
+          position: absolute;
+          right: 0;
+          @media screen and (max-width: 767px) {
+            padding: 0.42em;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
