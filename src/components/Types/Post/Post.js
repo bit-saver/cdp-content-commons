@@ -17,7 +17,7 @@ import PopupTrigger from '../../Popup/PopupTrigger';
 import PopupTabbed from '../../Popup/PopupTabbed';
 import Popup from '../../Popup/Popup';
 
-// import Share from '../../Share/Share';
+import Share from '../../Share/Share';
 import EmbedPost from './EmbedPost';
 import EmbedHelp from './EmbedHelp';
 
@@ -62,6 +62,13 @@ class Post extends Component {
   render() {
     if ( this.state && this.state.item ) {
       const { item, textDirection } = this.state;
+      const embedItem = (
+        `<script src="https://iipdesignmodules.america.gov/modules/cdp-module-article-single/static/js/iframe-resizer-host.min.js"></script>
+        <iframe id="cdp-article" width="100%" src="https://iipdesignmodules.america.gov/modules/cdp-module-article-single/index.html?id=${item.id}&site=${item.site}" frameborder="0" scrolling="no">
+        </iframe>
+        <script>iFrameResize({heightCalculationMethod:'bodyScroll'}, '#cdp-article')</script>`
+      );
+
       return (
         <ModalItem headline={ item.title } textDirection={ textDirection }>
           <div className="modal_options">
@@ -72,7 +79,7 @@ class Post extends Component {
                 handleLanguageChange={ this.handleLanguageChange }
               />
             </div>
-            <div className="trigger-container" style={ { display: 'none' } }>
+            <div className="trigger-container">
               <PopupTrigger
                 toolTip="Embed this article."
                 icon={ { img: embedIcon, dim: 24 } }
@@ -86,7 +93,7 @@ class Post extends Component {
                         component: (
                           <EmbedPost
                             instructions="Copy and paste the code below to embed article on your site"
-                            embedItem={ item }
+                            embedItem={ embedItem }
                           />
                         )
                       },
@@ -101,13 +108,14 @@ class Post extends Component {
                 show
                 content={
                   <Popup title="Share this article.">
-                    { /* <Share
-                      link={ shareLink }
-                      id={ id }
-                      site={ site }
-                      title={ unit.title }
-                      language={ selectedLanguage.locale }
-                    /> */ }
+                    <Share
+                      id={ item.id }
+                      language={ item.language.locale }
+                      link={ item.link }
+                      site={ item.site }
+                      title={ item.title }
+                      type={ item.type }
+                    />
                   </Popup>
                 }
               />

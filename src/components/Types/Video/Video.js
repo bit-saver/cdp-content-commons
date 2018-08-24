@@ -381,6 +381,7 @@ class Video extends Component {
                       site={ site }
                       title={ unit.title }
                       language={ selectedLanguage.locale }
+                      type={ this.props.item.type }
                     />
                   </Popup>
                 }

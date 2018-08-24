@@ -9,11 +9,12 @@ import './Share.css';
 
 const Share = ( props ) => {
   const {
-    id, site, language, title, link
+    id, site, language, title, link, type
   } = props;
 
+  const contentType = type;
   const queryStr = stringifyQueryString( { id, site, language } );
-  const directLink = `${window.location.protocol}//${window.location.host}/video?${queryStr}`;
+  const directLink = `${window.location.protocol}//${window.location.host}/${contentType}?${queryStr}`;
   const facebookURL = `https://www.facebook.com/sharer/sharer.php?u=${link}`;
   const tweet = `https://twitter.com/home?status=${title} ${link}`;
 
@@ -35,7 +36,8 @@ Share.propTypes = {
   site: string,
   language: string,
   link: string,
-  title: string
+  title: string,
+  type: string
 };
 
 export default Share;

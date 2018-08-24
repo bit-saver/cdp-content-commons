@@ -12,7 +12,7 @@ const embedPopupStyles = {
 
 const PostEmbed = props => (
   <div>
-    <Embed instructions={ props.instructions }>
+    <Embed instructions={ props.instructions } embedItem={ props.embedItem }>
       <Checkbox className="embed_keepStyles" label="Maintain original page styling" />
       <Popup
         trigger={ <Icon name="info circle" className="embed_tooltip" /> }
@@ -27,6 +27,7 @@ const PostEmbed = props => (
 );
 
 PostEmbed.propTypes = {
+  embedItem: string,
   instructions: string
 };
 
