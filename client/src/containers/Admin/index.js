@@ -1,26 +1,19 @@
 /**
  *
- * Admin
+ * Admin: A wrapper around all the admin sub routes
  *
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { createStructuredSelector } from 'reselect';
-import * as actions from './actions';
-import makeSelectAdmin from './selectors';
 
 // Could redirect to / after login but reusing LandingPage for now
 // as there will be a separate Loggded in Landing that contains draft content
 // import LandingPage from 'components/Pages/LandingPage';
-import Dashboard from '../Dashboard';
-
-import './Admin.css';
+import Dashboard from './Dashboard';
 
 /* eslint-disable react/prefer-stateless-function */
-class Admin extends React.PureComponent {
+class Admin extends PureComponent {
   render() {
     return (
       <div>
@@ -39,11 +32,4 @@ class Admin extends React.PureComponent {
   }
 }
 
-Admin.propTypes = {
-};
-
-const mapStateToProps = ( state, props ) => createStructuredSelector( {
-  admin: makeSelectAdmin()
-} );
-
-export default connect( mapStateToProps, actions )( Admin );
+export default Admin;

@@ -23,7 +23,7 @@ const withAuth = ( WrappedComponent ) => {
       console.log( `isAuthenticated : ${this.props.isAuthenticated}` );
 
       if ( !this.props.isAuthenticated ) {
-        this.props.history.push( '/' );
+        this.props.history.push( '/login' );
       }
     }
 

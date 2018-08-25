@@ -8,13 +8,14 @@ import withAuth from 'hocs/withAuth';
 import Admin from '../Admin/Loadable';
 
 // import { ScrollToTop } from './utils/helpers';
-import LandingPage from 'components/Pages/LandingPage';
+import LandingPage from 'components/PageLanding';
+import LoginPage from 'containers/PageLogin/Loadable';
 
 // Markdown pages
-import AboutPage from 'components/Pages/AboutPage/Loadable';
-import HelpPage from 'components/Pages/HelpPage/Loadable';
-import ContactPage from 'components/Pages/ContactPage/Loadable';
-import PrivacyPage from 'components/Pages/PrivacyPage/Loadable';
+import AboutPage from 'components/PagesStatic/AboutPage/Loadable';
+import HelpPage from 'components/PagesStatic/HelpPage/Loadable';
+import ContactPage from 'components/PagesStatic/ContactPage/Loadable';
+import PrivacyPage from 'components/PagesStatic/PrivacyPage/Loadable';
 
 // import VideoPage from './components/Pages/VideoPage';
 import SearchPage from 'containers/SearchPage/Loadable';
@@ -28,7 +29,11 @@ const App = () => (
       titleTemplate="%s | Content Commons"
       defaultTitle="Content Commons"
     >
-      <meta name="description" content="The Content Commons is the portal to search and share content from the U.S. Department of State’s Bureau of International Information Programs (IIP)." />
+      <meta
+        name="description"
+        content="The Content Commons is the portal to search and share
+      content from the U.S. Department of State’s Bureau of International Information Programs (IIP)."
+      />
     </Helmet>
     <Header />
     <div className="ui container">
@@ -36,6 +41,7 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={ LandingPage } />
         <Route path="/admin" component={ withAuth( Admin ) } />
+        <Route path="/login" component={ LoginPage } />
         <Route path="/search" component={ SearchPage } />
         <Route path="/about" component={ AboutPage } />
         <Route path="/help" component={ HelpPage } />

@@ -5,11 +5,12 @@ import { Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import './Header.css';
 
-import Nav from '../Nav';
+import Nav from 'components/Nav';
 import SearchBar from 'containers/SearchBar';
 
 const HeaderItem = ( props ) => {
-  const barClass = ( `${( props.location.pathname ).split( '/' ).slice( 1 )[0]}bar` );
+  const pagePath = props.location.pathname.split( '/' ).slice( 1 )[0];
+  const barClass = `bar ${pagePath === '' ? 'bar--home' : `bar--${pagePath}`}`;
 
   return (
     <section className={ barClass }>
@@ -26,8 +27,8 @@ const HeaderItem = ( props ) => {
             </Header.Subheader>
           </Header>
           <SearchBar />
+          <Nav />
         </header>
-        <Nav />
       </div>
     </section>
   );
