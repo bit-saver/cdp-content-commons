@@ -4,6 +4,8 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "aws-amplify": "^1.0.6",
+    "aws-amplify-react": "^1.0.6",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "bodybuilder": "^2.2.10",

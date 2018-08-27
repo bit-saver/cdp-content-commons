@@ -1,6 +1,6 @@
 /**
  *
- * Dashboard
+ * Global Nav
  *
  */
 import React, { PureComponent } from 'react';
@@ -36,6 +36,28 @@ class Nav extends PureComponent {
     }
   }
 
+  renderNav() {
+    const { mobileNavVisible } = this.state;
+
+    if ( this.props.authenticated ) {
+      return (
+        <GlobalLoggedInNav
+          mobileNavVisible={ mobileNavVisible }
+          toggleMobileNav={ this.handleNavClick }
+          keyUp={ this.keyUp }
+        />
+      );
+    }
+
+    return (
+      <GlobalLoggedOutNav
+        mobileNavVisible={ mobileNavVisible }
+        toggleMobileNav={ this.handleNavClick }
+        keyUp={ this.keyUp }
+      />
+    );
+  }
+
   render() {
     const { mobileNavVisible } = this.state;
 
@@ -51,20 +73,7 @@ class Nav extends PureComponent {
           className={ mobileNavVisible ? 'mobileNav' : 'fullNav' }
         />
 
-        { !this.props.isAuthenticated &&
-          <GlobalLoggedOutNav
-            mobileNavVisible={ mobileNavVisible }
-            toggleMobileNav={ this.handleNavClick }
-            keyUp={ this.keyUp }
-          />
-        }
-        { this.props.isAuthenticated &&
-          <GlobalLoggedInNav
-            mobileNavVisible={ mobileNavVisible }
-            toggleMobileNav={ this.handleNavClick }
-            keyUp={ this.keyUp }
-          />
-        }
+        { this.renderNav() }
       </nav>
     );
   }
@@ -72,12 +81,12 @@ class Nav extends PureComponent {
 
 
 Nav.propTypes = {
-  isAuthenticated: PropTypes.bool
+  authenticated: PropTypes.object
 };
 
 function mapStateToProps( state ) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    authenticated: state.auth.authenticated
   };
 }
 

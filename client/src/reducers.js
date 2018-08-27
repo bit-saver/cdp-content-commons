@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 // global reducers
 import globalReducer from 'containers/App/reducers/';
-import authReducer from 'hocs/withAuth/reducer';
+import authReducer from 'containers/Auth/reducer';
 
 // frontend reducers
 // import searchReducer from './search';

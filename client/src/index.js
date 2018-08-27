@@ -16,6 +16,8 @@ import App from 'containers/App';
 // Configure store
 import store from './store';
 
+// Configure aws services
+import './services/aws-amplify';
 
 import registerServiceWorker from './registerServiceWorker';
 

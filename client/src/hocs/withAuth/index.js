@@ -20,9 +20,7 @@ const withAuth = ( WrappedComponent ) => {
     }
 
     shouldNavigateAway() {
-      console.log( `isAuthenticated : ${this.props.isAuthenticated}` );
-
-      if ( !this.props.isAuthenticated ) {
+      if ( !this.props.authenticated ) {
         this.props.history.push( '/login' );
       }
     }
@@ -34,12 +32,12 @@ const withAuth = ( WrappedComponent ) => {
   }
 
   HOC.propTypes = {
-    isAuthenticated: PropTypes.bool,
+    authenticated: PropTypes.object,
     history: PropTypes.object
   };
 
   const mapStateToProps = state => ( {
-    isAuthenticated: state.auth.isAuthenticated
+    authenticated: state.auth.authenticated
   } );
 
   return connect( mapStateToProps )( HOC );

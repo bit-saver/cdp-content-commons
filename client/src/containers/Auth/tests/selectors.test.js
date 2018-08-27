@@ -1,6 +1,6 @@
-// import { selectLoginPage } from '../selectors';
+// import { selectAuth } from '../selectors';
 
-describe( 'selectPageLogin', () => {
+describe( 'selectAuth', () => {
   it( 'Expect to have unit tests specified', () => {
     expect( true ).toEqual( false );
   } );

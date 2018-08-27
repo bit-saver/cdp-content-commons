@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
-// import { connect } from 'react-redux';
-// import { logout } from '../../../actions/loginTEMP';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from 'containers/Auth/actions';
 import '../Menu.css';
 
 class UserProfileMenu extends Component {
@@ -17,7 +17,7 @@ class UserProfileMenu extends Component {
     if ( this.props.toggleMobileNav ) {
       this.props.toggleMobileNav();
     }
-    // this.props.logout();
+    this.props.logout();
   }
 
   linkClick() {
@@ -77,10 +77,8 @@ class UserProfileMenu extends Component {
 
 UserProfileMenu.propTypes = {
   toggleMobileNav: func,
-  // logout: func,
+  logout: func,
   submenuClosePopup: func
 };
 
-
-export default UserProfileMenu;
-// export default connect( null, { logout } )( UserProfileMenu );
+export default connect( null, { logout } )( UserProfileMenu );

@@ -9,16 +9,17 @@ import Admin from '../Admin/Loadable';
 
 // import { ScrollToTop } from './utils/helpers';
 import LandingPage from 'components/PageLanding';
-import LoginPage from 'containers/PageLogin/Loadable';
+import PageLogin from 'containers/Auth/PageLogin/Loadable';
+import PageRegister from 'containers/Auth/PageRegister/Loadable';
 
 // Markdown pages
-import AboutPage from 'components/PagesStatic/AboutPage/Loadable';
-import HelpPage from 'components/PagesStatic/HelpPage/Loadable';
-import ContactPage from 'components/PagesStatic/ContactPage/Loadable';
-import PrivacyPage from 'components/PagesStatic/PrivacyPage/Loadable';
+import AboutPage from 'components/pagesStatic/AboutPage/Loadable';
+import HelpPage from 'components/pagesStatic/HelpPage/Loadable';
+import ContactPage from 'components/pagesStatic/ContactPage/Loadable';
+import PrivacyPage from 'components/pagesStatic/PrivacyPage/Loadable';
 
 // import VideoPage from './components/Pages/VideoPage';
-import SearchPage from 'containers/SearchPage/Loadable';
+import PageSearch from 'containers/PageSearch/Loadable';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -41,8 +42,9 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={ LandingPage } />
         <Route path="/admin" component={ withAuth( Admin ) } />
-        <Route path="/login" component={ LoginPage } />
-        <Route path="/search" component={ SearchPage } />
+        <Route path="/login" component={ PageLogin } />
+        <Route path="/register" component={ PageRegister } />
+        <Route path="/search" component={ PageSearch } />
         <Route path="/about" component={ AboutPage } />
         <Route path="/help" component={ HelpPage } />
         <Route path="/privacy" component={ PrivacyPage } />
