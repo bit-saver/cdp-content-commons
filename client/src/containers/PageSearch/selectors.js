@@ -1,10 +1,9 @@
 import { createSelector } from 'reselect';
-// import { INITIAL_STATE } from './reducer';
 
 /**
  * Direct selector to the searchResults state
  */
-const selectSearchPage = state => state.searchPage;
+const selectPageSearch = state => state.searchPage;
 
 /**
  * Other specific selectors
@@ -14,7 +13,7 @@ const selectSearchPage = state => state.searchPage;
  * Default selector used by SearchResults
  */
 const makeSelectSearchPage = props =>
-  createSelector( selectSearchPage, substate => substate );
+  createSelector( selectPageSearch, substate => substate );
 
 export default makeSelectSearchPage;
-export { selectSearchPage };
+export { selectPageSearch };

@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for SearchResults
+ * Asynchronously loads the component for PageSearch
  *
  */
 

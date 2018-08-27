@@ -11,10 +11,10 @@ import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import makeSelectSearchResults from './selectors';
 
-import './SearchPage.css';
+import './PageSearch.css';
 
 /* eslint-disable react/prefer-stateless-function */
-class SearchPage extends React.Component {
+class PageSearch extends React.Component {
   render() {
     return (
       <div>
@@ -28,11 +28,11 @@ class SearchPage extends React.Component {
   }
 }
 
-SearchPage.propTypes = {
+PageSearch.propTypes = {
 };
 
 const mapStateToProps = ( state, props ) => createStructuredSelector( {
   searchPage: makeSelectSearchResults()
 } );
 
-export default connect( mapStateToProps, actions )( SearchPage );
+export default connect( mapStateToProps, actions )( PageSearch );

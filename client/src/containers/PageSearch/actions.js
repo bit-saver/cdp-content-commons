@@ -1,6 +1,6 @@
 /*
  *
- * SearchResults actions
+ * PageSearch actions
  *
  */
 

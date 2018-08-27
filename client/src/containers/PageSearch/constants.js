@@ -1,6 +1,6 @@
 /*
  *
- * SearchResults constants
+ * PageSearch constants
  *
  */
 

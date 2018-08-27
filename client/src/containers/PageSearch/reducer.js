@@ -1,6 +1,6 @@
 /*
  *
- * SearchPage reducer
+ * PageSearch reducer
  *
  */
 
@@ -9,7 +9,7 @@ import { DEFAULT_ACTION } from './constants';
 
 export const INITIAL_STATE = {};
 
-function searchPageReducer( state = INITIAL_STATE, action ) {
+function pageSearchReducer( state = INITIAL_STATE, action ) {
   switch ( action.type ) {
     case DEFAULT_ACTION:
       return state;
@@ -18,4 +18,4 @@ function searchPageReducer( state = INITIAL_STATE, action ) {
   }
 }
 
-export default searchPageReducer;
+export default pageSearchReducer;
