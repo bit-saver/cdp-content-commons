@@ -24,6 +24,14 @@ import PageSearch from 'containers/PageSearch/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
+/* api test
+fetch( 'v1/api/auth' )
+  .then( resp => resp.json() )
+  .then( ( data ) => {
+    console.log( data );
+  } );
+*/
+
 const App = () => (
   <div>
     <Helmet

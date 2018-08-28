@@ -1,10 +1,11 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-// import HelpPage from '../index';
+import HelpPage from './index';
 
 describe( '<HelpPage />', () => {
-  it( 'Expect to have unit tests specified', () => {
-    expect( true ).toEqual( false );
+  it( 'renders without crashing', () => {
+    shallow( <HelpPage /> );
   } );
 } );
+

@@ -1,10 +1,10 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-// import NavLoggedIn from '../index';
+import GlobalLoggedinNav from './index';
 
-describe( '<NavLoggedIn />', () => {
-  it( 'Expect to have unit tests specified', () => {
-    expect( true ).toEqual( false );
+describe( '<GlobalLoggedinNav />', () => {
+  it( 'renders without crashing', () => {
+    shallow( <GlobalLoggedinNav /> );
   } );
 } );

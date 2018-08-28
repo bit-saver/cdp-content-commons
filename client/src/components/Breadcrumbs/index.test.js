@@ -1,10 +1,10 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-// import Breadcrumbs from '../index';
+import Breadcrumbs from './index';
 
 describe( '<Breadcrumbs />', () => {
-  it( 'Expect to have unit tests specified', () => {
-    expect( true ).toEqual( false );
+  it( 'renders without crashing', () => {
+    shallow( <Breadcrumbs /> );
   } );
 } );

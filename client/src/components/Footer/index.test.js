@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import PageLanding from './index';
+import Footer from './index';
 
-describe( '<PageLanding />', () => {
+describe( '<Footer />', () => {
   it( 'renders without crashing', () => {
-    shallow( <PageLanding /> );
+    shallow( <Footer /> );
   } );
 } );
