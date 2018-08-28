@@ -61,6 +61,14 @@ nav {
     font-weight: bold;
     letter-spacing: 0.5px;
     color: $blue;
+
+    &:not(.feedback) {
+      &:hover {
+        transform: scale(1.2);
+        transition: transform 0.2s;
+      }
+    }
+   
     @media screen and (min-width: 993px) and (max-width: 1085px) {
       &:not(.feedback) {
         padding: 5px !important;
