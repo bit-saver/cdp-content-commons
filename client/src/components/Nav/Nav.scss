@@ -64,7 +64,6 @@ nav {
 
     &:not(.feedback) {
       &:hover {
-        transform: scale(1.2);
         transition: transform 0.2s;
       }
     }
@@ -76,11 +75,11 @@ nav {
     }
 
     &.nav_loggedin {
-      padding-left: 0.2em;
-      padding-right: 0.2em;
+      padding: 0 0.2em;
 
       &:hover {
         background: none;
+        transform: scale(1.2);
 
         &:after {
           display: none !important;

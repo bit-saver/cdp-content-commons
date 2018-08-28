@@ -103,11 +103,11 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background: white;
+    background-image: linear-gradient(60deg, $light-blue 3%, $bright-blue 100%);
 
     .title,
     .title:hover {
-      color: $blue;
+      color: #fff;
     }
 
     .search_bar {
