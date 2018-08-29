@@ -4,11 +4,12 @@
  *
  */
 import React from 'react';
-// import PropTypes from 'prop-types';;
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import makeSelectDashboard from './selectors';
+import { makeSelectUser } from 'containers/Auth/selectors';
 
 import { Grid, Menu } from 'semantic-ui-react';
 import userIcon from 'assets/icons/icon_user_profile.svg';
@@ -31,12 +32,13 @@ class Dashboard extends React.Component {
   handleItemClick = ( e, { name } ) => this.setState( { activeItem: name } );
 
   render() {
+    const { user } = this.props;
     return (
       <section className="dashboard">
         <Menu stackable borderless secondary>
           <Menu.Item>
             <img src={ userIcon } className="userIcon" alt="User Profile Icon" />
-            <span className="currentDashboard">{ this.state.activeItem }</span>
+            <span className="currentDashboard">{ user.name }</span>
           </Menu.Item>
           { menuItems.map( item => (
             <Menu.Item
@@ -64,10 +66,12 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
+  user: PropTypes.oneOfType( [PropTypes.object, PropTypes.func] )
 };
 
 const mapStateToProps = ( state, props ) => createStructuredSelector( {
-  dashboard: makeSelectDashboard()
+  dashboard: makeSelectDashboard(),
+  user: makeSelectUser()
 } );
 
 export default connect( mapStateToProps, actions )( Dashboard );

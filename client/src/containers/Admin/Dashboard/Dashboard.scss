@@ -19,5 +19,9 @@
     a.disabled.item:hover {
       color: rgba(40, 40, 40, 0.3);
     }
+    .active.item {
+      font-weight: bold;
+      background: transparent;
+    }
   }
 }
