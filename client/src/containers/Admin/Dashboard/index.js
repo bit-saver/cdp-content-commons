@@ -19,10 +19,9 @@ import './Dashboard.css';
 const menuItems = [
   { key: 1, name: 'dashboard', disabled: true },
   { key: 2, name: 'projects', disabled: false },
-  { key: 3, name: 'my projects', disabled: true },
-  { key: 4, name: 'team projects', disabled: true },
-  { key: 5, name: 'favorites', disabled: true },
-  { key: 6, name: 'collections', disabled: true }
+  { key: 3, name: 'team projects', disabled: true },
+  { key: 4, name: 'favorites', disabled: true },
+  { key: 5, name: 'collections', disabled: true }
 ];
 
 /* eslint-disable react/prefer-stateless-function */
@@ -38,7 +37,7 @@ class Dashboard extends React.Component {
         <Menu stackable borderless secondary>
           <Menu.Item>
             <img src={ userIcon } className="userIcon" alt="User Profile Icon" />
-            <span className="currentDashboard">{ user.name }</span>
+            { user && <span className="currentDashboard">{ user.name }</span> }
           </Menu.Item>
           { menuItems.map( item => (
             <Menu.Item
