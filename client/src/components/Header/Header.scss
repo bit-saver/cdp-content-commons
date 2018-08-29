@@ -119,7 +119,8 @@
     Results, Video - searchbar  
   ***/
   &--results,
-  &--video {
+  &--video,
+  &--admin {
     header {
       @media screen and (max-width: 767px) {
         text-align: left;
@@ -159,7 +160,8 @@
   &--results,
   &--video,
   &--login,
-  &--register {
+  &--register,
+  &--admin {
     position: fixed;
     top: 0;
     z-index: 2;

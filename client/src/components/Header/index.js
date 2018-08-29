@@ -9,8 +9,8 @@ import Nav from 'components/Nav';
 import SearchBar from 'containers/SearchBar';
 
 const HeaderItem = ( props ) => {
-  const pagePath = props.location.pathname.split( '/' ).slice( 1 )[0];
-  const barClass = `bar ${pagePath === '' ? 'bar--home' : `bar--${pagePath}`}`;
+  const pagePath = props.location.pathname.split( '/' ).slice( 1 );
+  const barClass = `bar ${pagePath[0] === '' ? 'bar--home' : pagePath.map( path => `bar--${path}` ).join( ' ' )}`;
 
   return (
     <section className={ barClass }>

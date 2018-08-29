@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { func } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from 'containers/Auth/actions';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectUser } from 'containers/Auth/selectors';
 import '../Menu.css';
 
 class UserProfileMenu extends Component {
@@ -28,14 +30,17 @@ class UserProfileMenu extends Component {
   }
 
   render() {
+    const { user } = this.props;
+    const name = ( user.name ) ? `, ${user.name}` : '';
+
     return (
       <div className="nav_submenu">
         <div className="nav_submenu_header">
-          <p className="nav_submenu_header_item nav_submenu_header_item--title">Welcome!</p>
+          <p className="nav_submenu_header_item nav_submenu_header_item--title">Welcome{ name }!</p>
         </div>
         <section className="nav_submenu_section">
           <Link
-            to="/dashboard"
+            to="/admin/dashboard"
             onClick={ this.linkClick }
             className="nav_submenu_item nav_submenu_item--margin"
           >Dashboard
@@ -76,9 +81,14 @@ class UserProfileMenu extends Component {
 }
 
 UserProfileMenu.propTypes = {
-  toggleMobileNav: func,
-  logout: func,
-  submenuClosePopup: func
+  toggleMobileNav: PropTypes.func,
+  logout: PropTypes.func,
+  submenuClosePopup: PropTypes.func,
+  user: PropTypes.oneOfType( [PropTypes.object, PropTypes.func] )
 };
 
-export default connect( null, { logout } )( UserProfileMenu );
+const mapStateToProps = state => createStructuredSelector( {
+  user: makeSelectUser()
+} );
+
+export default connect( mapStateToProps, { logout } )( UserProfileMenu );

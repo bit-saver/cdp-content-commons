@@ -7,6 +7,8 @@ import React, { PureComponent } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+import './Admin.css';
+
 // Could redirect to / after login but reusing LandingPage for now
 // as there will be a separate Loggded in Landing that contains draft content
 // import LandingPage from 'components/Pages/LandingPage';
@@ -21,7 +23,7 @@ class Admin extends PureComponent {
           <title>Admin</title>
           <meta name="description" content="Adminstrative area for content authoring" />
         </Helmet>
-        <div>
+        <div className="admin_wrapper">
           <Switch>
             <Route exact path="/admin/dashboard" component={ Dashboard } />
             <Redirect to="/" />

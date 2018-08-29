@@ -1,0 +1,7 @@
+.admin_wrapper {
+  width: 100%;
+  margin-top: 8em;
+  @media screen and (min-width: 768px) {
+    margin-top: 5em;
+  }
+}

@@ -1,0 +1,23 @@
+@import "../../../assets/styles/colors.scss";
+
+.dashboard {
+  .ui.menu .item .userIcon {
+    background: $blue;
+    height: 3em;
+    width: 3em;
+  }
+
+  .currentDashboard {
+    color: $blue;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 1em;
+    text-transform: capitalize;
+  }
+
+  .ui.secondary.menu {
+    a.disabled.item:hover {
+      color: rgba(40, 40, 40, 0.3);
+    }
+  }
+}
