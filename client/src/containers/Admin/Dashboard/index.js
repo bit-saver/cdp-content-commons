@@ -16,16 +16,17 @@ import userIcon from 'assets/icons/icon_user_profile.svg';
 import './Dashboard.css';
 
 const menuItems = [
-  { key: 1, name: 'dashboard', disabled: false },
-  { key: 2, name: 'my projects', disabled: false },
-  { key: 3, name: 'team projects', disabled: true },
-  { key: 4, name: 'favorites', disabled: true },
-  { key: 5, name: 'collections', disabled: true }
+  { key: 1, name: 'dashboard', disabled: true },
+  { key: 2, name: 'projects', disabled: false },
+  { key: 3, name: 'my projects', disabled: true },
+  { key: 4, name: 'team projects', disabled: true },
+  { key: 5, name: 'favorites', disabled: true },
+  { key: 6, name: 'collections', disabled: true }
 ];
 
 /* eslint-disable react/prefer-stateless-function */
 class Dashboard extends React.Component {
-  state = { activeItem: 'dashboard' };
+  state = { activeItem: 'projects' };
 
   handleItemClick = ( e, { name } ) => this.setState( { activeItem: name } );
 
