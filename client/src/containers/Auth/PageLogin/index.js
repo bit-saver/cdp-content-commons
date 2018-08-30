@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as actions from '../actions';
 import { makeSelectAuthenticated } from '../selectors';
-import { Button, Form } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import ButtonGoogle from 'components/ButtonGoogle';
 
 import Page from 'components/Page';

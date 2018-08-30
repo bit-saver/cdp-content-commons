@@ -12,7 +12,7 @@ import makeSelectDashboard from './selectors';
 import { makeSelectUser } from 'containers/Auth/selectors';
 
 import { Grid, Menu } from 'semantic-ui-react';
-import userIcon from 'assets/icons/icon_user_profile.svg';
+import userIcon from 'assets/icons/icon_user_profile_dark.svg';
 
 import './Dashboard.css';
 
