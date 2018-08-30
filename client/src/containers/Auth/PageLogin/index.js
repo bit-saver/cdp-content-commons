@@ -26,7 +26,7 @@ const PageLogin = ( props ) => {
     if ( state === 'signedIn' ) {
       props.login();
       // after successful login, redirect to loggedin home page
-      props.history.push( '/' );
+      props.history.push( '/admin/dashboard' );
     }
   };
 

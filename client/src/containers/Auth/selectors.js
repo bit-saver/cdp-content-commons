@@ -18,7 +18,8 @@ const makeSelectAuthenticated = props =>
 const makeSelectUser = props =>
   createSelector( selectAuthenticated, authenticated => ( ( authenticated && authenticated.user )
     ? authenticated.user
-    : null ) );
+    : null
+  ) );
 
 
 export {
