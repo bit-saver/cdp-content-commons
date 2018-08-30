@@ -38,7 +38,10 @@ class Dashboard extends React.Component {
         <Menu stackable borderless secondary>
           <Menu.Item>
             <img src={ userIcon } className="userIcon" alt="User Profile Icon" />
-            <span className="currentDashboard">{ user.name }</span>
+            { user && (
+              <span className="currentDashboard">{ user.name }</span>
+            ) }
+
           </Menu.Item>
           { menuItems.map( item => (
             <Menu.Item

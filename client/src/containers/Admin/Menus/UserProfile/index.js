@@ -31,12 +31,12 @@ class UserProfileMenu extends Component {
 
   render() {
     const { user } = this.props;
-    const name = ( user.name ) ? `, ${user.name}` : '';
+    const name = ( user && user.name ) ? user.name : '';
 
     return (
       <div className="nav_submenu">
         <div className="nav_submenu_header">
-          <p className="nav_submenu_header_item nav_submenu_header_item--title">Welcome{ name }!</p>
+          <p className="nav_submenu_header_item nav_submenu_header_item--title">Welcome { name }!</p>
         </div>
         <section className="nav_submenu_section">
           <Link

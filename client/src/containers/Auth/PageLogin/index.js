@@ -42,7 +42,7 @@ const PageLogin = ( props ) => {
         <ButtonGoogle federated={ federated } onStateChange={ handleAuthStateChange } />
 
         { /* /------- NOT INCL IN MVP  --------/ */ }
-        <p className="login_optionText">Or</p>
+        { /* <p className="login_optionText">Or</p>
         <Form>
           <Form.Input label="Email" type="text" placeholder="Your email address" />
           <Form.Input label="Password" type="password" placeholder="********" />
@@ -50,12 +50,12 @@ const PageLogin = ( props ) => {
             <div className="login_email--button">
               <Button type="submit">Log in</Button>
             </div>
-            { /* <div className="login_email--account">
-            <Link to="#">Forgot your password?</Link>
-            <p>Don't have an account? <Link to="#">Register</Link></p>
-          </div>  */ }
+            <div className="login_email--account">
+              <Link to="#">Forgot your password?</Link>
+              <p>Don't have an account? <Link to="#">Register</Link></p>
+            </div>
           </div>
-        </Form>
+        </Form> */ }
 
       </div>
     </Page>
