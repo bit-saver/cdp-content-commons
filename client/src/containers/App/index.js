@@ -13,10 +13,10 @@ import PageLogin from 'containers/Auth/PageLogin/Loadable';
 import PageRegister from 'containers/Auth/PageRegister/Loadable';
 
 // Markdown pages
-import AboutPage from 'components/PagesStatic/AboutPage/Loadable';
-import HelpPage from 'components/PagesStatic/HelpPage/Loadable';
-import ContactPage from 'components/PagesStatic/ContactPage/Loadable';
-import PrivacyPage from 'components/PagesStatic/PrivacyPage/Loadable';
+import AboutPage from 'components/pagesStatic/AboutPage/Loadable';
+import HelpPage from 'components/pagesStatic/HelpPage/Loadable';
+import ContactPage from 'components/pagesStatic/ContactPage/Loadable';
+import PrivacyPage from 'components/pagesStatic/PrivacyPage/Loadable';
 
 // import VideoPage from './components/Pages/VideoPage';
 import PageSearch from 'containers/PageSearch/Loadable';
