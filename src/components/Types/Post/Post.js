@@ -64,8 +64,7 @@ class Post extends Component {
       const { item, textDirection } = this.state;
       const embedItem = (
         `<div id="cdp-article-embed"></div>
-        <script async id="cdpArticle" data-id="${item.id}" data-site="${item.site}" src="${process.env.REACT_APP_MODULES_URL}/cdp-module-article-single/cdp-module-loader.min.js"></script>
-        `
+        <script async id="cdpArticle" data-id="${item.id}" data-site="${item.site}" src="${process.env.REACT_APP_MODULES_URL}cdp-module-article-single/cdp-module-loader.min.js"></script>`
       );
 
       return (
