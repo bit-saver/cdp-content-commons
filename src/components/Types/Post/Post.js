@@ -63,10 +63,9 @@ class Post extends Component {
     if ( this.state && this.state.item ) {
       const { item, textDirection } = this.state;
       const embedItem = (
-        `<script src="https://iipdesignmodules.america.gov/modules/cdp-module-article-single/static/js/iframe-resizer-host.min.js"></script>
-        <iframe id="cdp-article" width="100%" src="https://iipdesignmodules.america.gov/modules/cdp-module-article-single/index.html?id=${item.id}&site=${item.site}" frameborder="0" scrolling="no">
-        </iframe>
-        <script>iFrameResize({heightCalculationMethod:'bodyScroll'}, '#cdp-article')</script>`
+        `<div id="cdp-article-embed"></div>
+        <script async id="cdpArticle" data-id="${item.id}" data-site="${item.site}" src="${process.env.REACT_APP_MODULES_URL}/cdp-module-article-single/cdp-module-loader.min.js"></script>
+        `
       );
 
       return (
