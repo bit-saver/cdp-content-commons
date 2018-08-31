@@ -12,7 +12,8 @@ import './Admin.css';
 // Could redirect to / after login but reusing LandingPage for now
 // as there will be a separate Loggded in Landing that contains draft content
 // import LandingPage from 'components/Pages/LandingPage';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Loadable';
+import PageUpload from './PageUpload/Loadable';
 
 /* eslint-disable react/prefer-stateless-function */
 class Admin extends PureComponent {
@@ -26,6 +27,7 @@ class Admin extends PureComponent {
         <div className="admin_wrapper">
           <Switch>
             <Route exact path="/admin/dashboard" component={ Dashboard } />
+            <Route path="/admin/upload" component={ PageUpload } />
             <Redirect to="/" />
           </Switch>
         </div>
