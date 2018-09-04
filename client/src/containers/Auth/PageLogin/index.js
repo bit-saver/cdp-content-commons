@@ -25,8 +25,12 @@ const PageLogin = ( props ) => {
   const handleAuthStateChange = ( state ) => {
     if ( state === 'signedIn' ) {
       props.login();
+
       // after successful login, redirect to loggedin home page
-      props.history.push( '/admin/dashboard' );
+      // props.history.push( '/admin/dashboard' );
+
+      // redirect to previous entry in history stack
+      props.history.goBack();
     }
   };
 

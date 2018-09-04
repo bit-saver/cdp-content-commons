@@ -10,54 +10,49 @@ import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import makeSelectDashboard from './selectors';
 import { makeSelectUser } from 'containers/Auth/selectors';
+import PaneProjects from 'containers/Admin/PaneProjects';
 
-import { Grid, Menu } from 'semantic-ui-react';
+import { Grid, Tab } from 'semantic-ui-react';
 import userIcon from 'assets/icons/icon_user_profile_dark.svg';
 
 import './Dashboard.css';
 
-const menuItems = [
-  { key: 1, name: 'dashboard', disabled: true },
-  { key: 2, name: 'projects', disabled: false },
-  { key: 3, name: 'team projects', disabled: true },
-  { key: 4, name: 'favorites', disabled: true },
-  { key: 5, name: 'collections', disabled: true }
+const panes = [
+  { menuItem: 'Projects', render: () => <Tab.Pane ><PaneProjects /></Tab.Pane> },
+  { menuItem: 'Team Projects', render: () => <Tab.Pane /> },
+  { menuItem: 'Favorites', render: () => <Tab.Pane /> },
+  { menuItem: 'Collections', render: () => <Tab.Pane /> }
 ];
 
 /* eslint-disable react/prefer-stateless-function */
 class Dashboard extends React.Component {
-  state = { activeItem: 'projects' };
+  state = {
+    activeIndex: 0
+  }
 
-  handleItemClick = ( e, { name } ) => this.setState( { activeItem: name } );
+  tabChange( i ) {
+    // Temporarily disable tabs other than Projects (index === 0)
+    if ( i === 0 ) this.setState( { activeIndex: i } );
+  }
 
   render() {
     const { user } = this.props;
     return (
       <section className="dashboard">
-        <Menu stackable borderless secondary>
-          <Menu.Item>
+        <Grid stackable>
+          <Grid.Column width={ 2 }>
             <img src={ userIcon } className="userIcon" alt="User Profile Icon" />
             { user && <span className="currentDashboard">{ user.name }</span> }
-          </Menu.Item>
-          { menuItems.map( item => (
-            <Menu.Item
-              key={ item.key }
-              name={ item.name }
-              active={ this.state.activeItem === item.name }
-              onClick={ this.handleItemClick }
-              disabled={ item.disabled }
+            <div className="filters">[ FILTERS ]</div>
+          </Grid.Column>
+          <Grid.Column width={ 14 }>
+            <Tab
+              menu={ { text: true } }
+              panes={ panes }
+              activeIndex={ this.state.activeIndex }
+              onTabChange={ ( e, { activeIndex } ) => this.tabChange( activeIndex ) }
             />
-          ) ) }
-        </Menu>
-        <Grid stackable>
-          <Grid.Row>
-            <Grid.Column width={ 3 }>
-              [ FILTERS ]
-            </Grid.Column>
-            <Grid.Column width={ 13 }>
-              [ DASHBOARD CONTENT ]
-            </Grid.Column>
-          </Grid.Row>
+          </Grid.Column>
         </Grid>
       </section>
     );
