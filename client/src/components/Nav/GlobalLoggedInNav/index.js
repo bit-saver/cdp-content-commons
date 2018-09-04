@@ -81,11 +81,12 @@ class LoggedInNav extends Component {
       <span>
         <Responsive as={ Menu } compact secondary minWidth={ 993 }>
           {
+
             menuItems.map( ( item ) => {
               if ( item.name === 'upload' ) {
                 return (
-                  <Menu.Item key={ item.key } name={ item.name } as={ Link } to="/upload" className="nav_loggedin">
-                    { this.getIcon( item ) }
+                  <Menu.Item key={ item.key } name={ item.name } className="nav_loggedin">
+                    <Link to="/admin/upload">{ this.getIcon( item ) }</Link>
                   </Menu.Item>
                 );
               }
@@ -135,7 +136,7 @@ class LoggedInNav extends Component {
                 if ( item.name === 'upload' ) {
                   return (
                     <li key={ item.key }>
-                      <Link to="/upload" onClick={ toggleMobileNav }>{ this.getIcon( item ) }</Link>
+                      <Link to="/admin/upload" onClick={ toggleMobileNav }>{ this.getIcon( item ) }</Link>
                     </li>
                   );
                 }

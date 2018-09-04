@@ -1,10 +1,10 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import withAuth from './index';
+// import withMarkdown from './index';
 
-// describe( '<withAuth />', () => {
+// describe( '<withMarkdown />', () => {
 //   it( 'renders without crashing', () => {
-//     shallow( <withAuth /> );
+//     shallow( <withMarkdown /> );
 //   } );
 // } );
