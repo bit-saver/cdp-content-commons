@@ -18,23 +18,15 @@ import userIcon from 'assets/icons/icon_user_profile_dark.svg';
 import './Dashboard.css';
 
 const panes = [
+  { menuItem: { name: 'Overview', disabled: true }, render: () => <Tab.Pane /> },
   { menuItem: 'Projects', render: () => <Tab.Pane ><PaneProjects /></Tab.Pane> },
-  { menuItem: 'Team Projects', render: () => <Tab.Pane /> },
-  { menuItem: 'Favorites', render: () => <Tab.Pane /> },
-  { menuItem: 'Collections', render: () => <Tab.Pane /> }
+  { menuItem: { name: 'Team Projects', disabled: true }, render: () => <Tab.Pane /> },
+  { menuItem: { name: 'Favorites', disabled: true }, render: () => <Tab.Pane /> },
+  { menuItem: { name: 'Collections', disabled: true }, render: () => <Tab.Pane /> }
 ];
 
 /* eslint-disable react/prefer-stateless-function */
 class Dashboard extends React.Component {
-  state = {
-    activeIndex: 0
-  }
-
-  tabChange( i ) {
-    // Temporarily disable tabs other than Projects (index === 0)
-    if ( i === 0 ) this.setState( { activeIndex: i } );
-  }
-
   render() {
     const { user } = this.props;
     return (
@@ -49,8 +41,7 @@ class Dashboard extends React.Component {
             <Tab
               menu={ { text: true } }
               panes={ panes }
-              activeIndex={ this.state.activeIndex }
-              onTabChange={ ( e, { activeIndex } ) => this.tabChange( activeIndex ) }
+              defaultActiveIndex={ 1 }
             />
           </Grid.Column>
         </Grid>

@@ -34,8 +34,12 @@
     box-shadow: none;
     padding: 0;
   }
-  .ui.text.menu .item {
-    color: $medium-grey;
-    margin-right: 1em;
+  .ui.text.menu {
+    .item {
+      margin-right: 1em;
+    }
+    .disabled.item {
+      color: $alt-grey;
+    }
   }
 }
