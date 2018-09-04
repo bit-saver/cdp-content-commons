@@ -12,9 +12,8 @@ const Share = ( props ) => {
     id, site, language, title, link, type
   } = props;
 
-  const contentType = type;
   const queryStr = stringifyQueryString( { id, site, language } );
-  const directLink = `${window.location.protocol}//${window.location.host}/${contentType}?${queryStr}`;
+  const directLink = ( type === 'video' ) ? `${window.location.protocol}//${window.location.host}/video?${queryStr}` : link;
   const facebookURL = `https://www.facebook.com/sharer/sharer.php?u=${link}`;
   const tweet = `https://twitter.com/home?status=${title} ${link}`;
 
