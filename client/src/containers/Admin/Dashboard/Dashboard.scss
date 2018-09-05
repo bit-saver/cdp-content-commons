@@ -27,6 +27,7 @@
   .ui.text.menu .active.item {
     font-weight: bold;
     color: $blue;
+    border-bottom: 4px solid $blue;
   }
 
   .ui.segment {
@@ -37,6 +38,7 @@
   .ui.text.menu {
     .item {
       margin-right: 1em;
+      justify-content: center;
     }
     .disabled.item {
       color: $alt-grey;

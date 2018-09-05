@@ -12,17 +12,49 @@ import makeSelectDashboard from './selectors';
 import { makeSelectUser } from 'containers/Auth/selectors';
 import PaneProjects from 'containers/Admin/PaneProjects';
 
-import { Grid, Tab } from 'semantic-ui-react';
+import { Grid, Tab, Popup } from 'semantic-ui-react';
 import userIcon from 'assets/icons/icon_user_profile_dark.svg';
 
 import './Dashboard.css';
 
 const panes = [
-  { menuItem: { name: 'Overview', disabled: true }, render: () => <Tab.Pane /> },
-  { menuItem: 'Projects', render: () => <Tab.Pane ><PaneProjects /></Tab.Pane> },
-  { menuItem: { name: 'Team Projects', disabled: true }, render: () => <Tab.Pane /> },
-  { menuItem: { name: 'Favorites', disabled: true }, render: () => <Tab.Pane /> },
-  { menuItem: { name: 'Collections', disabled: true }, render: () => <Tab.Pane /> }
+  {
+    menuItem:
+    {
+      key: '1',
+      content: <Popup trigger={ <span>Overview</span> } content="Coming Soon!" inverted position="bottom left" />,
+      disabled: true
+    },
+    render: () => <Tab.Pane />
+  },
+  { menuItem: { key: '2', name: 'Projects' }, render: () => <Tab.Pane ><PaneProjects /></Tab.Pane> },
+  {
+    menuItem:
+    {
+      key: '3',
+      content: <Popup trigger={ <span>Team Projects</span> } content="Coming Soon!" inverted position="bottom left" />,
+      disabled: true
+    },
+    render: () => <Tab.Pane />
+  },
+  {
+    menuItem:
+    {
+      key: '4',
+      content: <Popup trigger={ <span>Favorites</span> } content="Coming Soon!" inverted position="bottom left" />,
+      disabled: true
+    },
+    render: () => <Tab.Pane />
+  },
+  {
+    menuItem:
+    {
+      key: '5',
+      content: <Popup trigger={ <span>Collections</span> } content="Coming Soon!" inverted position="bottom left" />,
+      disabled: true
+    },
+    render: () => <Tab.Pane />
+  }
 ];
 
 /* eslint-disable react/prefer-stateless-function */
@@ -39,7 +71,7 @@ class Dashboard extends React.Component {
           </Grid.Column>
           <Grid.Column width={ 14 }>
             <Tab
-              menu={ { text: true } }
+              menu={ { text: true, stackable: true } }
               panes={ panes }
               defaultActiveIndex={ 1 }
             />
