@@ -73,4 +73,15 @@
       }
     }
   }
+
+  .ui.negative.message {
+    background-color: #ffffff;
+    color: $red;
+    border: none;
+    box-shadow: none;
+    padding: 0 1em;
+    margin: 0;
+    font-size: 0.85em;
+    font-weight: 400;
+  }
 }

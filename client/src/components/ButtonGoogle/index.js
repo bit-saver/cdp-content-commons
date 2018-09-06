@@ -45,10 +45,6 @@ class ButtonGoogle extends Component {
   }
 
   render() {
-    const ga = window.gapi && window.gapi.auth2
-      ? window.gapi.auth2.getAuthInstance()
-      : null;
-
     return <Button { ...this.props } >{ this.props.children }</Button>;
   }
 }

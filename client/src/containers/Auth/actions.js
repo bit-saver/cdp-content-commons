@@ -10,6 +10,21 @@ import {
   LOGOUT
 } from './constants';
 
+
+const dispatchError = ( dispatch, err, callbackError ) => {
+  let msg = 'Login failed.';
+  if ( err && err.error !== 'popup_closed_by_user' ) { // user closes window before selecting a google email
+    if ( err.reason && err.reason.indexOf( 'Account domain does not match hosted_domain' ) !== -1 ) {
+      msg = 'You must use an america.gov email address to login';
+    }
+    dispatch( {
+      type: LOGIN_ERROR,
+      payload: 'Error'
+    } );
+    callbackError( msg );
+  }
+};
+
 /**
  * Authenticate Google user against the Cognito identity pool
  * Cognito identity pool gives google user access to AWS services
@@ -43,21 +58,24 @@ const federatedSignIn = async ( googleUser ) => {
  */
 export const googleLogin = ( callbackSuccess, callbackError ) => async ( dispatch ) => {
   try {
-    const ga = window.gapi.auth2.getAuthInstance();
-    const googleUser = await ga.signIn();
-    const user = await federatedSignIn( googleUser );
+    const ga = window.gapi && window.gapi.auth2
+      ? window.gapi.auth2.getAuthInstance()
+      : null;
 
-    dispatch( {
-      type: LOGIN,
-      payload: user
-    } );
-    callbackSuccess();
+    if ( ga ) {
+      const googleUser = await ga.signIn();
+      const user = await federatedSignIn( googleUser );
+
+      dispatch( {
+        type: LOGIN,
+        payload: user
+      } );
+      callbackSuccess();
+    } else {
+      dispatchError( dispatch, 'Google is not available for authentication.', callbackError );
+    }
   } catch ( err ) {
-    dispatch( {
-      type: LOGIN_ERROR,
-      payload: 'Error'
-    } );
-    callbackError( err );
+    dispatchError( dispatch, err, callbackError );
   }
 };
 

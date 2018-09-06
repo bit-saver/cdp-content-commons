@@ -25,13 +25,12 @@ class PageLogin extends PureComponent {
 
   handleLoginSuccess = () => {
     this.props.history.goBack();
-    // this.props.history.push( '/admin/dashboard' );
   };
 
   handleLoginError = ( err ) => {
     this.setState( {
       error: false,
-      errorMsg: err && err.reason ? err.reason : 'Unable to log you in.'
+      errorMsg: err
     } );
   };
 
@@ -48,7 +47,11 @@ class PageLogin extends PureComponent {
       <div className="login login_wrapper">
         <h1>Log In</h1>
         <p className="login_subtext">Log in to collect, upload, and manage content in the Content Commons.</p>
-        <ButtonGoogle clientid={ process.env.REACT_APP_GOOGLE_CLIENT_ID } onClick={ this.handleClickGoogleLogin }>Login america.gov</ButtonGoogle>
+        <ButtonGoogle
+          clientid={ process.env.REACT_APP_GOOGLE_CLIENT_ID }
+          onClick={ this.handleClickGoogleLogin }
+        >Login america.gov
+        </ButtonGoogle>
         <Message negative hidden={ this.state.error }>{ this.state.errorMsg }</Message>
 
         { /* /------- NOT INCL IN MVP  --------/ */ }
