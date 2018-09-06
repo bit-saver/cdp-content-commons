@@ -3,43 +3,52 @@
  * LoginPage
  *
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as actions from '../actions';
 import { makeSelectAuthenticated } from '../selectors';
-import { Button } from 'semantic-ui-react';
+import { Button, Message } from 'semantic-ui-react';
 import ButtonGoogle from 'components/ButtonGoogle';
 
 import Page from 'components/Page';
 
 import './PageLogin.css';
 
-const PageLogin = ( props ) => {
-  const federated = {
-    google_client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
+class PageLogin extends PureComponent {
+  state = {
+    error: true,
+    errorMsg: ''
+  }
+
+  handleLoginSuccess = () => {
+    this.props.history.push( '/admin/dashboard' );
   };
 
-  const handleAuthStateChange = ( state ) => {
-    if ( state === 'signedIn' ) {
-      props.login();
-      // after successful login, redirect to loggedin home page
-      props.history.push( '/admin/dashboard' );
-    }
+  handleLoginError = ( err ) => {
+    this.setState( {
+      error: false,
+      errorMsg: err && err.reason ? err.reason : 'Unable to log you in.'
+    } );
   };
 
-  const handleClickLogout = () => {
-    props.logout();
+  handleClickGoogleLogin = () => {
+    this.props.googleLogin( this.handleLoginSuccess, this.handleLoginError );
   };
 
-  const renderLoginPage = () => (
+  handleClickLogout = () => {
+    this.props.logout();
+  };
+
+  renderLoginPage = () => (
     <Page title="Login" description="Login to Content Commons">
       <div className="login login_wrapper">
         <h1>Log In</h1>
         <p className="login_subtext">Log in to collect, upload, and manage content in the Content Commons.</p>
-        <ButtonGoogle federated={ federated } onStateChange={ handleAuthStateChange } />
+        <ButtonGoogle clientid={ process.env.REACT_APP_GOOGLE_CLIENT_ID } onClick={ this.handleClickGoogleLogin }>Login america.gov</ButtonGoogle>
+        <Message negative hidden={ this.state.error }>{ this.state.errorMsg }</Message>
 
         { /* /------- NOT INCL IN MVP  --------/ */ }
         { /* <p className="login_optionText">Or</p>
@@ -61,26 +70,31 @@ const PageLogin = ( props ) => {
     </Page>
   );
 
-  const renderLogoutPage = () => (
+  renderLogoutPage = () => (
     <Page title="Login" description="Login to Content Commons">
       <div className="login login_wrapper">
         <h1>Log Out</h1>
         <p className="login_subtext">Log out of the Content Commons.</p>
-        <Button onClick={ handleClickLogout }>Log out</Button>
+        <Button onClick={ this.handleClickLogout }>Log out</Button>
       </div>
     </Page>
   );
 
-  if ( props.authenticated ) {
-    return renderLogoutPage();
+  render() {
+    if ( this.props.authenticated ) {
+      return this.renderLogoutPage();
+    }
+
+    return this.renderLoginPage();
   }
-  return renderLoginPage();
-};
+}
 
 
 PageLogin.propTypes = {
-  login: PropTypes.func,
-  logout: PropTypes.func
+  logout: PropTypes.func,
+  googleLogin: PropTypes.func,
+  authenticated: PropTypes.object,
+  history: PropTypes.object
 };
 
 const mapStateToProps = state => createStructuredSelector( {
