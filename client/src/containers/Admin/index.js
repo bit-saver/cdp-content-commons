@@ -19,7 +19,7 @@ import PageUpload from './PageUpload/Loadable';
 class Admin extends PureComponent {
   render() {
     return (
-      <div>
+      <div className="admin">
         <Helmet>
           <title>Admin</title>
           <meta name="description" content="Adminstrative area for content authoring" />

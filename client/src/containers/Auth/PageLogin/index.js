@@ -24,7 +24,8 @@ class PageLogin extends PureComponent {
   }
 
   handleLoginSuccess = () => {
-    this.props.history.push( '/admin/dashboard' );
+    this.props.history.goBack();
+    // this.props.history.push( '/admin/dashboard' );
   };
 
   handleLoginError = ( err ) => {

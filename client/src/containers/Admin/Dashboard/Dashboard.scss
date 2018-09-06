@@ -1,7 +1,7 @@
 @import "../../../assets/styles/colors.scss";
 
 .dashboard {
-  .ui.menu .item .userIcon {
+  .userIcon {
     height: 3em;
     width: 3em;
   }
@@ -12,15 +12,36 @@
     font-weight: bold;
     margin-left: 1em;
     text-transform: capitalize;
+    vertical-align: top;
+    line-height: 3em;
   }
 
-  .ui.secondary.menu {
-    a.disabled.item:hover {
-      color: rgba(40, 40, 40, 0.3);
+  .filters {
+    margin-top: 0.8em;
+  }
+
+  .ui.text.menu {
+    margin-top: 0.4em;
+  }
+
+  .ui.text.menu .active.item {
+    font-weight: bold;
+    color: $blue;
+    border-bottom: 4px solid $blue;
+  }
+
+  .ui.segment {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .ui.text.menu {
+    .item {
+      margin-right: 1em;
+      justify-content: center;
     }
-    .active.item {
-      font-weight: bold;
-      background: transparent;
+    .disabled.item {
+      color: $alt-grey;
     }
   }
 }
