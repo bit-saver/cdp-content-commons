@@ -79,7 +79,7 @@ class Post extends Component {
             </div>
             <div className="trigger-container">
               <PopupTrigger
-                toolTip="Embed this article."
+                toolTip="Embed this article"
                 icon={ { img: embedIcon, dim: 24 } }
                 show
                 content={
@@ -94,7 +94,7 @@ class Post extends Component {
                             embedItem={ embedItem }
                           />
                         )
-                      },
+                      }
                       // { title: 'Help', component: <EmbedHelp /> }
                     ] }
                   />

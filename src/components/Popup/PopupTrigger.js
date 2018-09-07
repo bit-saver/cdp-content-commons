@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Popup, Button } from 'semantic-ui-react';
 import { string, node, bool, object } from 'prop-types';
-import { Tooltip } from 'react-lightweight-tooltip';
-import tooltipStyles from '../../utils/tooltip';
+import '../../assets/styles/tooltip.css';
 
 class PopupTrigger extends Component {
   constructor( props ) {
@@ -23,30 +22,30 @@ class PopupTrigger extends Component {
     }
   };
 
+
   render() {
+    // const trigger = withTooltip( <Button>my button </Button> );
     return (
       <span style={ { display: this.props.show ? 'inline-block' : 'none' } }>
-        <Tooltip content={ this.props.toolTip } styles={ tooltipStyles }>
-          <Popup
-            trigger={
-              <Button className="trigger">
-                <img
-                  src={ this.props.icon.img }
-                  width={ this.props.icon.dim }
-                  height={ this.props.icon.dim }
-                  alt={ this.props.toolTip }
-                />{ ' ' }
-              </Button>
-            }
-            on="click"
-            onOpen={ this.handleOnOpen }
-            onClose={ this.handleOnClose }
-            className={ !this.state.isMobile ? 'popupElem_wrapper' : 'popupElem_wrapper popupElem_wrapper--mobile' }
-            content={ this.props.content }
-            horizontalOffset={ 4 }
-            position={ this.state.isMobile ? 'bottom center' : 'bottom right' }
-          />
-        </Tooltip>
+        <Popup
+          trigger={
+            <Button className="trigger" tooltip={ this.props.toolTip }>
+              <img
+                src={ this.props.icon.img }
+                width={ this.props.icon.dim }
+                height={ this.props.icon.dim }
+                alt={ this.props.toolTip }
+              />{ ' ' }
+            </Button>
+          }
+          on="click"
+          onOpen={ this.handleOnOpen }
+          onClose={ this.handleOnClose }
+          className={ !this.state.isMobile ? 'popupElem_wrapper' : 'popupElem_wrapper popupElem_wrapper--mobile' }
+          content={ this.props.content }
+          horizontalOffset={ 4 }
+          position={ this.state.isMobile ? 'bottom center' : 'bottom right' }
+        />
       </span>
     );
   }
@@ -60,3 +59,4 @@ PopupTrigger.propTypes = {
 };
 
 export default PopupTrigger;
+

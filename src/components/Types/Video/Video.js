@@ -347,7 +347,7 @@ class Video extends Component {
             <div className="trigger-container">
               { embedItem && (
               <PopupTrigger
-                toolTip="Embed video."
+                toolTip="Embed video"
                 icon={ { img: embedIcon, dim: 24 } }
                 show
                 content={
