@@ -1,5 +1,5 @@
 import React from 'react';
-import { array } from 'prop-types';
+import PropTypes from 'prop-types';
 import './ModalPostTags.css';
 
 const renderCategory = ( category, index, arr ) => {
@@ -17,16 +17,22 @@ const renderCategory = ( category, index, arr ) => {
 
 const ModalPostTags = ( props ) => {
   const { tags } = props;
+  let postTags = '';
+  if ( typeof tags === 'string' ) {
+    postTags = tags;
+  } else {
+    postTags = tags.map( renderCategory );
+  }
 
   return (
     <section className="modal_section modal_section--postTags">
-      { tags && tags.map( renderCategory ) }
+      { postTags }
     </section>
   );
 };
 
 ModalPostTags.propTypes = {
-  tags: array
+  tags: PropTypes.oneOfType( [PropTypes.array, PropTypes.string] )
 };
 
 export default ModalPostTags;
