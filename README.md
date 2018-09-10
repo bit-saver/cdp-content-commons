@@ -19,6 +19,9 @@ REACT_APP_WEBSITE_NAME=Content Commons
 #REACT_APP_PUBLIC_API=https://api.staging.america.gov (staging)
 REACT_APP_PUBLIC_API=https://api.america.gov (prod)
 
+# Points to the S3 bucket for CDP module (for the embed code)
+REACT_APP_CDP_MODULES_URL=
+
 # Value from YouTube
 REACT_APP_YOUTUBE_API_KEY=
 

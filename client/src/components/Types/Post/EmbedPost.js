@@ -12,8 +12,8 @@ const embedPopupStyles = {
 
 const PostEmbed = props => (
   <div>
-    <Embed instructions={ props.instructions }>
-      <Checkbox className="embed_keepStyles" label="Maintain original page styling" />
+    <Embed instructions={ props.instructions } embedItem={ props.embedItem }>
+      { /* <Checkbox className="embed_keepStyles" label="Maintain original page styling" />
       <Popup
         trigger={ <Icon name="info circle" className="embed_tooltip" /> }
         content="Check the box to embed this article with its original styling from the source site.
@@ -21,12 +21,13 @@ const PostEmbed = props => (
         position="bottom center"
         style={ embedPopupStyles }
         className="embed_popup"
-      />
+      /> */ }
     </Embed>
   </div>
 );
 
 PostEmbed.propTypes = {
+  embedItem: string,
   instructions: string
 };
 
