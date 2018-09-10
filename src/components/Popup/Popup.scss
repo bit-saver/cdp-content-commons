@@ -8,6 +8,15 @@
     transform: scale(1.2);
     transition: transform 0.2s;
   }
+
+  &[tooltip]::before {
+    top: 0;
+  }
+
+  &[tooltip]::after {
+    font-size: 0.85rem;
+    top: 0;
+  }
 }
 
 .popupElem {
