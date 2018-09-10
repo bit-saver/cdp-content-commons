@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.4.1](2018-09-10)
+
+**Bug Fixes**
+
+- Fixed difficulty selecting icon links in popups
+
+# [1.4.0](2018-09-08)
+
+**Features**
+
+- Enhanced footer to inlude additional links and information
+- Added embed code generation to enable sharing off posts
+- Updated direct link for posts to point to original source
+
+**Bug Fixes**
+
+- Fixed tabbed underline on video popups
+
 # [1.3.0](2018-08-08)
 
 **Features**

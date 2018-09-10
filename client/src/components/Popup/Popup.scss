@@ -4,6 +4,19 @@
   padding: 2px;
   background: #fff;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s;
+  }
+
+  &[tooltip]::before {
+    top: 0;
+  }
+
+  &[tooltip]::after {
+    font-size: 0.85rem;
+    top: 0;
+  }
 }
 
 .popupElem {
@@ -16,14 +29,14 @@
       border: none;
       padding: 20px;
 
-      &:before {  
+      &:before {
         top: -8px !important;
         right: 0.5em !important;
         left: auto !important;
         transform: initial;
         -ms-transform: rotate(5deg) !important;
         width: auto;
-        height: auto;        
+        height: auto;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         border-bottom: 8px solid $bright-blue;
@@ -57,11 +70,10 @@
     }
 
     &--mobile {
-
       &.ui.popup {
         position: absolute;
         min-width: 300px;
-        max-width: 300px;        
+        max-width: 300px;
         width: 100%;
         @media screen and (max-width: 330px) {
           left: 10px !important;
@@ -143,7 +155,7 @@
       top: 41px;
       z-index: 1;
       border: none;
-      height: 4px;      
+      height: 4px;
       background: $light-blue;
       transition: all 0.3s ease-in-out;
     }
