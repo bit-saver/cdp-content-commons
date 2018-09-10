@@ -1,3 +1,18 @@
+/**
+To add a tooltip to an element, include this css file and 
+add the tooltip content via the "tooltip" attribute in the
+applicable component
+
+Usage:
+import '../../assets/styles/tooltip.css';
+
+<component tooltip="my tooltip content"></component>
+
+If tooltip props need to be adjusted, i.e. font-size, color, etc
+do so in the containing components css file.  
+See src/components/Popup/Popup.scss for an example
+*/
+
 [tooltip] {
   margin: 20px;
   position: relative;
