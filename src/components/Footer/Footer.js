@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Responsive, Container, Header, List } from 'semantic-ui-react';
+import { Container, Header, List } from 'semantic-ui-react';
 import './Footer.css';
 import flagImage from '../../assets/images/US-Flag-Color-735b69.png';
 import DOSseal from '../../assets/images/DOS_Seal.png';
