@@ -1,15 +1,16 @@
 @import "../../../assets/styles/colors.scss";
 
+
+.admin_wrapper .cdp_static_page h2.ui.header {
+  font-size: 32px;
+  color: $blue;
+  font-weight: 700;
+  text-decoration: none solid rgb(17, 46, 81);
+}
+
 .upload-content {
   display: inline-block;
   width: 100%;
-
-  h2 {
-    font-size: 32px;
-    color: $blue;
-    font-weight: 700;
-    text-decoration: none solid rgb(17, 46, 81);
-  }
 
   .contentTypes {
     margin: 6em 0;
@@ -17,6 +18,10 @@
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
+
+    @media screen and (max-width: 768px) {
+      margin: 3em 0;
+    }
 
     .type {
       transition: transform 0.2s;
@@ -55,5 +60,19 @@
         }
       }
     }
+  }
+}
+
+.upload-advisory {
+  font-size: 14px;
+
+  h3 {
+    font-size: 24px;
+    font-weight: normal;
+    color: $blue;
+  }
+
+  ol {
+    padding-left: 14px;
   }
 }
