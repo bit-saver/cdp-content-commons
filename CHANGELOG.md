@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.4.2](2018-09-12)
+
+**Bug Fixes**
+
+- Languages will only be displayed in the video language dropdown if a source exists in the language unit
+
 # [1.4.1](2018-09-10)
 
 **Bug Fixes**

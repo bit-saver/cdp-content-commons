@@ -45,12 +45,19 @@ export const titleCase = str =>
 export const getAvailableLanguages = ( item ) => {
   if ( !item || !item.type ) return [];
   switch ( item.type ) {
-    case 'video':
-      return item.units.map( unit => ( {
-        key: unit.language.language_code,
-        value: unit.language.display_name,
-        text: unit.language.display_name
-      } ) );
+    case 'video': {
+      const langArr = item.units.reduce( ( langs, unit ) => {
+        if ( unit.source && unit.source.length ) {
+          langs.push( {
+            key: unit.language.language_code,
+            value: unit.language.display_name,
+            text: unit.language.display_name
+          } );
+        }
+        return langs;
+      }, [] );
+      return langArr;
+    }
     case 'post':
       if ( item.languages ) {
         let langArray = [];
