@@ -24,6 +24,7 @@ class Search extends Component {
     if ( this.props.location.pathname === '/' ) {
       // TODO: cache default query (set up general caching strategy)
       this.props.clearFilters();
+      this.props.languageUpdate( { display_name: 'English', key: 'en' } );
       this.props.createRequest();
     }
   }
