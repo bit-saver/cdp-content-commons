@@ -17,45 +17,17 @@
 /* Form */
 .search_bar {
   .ui.form {
-    .fields {
-      @media screen and (max-width: 767px) {
-        flex-wrap: nowrap;
-        margin: 0;
+    .search_input {
+      width: 100%;
+      font-size: 18px;
+      i {
+        color: $light-blue;
+        opacity: 0.9;
       }
-      @media screen and (max-width: 540px) {
-        flex-wrap: wrap;
-      }
 
-      .field {
-        padding-left: 0;
-        padding-right: 0;
-
-        &.search_input {
-          width: 100%;
-          font-size: 18px;
-          @media screen and (max-width: 540px) {
-            flex: 1;
-          }
-
-          input[type="text"] {
-            @media screen and (max-width: 767px) {
-              padding: 0.3em;
-            }
-          }
-        }
-
-        .ui.button {
-          padding: 14px 11px;
-          border-left: none;
-          font-size: 18px;
-          background-color: transparent;
-          color: $light-blue;
-          position: absolute;
-          right: 0;
-          @media screen and (max-width: 767px) {
-            padding: 0.42em;
-            margin: 0;
-          }
+      &.right {
+        input[type="text"] {
+          text-align: right;
         }
       }
     }
