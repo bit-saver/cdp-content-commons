@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.4.3](2018-09-20)
+
+**Changes**
+
+- Set single article module portion of embed URL to an environmental variable
+
 # [1.4.2](2018-09-12)
 
 **Bug Fixes**

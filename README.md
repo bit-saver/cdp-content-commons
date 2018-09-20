@@ -10,6 +10,8 @@ Two options for loading in environment variables:
 ```
 REACT_APP_WEBSITE_NAME=IIP Search
 REACT_APP_PUBLIC_API=http://localhost:3000
+REACT_APP_CDP_MODULES_URL=https://s3.amazonaws.com/iip-design-dev-modules/modules/
+REACT_APP_SINGLE_ARTICLE_MODULE=cdp-module-article-single/cdp-module-loader.min.js
 ```
 
 ### Get Started
