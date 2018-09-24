@@ -70,21 +70,21 @@ const getThumbnail = ( source ) => {
   const { thumbnail } = source;
   const image = source.featured_image;
 
-  if ( thumbnail ) {
-    if ( thumbnail.medium && thumbnail.medium.url ) {
-      return thumbnail.medium.url;
+  if ( thumbnail && thumbnail.sizes ) {
+    if ( thumbnail.sizes.medium && thumbnail.sizes.medium.url ) {
+      return thumbnail.sizes.medium.url;
     }
 
-    if ( thumbnail.small && thumbnail.small.url ) {
-      return thumbnail.small.url;
+    if ( thumbnail.sizes.small && thumbnail.sizes.small.url ) {
+      return thumbnail.sizes.small.url;
     }
 
-    if ( thumbnail.large && thumbnail.large.url ) {
-      return thumbnail.large.url;
+    if ( thumbnail.sizes.large && thumbnail.sizes.large.url ) {
+      return thumbnail.sizes.large.url;
     }
 
-    if ( thumbnail.full && thumbnail.full.url ) {
-      return thumbnail.full.url;
+    if ( thumbnail.sizes.full && thumbnail.sizes.full.url ) {
+      return thumbnail.sizes.full.url;
     }
   } else if ( image && image.sizes && image.sizes.medium ) {
     return image.sizes.medium.url;
