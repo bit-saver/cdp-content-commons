@@ -70,7 +70,7 @@ const getThumbnail = ( source ) => {
   const { thumbnail } = source;
   const image = source.featured_image;
 
-  if ( thumbnail ) {
+  if ( thumbnail && thumbnail.sizes ) {
     if ( thumbnail.sizes.medium && thumbnail.sizes.medium.url ) {
       return thumbnail.sizes.medium.url;
     }
