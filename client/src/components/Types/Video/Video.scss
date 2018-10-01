@@ -24,7 +24,8 @@
     }
   }
 
-
+  .ui.items:not(.unstackable) > .item > .ui.mini.image,
+  .ui.items:not(.unstackable) > .item > .ui.mini.image > img,
   .ui.mini.image {
     width: 20px;
     height: 20px;
