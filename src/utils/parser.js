@@ -69,22 +69,23 @@ const getDefaultThumbnail = ( type ) => {
 const getThumbnail = ( source ) => {
   const { thumbnail } = source;
   const image = source.featured_image;
+  const tn = ( thumbnail && thumbnail.sizes ) ? thumbnail.sizes : thumbnail;
 
-  if ( thumbnail && thumbnail.sizes ) {
-    if ( thumbnail.sizes.medium && thumbnail.sizes.medium.url ) {
-      return thumbnail.sizes.medium.url;
+  if ( tn ) {
+    if ( tn.medium && tn.medium.url ) {
+      return tn.medium.url;
     }
 
-    if ( thumbnail.sizes.small && thumbnail.sizes.small.url ) {
-      return thumbnail.sizes.small.url;
+    if ( tn.small && tn.small.url ) {
+      return tn.small.url;
     }
 
-    if ( thumbnail.sizes.large && thumbnail.sizes.large.url ) {
-      return thumbnail.sizes.large.url;
+    if ( tn.large && tn.large.url ) {
+      return tn.large.url;
     }
 
-    if ( thumbnail.sizes.full && thumbnail.sizes.full.url ) {
-      return thumbnail.sizes.full.url;
+    if ( tn.full && tn.full.url ) {
+      return tn.full.url;
     }
   } else if ( image && image.sizes && image.sizes.medium ) {
     return image.sizes.medium.url;
