@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Popup, Button } from 'semantic-ui-react';
-import { string, node, bool, object } from 'prop-types';
+import {
+  string, node, bool, object
+} from 'prop-types';
 import '../../assets/styles/tooltip.css';
 
 class PopupTrigger extends Component {
@@ -44,7 +46,7 @@ class PopupTrigger extends Component {
           className={ !this.state.isMobile ? 'popupElem_wrapper' : 'popupElem_wrapper popupElem_wrapper--mobile' }
           content={ this.props.content }
           horizontalOffset={ 4 }
-          position={ this.state.isMobile ? 'bottom center' : 'bottom right' }
+          position="bottom right"
         />
       </span>
     );
@@ -59,4 +61,3 @@ PopupTrigger.propTypes = {
 };
 
 export default PopupTrigger;
-
