@@ -49,7 +49,7 @@ export const getAvailableLanguages = ( item ) => {
       const langArr = item.units.reduce( ( langs, unit ) => {
         if ( unit.source && unit.source.length ) {
           langs.push( {
-            key: unit.language.language_code,
+            key: unit.language.locale,
             value: unit.language.display_name,
             text: unit.language.display_name
           } );
@@ -63,13 +63,13 @@ export const getAvailableLanguages = ( item ) => {
         let langArray = [];
         langArray = item.languages.map( post => ( {
           id: post.post_id,
-          key: post.language.language_code,
+          key: post.language.locale,
           value: post.language.display_name,
           text: post.language.display_name
         } ) );
         langArray.unshift( {
           id: item.id,
-          key: item.language.language_code,
+          key: item.language.locale,
           value: item.language.display_name,
           text: item.language.display_name
         } );

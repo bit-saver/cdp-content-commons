@@ -94,6 +94,17 @@ const getThumbnail = ( source ) => {
   return null;
 };
 
+const getThumbnailMeta = ( source ) => {
+  const thumbnail = ( ( source || {} ).thumbnail || {} );
+
+  const imageMeta = {
+    alt: ( thumbnail.alt ? thumbnail.alt : ' ' ),
+    caption: ( thumbnail.caption ? thumbnail.caption : '' )
+  };
+
+  return imageMeta;
+};
+
 const getThumbnailFromVideo = ( source ) => {
   let thumbnail = '';
 
@@ -159,6 +170,7 @@ const populateItem = ( source ) => {
     description: source.excerpt,
     content: source.content,
     thumbnail: getThumbnail( source ) || getDefaultThumbnail( source.type ),
+    thumbnailMeta: getThumbnailMeta( source ) || {},
     categories: source.categories || [],
     language: source.language,
     languages: source.languages || []
