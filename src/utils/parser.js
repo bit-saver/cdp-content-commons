@@ -133,7 +133,7 @@ const populateVideoItem = ( source, language ) => {
   const key = getLocaleKey( language );
   const thumbnail = getThumbnail( source );
   const units = source.unit;
-  const languageUnit = units.find( unit => unit.language.locale.toLowerCase() === key.toLowerCase() );
+  const languageUnit = units.find( unit => unit.language.language_code.toLowerCase() === key.toLowerCase() );
   let obj = {};
 
   if ( languageUnit ) {
