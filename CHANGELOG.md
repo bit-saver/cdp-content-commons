@@ -1,52 +1,68 @@
 # Change Log
-
 All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+# [1.5.0]
+
+**Features Added:**
+
+- Add captions and alt text to images in the search results modal
+
+**Bug Fixes:**
+
+- Define image figures to a maximum width of 100% to prevent them from overflowing the embed container
+
+**Changed:**
+
+- Use locale rather than language code to maintain project-wide consistency
 
 # [1.4.3](2018-09-20)
 
-**Changes**
+**Changed:**
 
 - Set single article module portion of embed URL to an environmental variable
 
 # [1.4.2](2018-09-12)
 
-**Bug Fixes**
+**Bug Fixes:**
 
 - Languages will only be displayed in the video language dropdown if a source exists in the language unit
 
 # [1.4.1](2018-09-10)
 
-**Bug Fixes**
+**Bug Fixes:**
 
 - Fixed difficulty selecting icon links in popups
 
 # [1.4.0](2018-09-08)
 
-**Features**
+**Features Added:**
 
 - Enhanced footer to inlude additional links and information
 - Added embed code generation to enable sharing off posts
 - Updated direct link for posts to point to original source
 
-**Bug Fixes**
+**Bug Fixes:**
 
 - Fixed tabbed underline on video popups
 
 # [1.3.0](2018-08-08)
 
-**Features**
+**Features Added:**
 
 - Embed code to display to embed both youtube and vimeo videos now active
 - Share windows now are either a popup for desktop or a new page for mobile
 
-**Bug Fixes**
+**Bug Fixes:**
 
 - Caption toggle now operates correctly and loads correct video based on caption selection
 - Fixed direct link UI display
 
 # [1.2.0](2018-07-18)
 
-**Features**
+**Features Added:**
 
 - Added Vimeo support
 - Provided a Vimeo/CloudFlare fallback option when YouTube is not available
@@ -54,13 +70,13 @@ All notable changes to this project will be documented in this file.
 - Updated UI to provide "web" and "broadcast" video quality display
 - Updated various UI styles
 
-**Bug Fixes**
+**Bug Fixes:**
 
 - Sources dropdown now sorted alphabetically
 
 # [1.1.0](2018-06-15)
 
-**Features**
+**Features Added:**
 
 - Added Contact Us page
 - Added Browse all [type] link above each recents section on Landing page
@@ -70,7 +86,7 @@ All notable changes to this project will be documented in this file.
 
 # [1.0.0](2018-05-29)
 
-**Features**
+**Features Added:**
 
 - Global search bar
 - Feedback form
