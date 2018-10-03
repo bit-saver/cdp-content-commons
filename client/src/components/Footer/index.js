@@ -73,8 +73,8 @@ const Footer = () => {
           </Header.Subheader>
           <Header.Subheader className="smalltext">
             This site is managed by
-            the <a href="https://www.state.gov/r/iip/">Bureau of International Information Programs</a>
-            within the <a href="https://state.gov">U.S. Department of State</a>.
+            the <a href="https://www.state.gov/r/iip/">Bureau of International Information Programs</a> within
+            the <a href="https://state.gov">U.S. Department of State</a>.
             External links to other Internet sites should not be construed as an endorsement of the views or privacy
             policies contained therein. IIP © 2018.
           </Header.Subheader>
