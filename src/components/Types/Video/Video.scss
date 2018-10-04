@@ -31,6 +31,24 @@
   }
 
 
+  @media only screen and (max-width: 767px) {
+    .ui.items.download-item > .item > .ui.mini.image,
+    .ui.items.download-item > .item > .ui.mini.image > img {
+      width: 20px !important;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .ui.items.download-item > .item {
+      flex-direction: row;
+    }
+
+    .ui.segment .ui.items.download-item .item .content {
+      padding: 0 0 0 1em !important;
+    }
+  }
+
+
   .ui.items > .item .meta {
     font-style: italic;
   }
