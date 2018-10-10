@@ -9,6 +9,7 @@ import shareIcon from '../../../assets/icons/icon_share.svg';
 import ModalItem from '../../Modals/ModalItem';
 import ModalLangDropdown from '../../Modals/ModalLangDropdown/ModalLangDropdown';
 import ModalContentMeta from '../../Modals/ModalContentMeta/ModalContentMeta';
+import ModalImage from '../../Modals/ModalImage/ModalImage';
 import ModalPostMeta from '../../Modals/ModalPostMeta/ModalPostMeta';
 import ModalPostTags from '../../Modals/ModalPostTags/ModalPostTags';
 import ModalText from '../../Modals/ModalText/ModalText';
@@ -119,9 +120,7 @@ class Post extends Component {
               />
             </div>
           </div>
-          <div className="modal_thumbnail">
-            <img src={ item.thumbnail } alt="post thumbnail" />
-          </div>
+          <ModalImage thumbnail={ item.thumbnail } thumbnailMeta={ item.thumbnailMeta } />
           <ModalContentMeta type={ item.type } dateUpdated={ item.modified } />
           <ModalText textContent={ item.content } />
           <ModalPostMeta
