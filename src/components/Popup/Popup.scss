@@ -30,9 +30,7 @@
       padding: 20px;
 
       &:before {
-        top: -8px !important;
-        right: 0.5em !important;
-        left: auto !important;
+        top: -8px !important;        
         transform: initial;
         -ms-transform: rotate(5deg) !important;
         width: auto;
@@ -41,10 +39,11 @@
         border-right: 8px solid transparent;
         border-bottom: 8px solid $bright-blue;
         background: transparent !important;
-        box-shadow: none !important;
-        @media screen and (max-width: 330px) {
-          right: 1.25em !important;
-        }
+        box-shadow: none !important;        
+        @media screen and (min-width: 600px) {
+          right: 0.5em !important;
+          left: auto !important;
+        }        
       }
 
       &:after {
@@ -72,12 +71,12 @@
     &--mobile {
       &.ui.popup {
         position: absolute;
+        right: 0 !important;
+        left: 50% !important;
+        transform: translateX(-50%);
         min-width: 300px;
-        max-width: 300px;
-        width: 100%;
-        @media screen and (max-width: 330px) {
-          left: 10px !important;
-        }
+        max-width: 100%;
+        width: 95%;
       }
     }
 
