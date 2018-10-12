@@ -31,7 +31,8 @@ class ClipboardCopy extends Component {
     this.toggleCls( '✓ Copied', 'copied' );
 
     // select text
-    window.getSelection().selectAllChildren( this.div );
+    // this.copyInput.select();
+    window.getSelection().selectAllChildren( this.copyInput );
 
     // Copy input value to document clipboard
     document.execCommand( 'copy' );
@@ -39,7 +40,7 @@ class ClipboardCopy extends Component {
     // Reset button
     this.timeoutID = setTimeout( () => {
       this.toggleCls();
-    }, 5000 );
+    }, 2500 );
   };
 
   render() {
@@ -52,15 +53,14 @@ class ClipboardCopy extends Component {
             <p className="clipboardcopy_label">{ label }</p>
           </div>
           <div className="clipboardcopy_item">
-            <div
+            <input
+              type="text"
+              defaultValue={ copyItem }
+              tabIndex="-1"
               className="clipboardcopy_item_text"
-              ref={ ( div ) => {
-                this.div = div;
-              } }
-            >
-              { copyItem }
-
-            </div>
+              disabled
+              ref={ ( copyInput ) => { this.copyInput = copyInput; } }
+            />
             <Button className={ this.state.cls } primary onClick={ this.handleCopyClick }>{ this.state.label }</Button>
           </div>
         </div>
