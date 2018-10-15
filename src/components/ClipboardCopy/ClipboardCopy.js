@@ -31,8 +31,7 @@ class ClipboardCopy extends Component {
     this.toggleCls( '✓ Copied', 'copied' );
 
     // select text
-    // this.copyInput.select();
-    window.getSelection().selectAllChildren( this.copyInput );
+    this.copyInput.select();
 
     // Copy input value to document clipboard
     document.execCommand( 'copy' );
@@ -58,7 +57,7 @@ class ClipboardCopy extends Component {
               defaultValue={ copyItem }
               tabIndex="-1"
               className="clipboardcopy_item_text"
-              disabled
+              readOnly
               ref={ ( copyInput ) => { this.copyInput = copyInput; } }
             />
             <Button className={ this.state.cls } primary onClick={ this.handleCopyClick }>{ this.state.label }</Button>
