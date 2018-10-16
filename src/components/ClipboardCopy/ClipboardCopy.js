@@ -42,6 +42,10 @@ class ClipboardCopy extends Component {
     }, 2500 );
   };
 
+  handleFocus = ( e ) => {
+    e.target.select();
+  };
+
   render() {
     const { copyItem, label } = this.props;
 
@@ -58,6 +62,7 @@ class ClipboardCopy extends Component {
               tabIndex="-1"
               className="clipboardcopy_item_text"
               readOnly
+              onFocus={ this.handleFocus }
               ref={ ( copyInput ) => { this.copyInput = copyInput; } }
             />
             <Button className={ this.state.cls } primary onClick={ this.handleCopyClick }>{ this.state.label }</Button>
