@@ -87,7 +87,7 @@ class DownloadVideo extends Component {
     }
 
     const videosArr = videos.map( ( v, i ) => v.downloadUrl && this.renderFormItem( v, i ) );
-    return <div>{ videosArr.length ? videosArr : 'There are no videos available for download at this time' }</div>;
+    return videosArr.length ? videosArr : 'There are no videos available for download at this time';
   }
 
   render() {
