@@ -4,7 +4,7 @@ header {
   text-align: center;
 }
 
-.bar {
+.landing.headerbar {
   background: url('../../assets/images/cdp_home_hero.jpg');
   background-size: cover;
   margin-bottom: 3em;
@@ -16,19 +16,9 @@ header {
     }
   }
 
-  nav {
-    @media screen and (max-width: 767px) {
-      position: fixed;
-      top: 0;
-      right: 0;
-      z-index: 999;
-      padding: 0;
-      width: 100%;
-    }
-  }
-
   nav .content.icon {
     color: white;
+    margin: 0.5em 0.6em;
   }
 
   nav .ui.menu .item,
@@ -64,8 +54,9 @@ header {
   }
 }
 
-.resultsbar,
-.videobar {
+.results.headerbar,
+.video.headerbar,
+.notfound.headerbar {
   background-image: linear-gradient(60deg, $light-blue 2%, $bright-blue 100%);
   border: none;
   border-radius: 0;
@@ -74,6 +65,31 @@ header {
   top: 0;
   width: 100%;
   z-index: 998;
+
+  .ui.container {
+    @media screen and (min-width: 768px) {
+      width: 1600px;
+    }
+    position: relative;
+  }
+   h1.ui.header {
+    @media screen and (min-width: 768px) {
+      float: left;
+      padding-top: 0.3em;
+    }
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+   .header .title {
+    padding: 0;
+    font-size: 0.8em;
+    @media screen and (min-width: 768px) {
+      font-size: 1em;
+      padding: 0.5em;
+      padding-left: 0;
+    }
+  }
 
   header {
     @media screen and (max-width: 767px) {
@@ -106,10 +122,37 @@ header {
   }
 }
 
-.aboutbar,
-.helpbar,
-.privacybar,
-.contactbar {
+.about.headerbar,
+.help.headerbar,
+.privacy.headerbar,
+.contact.headerbar {
+  .ui.container {
+    @media screen and (min-width: 768px) {
+      width: 1600px;
+    }
+    position: relative;
+  }
+   h1.ui.header {
+    @media screen and (min-width: 768px) {
+      float: left;
+      padding-top: 0.3em;
+    }
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+   .header .title {
+    padding: 0;
+    font-size: 0.8em;
+    @media screen and (min-width: 768px) {
+      font-size: 1em;
+      padding: 0.5em;
+      padding-left: 0;
+    }
+  }
+
+  .search_bar { display: none }
+
   background: white;
   border: none;
   border-radius: 0;
@@ -118,69 +161,4 @@ header {
   top: 0;
   width: 100%;
   z-index: 998;
-}
-
-.resultsbar .ui.container,
-.videobar .ui.container,
-.bar .ui.container,
-.aboutbar .ui.container,
-.helpbar .ui.container,
-.privacybar .ui.container,
-.contactbar .ui.container {
-  @media screen and (min-width: 768px) {
-    width: 1600px;
-  }
-  position: relative;
-}
-
-.resultsbar h1.ui.header,
-.videobar h1.ui.header,
-.aboutbar h1.ui.header,
-.helpbar h1.ui.header,
-.privacybar h1.ui.header,
-.contactbar h1.ui.header {
-  @media screen and (min-width: 768px) {
-    float: left;
-    padding-top: 0.3em;
-  }
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
-
-.resultsbar .header .title,
-.videobar .header .title,
-.aboutbar .header .title,
-.helpbar .header .title,
-.privacybar .header .title,
-.contactbar .header .title {
-  padding: 0;
-  font-size: 0.8em;
-  @media screen and (min-width: 768px) {
-    font-size: 1em;
-    padding: 0.5em;
-    padding-left: 0;
-  }
-}
-
-.resultsbar .sub.header.subtitle,
-.resultsbar .sub.header.subtext,
-.videobar .sub.header.subtitle,
-.videobar .sub.header.subtext,
-.aboutbar .sub.header.subtitle,
-.aboutbar .sub.header.subtext,
-.helpbar .sub.header.subtitle,
-.helpbar .sub.header.subtext,
-.privacybar .sub.header.subtitle,
-.privacybar .sub.header.subtext,
-.contactbar .sub.header.subtitle,
-.contactbar .sub.header.subtext {
-  display: none;
-}
-
-.aboutbar .search_bar,
-.helpbar .search_bar,
-.privacybar .search_bar,
-.contactbar .search_bar {
-  display: none;
 }
