@@ -1,10 +1,11 @@
 import React from 'react';
+import { bool } from 'prop-types';
 import { Header } from 'semantic-ui-react';
 import Title from '../Title';
 
-const Heading = () => (
+const Heading = props => (
   <Header as="h1">
-    <Title />
+    <Title isLanding={ props.isLanding } />
     <Header.Subheader className="subtitle">
       Discover, share, connect.
     </Header.Subheader>
@@ -16,5 +17,9 @@ const Heading = () => (
     </Header.Subheader>
   </Header>
 );
+
+Heading.propTypes = {
+  isLanding: bool
+};
 
 export default Heading;
