@@ -3,7 +3,7 @@ import { Header } from 'semantic-ui-react';
 import { string } from 'prop-types';
 import Title from '../Title';
 
-const Heading = ( props ) => (
+const Heading = props => (
   <Header as="h1">
     <Title />
     { props.page === 'landing' &&
