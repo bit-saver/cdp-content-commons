@@ -13,7 +13,7 @@ const HeaderItem = ( props ) => {
     <section className={ barClass }>
       <div className="ui container">
         <header>
-          <Heading />
+          <Heading isLanding={ barClass === 'bar' } />
           <Search />
         </header>
         <Nav />
