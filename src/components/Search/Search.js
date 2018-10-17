@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { func, shape, string, object } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { Form, Input } from 'semantic-ui-react';
+import { Form, Input, Icon } from 'semantic-ui-react';
 import './Search.css';
 
 // Text language detect - move to v2
@@ -77,21 +77,10 @@ class Search extends Component {
             onChange={ this.handleQueryOnChange }
             value={ this.props.search.query ? this.props.search.query : '' }
             size="large"
-            icon="search"
+            icon={ <Icon name="search" onClick={ this.handleSubmit } /> }
             placeholder="Type in keywords to search our content"
             { ...inputProps }
           />
-          { /* <Form.Group>
-            <Form.Input
-              placeholder="Type in keywords to search our content"
-              className="search_input"
-             // onBlur={ this.handleOnBlur }
-              onChange={ this.handleQueryOnChange }
-              value={ this.props.search.query ? this.props.search.query : '' }
-              style={ { textAlign: this.state.textAlign } }
-            />
-            <Form.Button icon="search" type="submit" />
-          </Form.Group> */ }
         </Form>
       </section>
     );
