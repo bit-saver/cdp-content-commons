@@ -31,7 +31,7 @@ class Recents extends Component {
     return typeObj.display_name;
   }
 
-  handleClick = ( e ) => {
+  handleClick = async ( e ) => {
     e.preventDefault();
     // NOTE: filters are cleared from search component when on landing page
     // so no need to clear filters here
@@ -43,7 +43,7 @@ class Recents extends Component {
       checked: true
     } );
 
-    this.props.createRequest();
+    await this.props.createRequest();
     this.props.history.push( '/results' );
   }
 
