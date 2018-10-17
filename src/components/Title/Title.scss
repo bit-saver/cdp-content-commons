@@ -7,11 +7,32 @@
     font-size: 60px;
   }
 }
-.beta {
-  font-size: 40%;
-  vertical-align: super;
-  color: $blue;
-  padding: 1px 6px;
-  background: $gold;
-  margin-left: 6px;
+
+
+.title_wrapper {
+  
+  &--header {
+    position: relative;
+
+    > .title {
+      margin-left: 27px;
+    }
+  }
+
+}
+
+
+.title_seal {
+  
+  &--landing {
+    display: block;
+    margin: 0 auto 1em auto;
+  }
+
+  &--header {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
