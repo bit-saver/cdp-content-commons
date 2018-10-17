@@ -353,7 +353,6 @@ class Video extends Component {
                 content={
                   <PopupTabbed
                     title="Embed this video on your site"
-
                     panes={ [
                       {
                         title: 'Copy Embed Code',
