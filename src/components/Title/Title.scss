@@ -8,22 +8,18 @@
   }
 }
 
-
 .title_wrapper {
-  
   &--header {
     position: relative;
+    top: 5px;
 
     > .title {
-      margin-left: 27px;
+      margin-left: 40px;
     }
   }
-
 }
 
-
 .title_seal {
-  
   &--landing {
     display: block;
     margin: 0 auto 1em auto;

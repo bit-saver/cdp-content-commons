@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Header, List } from 'semantic-ui-react';
 import './Footer.css';
 import flagImage from '../../assets/images/US-Flag-Color-735b69.png';
-import DOSseal from '../../assets/images/DOS_Seal.png';
+import DOSseal from '../../assets/images/DOS_Seal.svg';
 import slackLogo from '../../assets/images/logo_slack.png';
 
 const Footer = () => {
@@ -80,7 +80,7 @@ const Footer = () => {
           </Header.Subheader>
         </Header>
         <img src={ flagImage } alt="United States Flag" className="footer_img footer_img--usflag" />
-        <img src={ DOSseal } alt="Department of State Seal" className="footer_img footer_img--dosseal" />
+        <img src={ DOSseal } alt="Department of State Seal" width="30" height="30" className="footer_img footer_img--dosseal" />
       </Container>
     </footer>
   );
