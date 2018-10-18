@@ -47,7 +47,7 @@ export const languages = {
     display_name: 'Vietnamese',
     key: 'vi'
   },
-  zh: {
+  'zh-CN': {
     display_name: 'Chinese (Simplified)',
     key: 'zh-cn'
   }
