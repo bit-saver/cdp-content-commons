@@ -86,8 +86,10 @@ class DownloadVideo extends Component {
       videos.sort( this.sortByFilesize );
     }
 
-    const videosArr = videos.map( ( v, i ) => v.downloadUrl && this.renderFormItem( v, i ) );
-    return <div>{ videosArr.length ? videosArr : 'There are no videos available for download at this time' }</div>;
+    // Filter for videos w/ downloadable URLs, then return array of react elements
+    // returns empty array !downloadable URLs
+    const videosArr = videos.filter( ( v, i ) => v.downloadUrl !== '' ).map( ( v, i ) => this.renderFormItem( v, i ));
+    return videosArr.length ? videosArr : 'There are no videos available for download at this time';
   }
 
   render() {
