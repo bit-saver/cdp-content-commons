@@ -1,6 +1,7 @@
 @import '../../assets/styles/colors.scss';
 
 .bar {
+
   header {
     display: flex;
     justify-content: space-between;
@@ -17,17 +18,9 @@
   .title {
     color: #fff;
     font-size: 0.8em;
+    
     &:hover {
       color: #fff;
-    }
-
-    .beta {
-      margin-left: 6px;
-      padding: 1px 6px;
-      font-size: 55%;
-      vertical-align: super;
-      color: $blue;
-      background: $gold;
     }
   }
 
@@ -46,14 +39,8 @@
 
     .title {
       font-size: 2.5rem;
-      .beta {
-        font-size: 42%;
-      }
       @media screen and (min-width: 768px) {
         font-size: 4.285714rem;
-        .beta {
-          font-size: 35%;
-        }
       }
     }
 
@@ -116,11 +103,12 @@
   }
 
   /*** 
-    Results, Video - searchbar  
+    Results, Video, Admin, 404 - searchbar  
   ***/
   &--results,
   &--video,
-  &--admin {
+  &--admin,
+  &--404 {
     header {
       @media screen and (max-width: 767px) {
         text-align: left;
@@ -163,7 +151,8 @@
   &--login,
   &--register,
   &--registration-pending-approval,
-  &--admin {
+  &--admin,
+  &--404 {
     position: fixed;
     top: 0;
     z-index: 3;

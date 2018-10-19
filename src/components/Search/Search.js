@@ -4,7 +4,9 @@ import { func, shape, string, object } from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Form, Input, Icon } from 'semantic-ui-react';
+import config from '../../config';
 import './Search.css';
+
 
 // Text language detect - move to v2
 import axios from 'axios';
@@ -13,7 +15,7 @@ import { languages, getDirection } from '../../utils/language';
 class Search extends Component {
   constructor( props ) {
     super( props );
-    this.URL = `${process.env.REACT_APP_PUBLIC_API}/v1/util/language`;
+    this.URL = `${config.GOOGLE_LANGUAGE_DETECT_URL}?key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
     this.state = {
       direction: 'left'
     };
@@ -29,12 +31,19 @@ class Search extends Component {
     }
   }
 
+  getDetections = ( result ) => {
+    if ( result && result.data && result.data.data && result.data.data.detections ) {
+      const { detections } = result.data.data;
+      return detections.length && detections[0].length ? detections[0][0].language : null;
+    }
+    return null;
+  }
 
   async fetchTextLanguage( text ) {
-    const result = await axios.post( this.URL, { text } );
-    const data = ( result && result.data ) ? result.data : null;
-    if ( data && data[0] && data[0].language ) {
-      const { language } = data[0];
+    const result = await axios.post( `${this.URL}&q=${text}` );
+    const language = this.getDetections( result );
+
+    if ( language ) {
       this.setState( {
         direction: getDirection( language )
       } );
