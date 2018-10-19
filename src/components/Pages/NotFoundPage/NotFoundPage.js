@@ -47,7 +47,9 @@ class NotFoundPage extends Component {
     const { content } = this.state;
     return (
       <Page>
-        { content }
+        <section className="notFoundPage">
+          { content }
+        </section>
       </Page>
     );
   }

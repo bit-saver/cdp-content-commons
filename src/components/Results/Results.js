@@ -41,7 +41,7 @@ class Results extends Component {
     const { hits } = this.props.search.response;
     const items = hits ? hits.hits : [];
     return (
-      <section className="results">
+      <section className="resultsPage">
         <Breadcrumbs />
         { this.props.search.currentPage !== -1 && (
           <div>
@@ -50,7 +50,7 @@ class Results extends Component {
             <section>
               <ResultsHeader toggleView={ this.toggleView } currentView={ this.state.view } />
             </section>
-            <Grid className="results_wrapper">
+            <Grid className="resultsPage_wrapper">
               { items.map( item => (
                 <Grid.Column
                   mobile={ 16 }
@@ -65,7 +65,7 @@ class Results extends Component {
                 </Grid.Column>
               ) ) }
               { !items.length && (
-                <div className="results_noResults">
+                <div className="resultsPage_noResults">
                   <p>Sorry, your search did not return any results =(</p>
                 </div>
               ) }

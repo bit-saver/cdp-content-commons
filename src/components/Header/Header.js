@@ -7,13 +7,15 @@ import Nav from '../Nav';
 import Search from '../Search';
 
 const HeaderItem = ( props ) => {
-  const barClass = ( `${( props.location.pathname ).split( '/' ).slice( 1 )[0]}bar` );
+  let page = props.location.pathname.split( '/' ).join( ' ' ).trim();
+  if ( page === '' ) page = 'landing';
+  if ( page === '404' ) page = 'notfound';
 
   return (
-    <section className={ barClass }>
+    <section className={ `${page} headerbar` }>
       <div className="ui container">
         <header>
-          <Heading isLanding={ barClass === 'bar' } />
+          <Heading page={ page } />
           <Search />
         </header>
         <Nav />
