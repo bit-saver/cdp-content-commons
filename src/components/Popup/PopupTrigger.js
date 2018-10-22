@@ -13,6 +13,13 @@ class PopupTrigger extends Component {
 
   componentDidMount() {
     this.isMobile();
+
+    // iOS can only trigger an onclick event if element has cursor:pointer
+    // adding style to Modal on iOS devices
+    if ( 'ontouchstart' in document.documentElement ) {
+      const activeModal = document.querySelector('.ui.modal');
+      activeModal.style.cursor = 'pointer';
+    }
   }
 
   componentWillUnmount() {
