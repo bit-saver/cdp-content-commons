@@ -27,7 +27,7 @@ class Recents extends Component {
   getLabel = ( type ) => {
     if ( !type.list.length ) return '';
     const typeObj = type.list.find( item => item.key === this.props.postType );
-    if ( !typeObj.display_name ) return '';
+    if ( !typeObj || !typeObj.display_name ) return '';
     return typeObj.display_name;
   }
 
