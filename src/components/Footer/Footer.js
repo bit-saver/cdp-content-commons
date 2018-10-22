@@ -34,8 +34,11 @@ const Footer = () => {
     //   label: 'Sitemap'
     // }
   ];
+
+  const documentHeight = document.documentElement.getBoundingClientRect().height;
+
   return (
-    <footer className="ui">
+    <footer className={ documentHeight > 767 ? 'ui bottomFixed' : 'ui' }>
       <div className="footer-feedback">
         <p>
           Help us improve <Link name="home" to="/" className="footer_link">Content Commons</Link>.
