@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import * as ReactTapEventPlugin from 'react-tap-event-plugin';
 
 import './App.css';
@@ -30,8 +30,7 @@ const App = () => (
         <Route path="/privacy" component={ PrivacyPage } />
         <Route path="/contact" component={ ContactPage } />
         <Route path="/video" component={ VideoPage } />
-        <Route path="/404" component={ NotFoundPage } />
-        <Redirect to="/404" />
+        <Route component={ NotFoundPage } />
       </Switch>
     </div>
     <Footer />
