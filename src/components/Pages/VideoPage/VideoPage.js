@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { getItemRequest } from '../../../utils/api';
 import { normalizeItem } from '../../../utils/parser';
 import { parseQueryString } from '../../../utils/browser';
@@ -8,11 +8,15 @@ import Video from '../../Types/Video/Video';
 import './VideoPage.css';
 
 class VideoPage extends Component {
-  state = { redirect: false };
+  state = {};
 
   componentDidMount() {
     const parsed = parseQueryString( this.props.location.search );
     this.loadPage( parsed );
+  }
+
+  redirectTo404() {
+    this.props.history.replace( '/404' );
   }
 
   loadPage( parsed ) {
@@ -23,24 +27,22 @@ class VideoPage extends Component {
             const item = normalizeItem( response.hits.hits[0], parsed.language );
             this.setState( { item } );
           } else {
-            this.setState( { redirect: true } );
+            this.redirectTo404();
           }
         } )
         .catch( ( err ) => {
           // handle errors
         } );
     } else {
-      this.setState( { redirect: true } );
+      this.redirectTo404();
     }
   }
 
   render() {
-    if ( this.state.redirect ) return <Redirect to="/404" />;
-
     if ( !this.state.item ) {
       return (
         <section className="video-page">
-          <p className="video-page_paragraph">Loading Content...</p>
+          <p className="video-page_paragraph">Content Unavailable</p>
         </section>
       );
     }
@@ -54,7 +56,8 @@ class VideoPage extends Component {
 }
 
 VideoPage.propTypes = {
-  location: object
+  location: object,
+  history: object
 };
 
 export default withRouter( VideoPage );
