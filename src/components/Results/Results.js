@@ -66,7 +66,24 @@ class Results extends Component {
               ) ) }
               { !items.length && (
                 <div className="results_noResults">
-                  <p>Sorry, your search did not return any results =(</p>
+                  <div className="results_help">
+                    <i>{ `Sorry, no matches found for "${this.props.search.currentQuery}"` }</i>
+                    <p>
+                      We are working to enhance the search functionality of Content Commons. If you continue to
+                      experience issues with your search results or are having trouble with a particular search term,
+                      let us know!
+                    </p>
+                    <p>
+                      We will continue collecting analytics on what terms and phrases folks are searching in order to
+                      provide you a seamless search experience.
+                    </p>
+                    <div className="results_help--suggestions">
+                      <h3>Search suggestions</h3>
+                      <p>Check for spelling mistakes</p>
+                      <p>Broaden your search by using fewer or more general words</p>
+                      <p>Try different words that mean the same thing in the search box above</p>
+                    </div>
+                  </div>
                 </div>
               ) }
             </Grid>
