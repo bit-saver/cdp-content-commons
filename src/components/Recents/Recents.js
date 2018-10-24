@@ -33,8 +33,10 @@ class Recents extends Component {
 
   handleClick = async ( e ) => {
     e.preventDefault();
-    // NOTE: filters are cleared from search component when on landing page
-    // so no need to clear filters here
+    // NOTE: although filters are cleared from search component when on landing page
+    // need to clear here in the evetn BACK button is pushed and componentDidMount is
+    // not called on landing page
+    this.props.clearFilters();
 
     // enable post type in filter
     this.props.postTypeUpdate( {
@@ -145,6 +147,7 @@ Recents.propTypes = {
   createRequest: func,
   loadPostTypes: func,
   postTypeUpdate: func,
+  clearFilters: func,
   postType: string,
   type: object,
   history: object
