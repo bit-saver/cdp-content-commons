@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   from: new Date(),
   to: new Date(),
   list: [
-    { key: 'recent', display_name: 'Most Recent' },
+    { key: 'recent', display_name: 'Any Time' },
     {
       key: 'now-1d',
       display_name: 'Past 24 Hours'
@@ -22,7 +22,7 @@ const INITIAL_STATE = {
       display_name: 'Past Year'
     }
   ],
-  currentDate: { key: 'recent', display_name: 'Most Recent' }
+  currentDate: { key: 'recent', display_name: 'Any Time' }
 };
 
 export default ( state = INITIAL_STATE, action ) => {
@@ -30,7 +30,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case DATE_CHANGE:
       return {
         ...state,
-        currentDate: action.payload ? action.payload : { key: 'recent', display_name: 'Most Recent' }
+        currentDate: action.payload ? action.payload : { key: 'recent', display_name: 'Any Time' }
       };
 
     case FROM_DATE_CHANGE:
@@ -48,7 +48,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case CLEAR_FILTERS:
       return {
         ...state,
-        currentDate: { key: 'recent', display_name: 'Most Recent' }
+        currentDate: { key: 'recent', display_name: 'Any Time' }
       };
 
     default:

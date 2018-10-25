@@ -29,7 +29,7 @@ class FilterMenu extends Component {
           { /*  MAIN-MENU */ }
           { /* Date */ }
           <FilterMenuItem
-            filter="Most Recent"
+            filter="Date Range"
             selected={ this.props.date.currentDate }
             onFilterChange={ this.props.dateUpdate }
             options={ this.props.date.list }

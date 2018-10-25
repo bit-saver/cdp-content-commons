@@ -76,7 +76,7 @@ class FilterSelections extends Component {
         this.props.sourceUpdate( { key: value, display_name: label, checked } );
         break;
 
-      case 'most recent':
+      case 'date range':
         this.props.dateUpdate( { key: value, display_name: label } );
         break;
 
