@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Header, List } from 'semantic-ui-react';
 import './Footer.css';
@@ -6,7 +7,8 @@ import flagImage from '../../assets/images/US-Flag-Color-735b69.png';
 import DOSseal from '../../assets/images/DOS_Seal.svg';
 import slackLogo from '../../assets/images/logo_slack.png';
 
-const Footer = () => {
+
+const Footer = ( props ) => {
   const menuItems = [
     {
       name: 'home',
@@ -38,7 +40,7 @@ const Footer = () => {
   const documentHeight = document.documentElement.getBoundingClientRect().height;
 
   return (
-    <footer className={ documentHeight > 767 ? 'ui bottomFixed' : 'ui' }>
+    <footer className={ props.isError && documentHeight > 767 ? 'ui bottomFixed' : 'ui' }>
       <div className="footer-feedback">
         <p>
           Help us improve <Link name="home" to="/" className="footer_link">Content Commons</Link>.
@@ -83,6 +85,10 @@ const Footer = () => {
       </Container>
     </footer>
   );
+};
+
+Footer.propTypes = {
+  isError: bool
 };
 
 export default Footer;

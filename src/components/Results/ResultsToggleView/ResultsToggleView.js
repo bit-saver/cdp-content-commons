@@ -1,12 +1,13 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 import { Icon } from 'semantic-ui-react';
+import { isMobile } from '../../../utils/browser';
 import './ResultsToggleView.css';
 import '../../../assets/styles/tooltip.css';
 
 const ResultsToggleView = props => (
   <div className="results_toggleView">
-    <span tooltip="Gallery View">
+    <span tooltip="Gallery View" className={ isMobile() ? 'noTooltip' : '' }>
       <Icon
         name="grid layout"
         data-view="gallery"
@@ -14,7 +15,7 @@ const ResultsToggleView = props => (
         className={ props.currentView === 'gallery' ? 'active' : '' }
       />
     </span>
-    <span tooltip="List View">
+    <span tooltip="List View" className={ isMobile() ? 'noTooltip' : '' }>
       <Icon
         name="list"
         data-view="list"

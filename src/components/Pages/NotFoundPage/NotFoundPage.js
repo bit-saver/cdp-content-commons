@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { func } from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import Page from '../PageTmpl';
@@ -6,19 +7,25 @@ import config from '../../../config';
 import './NotFoundPage.css';
 
 class NotFoundPage extends Component {
-  constructor() {
-    super();
+  constructor( props ) {
+    super( props );
     this.state = {
       content: <div>Loading...</div>
     };
   }
 
   componentDidMount() {
+    this.props.toggleError();
+
     const cached = this.checkSessionStorage();
     if ( !cached ) {
       axios.get( config.NOTFOUND_URL )
         .then( response => this.onFetchResult( response.data ), error => this.onError( error ) );
     }
+  }
+
+  componentWillUnmount() {
+    this.props.toggleError();
   }
 
   onFetchResult = ( result ) => {
@@ -54,5 +61,9 @@ class NotFoundPage extends Component {
     );
   }
 }
+
+NotFoundPage.propTypes = {
+  toggleError: func
+};
 
 export default NotFoundPage;
