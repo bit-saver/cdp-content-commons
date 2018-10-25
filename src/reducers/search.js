@@ -9,6 +9,7 @@ import {
   SEARCH_SORT_PENDING,
   SEARCH_SORT_FAILED,
   SEARCH_SORT_SUCCESS,
+  SEARCH_SORT_UPDATE,
   SEARCH_AUTHOR_UPDATE,
   SEARCH_TAG_UPDATE,
   CLEAR_FILTERS
@@ -26,7 +27,7 @@ const INITIAL_STATE = {
   query: '',
   currentQuery: '',
   response: {},
-  sort: 'published',
+  sort: 'relevance',
   startIndex: 0,
   startPage: 1,
   tag: '',
@@ -50,6 +51,11 @@ export default ( state = INITIAL_STATE, action ) => {
       return {
         ...state,
         tag: action.payload
+      };
+    case SEARCH_SORT_UPDATE:
+      return {
+        ...state,
+        sort: action.payload
       };
     case SEARCH_REQUEST_PENDING:
       return {

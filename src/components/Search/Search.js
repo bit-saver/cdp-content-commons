@@ -64,10 +64,11 @@ class Search extends Component {
       .catch( err => console.log( err ) );
   };
 
-  handleSubmit = ( e ) => {
+  handleSubmit = async ( e ) => {
     e.preventDefault();
 
-    this.props.createRequest();
+    this.props.updateSort( 'relevance' );
+    await this.props.createRequest();
     this.props.history.push( '/results' );
   };
 
@@ -102,6 +103,7 @@ const mapStateToProps = state => ( {
 
 Search.propTypes = {
   updateSearchQuery: func,
+  updateSort: func,
   createRequest: func,
   clearFilters: func,
   languageUpdate: func,
