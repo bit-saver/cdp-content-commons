@@ -4,10 +4,10 @@ import Bodybuilder from 'bodybuilder';
 // i.e. fields to search, parser, etc.
 const fields = {
   post: [
-    'title', 'author', 'content', 'excerpt', 'categories', 'tags'
+    'title^2', 'author', 'content', 'excerpt', 'categories', 'tags'
   ],
   video: [
-    'author', 'unit.title', 'unit.desc', 'unit.transcript.text', 'unit.categories.name', 'unit.tags'
+    'author', 'unit.title^6', 'unit.desc^3', 'unit.transcript.text', 'unit.categories.name', 'unit.tags'
   ]
 };
 
@@ -213,6 +213,8 @@ export const queryBuilder = ( store ) => {
     const qryObj = { query: `${escapeRegExp( store.search.query )} AND (${optionStr})` };
     if ( hasSelectedTypes ) {
       qryObj.fields = getQryFields( store.type.currentPostTypes );
+    } else {
+      qryObj.fields = getQryFields( store.type.list );
     }
     body.query( 'query_string', qryObj );
   } else {
