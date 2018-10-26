@@ -11,7 +11,6 @@
       position: relative;
       top: 0.5em;
     }
-
   }
 
   &left {
@@ -34,17 +33,15 @@
     }
   }
 
-  &gridleft {    
-
+  &gridleft {
     &.column {
       padding-right: 0 !important;
       padding-bottom: 0 !important;
-      min-height: 320px;      
+      min-height: 320px;
     }
   }
 
   &gridright {
-
     .ui.items {
       height: 100%;
 
@@ -59,19 +56,22 @@
 
   &overlay {
     position: absolute;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
     bottom: 0;
     width: 100%;
-    height: auto; 
-    color: white; 
-    font-size: 3em; 
-    padding: 0.5em;
-    line-height: 1em;
-    text-shadow: 
-      -1px -1px 0 rgba(0,0,0,0.3),
-      1px -1px 0 rgba(0,0,0,0.3),
-      -1px 1px 0 rgba(0,0,0,0.3), 
-      1px 1px 0 rgba(0,0,0,0.3);
+    height: auto;
+    color: white;
+    font-size: 2.1em;
+    font-weight: 600;
+    padding: 2em 0 0.5em 0.5em;
+    line-height: 1.2em;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3), 1px -1px 0 rgba(0, 0, 0, 0.3),
+      -1px 1px 0 rgba(0, 0, 0, 0.3), 1px 1px 0 rgba(0, 0, 0, 0.3);
 
     &_title {
       width: 80%;
@@ -80,7 +80,7 @@
     &_icon {
       position: absolute;
       bottom: 0.5em;
-      right: 0.5em; 
+      right: 0.5em;
     }
   }
 
@@ -89,13 +89,12 @@
   }
 }
 
-
 .ui.items .item.recentsItem {
   border: 1px solid $light-grey;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
-  .recentsItem_img { 
+  .recentsItem_img {
     position: relative;
     min-width: 195px;
     background-size: cover;
@@ -114,11 +113,11 @@
   }
 
   .content {
-    position: relative; 
-    padding: 1em;    
+    position: relative;
+    padding: 1em;
 
     .header {
-      margin-bottom: 2.2em;  
+      margin-bottom: 2.2em;
       font-size: 1.5em;
       line-height: 1.2em;
       color: $blue;
@@ -132,7 +131,7 @@
 
     .meta {
       position: absolute;
-      bottom: 0em;      
+      bottom: 0em;
       margin-bottom: 1em;
       line-height: 1.2em;
       @media screen and (max-width: 991px) {
@@ -150,8 +149,7 @@
         @media screen and (max-width: 991px) {
           font-size: 0.8em;
         }
-      }      
+      }
     }
   }
-
 }
