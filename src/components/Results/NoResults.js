@@ -6,9 +6,9 @@ const message = term => ( ( term )
   : 'Sorry, no matches found' );
 
 const NoResults = props => (
-  <div className="results_noResults">
-    <div className="results_help">
-      <i className="results_help--nomatch">{ message( props.searchTerm ) }</i>
+  <div className="resultsPage_noResults">
+    <div className="resultsPage_help">
+      <i className="resultsPage_help--nomatch">{ message( props.searchTerm ) }</i>
       <p>
         We are working to enhance the search functionality of Content Commons. If you continue to
         experience issues with your search results or are having trouble with a particular search term,
@@ -24,7 +24,7 @@ const NoResults = props => (
         We will continue collecting analytics on what terms and phrases folks are searching in order to
         provide you a seamless search experience.
       </p>
-      <div className="results_help--suggestions">
+      <div className="resultsPage_help--suggestions">
         <h3>Search suggestions</h3>
         <ul>
           <li>Check for spelling mistakes</li>
