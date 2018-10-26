@@ -7,6 +7,7 @@ import Breadcrumbs from '../Breadcrumbs';
 import FilterMenu from '../FilterMenu/FilterMenu';
 import ResultsHeader from './ResultsHeader';
 import ResultItem from './ResultItem';
+import NoResults from './NoResults';
 import ResultsPagination from './ResultsPagination';
 import { Grid } from 'semantic-ui-react';
 import { normalizeItem } from '../../utils/parser';
@@ -46,6 +47,8 @@ class Results extends Component {
         { this.props.search.currentPage !== -1 && (
           <div>
             <SearchTerm />
+            { !items.length && ( <NoResults searchTerm={ this.props.search.currentQuery } /> ) }
+            <hr />
             <FilterMenu />
             <section>
               <ResultsHeader toggleView={ this.toggleView } currentView={ this.state.view } />
@@ -64,11 +67,6 @@ class Results extends Component {
                   <ResultItem key={ item._id } item={ normalizeItem( item ) } />
                 </Grid.Column>
               ) ) }
-              { !items.length && (
-                <div className="results_noResults">
-                  <p>Sorry, your search did not return any results =(</p>
-                </div>
-              ) }
             </Grid>
             <ResultsPagination />
           </div>

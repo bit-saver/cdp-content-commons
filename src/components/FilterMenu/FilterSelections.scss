@@ -1,9 +1,8 @@
 @import "../../assets/styles/colors.scss";
 
 .filterMenu {
-
   &_selections {
-    margin-top: 1em;    
+    margin-top: 1.5em;
     transition: opacity 0.8s ease, max-height 1s ease;
 
     &.display {
