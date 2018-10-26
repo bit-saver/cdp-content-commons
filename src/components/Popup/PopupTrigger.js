@@ -18,7 +18,7 @@ class PopupTrigger extends Component {
     // adding style to Modal on iOS devices
     if ( 'ontouchstart' in document.documentElement ) {
       const activeModal = document.querySelector('.ui.modal');
-      activeModal.style.cursor = 'pointer';
+      if ( activeModal && activeModal.style ) activeModal.style.cursor = 'pointer';
     }
   }
 
