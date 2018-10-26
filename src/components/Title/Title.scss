@@ -3,32 +3,19 @@
 .title,
 .title:hover {
   color: $blue;
-  @media screen and (min-width: 641px) {
-    font-size: 60px;
-  }
 }
 
-.title_wrapper {
-  &--header {
-    position: relative;
-    top: 5px;
-
-    > .title {
-      margin-left: 40px;
-    }
-  }
-}
 
 .title_seal {
+  margin: 0.3em 0.3em 0.3em 0;
+
   &--landing {
     display: block;
     margin: 0 auto 1em auto;
   }
 
   &--header {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    display: inline-block;
+    vertical-align: middle;
   }
 }

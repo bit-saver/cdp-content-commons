@@ -15,6 +15,10 @@ class VideoPage extends Component {
     this.loadPage( parsed );
   }
 
+  redirectTo404() {
+    this.props.history.replace( '/404' );
+  }
+
   loadPage( parsed ) {
     if ( parsed && parsed.site && parsed.id ) {
       getItemRequest( parsed.site, parsed.id )
@@ -22,11 +26,15 @@ class VideoPage extends Component {
           if ( response.hits && response.hits.hits && response.hits.hits[0] ) {
             const item = normalizeItem( response.hits.hits[0], parsed.language );
             this.setState( { item } );
+          } else {
+            this.redirectTo404();
           }
         } )
         .catch( ( err ) => {
           // handle errors
         } );
+    } else {
+      this.redirectTo404();
     }
   }
 
@@ -48,7 +56,8 @@ class VideoPage extends Component {
 }
 
 VideoPage.propTypes = {
-  location: object
+  location: object,
+  history: object
 };
 
 export default withRouter( VideoPage );

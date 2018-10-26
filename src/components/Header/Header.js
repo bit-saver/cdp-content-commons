@@ -7,16 +7,17 @@ import Nav from '../Nav';
 import Search from '../Search';
 
 const HeaderItem = ( props ) => {
-  const barClass = ( `${( props.location.pathname ).split( '/' ).slice( 1 )[0]}bar` );
+  const pagePath = props.location.pathname.split( '/' ).slice( 1 );
+  const barClass = `bar ${pagePath[0] === '' ? 'bar--home' : pagePath.map( path => `bar--${path}` ).join( ' ' )}`;
 
   return (
     <section className={ barClass }>
       <div className="ui container">
         <header>
-          <Heading isLanding={ barClass === 'bar' } />
+          <Heading isLanding={ barClass === 'bar bar--home' } />
           <Search />
+          <Nav />
         </header>
-        <Nav />
       </div>
     </section>
   );
@@ -25,5 +26,6 @@ const HeaderItem = ( props ) => {
 HeaderItem.propTypes = {
   location: object
 };
+
 
 export default withRouter( HeaderItem );
