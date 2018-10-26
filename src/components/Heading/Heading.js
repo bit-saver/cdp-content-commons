@@ -11,7 +11,7 @@ const Heading = props => (
       The Commons is the portal to find, use, and share content from the U.S. Department of State.
     </Header.Subheader>
     <Header.Subheader className="subtext">
-      Connecting people with content. To get started, search or browse below.
+      To get started, search or browse below.
     </Header.Subheader>
   </Header>
 );
