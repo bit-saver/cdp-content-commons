@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Popup, Button } from 'semantic-ui-react';
 import { string, node, bool, object } from 'prop-types';
+import { isMobile } from '../../utils/browser';
 import '../../assets/styles/tooltip.css';
 
 class PopupTrigger extends Component {
@@ -70,7 +71,7 @@ class PopupTrigger extends Component {
         <Popup
           trigger={
             <Button
-              className="trigger"
+              className={ isMobile() ? 'trigger noTooltip' : 'trigger' }
               tooltip={ this.props.toolTip }
             >
               <img
