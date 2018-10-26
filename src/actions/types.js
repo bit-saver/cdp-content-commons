@@ -10,6 +10,7 @@ export const SEARCH_PAGE_SUCCESS = 'search_page_success';
 export const SEARCH_SORT_PENDING = 'search_sort_pending';
 export const SEARCH_SORT_FAILED = 'search_sort_failed';
 export const SEARCH_SORT_SUCCESS = 'search_sort_success';
+export const SEARCH_SORT_UPDATE = 'search_sort_update';
 
 export const LOAD_LANGUAGES_PENDING = 'load_languages_pending';
 export const LOAD_LANGUAGES_FAILED = 'load_languages_failed';

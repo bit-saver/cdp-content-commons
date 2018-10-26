@@ -37,6 +37,7 @@ class Recents extends Component {
     // need to clear here in the evetn BACK button is pushed and componentDidMount is
     // not called on landing page
     this.props.clearFilters();
+    this.props.updateSort( 'published' );
 
     // enable post type in filter
     this.props.postTypeUpdate( {
@@ -148,6 +149,7 @@ Recents.propTypes = {
   loadPostTypes: func,
   postTypeUpdate: func,
   clearFilters: func,
+  updateSort: func,
   postType: string,
   type: object,
   history: object

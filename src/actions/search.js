@@ -4,6 +4,7 @@ import {
   SEARCH_QUERY_UPDATE,
   SEARCH_AUTHOR_UPDATE,
   SEARCH_TAG_UPDATE,
+  SEARCH_SORT_UPDATE,
   SEARCH_REQUEST_PENDING,
   SEARCH_REQUEST_FAILED,
   SEARCH_REQUEST_SUCCESS,
@@ -70,6 +71,11 @@ export const calculatePages = ( _total, _currentPage, pageSize ) => {
     pages
   };
 };
+
+export const updateSort = payload => ( {
+  type: SEARCH_SORT_UPDATE,
+  payload
+} );
 
 export const updateSearchQuery = payload => ( {
   type: SEARCH_QUERY_UPDATE,
