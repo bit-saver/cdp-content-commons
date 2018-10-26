@@ -103,10 +103,12 @@ footer {
     }
 
     .sub.header {
+      margin-bottom: 15px;
+      line-height: 1.428;
 
       &.subtitle {
         font-size: 20px;
-        font-weight: bold;
+        font-weight: bold;        
         color: white;
       }
 
@@ -117,8 +119,7 @@ footer {
 
       &.smalltext {
         font-size: 11px;
-        color: white;
-        margin-bottom: 15px;
+        color: white;        
       }
 
       > img.footer_img--slack {
