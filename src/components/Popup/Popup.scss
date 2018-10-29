@@ -17,6 +17,11 @@
     font-size: 0.85rem;
     top: 0;
   }
+
+  &.noTooltip:before,
+  &.noTooltip:after {
+    display: none;
+  }
 }
 
 .popupElem {
