@@ -209,7 +209,7 @@ export const queryBuilder = ( store ) => {
   }, '' );
 
   // add original search query last
-  if ( store.search.query ) {
+  if ( store.search.query && store.search.query.trim() ) {
     const qryObj = { query: `${escapeRegExp( store.search.query )} AND (${optionStr})` };
     if ( hasSelectedTypes ) {
       qryObj.fields = getQryFields( store.type.currentPostTypes );

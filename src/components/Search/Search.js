@@ -67,10 +67,10 @@ class Search extends Component {
   handleSubmit = async ( e ) => {
     e.preventDefault();
 
-    if ( this.props.search.query === '' ) {
-      this.props.updateSort( 'published' );
-    } else {
+    if ( this.props.search.query && this.props.search.query.trim() ) {
       this.props.updateSort( 'relevance' );
+    } else {
+      this.props.updateSort( 'published' );
     }
     await this.props.createRequest();
     this.props.history.push( '/results' );
