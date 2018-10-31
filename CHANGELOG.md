@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [1.6.0](2018-11-01)
+
+**Added:**
+
+- Integrate Google Translate API for language detection. Search results will now reflect search term in language
+- Redirect to 404 page when a route is not found
+- Help content added to embed article and video modal windows
+- Message will be shown when no videos are avaialble for download
+- Mesaage will be shown when search does not return any results
+
+**Changed:**
+
+- Change favicon to DoS Seal
+- Remove "Connecting people with content." from the subheading on the homepage
+- Enhance search query
+  - Boost the title, desc fields
+  - Search by 'Relevance' when text is entered in the search field
+  - Ensure that 'Recent' is used in the Browse links and when search field is empty
+
+**Fixed:**
+
+- Search fails if only blank spaces/characters are entered
+- Searching on various special characters throws a 400 bad request error
+- Selecting 'Browse all [type]' from Landing page and then the 'Back' would not clear type selections
+- Search input drops to new line at certain screen widths
+- Tooltips expanding Header outside of viewport on Mobile
+- Fix iPhone 6,6s,7 issues:
+  - Oversized Arrow Icon on Click of Video and SRT Tabs
+  - Share, Embed, and Download Links Shifted to the Left Corner of Screen
+  - Browse all Video link displays on the left hand corner of the screen instead of the right
+  - Copy button is partially visible on share video page and download page
+  - Download arrow icon is not visible when you click on video file and SRT tabs.
+  - When downloaded, local video is closed, the homepage does not reload
+- Edge [v40] and IE[11]: Close Icon Missing from Modals for Articles and Videos
+- Edge [v40][9] Copy Button is outside image area on share of video/article
+- IE [v11] Win10[7] Articles and Video Pages have Copy Button Partially Displayed and Scroll Bar Displayed
+- Edge [v40][9] Copy Button is Outside Image Area on Share of Video/Article
+- FF [Win10][15] Copy Button Partially Displayed and Scroll Bar Displayed on Articles and Videos
+
 # [1.5.2](2018-10-18)
 
 **Changed:**
@@ -13,18 +52,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [1.5.1](2018-10-17)
 
-**Features Added:**
+**Added:**
 
 - Make search icon clickable
 - Remove BETA tag and add DOS Seal
 
 # [1.5.0]
 
-**Features Added:**
+**Added:**
 
 - Add captions and alt text to images in the search results modal
 
-**Bug Fixes:**
+**Fixed:**
 
 - Define image figures to a maximum width of 100% to prevent them from overflowing the embed container
 
@@ -40,43 +79,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [1.4.2](2018-09-12)
 
-**Bug Fixes:**
+**Fixed:**
 
 - Languages will only be displayed in the video language dropdown if a source exists in the language unit
 
 # [1.4.1](2018-09-10)
 
-**Bug Fixes:**
+**Fixed:**
 
 - Fixed difficulty selecting icon links in popups
 
 # [1.4.0](2018-09-08)
 
-**Features Added:**
+**Added:**
 
 - Enhanced footer to inlude additional links and information
 - Added embed code generation to enable sharing off posts
 - Updated direct link for posts to point to original source
 
-**Bug Fixes:**
+**Fixed:**
 
 - Fixed tabbed underline on video popups
 
 # [1.3.0](2018-08-08)
 
-**Features Added:**
+**Added:**
 
 - Embed code to display to embed both youtube and vimeo videos now active
 - Share windows now are either a popup for desktop or a new page for mobile
 
-**Bug Fixes:**
+**Fixed:**
 
 - Caption toggle now operates correctly and loads correct video based on caption selection
 - Fixed direct link UI display
 
 # [1.2.0](2018-07-18)
 
-**Features Added:**
+**Added:**
 
 - Added Vimeo support
 - Provided a Vimeo/CloudFlare fallback option when YouTube is not available
@@ -84,13 +123,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated UI to provide "web" and "broadcast" video quality display
 - Updated various UI styles
 
-**Bug Fixes:**
+**Fixed:**
 
 - Sources dropdown now sorted alphabetically
 
 # [1.1.0](2018-06-15)
 
-**Features Added:**
+**Added:**
 
 - Added Contact Us page
 - Added Browse all [type] link above each recents section on Landing page
@@ -100,7 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [1.0.0](2018-05-29)
 
-**Features Added:**
+**Added:**
 
 - Global search bar
 - Feedback form
