@@ -42,7 +42,7 @@ class Results extends Component {
     const { hits } = this.props.search.response;
     const items = hits ? hits.hits : [];
     return (
-      <section className="resultsPage">
+      <section className="results">
         <Breadcrumbs />
         { this.props.search.currentPage !== -1 && (
           <div>
@@ -53,7 +53,7 @@ class Results extends Component {
             <section>
               <ResultsHeader toggleView={ this.toggleView } currentView={ this.state.view } />
             </section>
-            <Grid className="resultsPage_wrapper">
+            <Grid className="results_wrapper">
               { items.map( item => (
                 <Grid.Column
                   mobile={ 16 }
