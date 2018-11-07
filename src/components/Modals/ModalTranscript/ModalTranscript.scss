@@ -31,13 +31,14 @@
     display: block;
   }
 
-  &_label {
-    font-size: 12px;
-    color: $shuttle-grey;
-  }
-
   &_text {
-    width: 50%;
     margin: 0 auto;
+    .modal_section--textContent {
+      .textContent {
+        word-wrap: normal;
+        white-space: pre-wrap;
+        overflow: inherit;
+      }
+    }
   }
 }

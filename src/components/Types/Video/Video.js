@@ -353,6 +353,7 @@ class Video extends Component {
                 content={
                   <PopupTabbed
                     title="Embed this video on your site"
+
                     panes={ [
                       {
                         title: 'Copy Embed Code',
@@ -431,7 +432,7 @@ class Video extends Component {
 
           <Embed { ...videoProps } placeholder={ this.props.item.thumbnail } />
 
-          <ModalContentMeta type={ type } dateUpdated={ modified } transcript={ this.getVideoTranscript() } />
+          <ModalContentMeta type={ type } dateUpdated={ modified } transcript={ this.getVideoTranscript( unit ) } />
           <ModalDescription description={ unit.desc } />
           <ModalPostMeta author={ author } logo={ logo } source={ owner } datePublished={ published } />
           <ModalPostTags tags={ unit.categories } />

@@ -6,7 +6,7 @@ import { array, string } from 'prop-types';
 class DownloadTranscript extends Component {
   renderFormItems( units ) {
     const transcripts = units
-      .filter( unit => unit.srt && unit.transcript.srcUrl )
+      .filter( unit => unit.transcript && unit.transcript.srcUrl )
       .map( ( unit, i ) => this.renderFormItem( unit, i ) );
     return transcripts.length ? transcripts : 'There are no transcripts available for download at this time';
   }

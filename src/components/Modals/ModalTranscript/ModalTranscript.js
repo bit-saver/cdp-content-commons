@@ -1,5 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
+import ModalText from '../ModalText/ModalText';
 import './ModalTranscript.css';
 
 const ModalTranscript = ( props ) => {
@@ -7,9 +8,8 @@ const ModalTranscript = ( props ) => {
 
   return (
     <div className={ classes }>
-      <p className="transcript_label">Transcript:</p>
       <div className="transcript_text">
-        { transcript }
+        <ModalText textContent={ transcript } />
       </div>
     </div>
   );
