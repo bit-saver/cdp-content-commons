@@ -34,6 +34,7 @@ export const escape = ( id ) => {
   return re.test( id.charAt( 0 ) ) ? `\\${id}` : id;
 };
 
+export const escapeQuotes = string => string.replace( /"/g, '\\"' );
 export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
 export const titleCase = str =>
   str
@@ -208,7 +209,7 @@ export const queryBuilder = ( store ) => {
 
   // add original search query last
   if ( store.search.query ) {
-    const qryObj = { query: `${store.search.query} AND (${optionStr})` };
+    const qryObj = { query: `${escapeQuotes( store.search.query )} AND (${optionStr})` };
     if ( hasSelectedTypes ) {
       qryObj.fields = getQryFields( store.type.currentPostTypes );
     }
