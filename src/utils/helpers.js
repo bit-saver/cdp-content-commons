@@ -146,11 +146,13 @@ const getQryFields = ( types = [] ) => {
 
 const escapeRegExp = string => string.replace( /[.*+-=&!?^~${}()|[\]\\]/g, '\\$&' );
 
+const escapeQuotes = string => string.replace( /"/g, '\\"' );
+
 export const queryBuilder = ( store ) => {
   const body = new Bodybuilder();
   const options = [];
   const hasSelectedTypes = store.type.currentPostTypes.length;
-
+  console.log('queryBuilder\r\n', store);
   if ( store.language.currentLanguage ) {
     options.push( getLanguageQry( store.language.currentLanguage ) );
   }
@@ -210,7 +212,7 @@ export const queryBuilder = ( store ) => {
 
   // add original search query last
   if ( store.search.query && store.search.query.trim() ) {
-    const qryObj = { query: `${escapeRegExp( store.search.query )} AND (${optionStr})` };
+    const qryObj = { query: `${escapeQuotes( escapeRegExp( store.search.query ) )} AND (${optionStr})` };
     if ( hasSelectedTypes ) {
       qryObj.fields = getQryFields( store.type.currentPostTypes );
     } else {
