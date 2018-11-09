@@ -155,21 +155,14 @@ const escapeRegExp = string => string.replace( /[.*+-=&!?^~${}()|[\]\\]/g, '\\$&
  * @returns string
  */
 const maybeFixQuotes = ( str ) => {
-  const arr = str.split( '' );
-  const quoteCount = arr.filter( c => c === '"' ).length;
+  const quoteCount = str.replace( /[^"]/g, '' ).length;
 
   // If only 1 quote then escape it
-  if ( quoteCount < 2 ) return str.replace( '"', '\\"' );
+  if ( quoteCount === 1 ) return str.replace( '"', '\\"' );
   // If an odd number of quotes then escape all the ones in the middle
   else if ( quoteCount % 2 === 1 ) {
-    const quotes = {
-      first: str.indexOf( '"' ),
-      last: str.lastIndexOf( '"' )
-    };
-    const first = str.slice( 0, quotes.first + 1 );
-    const mid = str.slice( quotes.first + 1, quotes.last ).replace( '"', '\\"' );
-    const last = str.slice( quotes.last );
-    return `${first}${mid}${last}`;
+    const parts = str.split( '"' );
+    return `${parts[0]}"${parts.slice( 1, -1 ).join( '\\"' )}"${parts[parts.length - 1]}`;
   }
   return str;
 };
@@ -238,7 +231,7 @@ export const queryBuilder = ( store ) => {
 
   // add original search query last
   if ( store.search.query && store.search.query.trim() ) {
-    const qryObj = { query: `${maybeFixQuotes( escapeRegExp( store.search.query ) )} AND (${optionStr})` };
+    const qryObj = { query: `(${maybeFixQuotes( escapeRegExp( store.search.query ) )}) AND (${optionStr})` };
     if ( hasSelectedTypes ) {
       qryObj.fields = getQryFields( store.type.currentPostTypes );
     } else {
