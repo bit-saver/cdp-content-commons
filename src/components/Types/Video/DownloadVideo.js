@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
 import { Item } from 'semantic-ui-react';
 import { object, string, bool, func } from 'prop-types';
-import withFileDownload from '../../../utils/withFiledownload';
+import withFileDownload from '../../../utils/withFileDownload';
 
 class DownloadVideo extends Component {
   getSrt() {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import downloadIcon from '../../../assets/icons/icon_download.svg';
 import { Item } from 'semantic-ui-react';
 import { array, string, func } from 'prop-types';
-import withFileDownload from '../../../utils/withFiledownload';
+import withFileDownload from '../../../utils/withFileDownload';
 
 class DownloadSrt extends Component {
   renderFormItems( units ) {
