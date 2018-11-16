@@ -13,10 +13,12 @@ const withFileDownload = ( WrappedComponent ) => {
     }
 
     download = ( url, title, locale, id = '' ) => {
+      // Replace whitespace with dashes and remove non-alphanumerics
+      title = title.replace( /\s+/g, '-' ).replace( /[^\w-]/g, '' );
+      locale = locale.replace( '-', '_' );
       const ext = url.substr( url.lastIndexOf( '.' ) );
       id = ( id ) ? `.${id}` : '';
-      let filename = `${title}.${locale}${id}${ext}`;
-      filename = filename.replace( /(\s|-)/g, '_' ).toLowerCase();
+      const filename = `${title}.${locale}${id}${ext}`.toLowerCase();
       axios
         .post( this.ENDPOINT, { url, filename }, { responseType: 'blob' } )
         .then( ( response ) => {
@@ -27,7 +29,7 @@ const withFileDownload = ( WrappedComponent ) => {
             error: `Oops there was a problem downloading your file: ${err.message}`
           } );
         } );
-    }
+    };
 
     render() {
       return <WrappedComponent { ...this.props } download={ this.download } error={ this.state.error } />;

@@ -56,11 +56,11 @@ class DownloadVideo extends Component {
     const size = this.getSizeInfo( video.size );
     // const fn = `${title.replace( /\s/g, '_' )}_${video.size.width}.${this.getFnExt( video.downloadUrl )}`;
     const videoQuality = `${video.video_quality && video.video_quality === 'broadcast' ? 'broadcast' : 'web'}`;
-
+    const downloadIdentifier = `${videoQuality}_${size.weight}_${size.label}`.replace( /\s/g, '' );
     return (
       <div key={ `fs_${index}` } >
         <Item.Group className="download-item">
-          <Item as="a" onClick={ () => this.props.download( video.downloadUrl, title, language.locale, videoQuality ) }>
+          <Item as="a" onClick={ () => this.props.download( video.downloadUrl, title, language.locale, downloadIdentifier ) }>
             <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
             <Item.Content>
               <Item.Header className="download-header">
