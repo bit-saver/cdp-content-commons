@@ -5,6 +5,7 @@ import './Header.css';
 import Heading from '../Heading';
 import Nav from '../Nav';
 import Search from '../Search';
+import Alert from '../Alert';
 
 const HeaderItem = ( props ) => {
   const pagePath = props.location.pathname.split( '/' ).slice( 1 );
@@ -19,6 +20,7 @@ const HeaderItem = ( props ) => {
           <Nav />
         </header>
       </div>
+      <Alert />
     </section>
   );
 };
