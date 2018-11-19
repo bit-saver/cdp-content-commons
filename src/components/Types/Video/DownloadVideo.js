@@ -60,7 +60,7 @@ class DownloadVideo extends Component {
     return (
       <div key={ `fs_${index}` } >
         <Item.Group className="download-item">
-          <Item as="a" onClick={ () => this.props.download( video.downloadUrl, title, language.locale, downloadIdentifier ) }>
+          <Item as="a" href={ this.props.downloadLink( video.downloadUrl, title, language.locale, downloadIdentifier ) }>
             <Item.Image size="mini" src={ downloadIcon } className="download-icon" />
             <Item.Content>
               <Item.Header className="download-header">
@@ -109,7 +109,7 @@ DownloadVideo.propTypes = {
   selectedLanguageUnit: object,
   instructions: string,
   burnedInCaptions: bool,
-  download: func,
+  downloadLink: func,
   error: string
 };
 

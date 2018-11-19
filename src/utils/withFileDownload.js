@@ -31,8 +31,29 @@ const withFileDownload = ( WrappedComponent ) => {
         } );
     };
 
+    downloadLink = ( url, title, locale, id = '' ) => {
+      // Replace whitespace with dashes and remove non-alphanumerics
+      title = title.replace( /\s+/g, '-' ).replace( /[^\w-]/g, '' );
+      locale = locale.replace( '-', '_' );
+      const ext = url.substr( url.lastIndexOf( '.' ) );
+      id = ( id ) ? `.${id}` : '';
+      const filename = `${title}.${locale}${id}${ext}`.toLowerCase();
+      const opts = {
+        filename,
+        url
+      };
+      return `${this.ENDPOINT}/${btoa( JSON.stringify( opts ) )}`;
+    };
+
     render() {
-      return <WrappedComponent { ...this.props } download={ this.download } error={ this.state.error } />;
+      return (
+        <WrappedComponent
+          { ...this.props }
+          download={ this.download }
+          downloadLink={ this.downloadLink }
+          error={ this.state.error }
+        />
+      );
     }
   }
 
