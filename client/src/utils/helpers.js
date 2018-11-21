@@ -34,6 +34,27 @@ export const escape = ( id ) => {
   return re.test( id.charAt( 0 ) ) ? `\\${id}` : id;
 };
 
+/**
+ * If there are an odd number of quotes in the query string is will cause
+ * an error. So in that case a string is returned with some quotes escaped
+ * to prevent error.
+ *
+ * @param str
+ * @returns string
+ */
+export const maybeFixQuotes = ( str ) => {
+  const quoteCount = str.replace( /[^"]/g, '' ).length;
+
+  // If only 1 quote then escape it
+  if ( quoteCount === 1 ) return str.replace( '"', '\\"' );
+  // If an odd number of quotes then escape all the ones in the middle
+  if ( quoteCount % 2 === 1 ) {
+    const parts = str.split( '"' );
+    return `${parts[0]}"${parts.slice( 1, -1 ).join( '\\"' )}"${parts[parts.length - 1]}`;
+  }
+  return str;
+};
+
 export const capitalizeFirst = str => str.substr( 0, 1 ).toUpperCase() + str.substr( 1 );
 export const titleCase = str =>
   str
@@ -208,7 +229,7 @@ export const queryBuilder = ( store ) => {
 
   // add original search query last
   if ( store.search.query ) {
-    const qryObj = { query: `${store.search.query} AND (${optionStr})` };
+    const qryObj = { query: `(${maybeFixQuotes( store.search.query )}) AND (${optionStr})` };
     if ( hasSelectedTypes ) {
       qryObj.fields = getQryFields( store.type.currentPostTypes );
     }
