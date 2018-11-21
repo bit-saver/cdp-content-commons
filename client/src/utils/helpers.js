@@ -165,6 +165,8 @@ const getQryFields = ( types = [] ) => {
   return [...set];
 };
 
+const escapeRegExp = string => string.replace( /[.*+-=&!?^~${}()|[\]\\]/g, '\\$&' );
+
 export const queryBuilder = ( store ) => {
   const body = new Bodybuilder();
   const options = [];
@@ -229,7 +231,7 @@ export const queryBuilder = ( store ) => {
 
   // add original search query last
   if ( store.search.query ) {
-    const qryObj = { query: `(${maybeFixQuotes( store.search.query )}) AND (${optionStr})` };
+    const qryObj = { query: `(${maybeFixQuotes( escapeRegExp( store.search.query ) )}) AND (${optionStr})` };
     if ( hasSelectedTypes ) {
       qryObj.fields = getQryFields( store.type.currentPostTypes );
     }
