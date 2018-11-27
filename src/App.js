@@ -14,10 +14,6 @@ import NotFoundPage from './components/Pages/NotFoundPage';
 import Header from './components/Header';
 import Results from './components/Results';
 import Footer from './components/Footer';
-import { object } from 'prop-types';
-
-import { connect } from 'react-redux';
-import * as actions from './actions';
 
 ReactTapEventPlugin();
 
@@ -39,7 +35,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <div className={ `ui container ${this.props.alert.showAlert ? 'alert-shown' : ''}` }>
+        <div className="ui container">
           <Route component={ ScrollToTop } />
           <Switch>
             <Route path="/" exact component={ LandingPage } />
@@ -58,12 +54,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ( {
-  alert: state.alert
-} );
-
-App.propTypes = {
-  alert: object
-};
-
-export default connect( mapStateToProps, actions )( App );
+export default App;

@@ -1,5 +1,9 @@
 @import '../../assets/styles/colors.scss';
 
+section.bar.alert-shown + div.ui.container {
+  padding-top: 32px;
+}
+
 .alert-bar {
   position: relative;
   display: block;
