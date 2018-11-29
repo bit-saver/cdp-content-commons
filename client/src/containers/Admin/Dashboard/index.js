@@ -10,11 +10,10 @@ import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import makeSelectDashboard from './selectors';
 import { makeSelectUser } from 'containers/Auth/selectors';
-import PaneProjects from 'containers/Admin/PaneProjects';
-
+// import PaneProjects from 'containers/Admin/PaneProjects';
 import { Grid, Tab, Popup } from 'semantic-ui-react';
 import userIcon from 'assets/icons/icon_user_profile_dark.svg';
-
+import MyProjects from './MyProjects';
 import './Dashboard.css';
 
 const panes = [
@@ -27,7 +26,7 @@ const panes = [
     },
     render: () => <Tab.Pane />
   },
-  { menuItem: { key: '2', name: 'Projects' }, render: () => <Tab.Pane ><PaneProjects /></Tab.Pane> },
+  { menuItem: { key: '2', name: 'Projects' }, render: () => <Tab.Pane ><MyProjects /></Tab.Pane> },
   {
     menuItem:
     {
@@ -64,12 +63,12 @@ class Dashboard extends React.Component {
     return (
       <section className="dashboard">
         <Grid stackable>
-          <Grid.Column width={ 2 }>
+          <Grid.Column width={ 3 }>
             <img src={ userIcon } className="userIcon" alt="User Profile Icon" />
             { user && <span className="currentDashboard">{ user.name }</span> }
             <div className="filters">[ FILTERS ]</div>
           </Grid.Column>
-          <Grid.Column width={ 14 }>
+          <Grid.Column width={ 13 }>
             <Tab
               menu={ { text: true, stackable: true } }
               panes={ panes }
