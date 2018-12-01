@@ -6,6 +6,16 @@
 
 export const DEFAULT_ACTION = 'default_action';
 
+export const menuItems = [
+  'Analytics',
+  'Author',
+  'Categories',
+  'Date',
+  'Owner',
+  'Source',
+  'Visibility'
+];
+
 export const tempData = [
   {
     name: 'John',

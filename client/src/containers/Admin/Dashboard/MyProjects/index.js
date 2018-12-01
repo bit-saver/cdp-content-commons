@@ -14,13 +14,15 @@ import './MyProjects.css';
 
 import lowerFirst from 'lodash/lowerFirst';
 import upperFirst from 'lodash/upperFirst';
-import { tempData } from './constants';
+import { tempData, menuItems } from './constants';
 
 /* eslint-disable react/prefer-stateless-function */
-class MyProjects extends React.PureComponent {
+class MyProjects extends React.Component {
   state = {
     displayTableMenu: false,
-    tableHeaders: ['name', 'status', 'notes']
+    tableHeaders: ['name', 'status', 'notes'],
+    selectAllProjects: false,
+    selectedProjects: new Map()
   };
 
   toggleTableMenu = () => {
@@ -39,9 +41,37 @@ class MyProjects extends React.PureComponent {
     });
   }
 
-  render() {
-    const { displayTableMenu, tableHeaders } = this.state;
+  toggleAllCheckboxSelection = () => {    
+    const allProjects = Array
+      .from( document.querySelectorAll('[data-label]') )
+      .map( project => project.dataset.label );
 
+    const newSelectAllProjectsState = !this.state.selectAllProjects;
+    let newSelectedProjects = new Map();        
+    
+    allProjects.map( project => {
+      if ( !newSelectAllProjectsState ) {
+        newSelectedProjects.set(project, false);
+      } else {
+        newSelectedProjects.set(project, true);
+      }      
+    } );
+    
+    this.setState({
+      selectAllProjects: newSelectAllProjectsState,
+      selectedProjects: newSelectedProjects
+    });
+  }
+
+  toggleProjectSelection = (e, data) => {
+    const isChecked = data.checked;
+    this.setState( prevState => ( {
+      selectedProjects: prevState.selectedProjects.set(data['data-label'], isChecked)
+    } ) );
+  }
+
+  render() {
+    const { displayTableMenu, tableHeaders, selectAllProjects, selectedProjects } = this.state;
     return (
       <Grid>
         <Grid.Row>
@@ -52,32 +82,46 @@ class MyProjects extends React.PureComponent {
             <div className='myProjects_menu'>
               <span onClick={ this.toggleTableMenu }>See More &#9660;</span>
               <div className={ displayTableMenu ? 'myProjects_menu_list display' : 'myProjects_menu_list' }>
-                <Checkbox onChange={ this.tableMenuOnChange } label='Analytics' />
-                <Checkbox onChange={ this.tableMenuOnChange } label='Author' />
-                <Checkbox onChange={ this.tableMenuOnChange } label='Categories' />
-                <Checkbox onChange={ this.tableMenuOnChange } label='Date' />
-                <Checkbox onChange={ this.tableMenuOnChange } label='Owner' />
-                <Checkbox onChange={ this.tableMenuOnChange } label='Source' />
-                <Checkbox onChange={ this.tableMenuOnChange } label='Visibility' />
+                { menuItems.map( item => (
+                  <Checkbox key={ item } onChange={ this.tableMenuOnChange } label={ item } />
+                ) ) }
               </div>
             </div>
           </Grid.Column>
-        </Grid.Row>
-        
+        </Grid.Row>        
         <Grid.Row>          
           <Grid.Column>
             <div className='myProjects_table'>
               <Table>
                 <Table.Header>
                   <Table.Row>
-                    { tableHeaders.map( header => (<Table.HeaderCell>{ upperFirst(header) }</Table.HeaderCell>) ) }
+                    { tableHeaders.map( (header,i) => (
+                      <Table.HeaderCell key={i}>
+                        { i === 0 
+                          ? <Checkbox label={ upperFirst(header) } onClick={ this.toggleAllCheckboxSelection }/>
+                          : upperFirst(header)
+                        }
+                      </Table.HeaderCell>
+                    ) ) }
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  { tempData.map( d => (
-                    <Table.Row>
+                  { tempData.map( (d,i) => (
+                    <Table.Row key={`${d.name}_${i}`}>
                       { tableHeaders.map( header => {
-                        return <Table.Cell>{ d[header] }</Table.Cell>
+                        return (
+                          <Table.Cell key={header}>
+                            { header === 'name' 
+                              ? <Checkbox
+                                  data-label={ `name_${d.name}_${i}` }
+                                  label={ d[header] }
+                                  checked={ selectedProjects.get(`name_${d.name}_${i}`) }
+                                  onChange={ this.toggleProjectSelection }
+                                /> 
+                              : d[header]
+                            }
+                          </Table.Cell>
+                        )
                       } ) }
                     </Table.Row>
                   ) ) }
