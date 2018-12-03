@@ -9,11 +9,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import makeSelectMyProjects from './selectors';
-import { Table, Grid, Checkbox } from 'semantic-ui-react';
+import { Table, Grid, Checkbox, Icon, Label } from 'semantic-ui-react';
 import './MyProjects.css';
 
 import lowerFirst from 'lodash/lowerFirst';
 import upperFirst from 'lodash/upperFirst';
+import sortBy from 'lodash/sortBy';
+
 import { tempData, menuItems } from './constants';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -22,7 +24,10 @@ class MyProjects extends React.Component {
     displayTableMenu: false,
     tableHeaders: ['name', 'status', 'notes'],
     selectAllProjects: false,
-    selectedProjects: new Map()
+    selectedProjects: new Map(),
+    column: null,
+    data: tempData,
+    direction: null
   };
 
   toggleTableMenu = () => {
@@ -70,8 +75,35 @@ class MyProjects extends React.Component {
     } ) );
   }
 
+  handleSort = clickedColumn => () => {
+    console.log(clickedColumn);
+    const { column, data, direction } = this.state
+
+    if (column !== clickedColumn) {
+      this.setState({
+        column: clickedColumn,
+        data: sortBy(data, [clickedColumn]),
+        direction: 'ascending',
+      });
+      return;
+    }
+
+    this.setState({
+      data: data.reverse(),
+      direction: direction === 'ascending' ? 'descending' : 'ascending',
+    });
+  }
+
   render() {
-    const { displayTableMenu, tableHeaders, selectAllProjects, selectedProjects } = this.state;
+    const {
+      displayTableMenu,
+      tableHeaders,
+      selectAllProjects,
+      selectedProjects,
+      column,
+      direction
+    } = this.state;
+
     return (
       <Grid>
         <Grid.Row>
@@ -91,12 +123,17 @@ class MyProjects extends React.Component {
         </Grid.Row>        
         <Grid.Row>          
           <Grid.Column>
-            <div className='myProjects_table'>
-              <Table>
+            <div className="myProjects_table">
+              <Table sortable>
                 <Table.Header>
                   <Table.Row>
                     { tableHeaders.map( (header,i) => (
-                      <Table.HeaderCell key={i}>
+                      <Table.HeaderCell 
+                        key={i}
+                        className="myProjects_table_headerCell"
+                        sorted={ column === header ? direction : null }
+                        onClick={ this.handleSort( header ) }
+                      >
                         { i === 0 
                           ? <Checkbox label={ upperFirst(header) } onClick={ this.toggleAllCheckboxSelection }/>
                           : upperFirst(header)

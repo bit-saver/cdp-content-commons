@@ -21,41 +21,48 @@ export const tempData = [
     name: 'John',
     status: 'Approved',
     notes: 'None',
-    analytics: 'Analytics Data'
+    analytics: '1'
   },
   {
     name: 'Jamie',
     status: 'Approved',
-    notes: 'Requires call'
+    notes: 'Requires call',
+    analytics: '2'
   },
   {
     name: 'John',
     status: 'Approved',
-    notes: 'None'
+    notes: 'None',
+    analytics: '3'
   },
   {
     name: 'Jamie',
     status: 'Approved',
-    notes: 'Requires call'
+    notes: 'Requires call',
+    analytics: '4'
   },
   {
     name: 'John',
     status: 'Approved',
-    notes: 'None'
+    notes: 'None',
+    analytics: '5'
   },
   {
     name: 'Jamie',
     status: 'Approved',
-    notes: 'Requires call'
+    notes: 'Requires call',
+    analytics: '6'
   },
   {
     name: 'John',
     status: 'Approved',
-    notes: 'None'
+    notes: 'None',
+    analytics: '7'
   },
   {
     name: 'Jamie',
     status: 'Approved',
-    notes: 'Requires call'
+    notes: 'Requires call',
+    analytics: '8'
   },
 ];
