@@ -10,8 +10,9 @@ import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import makeSelectMyProjects from './selectors';
 import './MyProjects.css';
-import { tempData, menuItems } from './constants';
 import ScrollableTableWithMenu from 'components/ScrollableTableWithMenu';
+
+import { tempData, menuItems } from './constants';
 
 /* eslint-disable react/prefer-stateless-function */
 class MyProjects extends React.Component {
@@ -22,7 +23,7 @@ class MyProjects extends React.Component {
       <ScrollableTableWithMenu
         tableData={ tempData }
         columnMenu={ menuItems }
-        persistentTableHeaders={ tableHeaders }
+        persistentTableHeaders={ ['name', 'status', 'notes'] }
       />
     );
   }

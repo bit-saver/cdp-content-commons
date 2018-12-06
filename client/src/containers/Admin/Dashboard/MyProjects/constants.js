@@ -78,20 +78,20 @@ export const tempData = [
     name: 'Jamie',
     status: 'Approved',
     notes: 'Requires call',
-    analytics: '6'
+    analytics: '9'
   },
   {
     id: 10,
     name: 'John',
     status: 'Approved',
     notes: 'None',
-    analytics: '7'
+    analytics: '10'
   },
   {
     id: 11,
     name: 'Jamie',
     status: 'Approved',
     notes: 'Requires call',
-    analytics: '8'
+    analytics: '11'
   },
 ];

@@ -1,0 +1,32 @@
+.items {
+  
+  &_menu {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    &_wrapper {
+      text-align: right;
+    }
+
+    &_list {
+      position: absolute;
+      left: 0;
+      z-index: 3;
+      display: none;
+      padding: 5px;
+      border: 1px solid #ccc;
+      text-align: left;
+      background: #fff;
+
+      &.display {
+        display: block;
+      }
+
+      .ui.checkbox {
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

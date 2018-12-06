@@ -1,37 +1,11 @@
 @import "../../assets/styles/colors.scss";
 
-.myProjects {
-  
-  &_menu {
-    position: relative;
-    cursor: pointer;
-
-    &_list {
-      position: absolute;
-      left: 0;
-      z-index: 3;
-      display: none;
-      padding: 5px;
-      border: 1px solid #ccc;
-      background: #fff;
-
-      &.display {
-        display: block;
-      }
-
-      .ui.checkbox {
-        display: block;
-        margin-bottom: 5px;
-      }
-    }
-  }
-
+.items {
 
   &_table {
     max-height: 500px;
     overflow: scroll;
     border: 1px solid rgba(34, 36, 38, 0.15);
-    border-radius: 0.28571429rem 0em 0em 0em;
 
     /* ONLY IN WORKS IN CHROME & SAFARI */
     &::-webkit-scrollbar {
@@ -42,9 +16,9 @@
       table-layout: fixed;
       width: 100%;
       border: none;
+      border-radius: 0;
 
-      td, th {
-        width: 150px;
+      td, th {        
   
         &:first-child {
           position: sticky;
@@ -52,44 +26,6 @@
           /*width: 300px;*/
         };
       }
-  
-      td:first-child {
-        z-index: 1;
-        background-color: #fff;
-        box-shadow: 1px 0 3px 1px rgba(0,0,0,0.1);
-      }
-  
-      thead tr th {
-        position: sticky;
-        top: 0;
-        color: #fff;
-        background-color: $light-blue;
-        cursor: pointer;
-  
-        &:first-child {
-          z-index: 2;
-          box-shadow: 1px 0 3px 1px rgba(0,0,0,0.1);
-        };
-
-        &:hover, 
-        &.sorted:hover {
-          color: #fff;
-          background: $matisse-blue;
-        }
-
-        label {
-          color: #fff;
-        }
-      }
-    }
-    
-    &_headerCell {
-      position: relative;
-      border-right: 1px solid #fff;      
-    }
+    }    
   }  
-}
-
-.primary_col {
-  display: flex;
 }
