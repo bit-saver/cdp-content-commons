@@ -1,6 +1,5 @@
 import { CLEAR_FILTERS } from './types';
 
-export * from './alert';
 export * from './language';
 export * from './category';
 export * from './search';
