@@ -37,8 +37,3 @@ export const CLEAR_FILTERS = 'clear_filters';
 export const DATE_CHANGE = 'date_change';
 export const FROM_DATE_CHANGE = 'from_date_change';
 export const TO_DATE_CHANGE = 'to_date_change';
-
-export const LOAD_ALERT_PENDING = 'load_alert_pending';
-export const LOAD_ALERT_FAILED = 'load_alert_failed';
-export const LOAD_ALERT_SUCCESS = 'load_alert_success';
-export const ALERT_CLOSED_CHANGE = 'alert_closed_change';
