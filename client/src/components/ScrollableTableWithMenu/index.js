@@ -4,66 +4,67 @@
  *
  */
 import React from 'react';
-// import PropTypes from 'prop-types';
-import './ScrollableTableWithMenu.css';
+import PropTypes from 'prop-types';
+import sortBy from 'lodash/sortBy';
 import { Table, Grid } from 'semantic-ui-react';
-
 import TableItemsDisplay from './TableItemsDisplay';
 import TableMenu from './TableMenu';
 import TableHeader from './TableHeader';
-import TableBody from './TableBody';
-
-import lowerFirst from 'lodash/lowerFirst';
-import sortBy from 'lodash/sortBy';
+import './ScrollableTableWithMenu.css';
 
 /* eslint-disable react/prefer-stateless-function */
 class ScrollableTableWithMenu extends React.Component {
   state = {
     data: this.props.tableData,
     tableHeaders: this.props.persistentTableHeaders,        
-    selectAllProjects: false,
-    selectedProjects: new Map(),
+    selectAllItems: false,
+    selectedItems: new Map(),
     column: null,
     direction: null
   };
 
-  tableMenuOnChange = ( e ) => {    
+  tableMenuOnChange = e => {    
     e.persist();
-    const menuItem = lowerFirst(e.target.textContent);
+    const menuItem = {
+      name: e.target.parentNode.dataset.propname,
+      label: e.target.parentNode.dataset.proplabel
+    };
     this.setState(prevState => {
-      if ( prevState.tableHeaders.includes(menuItem) ) {
-        return { tableHeaders: prevState.tableHeaders.filter( header => header !== menuItem ) };
+      if ( prevState.tableHeaders.map( h => h.name ).includes( menuItem.name ) ) {
+        return {
+          tableHeaders: prevState.tableHeaders.filter( h => h.name !== menuItem.name )
+        };
       } else {
         return { tableHeaders: [...prevState.tableHeaders, menuItem] };
       }
     });
   }
 
-  toggleAllCheckboxSelection = e => {
+  toggleAllItemsSelection = e => {
     e.stopPropagation();
-    const allProjects = Array
+    const allItems = Array
       .from( document.querySelectorAll('[data-label]') )
-      .map( project => project.dataset.label );
+      .map( item => item.dataset.label );
 
-    const newSelectAllProjectsState = !this.state.selectAllProjects;
-    let newSelectedProjects = new Map();        
+    const newSelectAllItemsState = !this.state.selectAllItems;
+    let newSelectedItems = new Map();        
     
-    allProjects.forEach( project => {
-      !newSelectAllProjectsState
-      ? newSelectedProjects.set(project, false)
-      : newSelectedProjects.set(project, true)  
+    allItems.forEach( item => {
+      !newSelectAllItemsState
+      ? newSelectedItems.set(item, false)
+      : newSelectedItems.set(item, true)  
     } );
     
     this.setState({
-      selectAllProjects: newSelectAllProjectsState,
-      selectedProjects: newSelectedProjects
+      selectAllItems: newSelectAllItemsState,
+      selectedItems: newSelectedItems
     });
   }
 
-  toggleProjectSelection = (e, data) => {
+  toggleItemSelection = (e, data) => {
     const isChecked = data.checked;
     this.setState( prevState => ( {
-      selectedProjects: prevState.selectedProjects.set(data['data-label'], isChecked)
+      selectedItems: prevState.selectedItems.set(data['data-label'], isChecked)
     } ) );
   }
 
@@ -87,9 +88,7 @@ class ScrollableTableWithMenu extends React.Component {
   render() {
     const {
       tableHeaders,
-      selectedProjects,
       column,
-      data,
       direction,
     } = this.state;
 
@@ -97,7 +96,7 @@ class ScrollableTableWithMenu extends React.Component {
 
     return (
       <Grid>
-        <Grid.Row>
+        <Grid.Row className="items_tableMenus">
           <TableItemsDisplay />
           <TableMenu columnMenu={ columnMenu } tableMenuOnChange={ this.tableMenuOnChange } />
         </Grid.Row>
@@ -110,14 +109,9 @@ class ScrollableTableWithMenu extends React.Component {
                   column={ column }
                   direction={ direction }
                   handleSort={ this.handleSort }
-                  toggleAllCheckboxSelection={ this.toggleAllCheckboxSelection }
-                />
-                <TableBody
-                  data={ data }
-                  tableHeaders={ tableHeaders }
-                  selectedProjects={ selectedProjects }
-                  toggleProjectSelection={ this.toggleProjectSelection }
-                />
+                  toggleAllItemsSelection={ this.toggleAllItemsSelection }
+                />                
+                { this.props.renderTableBody(this.state, this.toggleItemSelection) }
               </Table>
             </div>
           </Grid.Column>
@@ -128,6 +122,9 @@ class ScrollableTableWithMenu extends React.Component {
 }
 
 ScrollableTableWithMenu.propTypes = {
+  tableData: PropTypes.array,
+  persistentTableHeaders: PropTypes.array,
+  columnMenu: PropTypes.array  
 };
 
 export default ScrollableTableWithMenu;

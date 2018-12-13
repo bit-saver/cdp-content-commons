@@ -6,8 +6,8 @@
 
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-// import PropTypes from 'prop-types';
-// import './TableItemsDisplay.css';
+import PropTypes from 'prop-types';
+import './TableItemsDisplay.css';
 
 const TableItemsDisplay = ( props ) => {
   return (

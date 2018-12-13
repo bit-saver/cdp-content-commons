@@ -5,8 +5,9 @@
  */
 
 import React from 'react';
-import { Grid, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Grid, Checkbox, Icon } from 'semantic-ui-react';
+import { titleCase } from '../../../utils/helpers';
 import './TableMenu.css';
 
 class TableMenu extends React.Component {
@@ -43,11 +44,20 @@ class TableMenu extends React.Component {
 
     return (
       <Grid.Column floated='right' width={ 8 } className="items_menu_wrapper">
-        <div className="items_menu">
-          <span data-tablemenu>See More &#9660;</span>
+        <div className={ displayTableMenu ? 'items_menu active' : 'items_menu' }>
+          <span data-tablemenu>See More <Icon data-tablemenu name="angle down"/></span>          
+          <span><Icon name="angle left" /></span>
+          <span><Icon name="angle right" /></span>
           <div className={ displayTableMenu ? 'items_menu_list display' : 'items_menu_list' }>
             { columnMenu.map( item => (
-              <Checkbox data-tablemenuitem key={ item } onChange={ tableMenuOnChange } label={ item } />
+              <Checkbox 
+                data-tablemenuitem
+                data-propname={ item.name }
+                data-proplabel={ item.label }
+                key={ item.name }
+                onChange={ tableMenuOnChange }
+                label={ titleCase( item.label ) }
+              />
             ) ) }
           </div>
         </div>

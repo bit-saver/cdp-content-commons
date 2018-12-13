@@ -18,36 +18,34 @@ import './Dashboard.css';
 
 const panes = [
   {
-    menuItem:
-    {
+    menuItem: {
       key: '1',
       content: <Popup trigger={ <span>Overview</span> } content="Coming Soon!" inverted position="bottom left" />,
       disabled: true
     },
     render: () => <Tab.Pane />
   },
-  { menuItem: { key: '2', name: 'Projects' }, render: () => <Tab.Pane ><MyProjects /></Tab.Pane> },
-  {
-    menuItem:
-    {
+  { menuItem: {
+    key: '2',
+    name: 'My Projects'
+    },
+    render: () => <Tab.Pane ><MyProjects /></Tab.Pane> 
+  },
+  { menuItem: {
       key: '3',
       content: <Popup trigger={ <span>Team Projects</span> } content="Coming Soon!" inverted position="bottom left" />,
       disabled: true
     },
     render: () => <Tab.Pane />
   },
-  {
-    menuItem:
-    {
+  { menuItem: {
       key: '4',
       content: <Popup trigger={ <span>Favorites</span> } content="Coming Soon!" inverted position="bottom left" />,
       disabled: true
     },
     render: () => <Tab.Pane />
   },
-  {
-    menuItem:
-    {
+  { menuItem: {
       key: '5',
       content: <Popup trigger={ <span>Collections</span> } content="Coming Soon!" inverted position="bottom left" />,
       disabled: true

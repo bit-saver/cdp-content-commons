@@ -5,25 +5,24 @@
  */
 
 import React from 'react';
-import upperFirst from 'lodash/upperFirst';
-import { Table, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Table, Checkbox } from 'semantic-ui-react';
 import './TableHeader.css';
 
 const TableHeader = props => {
-  const { tableHeaders, column, direction, handleSort, toggleAllCheckboxSelection } = props;
+  const { tableHeaders, column, direction, handleSort, toggleAllItemsSelection } = props;
   return (
     <Table.Header>
       <Table.Row>
-        { tableHeaders.map( (header,i) => (
+        { tableHeaders.map( ( header, i ) => (
           <Table.HeaderCell 
             key={ i }
-            sorted={ column === header ? direction : null }
-            onClick={ handleSort( header )  }
+            sorted={ column === header.name ? direction : null }
+            onClick={ handleSort( header.name )  }
           >
             { i === 0 
-              ? <Checkbox label={ upperFirst(header) } onChange={ toggleAllCheckboxSelection }/>
-              : upperFirst(header)
+              ? <Checkbox label={ header.label } onChange={ toggleAllItemsSelection }/>
+              : header.label
             }
           </Table.HeaderCell>
         ) ) }
@@ -37,7 +36,7 @@ TableHeader.propTypes = {
   column: PropTypes.string,
   direction: PropTypes.string,
   handleSort: PropTypes.func, 
-  toggleAllCheckboxSelection: PropTypes.func 
+  toggleAllItemsSelection: PropTypes.func 
 };
 
 export default TableHeader;
