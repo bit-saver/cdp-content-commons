@@ -4,10 +4,15 @@
   padding-bottom: 0;  
 }
 
+// @-moz-document url-prefix() {
+//   html, body {
+//     overflow: hidden!important;
+//   }
+// }
 
 .items {
 
-  &_table {
+  &_table {    
     max-height: 500px;
     overflow: scroll;
     border: 1px solid rgba(34, 36, 38, 0.15);

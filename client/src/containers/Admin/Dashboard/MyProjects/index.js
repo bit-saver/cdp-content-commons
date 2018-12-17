@@ -39,20 +39,19 @@ class MyProjects extends React.Component {
           }, toggleItemSelection) => (
             <Table.Body>
               { data.map( ( d,i ) => (
-                <Table.Row key={ i }>
+                <Table.Row key={ d.id }>
                   { tableHeaders.map( ( header, i ) => {
                     return (              
-                      <Table.Cell key={ `${header}_${i}` } className="items_table_item">
+                      <Table.Cell key={ `${d.id}_${header.name}` } className="items_table_item">
                         { i === 0 && ( 
-                          <div className="primary_col">
-
+                          // Table must include .primary_col div for fixed column
+                          <div className="primary_col"> 
                             <MyProjectPrimaryCol
                               d={ d }
                               header={ header }
                               selectedItems={ selectedItems }
                               toggleItemSelection={ toggleItemSelection }
                             />
-
                           </div>
                         ) }
                         { i !== 0 && d[header.name] }

@@ -101,7 +101,7 @@ class ScrollableTableWithMenu extends React.Component {
           <TableMenu columnMenu={ columnMenu } tableMenuOnChange={ this.tableMenuOnChange } />
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column>
+          <Grid.Column className="items_table_wrapper">
             <div className="items_table">
               <Table sortable celled>
                 <TableHeader
@@ -110,7 +110,9 @@ class ScrollableTableWithMenu extends React.Component {
                   direction={ direction }
                   handleSort={ this.handleSort }
                   toggleAllItemsSelection={ this.toggleAllItemsSelection }
-                />                
+                />
+
+                {/* ADD CUSTOM TABLE BODY */}
                 { this.props.renderTableBody(this.state, this.toggleItemSelection) }
               </Table>
             </div>

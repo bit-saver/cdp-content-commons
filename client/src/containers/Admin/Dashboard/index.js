@@ -29,7 +29,7 @@ const panes = [
     key: '2',
     name: 'My Projects'
     },
-    render: () => <Tab.Pane ><MyProjects /></Tab.Pane> 
+    render: () => <Tab.Pane className="myProjects_scrolltable"><MyProjects /></Tab.Pane> 
   },
   { menuItem: {
       key: '3',
