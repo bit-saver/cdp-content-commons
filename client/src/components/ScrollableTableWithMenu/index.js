@@ -64,7 +64,7 @@ class ScrollableTableWithMenu extends React.Component {
   toggleItemSelection = (e, data) => {
     const isChecked = data.checked;
     this.setState( prevState => ( {
-      selectedItems: prevState.selectedItems.set(data['data-label'], isChecked)
+      selectedItems: prevState.selectedItems.set(String(data['data-label']), isChecked)
     } ) );
   }
 
