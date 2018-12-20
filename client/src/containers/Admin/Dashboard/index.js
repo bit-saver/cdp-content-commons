@@ -7,12 +7,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as actions from './actions';
-import makeSelectDashboard from './selectors';
 import { makeSelectUser } from 'containers/Auth/selectors';
 // import PaneProjects from 'containers/Admin/PaneProjects';
 import { Grid, Tab, Popup } from 'semantic-ui-react';
 import userIcon from 'assets/icons/icon_user_profile_dark.svg';
+import makeSelectDashboard from './selectors';
+import * as actions from './actions';
 import MyProjects from './MyProjects';
 import './Dashboard.css';
 
@@ -20,34 +20,58 @@ const panes = [
   {
     menuItem: {
       key: '1',
-      content: <Popup trigger={ <span>Overview</span> } content="Coming Soon!" inverted position="bottom left" />,
+      content: <Popup
+        trigger={ <span>Overview</span> }
+        content="Coming Soon!"
+        inverted
+        position="bottom left"
+      />,
       disabled: true
     },
     render: () => <Tab.Pane />
   },
-  { menuItem: {
-    key: '2',
-    name: 'My Projects'
+  {
+    menuItem: {
+      key: '2',
+      name: 'My Projects'
     },
-    render: () => <Tab.Pane className="myProjects_scrolltable"><MyProjects /></Tab.Pane> 
+    render: () => <Tab.Pane className="myProjects_scrolltable"><MyProjects /></Tab.Pane>
   },
-  { menuItem: {
+  {
+    menuItem: {
       key: '3',
-      content: <Popup trigger={ <span>Team Projects</span> } content="Coming Soon!" inverted position="bottom left" />,
+      content: <Popup
+        trigger={ <span>Team Projects</span> }
+        content="Coming Soon!"
+        inverted
+        position="bottom left"
+      />,
       disabled: true
     },
     render: () => <Tab.Pane />
   },
-  { menuItem: {
+  {
+    menuItem: {
       key: '4',
-      content: <Popup trigger={ <span>Favorites</span> } content="Coming Soon!" inverted position="bottom left" />,
+      content: <Popup
+        trigger={ <span>Favorites</span> }
+        content="Coming Soon!"
+        inverted
+        position="bottom left"
+      />,
       disabled: true
     },
     render: () => <Tab.Pane />
   },
-  { menuItem: {
+  {
+    menuItem: {
       key: '5',
-      content: <Popup trigger={ <span>Collections</span> } content="Coming Soon!" inverted position="bottom left" />,
+      content: <Popup
+        trigger={ <span>Collections</span> }
+        content="Coming Soon!"
+        inverted
+        position="bottom left"
+      />,
       disabled: true
     },
     render: () => <Tab.Pane />

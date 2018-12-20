@@ -7,11 +7,12 @@ import React, { Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as actions from './actions';
-import makeSelectMyProjects from './selectors';
 import { Table } from 'semantic-ui-react';
 import ScrollableTableWithMenu from 'components/ScrollableTableWithMenu';
+import * as actions from './actions';
+import makeSelectMyProjects from './selectors';
 import MyProjectPrimaryCol from './MyProjectPrimaryCol';
+import DashSearch from '../DashSearch';
 import './MyProjects.css';
 
 import { tempData, menuItems } from './constants';
@@ -20,44 +21,49 @@ import { tempData, menuItems } from './constants';
 class MyProjects extends React.Component {
   render() {
     const persistentTableHeaders = [
-      { name: 'title', label: 'PROJECT TITLE'},
+      { name: 'title', label: 'PROJECT TITLE' },
       { name: 'visibility', label: 'VISIBILITY' },
       { name: 'owner', label: 'OWNER' }
     ];
 
     return (
       <Fragment>
-        <p className="myProjects_headline">Overview, Team Projects, Favorites, and Collections coming in future iterations!</p>
+        <p className="myProjects_headline">
+          Overview, Team Projects, Favorites, and Collections coming in future iterations!
+        </p>
         <ScrollableTableWithMenu
           tableData={ tempData }
           columnMenu={ menuItems }
           persistentTableHeaders={ persistentTableHeaders }
-          renderTableBody={ ({
+          renderDashSearch={
+            () => (
+              <DashSearch />
+            )
+          }
+          renderTableBody={ ( {
             tableHeaders,
             selectedItems,
-            data,
-          }, toggleItemSelection) => (
+            data
+          }, toggleItemSelection ) => (
             <Table.Body>
-              { data.map( ( d,i ) => (
+              { data.map( ( d, i ) => (
                 <Table.Row key={ d.id }>
-                  { tableHeaders.map( ( header, i ) => {
-                    return (              
-                      <Table.Cell key={ `${d.id}_${header.name}` } className="items_table_item">
-                        { i === 0 && ( 
-                          // Table must include .primary_col div for fixed column
-                          <div className="primary_col"> 
-                            <MyProjectPrimaryCol
-                              d={ d }
-                              header={ header }
-                              selectedItems={ selectedItems }
-                              toggleItemSelection={ toggleItemSelection }
-                            />
-                          </div>
-                        ) }
-                        { i !== 0 && d[header.name] }
-                      </Table.Cell>
-                    )
-                  } ) }
+                  { tableHeaders.map( ( header, j ) => (
+                    <Table.Cell key={ `${d.id}_${header.name}` } className="items_table_item">
+                      { j === 0 && (
+                      // Table must include .primary_col div for fixed column
+                      <div className="primary_col">
+                        <MyProjectPrimaryCol
+                          d={ d }
+                          header={ header }
+                          selectedItems={ selectedItems }
+                          toggleItemSelection={ toggleItemSelection }
+                        />
+                      </div>
+                      ) }
+                      { j !== 0 && d[header.name] }
+                    </Table.Cell>
+                  ) ) }
                 </Table.Row>
               ) ) }
             </Table.Body>
